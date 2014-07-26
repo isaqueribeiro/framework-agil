@@ -6,7 +6,8 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   Model.Rotina in '..\..\model\Model.Rotina.pas',
-  ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI};
+  ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI},
+  Controller.Rotina in '..\..\controller\Controller.Rotina.pas';
 
 {$R *.res}
 
