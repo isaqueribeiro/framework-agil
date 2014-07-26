@@ -34,7 +34,7 @@ begin
   CreateGUID(aID);
   aNome      := Trim(pNome);
   aDescricao := Trim(pDescricao);
-  aIndice := 0;
+  aIndice    := 0;
 end;
 
 constructor TRotina.Create;

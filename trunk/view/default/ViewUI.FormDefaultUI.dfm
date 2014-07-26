@@ -13,7 +13,6 @@ object FormDefaultUI: TFormDefaultUI
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  ShowHint = False
   PixelsPerInch = 96
   TextHeight = 13
 end
