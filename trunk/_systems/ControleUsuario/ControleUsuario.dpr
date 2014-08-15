@@ -7,7 +7,10 @@ uses
   Vcl.Styles,
   Model.Rotina in '..\..\model\Model.Rotina.pas',
   ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI},
-  Controller.Rotina in '..\..\controller\Controller.Rotina.pas';
+  Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
+  InterfaceAgil.Observer in '..\..\agil_lib\interfaces\InterfaceAgil.Observer.pas',
+  ClasseAgil.BaseObject in '..\..\agil_lib\classes\ClasseAgil.BaseObject.pas',
+  InterfaceAgil.Controller in '..\..\agil_lib\interfaces\InterfaceAgil.Controller.pas';
 
 {$R *.res}
 
