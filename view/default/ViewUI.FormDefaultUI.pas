@@ -4,20 +4,21 @@ interface
 
 uses
   //Model.Rotina,
+  InterfaceAgil.Observer,
   Controller.Rotina,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
 
 type
-  TFormDefaultUI = class(TForm)
+  TFormDefaultUI = class(TForm, IObservador)
   private
     { Private declarations }
-    //aRotina : TRotina;
-    //function GetRotina : TRotina;
+    aRotinaController: TRotinaController;
   public
     { Public declarations }
-    //property Rotina : TRotina read GetRotina;
+    constructor Create(AOwner: TComponent; Controller: TRotinaController); reintroduce;
+    procedure Update(Observable: IObservable);
   end;
 
 var
@@ -29,12 +30,18 @@ implementation
 
 { TFormDefaultUI }
 
-//function TFormDefaultUI.GetRotina: TRotina;
-//begin
-//  if not Assigned(aRotina) then
-//    aRotina := TRotina.CriarRotina(Self.UnitName, Self.Hint);
-//
-//  Result := aRotina;
-//end;
+constructor TFormDefaultUI.Create(AOwner: TComponent;
+  Controller: TRotinaController);
+begin
+  inherited Create(AOwner);
+  aRotinaController := TRotinaController.CriarRotina(Self.Caption, Self.Hint);
+  with aRotinaController do
+    Model.addObserver(Self);
+end;
+
+procedure TFormDefaultUI.Update(Observable: IObservable);
+begin
+  Self.Tag := aRotinaController.Model.Indice;
+end;
 
 end.

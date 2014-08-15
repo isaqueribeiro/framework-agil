@@ -3,10 +3,11 @@ unit Model.Rotina;
 interface
 
 Uses
+  ClasseAgil.BaseObject,
   System.Classes, System.SysUtils, System.StrUtils;
 
 Type
-  TRotina = class(TObject)
+  TRotina = class(TBaseObject)
   private
     aID : TGUID;
     aNome ,
@@ -22,6 +23,8 @@ Type
     property Descricao : String read aDescricao write aDescricao;
     property Indice : Integer read aIndice write aIndice;
 
+    procedure Salvar; virtual; abstract;
+    function Buscar(Codigo: String): TRotina; virtual; abstract;
   end;
 
 implementation
