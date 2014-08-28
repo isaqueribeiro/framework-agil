@@ -3,7 +3,6 @@ unit ViewUI.FormDefaultUI;
 interface
 
 uses
-  //Model.Rotina,
   InterfaceAgil.Observer,
   Controller.Rotina,
 
@@ -15,10 +14,14 @@ type
   private
     { Private declarations }
     aRotinaController: TRotinaController;
+  protected
+    constructor Create(AOwner: TComponent); override;
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent; Controller: TRotinaController); reintroduce;
+    constructor CreateForm(AOwner: TComponent; Controller: TRotinaController); reintroduce;
     procedure Update(Observable: IObservable);
+
+    property RotinaController : TRotinaController read aRotinaController;
   end;
 
 var
@@ -30,13 +33,18 @@ implementation
 
 { TFormDefaultUI }
 
-constructor TFormDefaultUI.Create(AOwner: TComponent;
-  Controller: TRotinaController);
+constructor TFormDefaultUI.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  aRotinaController := TRotinaController.CriarRotina(Self.Caption, Self.Hint);
+  aRotinaController := TRotinaController.CriarRotina(Self.Name, Self.Caption);
   with aRotinaController do
     Model.addObserver(Self);
+end;
+
+constructor TFormDefaultUI.CreateForm(AOwner: TComponent;
+  Controller: TRotinaController);
+begin
+  Self.Create(AOwner);
 end;
 
 procedure TFormDefaultUI.Update(Observable: IObservable);

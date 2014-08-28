@@ -1,6 +1,6 @@
 inherited FormSplashUI: TFormSplashUI
   BorderStyle = bsNone
-  Caption = 'FormSplashUI'
+  Caption = 'Formul'#225'rio Splash Padr'#227'o'
   ClientHeight = 334
   ClientWidth = 523
   ExplicitWidth = 523
