@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/06/06 14:13:35.000.990,C:\Users\DESENV\Documents\RAD Studio\Projects\Project1.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj</Transaction>
+    <Transaction>2014/06/06 14:44:59.000.914,C:\PROJETOS\Framework Agil\trunk\view\default\uFormDefaultUI.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormDefaultUI.dfm</Transaction>
+    <Transaction>2014/06/06 15:43:58.000.368,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormSplashUI.dfm</Transaction>
+    <Transaction>2014/08/28 15:50:51.000.735,C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormMainUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm</Transaction>
+    <Transaction>2014/08/28 15:55:16.000.810,C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm</Transaction>
+    <Transaction>2014/08/28 15:58:08.000.465,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj</Transaction>
+    <Transaction>2014/08/28 16:45:41.000.096,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj</Transaction>
+    <Transaction>2014/08/28 16:48:08.000.723,C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.dfm</Transaction>
+  </Transactions>
+</BorlandProject>
