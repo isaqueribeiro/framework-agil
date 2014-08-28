@@ -66,7 +66,7 @@ end;
 
 function TRotinaController.New: TBaseObject;
 begin
-  aModel := TRotina.CriarRotina('', '');
+  aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
   Result := aModel;
 end;
 

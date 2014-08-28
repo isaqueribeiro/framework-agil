@@ -4,7 +4,7 @@ interface
 
 uses
   InterfaceAgil.Observer,
-  Vcl.Dialogs, System.SysUtils, Winapi.Windows, System.Classes;
+  Vcl.Dialogs, System.SysUtils, Winapi.Windows, System.Classes, System.TypInfo;
 
 Type
   TBaseObject = class(TInterfacedObject, IObservable)
@@ -21,6 +21,7 @@ Type
     procedure addObserver(Observer: IObservador);
     procedure removeObserver(Observer: IObservador);
     procedure Notify;
+    procedure Assign(const Source : TBaseObject);
   published
     property IDGuid: String read GetIDGuid write SetIDGuid;
   end;
@@ -36,6 +37,28 @@ begin
   I := aObservers.IndexOf(Observer);
   if ( I < 0 ) then
     aObservers.Add(Observer);
+end;
+
+procedure TBaseObject.Assign(const Source: TBaseObject);
+var
+  TypInfo  : PTypeInfo;
+  PropList : TPropList;
+  PropCount,
+  I        : Integer;
+  Value    : Variant;
+begin
+  TypInfo   := Source.ClassInfo;
+  PropCount := GetPropList(TypInfo, tkAny, @PropList);
+
+  for I := 0 to PropCount - 1 do
+  begin
+    // Verifica se possui acesso a escrita na propriedade
+    if ( PropList[I]^.SetProc <> nil ) then
+    begin
+      Value := GetPropValue(Source, PropList[I]^.Name);
+      SetPropValue(Self, PropList[I]^.Name, Value);
+    end;
+  end;
 end;
 
 constructor TBaseObject.Create;
