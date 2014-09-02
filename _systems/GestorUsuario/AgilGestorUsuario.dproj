@@ -145,15 +145,20 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DelphiCompile>
         <DCCReference Include="..\..\agil_lib\units\TypeAgil.SimpleTypes.pas"/>
         <DCCReference Include="..\..\agil_lib\units\TypeAgil.ComplexTypes.pas"/>
-        <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.BaseObject.pas"/>
         <DCCReference Include="..\..\agil_lib\interfaces\InterfaceAgil.Observer.pas"/>
         <DCCReference Include="..\..\agil_lib\interfaces\InterfaceAgil.Controller.pas"/>
+        <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.BaseObject.pas"/>
         <DCCReference Include="..\..\model\Model.Rotina.pas"/>
         <DCCReference Include="..\..\model\Model.Licenca.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Rotina.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Licenca.pas"/>
         <DCCReference Include="..\..\module\DataModule.Recursos.pas">
             <Form>DtmRecursos</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\module\DataModule.Base.pas">
+            <Form>DtmBase</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormDefaultUI.pas">
@@ -289,13 +294,13 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
+                <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32"/>
+                </DeployFile>
                 <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.rsm" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>ControleUsuario.rsm</RemoteName>
                     </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32"/>
                 </DeployFile>
                 <DeployClass Required="true" Name="DependencyPackage">
                     <Platform Name="iOSDevice">

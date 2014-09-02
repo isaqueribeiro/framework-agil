@@ -17,26 +17,30 @@ uses
       procedure SetCompanyName(const Value : String);
 
       function GetCompanyName : String;
+      function GetFileDescription : String;
       function GetFileVersion : String;
+      function GetLegalCopyright : String;
       function GetOriginalFilename : String;
       function GetProductName : String;
       function GetProductVersion : String;
       function GetProductKey : String;
-      function GetLegalCopyright : String;
-      function GetFileDescription : String;
+      function GetReleaseDate : String;
+      function GetOwner : String;
       function GetSplashName : String;
       function GetSplashDescription : String;
     protected
       constructor Create;
     public
       property CompanyName: String read GetCompanyName write SetCompanyName;
+      property FileDescription : String read GetFileDescription;
       property FileVersion: String read GetFileVersion;
+      property LegalCopyright : String read GetLegalCopyright;
       property OriginalFilename: String read GetOriginalFilename;
       property ProductName: String read GetProductName;
       property ProductVersion: String read GetProductVersion;
       property ProductKey: String read GetProductKey;
-      property LegalCopyright : String read GetLegalCopyright;
-      property FileDescription : String read GetFileDescription;
+      property ReleaseDate : String read GetReleaseDate;
+      property Owner : String read GetOwner;
       property SplashName : String read GetSplashName;
       property SplashDescription : String read GetSplashDescription;
 
@@ -83,6 +87,11 @@ end;
 function TVersaoAplicacaoController.GetOriginalFilename: String;
 begin
   Result := getPropertyValue(ivORIGINAL_FILENAME);
+end;
+
+function TVersaoAplicacaoController.GetOwner: String;
+begin
+  Result := getPropertyValue(ivOWNER);
 end;
 
 function TVersaoAplicacaoController.GetCompanyName: String;
@@ -140,6 +149,11 @@ begin
 
   end;
 
+end;
+
+function TVersaoAplicacaoController.GetReleaseDate: String;
+begin
+  Result := getPropertyValue(ivRELEASE_DATE);
 end;
 
 function TVersaoAplicacaoController.GetSplashDescription: String;

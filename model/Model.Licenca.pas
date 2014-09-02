@@ -39,6 +39,10 @@ constructor TLicenca.Create;
 begin
   inherited Create;
 
+  aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
+  aNomeFantasia := 'Empresa de Demonstração';
+  aCnpj         := '71.841.661/0001-98';
+
   with aEndereco do
   begin
     Logradouro  := EmptyStr;

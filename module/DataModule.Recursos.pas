@@ -15,10 +15,12 @@ interface
 
 uses
   Controller.VersaoAplicacao,
-  System.SysUtils, System.Classes;
+  Controller.Licenca,
+  System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls;
 
 type
   TDtmRecursos = class(TDataModule)
+    ImageList16: TImageList;
   private
     { Private declarations }
   public
@@ -26,8 +28,9 @@ type
   end;
 
 var
-  DtmRecursos: TDtmRecursos;
-  gVersaoApp : TVersaoAplicacaoController;
+  DtmRecursos : TDtmRecursos;
+  gVersaoApp  : TVersaoAplicacaoController;
+  gLicencaApp : TLicencaController;
 
 implementation
 
@@ -36,6 +39,7 @@ implementation
 {$R *.dfm}
 
 initialization
-  gVersaoApp := TVersaoAplicacaoController.GetInstance();
+  gVersaoApp  := TVersaoAplicacaoController.GetInstance();
+  gLicencaApp := TLicencaController.GetInstance();
 
 end.

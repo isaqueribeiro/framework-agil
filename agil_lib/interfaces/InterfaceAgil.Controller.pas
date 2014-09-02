@@ -9,6 +9,7 @@ uses
     IController = Interface
       ['{B84ACB58-DD61-45E8-8162-99E8C56F9905}']
       procedure Save;
+      procedure Load;
 
       function Find(ID: String): TBaseObject;
       function New : TBaseObject;
