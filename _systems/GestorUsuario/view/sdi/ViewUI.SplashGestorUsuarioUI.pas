@@ -1,13 +1,14 @@
-unit ViewUI.FormMainGestorUsuarioUI;
+unit ViewUI.SplashGestorUsuarioUI;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ViewUI.FormMainUI;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ViewUI.FormSplashUI, Vcl.StdCtrls,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
-  TFormMainGestorUsuarioUI = class(TFormMainUI)
+  TFormSplashGestorUsuarioUI = class(TFormSplashUI)
   private
     { Private declarations }
   public
@@ -15,7 +16,7 @@ type
   end;
 
 var
-  FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI;
+  FormSplashGestorUsuarioUI: TFormSplashGestorUsuarioUI;
 
 implementation
 

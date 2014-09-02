@@ -36,7 +36,7 @@ implementation
 constructor TFormDefaultUI.Create(AOwner: TComponent);
 begin
   inherited Create(AOwner);
-  aRotinaController := TRotinaController.CriarRotina(Self.Name, Self.Caption);
+  aRotinaController := TRotinaController.CriarRotina(nil, Self.Name, Self.Caption);
   with aRotinaController do
     Model.addObserver(Self);
 end;
