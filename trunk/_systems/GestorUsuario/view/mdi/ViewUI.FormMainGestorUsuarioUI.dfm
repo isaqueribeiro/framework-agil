@@ -1,4 +1,4 @@
-inherited FormMainControleUsuarioUI: TFormMainControleUsuarioUI
+inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   Caption = #193'gil Gestor Usu'#225'rios'
   ClientHeight = 569
   ClientWidth = 997

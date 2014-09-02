@@ -18,7 +18,7 @@ Uses
       constructor Create;
     public
       class function GetInstance: TRotinaController;
-      constructor CriarRotina(aNome, aDescricao : String);
+      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
       destructor Destroy; override;
       procedure Save;
       function Find(ID: String): TBaseObject;
@@ -37,9 +37,11 @@ begin
   aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
 end;
 
-constructor TRotinaController.CriarRotina(aNome, aDescricao: String);
+constructor TRotinaController.CriarRotina(const aParent : TRotina; aNome, aDescricao: String);
 begin
   aModel := TRotina.CriarRotina(aNome, aDescricao);
+  if (aParent <> nil) then
+    aModel.Parent.Assign( aParent );
 end;
 
 destructor TRotinaController.Destroy;

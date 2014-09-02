@@ -3,6 +3,7 @@ unit ViewUI.FormMainUI;
 interface
 
 uses
+  DataModule.Recursos,
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ViewUI.FormDefaultUI;
 
@@ -24,7 +25,9 @@ implementation
 
 procedure TFormMainUI.FormCreate(Sender: TObject);
 begin
-  Self.Caption := Application.Title;
+  Self.Caption := Application.Title + ' - v' +
+    gVersaoApp.ProductVersion + ' (Build ' +
+    gVersaoApp.FileVersion + ')';
   inherited;
 end;
 
