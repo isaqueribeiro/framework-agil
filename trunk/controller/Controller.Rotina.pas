@@ -16,6 +16,7 @@ Uses
       function GetModel : TRotina;
     protected
       constructor Create;
+      procedure Load;
     public
       class function GetInstance: TRotinaController;
       constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
@@ -64,6 +65,11 @@ end;
 function TRotinaController.GetModel: TRotina;
 begin
   Result := aModel;
+end;
+
+procedure TRotinaController.Load;
+begin
+  ;
 end;
 
 function TRotinaController.New: TBaseObject;

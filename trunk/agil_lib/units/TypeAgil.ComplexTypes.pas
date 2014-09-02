@@ -16,6 +16,8 @@ Type
     Cep        : st_EnderecoCep;
   end;
 
+  ct_Enderecos = Array of ct_Endereco;
+
   ct_Sistema = Array of record
     ProductKey  : st_ProductKey;
     ProductName : st_NomeCompleto;

@@ -6,6 +6,9 @@ inherited FormSplashUI: TFormSplashUI
   ClientWidth = 560
   Font.Charset = ANSI_CHARSET
   Font.Name = 'Segoe UI'
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
   ExplicitWidth = 560
   ExplicitHeight = 338
   DesignSize = (
@@ -1014,8 +1017,10 @@ inherited FormSplashUI: TFormSplashUI
   object lblRegistradoPara: TLabel
     Left = 150
     Top = 146
-    Width = 205
-    Height = 17
+    Width = 395
+    Height = 88
+    Anchors = [akLeft, akTop, akRight]
+    AutoSize = False
     Caption = 'Licen'#231'a de uso para demonstra'#231#227'o'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -1023,6 +1028,7 @@ inherited FormSplashUI: TFormSplashUI
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    WordWrap = True
   end
   object lblCarregando: TLabel
     Left = 150
