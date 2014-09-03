@@ -6,4 +6,14 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   ExplicitHeight = 607
   PixelsPerInch = 96
   TextHeight = 13
+  inherited PnlStatusBar: TPanel
+    Top = 531
+    Width = 997
+    inherited BvlStatusBar: TBevel
+      Width = 997
+    end
+    inherited PnlCompany: TPanel
+      Width = 428
+    end
+  end
 end
