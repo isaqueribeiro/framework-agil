@@ -3,10 +3,11 @@ inherited FormMainUI: TFormMainUI
   ClientHeight = 608
   ClientWidth = 888
   FormStyle = fsMDIForm
+  Menu = MainMenu
   WindowState = wsMaximized
   OnCreate = FormCreate
   ExplicitWidth = 904
-  ExplicitHeight = 646
+  ExplicitHeight = 666
   PixelsPerInch = 96
   TextHeight = 13
   object ImgLogoCompany: TImage
@@ -345,7 +346,6 @@ inherited FormMainUI: TFormMainUI
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
-      ExplicitHeight = 28
       object ImgDate: TImage
         AlignWithMargins = True
         Left = 5
@@ -488,7 +488,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 229
+        Width = 206
         Height = 13
         Hint = 'Ter'#231'a-feira, 02 de setembro de 2014'
         Caption = 'Ter'#231'a-feira, 02 de setembro de 2014'
@@ -610,8 +610,6 @@ inherited FormMainUI: TFormMainUI
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
-      ExplicitLeft = 339
-      ExplicitHeight = 28
       DesignSize = (
         230
         34)
@@ -684,7 +682,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 189
+        Width = 102
         Height = 13
         Hint = 'user@server.base'
         Anchors = [akLeft, akTop, akRight]
@@ -714,9 +712,6 @@ inherited FormMainUI: TFormMainUI
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
-      ExplicitLeft = 561
-      ExplicitWidth = 327
-      ExplicitHeight = 28
       DesignSize = (
         294
         34)
@@ -791,7 +786,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 253
+        Width = 49
         Height = 13
         Hint = 'Empresa'
         Anchors = [akLeft, akTop, akRight]
@@ -804,13 +799,12 @@ inherited FormMainUI: TFormMainUI
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 278
       end
     end
   end
   object actMain: TActionList
-    Left = 48
-    Top = 112
+    Left = 272
+    Top = 448
     object actWindowCascade: TWindowCascade
       Category = 'Janela'
       Caption = '&Cascade'
@@ -861,7 +855,20 @@ inherited FormMainUI: TFormMainUI
   end
   object TmrContador: TTimer
     OnTimer = TmrContadorTimer
-    Left = 48
-    Top = 160
+    Left = 272
+    Top = 496
+  end
+  object MainMenu: TMainMenu
+    Left = 304
+    Top = 448
+    object menuArquivo: TMenuItem
+      Caption = 'Arquivo'
+    end
+    object menuAjuda: TMenuItem
+      Caption = 'Ajuda'
+      object nmSobre: TMenuItem
+        Caption = 'Sobre'
+      end
+    end
   end
 end

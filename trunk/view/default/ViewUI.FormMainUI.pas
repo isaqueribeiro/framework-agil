@@ -36,6 +36,10 @@ type
     LblTime: TLabel;
     ImgDate: TImage;
     LblDate: TLabel;
+    MainMenu: TMainMenu;
+    menuArquivo: TMenuItem;
+    menuAjuda: TMenuItem;
+    nmSobre: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
   private
