@@ -4,7 +4,7 @@ object DtmRecursos: TDtmRecursos
   Width = 394
   object ImageList16: TImageList
     DrawingStyle = dsTransparent
-    Left = 104
-    Top = 72
+    Left = 32
+    Top = 32
   end
 end
