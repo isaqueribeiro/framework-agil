@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, ViewUI.FormMainUI, Vcl.ExtCtrls,
-  Vcl.StdCtrls, Vcl.StdActns, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, Vcl.StdActns, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage,
+  Vcl.Menus;
 
 type
   TFormMainGestorUsuarioUI = class(TFormMainUI)

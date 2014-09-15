@@ -66,7 +66,10 @@ end;
 procedure TFormMainUI.TmrContadorTimer(Sender: TObject);
 begin
   LblDate.Caption := FormatDateTime('dddd, dd "de" mmmm "de" yyyy', Date);
-  LblDate.Hint    := FormatDateTime('dddd, dd "de" mmmm "de" yyyy', Date);
+  LblDate.Caption := StringReplace(LblDate.Caption, '-', ' ', [rfReplaceAll]);
+  LblDate.Caption := AnsiUpperCase(LblDate.Caption[1]) + Copy(LblDate.Caption, 2, Length(LblDate.Caption));
+  LblDate.Hint    := LblDate.Caption;
+
   LblTime.Caption := TimeToStr(Time);
   LblTime.Hint    := TimeToStr(Time);
 end;
