@@ -34,6 +34,9 @@ procedure TBaseObject.addObserver(Observer: IObservador);
 var
   I : Integer;
 begin
+//  if ( aObservers = nil ) then
+//    aObservers := TInterfaceList.Create;
+//
   I := aObservers.IndexOf(Observer);
   if ( I < 0 ) then
     aObservers.Add(Observer);
@@ -84,10 +87,11 @@ end;
 
 procedure TBaseObject.Notify;
 var
-  Observer : IInterface;
+  I : Integer;
 begin
-  for Observer in aObservers do
-    IObservador(Observer).Update(Self);
+//  if ( aObservers <> nil ) then
+    for I := 0 to aObservers.Count - 1 do
+      IObservador(aObservers[I]).Update(Self);
 end;
 
 procedure TBaseObject.removeObserver(Observer: IObservador);

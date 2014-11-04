@@ -15,9 +15,6 @@ type
     { Public declarations }
   end;
 
-var
-  FormSplashGestorUsuarioUI: TFormSplashGestorUsuarioUI;
-
 implementation
 
 {$R *.dfm}

@@ -14,6 +14,7 @@ object FormDefaultUI: TFormDefaultUI
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
 end
