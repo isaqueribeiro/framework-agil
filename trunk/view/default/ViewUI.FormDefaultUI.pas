@@ -11,6 +11,7 @@ uses
 
 type
   TFormDefaultUI = class(TForm, IObservador)
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     aRotinaController: TRotinaController;
@@ -47,9 +48,15 @@ begin
   Self.Create(AOwner);
 end;
 
+procedure TFormDefaultUI.FormShow(Sender: TObject);
+begin
+  aRotinaController.Load;
+end;
+
 procedure TFormDefaultUI.Update(Observable: IObservable);
 begin
   Self.Tag := aRotinaController.Model.Indice;
+  ShowMessage( aRotinaController.Model.Nome + ' - ' + aRotinaController.Model.Descricao );
 end;
 
 end.

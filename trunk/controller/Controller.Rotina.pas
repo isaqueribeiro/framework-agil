@@ -16,11 +16,11 @@ Uses
       function GetModel : TRotina;
     protected
       constructor Create;
-      procedure Load;
     public
       class function GetInstance: TRotinaController;
       constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
       destructor Destroy; override;
+      procedure Load;
       procedure Save;
       function Find(ID: String): TBaseObject;
       function New: TBaseObject;
@@ -69,7 +69,10 @@ end;
 
 procedure TRotinaController.Load;
 begin
+  // Carregar dados
   ;
+  // Notificar observadores
+  aModel.Notify;
 end;
 
 function TRotinaController.New: TBaseObject;

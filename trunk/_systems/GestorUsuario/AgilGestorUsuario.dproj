@@ -167,11 +167,11 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\view\default\ViewUI.FormSplashUI.pas">
             <Form>FormSplashUI</Form>
         </DCCReference>
-        <DCCReference Include="view\sdi\ViewUI.SplashGestorUsuarioUI.pas">
-            <Form>FormSplashGestorUsuarioUI</Form>
-        </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormMainUI.pas">
             <Form>FormMainUI</Form>
+        </DCCReference>
+        <DCCReference Include="view\sdi\ViewUI.SplashGestorUsuarioUI.pas">
+            <Form>FormSplashGestorUsuarioUI</Form>
         </DCCReference>
         <DCCReference Include="view\mdi\ViewUI.FormMainGestorUsuarioUI.pas">
             <Form>FormMainGestorUsuarioUI</Form>
@@ -294,13 +294,13 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment>
-                <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.exe" Configuration="Debug" Class="ProjectOutput">
-                    <Platform Name="Win32"/>
-                </DeployFile>
                 <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.rsm" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>ControleUsuario.rsm</RemoteName>
                     </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\_bin\Win32\Debug\ControleUsuario.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32"/>
                 </DeployFile>
                 <DeployClass Required="true" Name="DependencyPackage">
                     <Platform Name="iOSDevice">
