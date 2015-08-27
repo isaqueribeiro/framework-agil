@@ -1,0 +1,1 @@
+Framework em Delphi XE4 com adoção do padrão MVC.
