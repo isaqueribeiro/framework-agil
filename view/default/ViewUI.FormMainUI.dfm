@@ -1,13 +1,13 @@
 inherited FormMainUI: TFormMainUI
   Caption = 'Formul'#225'rio Principal Padr'#227'o'
-  ClientHeight = 608
-  ClientWidth = 888
+  ClientHeight = 551
+  ClientWidth = 971
   FormStyle = fsMDIForm
   Menu = MainMenu
   WindowState = wsMaximized
   OnCreate = FormCreate
-  ExplicitWidth = 904
-  ExplicitHeight = 666
+  ExplicitWidth = 987
+  ExplicitHeight = 610
   PixelsPerInch = 96
   TextHeight = 13
   object ImgLogoCompany: TImage
@@ -311,8 +311,8 @@ inherited FormMainUI: TFormMainUI
   end
   object PnlStatusBar: TPanel
     Left = 0
-    Top = 570
-    Width = 888
+    Top = 513
+    Width = 971
     Height = 38
     Align = alBottom
     BevelOuter = bvNone
@@ -326,10 +326,11 @@ inherited FormMainUI: TFormMainUI
     object BvlStatusBar: TBevel
       Left = 0
       Top = 0
-      Width = 888
+      Width = 971
       Height = 4
       Align = alTop
       Shape = bsSpacer
+      ExplicitWidth = 888
     end
     object PnlDate: TPanel
       Left = 0
@@ -700,7 +701,7 @@ inherited FormMainUI: TFormMainUI
     object PnlCompany: TPanel
       Left = 594
       Top = 4
-      Width = 294
+      Width = 377
       Height = 34
       Align = alClient
       Alignment = taLeftJustify
@@ -713,7 +714,7 @@ inherited FormMainUI: TFormMainUI
       ParentFont = False
       TabOrder = 3
       DesignSize = (
-        294
+        377
         34)
       object ImgCompany: TImage
         AlignWithMargins = True
@@ -803,8 +804,8 @@ inherited FormMainUI: TFormMainUI
     end
   end
   object actMain: TActionList
-    Left = 272
-    Top = 448
+    Left = 264
+    Top = 296
     object actWindowCascade: TWindowCascade
       Category = 'Janela'
       Caption = '&Cascade'
@@ -855,12 +856,12 @@ inherited FormMainUI: TFormMainUI
   end
   object TmrContador: TTimer
     OnTimer = TmrContadorTimer
-    Left = 272
-    Top = 496
+    Left = 264
+    Top = 344
   end
   object MainMenu: TMainMenu
-    Left = 304
-    Top = 448
+    Left = 296
+    Top = 296
     object menuArquivo: TMenuItem
       Caption = 'Arquivo'
     end

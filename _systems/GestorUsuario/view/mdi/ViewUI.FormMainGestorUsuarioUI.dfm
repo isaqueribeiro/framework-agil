@@ -3,7 +3,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   ClientHeight = 569
   ClientWidth = 997
   ExplicitWidth = 1013
-  ExplicitHeight = 627
+  ExplicitHeight = 628
   PixelsPerInch = 96
   TextHeight = 13
   inherited PnlStatusBar: TPanel
@@ -18,9 +18,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     inherited PnlCompany: TPanel
       Width = 403
       ExplicitWidth = 403
-      inherited LblCompany: TLabel
-        Width = 24
-      end
     end
   end
   inherited actMain: TActionList

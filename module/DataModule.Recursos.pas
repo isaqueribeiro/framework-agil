@@ -16,6 +16,7 @@ interface
 uses
   Controller.VersaoAplicacao,
   Controller.Licenca,
+
   System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls;
 
 type
