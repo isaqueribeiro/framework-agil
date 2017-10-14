@@ -8,21 +8,18 @@ uses
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
-  System.Actions, Vcl.ActnList, Vcl.StdActns, Vcl.Menus, Vcl.StdCtrls;
+  System.Actions, Vcl.ActnList, Vcl.StdActns, Vcl.Menus, Vcl.StdCtrls, cxClasses,
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxNavBar, dxStatusBar,
+  dxBar, dxRibbonSkins, dxSkinsdxRibbonPainter, dxRibbonCustomizationForm, dxRibbon,
+  dxNavBarBase, dxNavBarCollns,
+
+  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter;
 
 type
   TFormMainUI = class(TFormDefaultUI)
     ImgLogoCompany: TImage;
-    actMain: TActionList;
-    actWindowClose: TWindowClose;
-    actWindowCascade: TWindowCascade;
-    actWindowTileHorizontal: TWindowTileHorizontal;
-    actWindowTileVertical: TWindowTileVertical;
-    actWindowMinimizeAll: TWindowMinimizeAll;
-    actWindowArrange: TWindowArrange;
-    actWindowCloseAll: TAction;
     PnlStatusBar: TPanel;
-    actExit: TAction;
     PnlDate: TPanel;
     PnlTime: TPanel;
     PnlUser: TPanel;
@@ -37,10 +34,10 @@ type
     LblTime: TLabel;
     ImgDate: TImage;
     LblDate: TLabel;
-    MainMenu: TMainMenu;
-    menuArquivo: TMenuItem;
-    menuAjuda: TMenuItem;
-    nmSobre: TMenuItem;
+    stbInforme: TdxStatusBar;
+    BrManager: TdxBarManager;
+    rbbMenuSistema: TdxRibbonTab;
+    rbbMenu: TdxRibbon;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
   private
@@ -73,6 +70,9 @@ begin
 
   LblTime.Caption := TimeToStr(Time);
   LblTime.Hint    := TimeToStr(Time);
+
+  stbInforme.Panels.Items[0].Text := LblDate.Caption;
+  stbInforme.Panels.Items[1].Text := LblTime.Caption;
 end;
 
 end.

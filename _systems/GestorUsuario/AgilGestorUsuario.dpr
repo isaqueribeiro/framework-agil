@@ -28,7 +28,6 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Ágil Gestor Usuários';
-  TStyleManager.TrySetStyle('Metropolis UI Green');
   Application.CreateForm(TDtmRecursos, DtmRecursos);
   Application.CreateForm(TDtmBase, DtmBase);
   Application.CreateForm(TFormMainGestorUsuarioUI, FormMainGestorUsuarioUI);

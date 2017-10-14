@@ -64,7 +64,6 @@
         <VerInfo_Locale>1046</VerInfo_Locale>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;$(DCC_Namespace)</DCC_Namespace>
         <Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
-        <VCL_Custom_Styles>&quot;Golden Graphite|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\GoldenGraphite.vsf&quot;;&quot;Metropolis UI Black|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\MetropolisUIBlack.vsf&quot;;&quot;Metropolis UI Blue|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\MetropolisUIBlue.vsf&quot;;&quot;Metropolis UI Dark|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\MetropolisUIDark.vsf&quot;;&quot;Metropolis UI Green|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\MetropolisUIGreen.vsf&quot;;&quot;Ruby Graphite|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\RubyGraphite.vsf&quot;;&quot;Smokey Quartz Kamri|VCLSTYLE|$(PUBLIC)\Documents\Embarcadero\Studio\15.0\Styles\SmokeyQuartzKamri.vsf&quot;</VCL_Custom_Styles>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
@@ -114,7 +113,6 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
 Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=20221980</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">

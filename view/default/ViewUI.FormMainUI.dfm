@@ -1,9 +1,8 @@
 inherited FormMainUI: TFormMainUI
   Caption = 'Formul'#225'rio Principal Padr'#227'o'
-  ClientHeight = 551
+  ClientHeight = 571
   ClientWidth = 971
   FormStyle = fsMDIForm
-  Menu = MainMenu
   WindowState = wsMaximized
   OnCreate = FormCreate
   ExplicitWidth = 987
@@ -11,8 +10,8 @@ inherited FormMainUI: TFormMainUI
   PixelsPerInch = 96
   TextHeight = 13
   object ImgLogoCompany: TImage
-    Left = 8
-    Top = 8
+    Left = 707
+    Top = 261
     Width = 128
     Height = 98
     Picture.Data = {
@@ -311,7 +310,7 @@ inherited FormMainUI: TFormMainUI
   end
   object PnlStatusBar: TPanel
     Left = 0
-    Top = 513
+    Top = 507
     Width = 971
     Height = 38
     Align = alBottom
@@ -323,6 +322,7 @@ inherited FormMainUI: TFormMainUI
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
+    Visible = False
     object BvlStatusBar: TBevel
       Left = 0
       Top = 0
@@ -330,6 +330,7 @@ inherited FormMainUI: TFormMainUI
       Height = 4
       Align = alTop
       Shape = bsSpacer
+      Visible = False
       ExplicitWidth = 888
     end
     object PnlDate: TPanel
@@ -803,73 +804,82 @@ inherited FormMainUI: TFormMainUI
       end
     end
   end
-  object actMain: TActionList
-    Left = 264
-    Top = 296
-    object actWindowCascade: TWindowCascade
-      Category = 'Janela'
-      Caption = '&Cascade'
-      Enabled = False
-      Hint = 'Cascade'
-      ImageIndex = 17
-    end
-    object actWindowTileHorizontal: TWindowTileHorizontal
-      Category = 'Janela'
-      Caption = 'Tile &Horizontally'
-      Enabled = False
-      Hint = 'Tile Horizontal'
-      ImageIndex = 15
-    end
-    object actWindowTileVertical: TWindowTileVertical
-      Category = 'Janela'
-      Caption = '&Tile Vertically'
-      Enabled = False
-      Hint = 'Tile Vertical'
-      ImageIndex = 16
-    end
-    object actWindowMinimizeAll: TWindowMinimizeAll
-      Category = 'Janela'
-      Caption = '&Minimize All'
-      Enabled = False
-      Hint = 'Minimize All'
-    end
-    object actWindowArrange: TWindowArrange
-      Category = 'Janela'
-      Caption = '&Arrange'
-      Enabled = False
-    end
-    object actWindowClose: TWindowClose
-      Category = 'Janela'
-      Caption = '&Fechar'
-      Enabled = False
-      Hint = 'Close'
-    end
-    object actWindowCloseAll: TAction
-      Category = 'Janela'
-      Caption = 'Fechar todas'
-    end
-    object actExit: TAction
-      Category = 'Arquivo'
-      Caption = 'Sair'
-      ShortCut = 32883
+  object stbInforme: TdxStatusBar
+    Left = 0
+    Top = 545
+    Width = 971
+    Height = 26
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Width = 270
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Width = 90
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        Width = 226
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+      end>
+    PaintStyle = stpsUseLookAndFeel
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+  end
+  object rbbMenu: TdxRibbon
+    Left = 0
+    Top = 0
+    Width = 971
+    Height = 122
+    BarManager = BrManager
+    Style = rs2013
+    ColorSchemeAccent = rcsaGreen
+    ColorSchemeName = 'Office2013DarkGray'
+    Contexts = <>
+    TabOrder = 5
+    TabStop = False
+    object rbbMenuSistema: TdxRibbonTab
+      Active = True
+      Caption = 'Sistema'
+      Groups = <>
+      Index = 0
     end
   end
   object TmrContador: TTimer
     OnTimer = TmrContadorTimer
-    Left = 264
-    Top = 344
+    Left = 360
+    Top = 240
   end
-  object MainMenu: TMainMenu
-    Left = 296
-    Top = 296
-    object menuArquivo: TMenuItem
-      Caption = 'Arquivo'
-    end
-    object menuAjuda: TMenuItem
-      Caption = 'Ajuda'
-      object nmSobre: TMenuItem
-        Caption = 'Sobre'
-      end
-    end
+  object BrManager: TdxBarManager
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    Categories.Strings = (
+      'Padr'#195#163'o')
+    Categories.ItemsVisibles = (
+      2)
+    Categories.Visibles = (
+      True)
+    ImageOptions.DisabledLargeImages = DtmRecursos.imgFlat32Disable
+    ImageOptions.HotImages = DtmRecursos.imgFlat32Hot
+    ImageOptions.Images = DtmRecursos.imgFlat16
+    ImageOptions.LargeImages = DtmRecursos.imgFlat32
+    PopupMenuLinks = <>
+    UseSystemFont = True
+    Left = 360
+    Top = 192
+    DockControlHeights = (
+      0
+      0
+      0
+      0)
   end
 end

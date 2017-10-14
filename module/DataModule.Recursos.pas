@@ -17,11 +17,20 @@ uses
   Controller.VersaoAplicacao,
   Controller.Licenca,
 
-  System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls;
+  System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls, cxClasses, cxLookAndFeels,
+
+  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinsForm, cxGraphics;
 
 type
   TDtmRecursos = class(TDataModule)
     ImageList16: TImageList;
+    SkinController: TdxSkinController;
+    LookAndFeelController: TcxLookAndFeelController;
+    imgFlat16: TcxImageList;
+    imgFlat32: TcxImageList;
+    imgFlat32Disable: TcxImageList;
+    imgFlat32Hot: TcxImageList;
   private
     { Private declarations }
   public
