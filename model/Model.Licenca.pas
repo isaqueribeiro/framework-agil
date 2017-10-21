@@ -17,8 +17,10 @@ Type
       aCompetenciaLimite : Integer;
       aDataBloqueio      : TDateTime;
       aSistema           : ct_Sistema;
+      aNotificacaoSplash : String;
       procedure SetRazaoSocial(Value : String);
       procedure SetNomeFantasia(Value : String);
+      procedure SetNotificacaoSplash(Value : String);
     protected
       constructor Create;
     public
@@ -29,6 +31,7 @@ Type
       property CompetenciaLimite : Integer read aCompetenciaLimite write aCompetenciaLimite;
       property DataBloqueio      : TDateTime read aDataBloqueio write aDataBloqueio;
       property Sistema           : ct_Sistema read aSistema write aSistema;
+      property NotificacaoSplash : String read aNotificacaoSplash write SetNotificacaoSplash;
   end;
 
 implementation
@@ -42,6 +45,8 @@ begin
   aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
   aNomeFantasia := 'Empresa de Demonstração';
   aCnpj         := '71.841.661/0001-98';
+
+  aNotificacaoSplash := EmptyStr;
 
   with aEndereco do
   begin
@@ -66,6 +71,12 @@ end;
 procedure TLicenca.SetNomeFantasia(Value: String);
 begin
   aNomeFantasia := Trim(Value);
+end;
+
+procedure TLicenca.SetNotificacaoSplash(Value: String);
+begin
+  aNotificacaoSplash := Trim(Value);
+  Self.Notify;
 end;
 
 procedure TLicenca.SetRazaoSocial(Value: String);

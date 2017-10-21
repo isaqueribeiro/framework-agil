@@ -306,6 +306,7 @@ inherited FormMainUI: TFormMainUI
       31506554F913DFC11DA0CAD554651613E10AAB48A4417AB4D95865AA24DF156C
       601789B992BC2ED2D0CCA782E614F9887CDB8DB0EB43BB71821EA06DF08000FF
       CFF17FB2C149BADAD3A7270000000049454E44AE426082}
+    Visible = False
   end
   object PnlStatusBar: TPanel
     Left = 0
@@ -858,7 +859,7 @@ inherited FormMainUI: TFormMainUI
     end
   end
   object rbvMenu: TdxRibbonBackstageView
-    Left = 128
+    Left = 136
     Top = 161
     Width = 550
     Height = 328

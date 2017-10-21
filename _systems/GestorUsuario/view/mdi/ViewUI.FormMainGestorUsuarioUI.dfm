@@ -7,11 +7,10 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   PixelsPerInch = 96
   TextHeight = 13
   inherited ImgLogoCompany: TImage
-    Left = 550
-    Top = 277
-    Anchors = [akRight, akBottom]
-    ExplicitLeft = 550
-    ExplicitTop = 277
+    Left = 861
+    Top = 421
+    ExplicitLeft = 861
+    ExplicitTop = 421
   end
   inherited PnlStatusBar: TPanel
     Top = 525
@@ -46,7 +45,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   object nvbMenu: TdxNavBar [4]
     Left = 0
     Top = 155
-    Width = 121
+    Width = 129
     Height = 370
     Align = alLeft
     ActiveGroupIndex = 0
@@ -101,7 +100,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
-      Active = True
       Caption = 'Configurar Empresa'
       DesignSize = (
         367
@@ -130,6 +128,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
+      Active = True
       Caption = 'Configurar Certificado'
       DesignSize = (
         367

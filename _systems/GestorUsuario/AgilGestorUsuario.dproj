@@ -112,6 +112,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
 Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=20221980</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
@@ -162,6 +163,9 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormDefaultUI.pas">
             <Form>FormDefaultUI</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\view\default\ViewUI.FormDefaultPesquisaUI.pas">
+            <Form>FormDefaultPesquisaUI</Form>
         </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormSplashUI.pas">
             <Form>FormSplashUI</Form>

@@ -1,7 +1,7 @@
 object DtmRecursos: TDtmRecursos
   OldCreateOrder = False
-  Height = 272
-  Width = 394
+  Height = 400
+  Width = 558
   object ImageList16: TImageList
     DrawingStyle = dsTransparent
     Left = 64
@@ -6150,5 +6150,31 @@ object DtmRecursos: TDtmRecursos
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000}
       end>
+  end
+  object StyleControllerHint: TcxHintStyleController
+    HintStyleClassName = 'TcxHintStyle'
+    HintStyle.CaptionFont.Charset = DEFAULT_CHARSET
+    HintStyle.CaptionFont.Color = clWindowText
+    HintStyle.CaptionFont.Height = -11
+    HintStyle.CaptionFont.Name = 'Tahoma'
+    HintStyle.CaptionFont.Style = []
+    HintStyle.Font.Charset = DEFAULT_CHARSET
+    HintStyle.Font.Color = clWindowText
+    HintStyle.Font.Height = -11
+    HintStyle.Font.Name = 'Tahoma'
+    HintStyle.Font.Style = []
+    HintStyle.IconType = cxhiApplication
+    LookAndFeel.SkinName = 'Office2013DarkGray'
+    Left = 64
+    Top = 184
+  end
+  object StyleControllerDefaultEdit: TcxDefaultEditStyleController
+    Style.LookAndFeel.SkinName = 'Office2013DarkGray'
+    StyleDisabled.LookAndFeel.SkinName = 'Office2013DarkGray'
+    StyleFocused.LookAndFeel.SkinName = 'Office2013DarkGray'
+    StyleHot.LookAndFeel.SkinName = 'Office2013DarkGray'
+    Left = 64
+    Top = 232
+    PixelsPerInch = 96
   end
 end

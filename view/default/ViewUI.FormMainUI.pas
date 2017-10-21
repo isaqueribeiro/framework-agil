@@ -19,7 +19,6 @@ uses
 
 type
   TFormMainUI = class(TFormDefaultUI)
-    ImgLogoCompany: TImage;
     PnlStatusBar: TPanel;
     PnlDate: TPanel;
     PnlTime: TPanel;
@@ -51,6 +50,7 @@ type
     BrBtnBloquearApp: TdxBarLargeButton;
     acnFecharApp: TAction;
     BrBtnFecharApp: TdxBarLargeButton;
+    ImgLogoCompany: TImage;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
     procedure acnFecharAppExecute(Sender: TObject);

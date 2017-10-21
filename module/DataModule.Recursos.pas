@@ -3,6 +3,7 @@
   Data  : 29/08/2014
 
   Objectivo:
+
   Esta unidade poderá ser usada por todos os formulários do projeto para que estes
   tenham acesso a variáveis (objetos) globais do sistemas. E como recomendação
   para diminuir o acoplamento desnecessário entre diferentes unidades de códigos
@@ -20,7 +21,8 @@ uses
   System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls, cxClasses, cxLookAndFeels,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, dxSkinsForm, cxGraphics;
+  dxSkinOffice2013White, dxSkinsForm, cxGraphics, dxScreenTip, cxEdit,
+  dxCustomHint, cxHint;
 
 type
   TDtmRecursos = class(TDataModule)
@@ -31,6 +33,8 @@ type
     imgFlat32: TcxImageList;
     imgFlat32Disable: TcxImageList;
     imgFlat32Hot: TcxImageList;
+    StyleControllerHint: TcxHintStyleController;
+    StyleControllerDefaultEdit: TcxDefaultEditStyleController;
   private
     { Private declarations }
   public

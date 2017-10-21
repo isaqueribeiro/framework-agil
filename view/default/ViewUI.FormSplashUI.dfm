@@ -7,8 +7,6 @@ inherited FormSplashUI: TFormSplashUI
   Font.Charset = ANSI_CHARSET
   Font.Name = 'Segoe UI'
   OnClose = FormClose
-  OnCreate = FormCreate
-  OnShow = FormShow
   ExplicitWidth = 560
   ExplicitHeight = 338
   DesignSize = (

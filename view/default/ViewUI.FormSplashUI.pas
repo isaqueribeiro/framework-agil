@@ -12,7 +12,7 @@ uses
   Vcl.ExtCtrls, Vcl.Imaging.pngimage;
 
 type
-  TFormSplashUI = class(TFormDefaultUI, IObservador)
+  TFormSplashUI = class(TFormDefaultUI, IObservador) // Este splash será o observador da licença
     lblCompanyName: TLabel;
     lblLegalCopyright: TLabel;
     lblSplashName: TLabel;
@@ -89,6 +89,8 @@ begin
       IntToStr(CompetenciaLimite) + ' (' + FormatDateTime('dd/mm/yyyy', DataBloqueio) + ').';
 
   lblRegistradoPara.Caption := Trim(lblRegistradoPara.Caption);
+  lblCarregando.Caption     := Trim(aLicenca.Model.NotificacaoSplash);
+  lblCarregando.Update;
 end;
 
 end.
