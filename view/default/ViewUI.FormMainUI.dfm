@@ -4,7 +4,6 @@ inherited FormMainUI: TFormMainUI
   ClientWidth = 971
   FormStyle = fsMDIForm
   WindowState = wsMaximized
-  OnCreate = FormCreate
   ExplicitWidth = 987
   ExplicitHeight = 610
   PixelsPerInch = 96
@@ -813,12 +812,12 @@ inherited FormMainUI: TFormMainUI
     Panels = <
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 5
+        PanelStyle.ImageIndex = 6
         Width = 270
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 6
+        PanelStyle.ImageIndex = 7
         Width = 90
       end
       item
@@ -828,7 +827,7 @@ inherited FormMainUI: TFormMainUI
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 7
+        PanelStyle.ImageIndex = 8
       end>
     PaintStyle = stpsUseLookAndFeel
     LookAndFeel.SkinName = 'Office2013DarkGray'
@@ -837,7 +836,6 @@ inherited FormMainUI: TFormMainUI
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    ExplicitTop = 546
   end
   object rbbMenu: TdxRibbon
     Left = 0
@@ -862,7 +860,7 @@ inherited FormMainUI: TFormMainUI
   object rbvMenu: TdxRibbonBackstageView
     Left = 128
     Top = 161
-    Width = 466
+    Width = 550
     Height = 328
     Buttons = <>
     Ribbon = rbbMenu
@@ -878,8 +876,9 @@ inherited FormMainUI: TFormMainUI
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
+    CanCustomize = False
     Categories.Strings = (
-      'Sistema')
+      'Controle de Usu'#225'rio')
     Categories.ItemsVisibles = (
       2)
     Categories.Visibles = (
@@ -888,6 +887,7 @@ inherited FormMainUI: TFormMainUI
     ImageOptions.HotImages = DtmRecursos.imgFlat32Hot
     ImageOptions.Images = DtmRecursos.imgFlat16
     ImageOptions.LargeImages = DtmRecursos.imgFlat32
+    MenuAnimations = maRandom
     PopupMenuLinks = <>
     UseSystemFont = True
     Left = 640
@@ -897,6 +897,26 @@ inherited FormMainUI: TFormMainUI
       0
       0
       0)
+    object BrBtnCadastroPerfilUsuario: TdxBarLargeButton
+      Action = acnCadastroPerfilUsuario
+      Category = 0
+    end
+    object BrBtnCadastroUsuario: TdxBarLargeButton
+      Action = acnCadastroUsuario
+      Category = 0
+    end
+    object BrBtnAlterarSenhaUsuario: TdxBarLargeButton
+      Action = acnAlterarSenhaUsuario
+      Category = 0
+    end
+    object BrBtnBloquearApp: TdxBarLargeButton
+      Action = acnBloquearApp
+      Category = 0
+    end
+    object BrBtnFecharApp: TdxBarLargeButton
+      Action = acnFecharApp
+      Category = 0
+    end
   end
   object acnMenu: TActionList
     Images = DtmRecursos.imgFlat16
@@ -906,11 +926,33 @@ inherited FormMainUI: TFormMainUI
       Category = 'Sistema'
       Caption = 'Perfil de Usu'#225'rio'
       ImageIndex = 0
+      OnExecute = acnCadastroPerfilUsuarioExecute
     end
     object acnCadastroUsuario: TAction
       Category = 'Sistema'
       Caption = 'Usu'#225'rio do Sistema'
       ImageIndex = 2
+      OnExecute = acnCadastroUsuarioExecute
+    end
+    object acnAlterarSenhaUsuario: TAction
+      Category = 'Sistema'
+      Caption = 'Alterar Senha (%s)'
+      ImageIndex = 3
+      OnExecute = acnAlterarSenhaUsuarioExecute
+    end
+    object acnBloquearApp: TAction
+      Category = 'Sistema'
+      Caption = 'Bloquear Aplica'#231#227'o'
+      ImageIndex = 5
+      ShortCut = 12364
+      OnExecute = acnBloquearAppExecute
+    end
+    object acnFecharApp: TAction
+      Category = 'Sistema'
+      Caption = 'Fechar Aplica'#231#227'o'
+      ImageIndex = 10
+      ShortCut = 32883
+      OnExecute = acnFecharAppExecute
     end
   end
 end

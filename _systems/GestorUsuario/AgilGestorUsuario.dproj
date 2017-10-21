@@ -73,6 +73,7 @@
         <DCC_K>false</DCC_K>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
 Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
@@ -83,6 +84,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCC_ExeOutput>..\..\_bin\$(Platform)\$(Config)</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_DcuOutput>..\..\_bin\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>..\..\_bin\$(Platform)\$(Config)</DCC_ExeOutput>

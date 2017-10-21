@@ -14,7 +14,8 @@ uses
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
-  dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView;
+  dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView,
+  cxContainer, cxEdit, cxLabel;
 
 type
   TFormMainGestorUsuarioUI = class(TFormMainUI)
@@ -24,7 +25,10 @@ type
     nvbCadastroPerfilUsuario: TdxNavBarItem;
     nvbCadastroUsuario: TdxNavBarItem;
     brnAcessoRapido: TdxBar;
-    dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet;
+    rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet;
+    lblConfigurarCertificado: TcxLabel;
+    rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet;
+    lblConfigurarEmpresa: TcxLabel;
   private
     { Private declarations }
   public

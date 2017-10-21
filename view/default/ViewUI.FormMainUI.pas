@@ -43,8 +43,21 @@ type
     acnCadastroPerfilUsuario: TAction;
     acnCadastroUsuario: TAction;
     rbvMenu: TdxRibbonBackstageView;
+    acnAlterarSenhaUsuario: TAction;
+    BrBtnCadastroPerfilUsuario: TdxBarLargeButton;
+    BrBtnCadastroUsuario: TdxBarLargeButton;
+    BrBtnAlterarSenhaUsuario: TdxBarLargeButton;
+    acnBloquearApp: TAction;
+    BrBtnBloquearApp: TdxBarLargeButton;
+    acnFecharApp: TAction;
+    BrBtnFecharApp: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
+    procedure acnFecharAppExecute(Sender: TObject);
+    procedure acnCadastroPerfilUsuarioExecute(Sender: TObject);
+    procedure acnCadastroUsuarioExecute(Sender: TObject);
+    procedure acnAlterarSenhaUsuarioExecute(Sender: TObject);
+    procedure acnBloquearAppExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,6 +70,31 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TFormMainUI.acnAlterarSenhaUsuarioExecute(Sender: TObject);
+begin
+  ;
+end;
+
+procedure TFormMainUI.acnBloquearAppExecute(Sender: TObject);
+begin
+  ;
+end;
+
+procedure TFormMainUI.acnCadastroPerfilUsuarioExecute(Sender: TObject);
+begin
+  ;
+end;
+
+procedure TFormMainUI.acnCadastroUsuarioExecute(Sender: TObject);
+begin
+  ;
+end;
+
+procedure TFormMainUI.acnFecharAppExecute(Sender: TObject);
+begin
+  Self.Close;
+end;
 
 procedure TFormMainUI.FormCreate(Sender: TObject);
 begin

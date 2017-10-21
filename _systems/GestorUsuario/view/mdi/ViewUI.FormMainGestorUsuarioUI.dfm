@@ -64,7 +64,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       LargeImageIndex = 1
       LinksUseSmallImages = False
       SelectedLinkIndex = -1
-      SmallImageIndex = 1
+      SmallImageIndex = 11
       TopVisibleLinkIndex = 0
       OptionsExpansion.ShowExpandButton = False
       Links = <
@@ -83,11 +83,77 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     end
   end
   inherited rbvMenu: TdxRibbonBackstageView
-    object dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet
-      Left = 132
+    Buttons = <
+      item
+        BeginGroup = True
+        Item = BrBtnBloquearApp
+        Position = mbpAfterTabs
+      end
+      item
+        Item = BrBtnAlterarSenhaUsuario
+        Position = mbpAfterTabs
+      end
+      item
+        BeginGroup = True
+        Item = BrBtnFecharApp
+        Position = mbpAfterTabs
+      end>
+    object rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet
+      Left = 183
       Top = 0
       Active = True
-      Caption = 'Teste'
+      Caption = 'Configurar Empresa'
+      DesignSize = (
+        367
+        328)
+      object lblConfigurarEmpresa: TcxLabel
+        Left = 20
+        Top = 19
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'Configurar Empresa'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -16
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.TransparentBorder = False
+        Style.IsFontAssigned = True
+        Properties.LineOptions.Alignment = cxllaBottom
+        Properties.LineOptions.Visible = True
+        Transparent = True
+        Height = 26
+        Width = 333
+      end
+    end
+    object rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet
+      Left = 183
+      Top = 0
+      Caption = 'Configurar Certificado'
+      DesignSize = (
+        367
+        328)
+      object lblConfigurarCertificado: TcxLabel
+        Left = 20
+        Top = 19
+        Anchors = [akLeft, akTop, akRight]
+        AutoSize = False
+        Caption = 'Configurar Certificado Digital'
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -16
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = []
+        Style.TransparentBorder = False
+        Style.IsFontAssigned = True
+        Properties.LineOptions.Alignment = cxllaBottom
+        Properties.LineOptions.Visible = True
+        Transparent = True
+        Height = 26
+        Width = 333
+      end
     end
   end
   inherited brnMenu: TdxBarManager
@@ -100,7 +166,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       0
       0
       0)
-    object brnAcessoRapido: TdxBar
+    object brnAcessoRapido: TdxBar [0]
       AllowClose = False
       AllowCustomizing = False
       AllowQuickCustomizing = False
@@ -114,14 +180,22 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       FloatClientWidth = 0
       FloatClientHeight = 0
       Images = DtmRecursos.imgFlat16
-      ItemLinks = <>
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'BrBtnBloquearApp'
+        end
+        item
+          Visible = True
+          ItemName = 'BrBtnAlterarSenhaUsuario'
+        end>
       OneOnRow = True
       Row = 0
       UseOwnFont = False
       Visible = True
       WholeRow = False
     end
-    object BrBtnPerfilUsuario: TdxBarLargeButton
+    object BrBtnPerfilUsuario: TdxBarLargeButton [1]
       Caption = 'Perfil de Usu'#225'rio'
       Category = 0
       Hint = 'Perfil de Usu'#225'rio'
