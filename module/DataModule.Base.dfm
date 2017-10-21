@@ -1,5 +1,5 @@
 object DtmBase: TDtmBase
   OldCreateOrder = False
-  Height = 246
-  Width = 390
+  Height = 428
+  Width = 674
 end

@@ -14,14 +14,17 @@ uses
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
-  dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns;
+  dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView;
 
 type
   TFormMainGestorUsuarioUI = class(TFormMainUI)
+    BrBtnPerfilUsuario: TdxBarLargeButton;
     nvbMenu: TdxNavBar;
-    nvbMenuGrpCadastro: TdxNavBarGroup;
-    nvbMenuGrpConfiguracao: TdxNavBarGroup;
-    nvbMenuGrpRelatorio: TdxNavBarGroup;
+    nvbGrpCadastro: TdxNavBarGroup;
+    nvbCadastroPerfilUsuario: TdxNavBarItem;
+    nvbCadastroUsuario: TdxNavBarItem;
+    brnAcessoRapido: TdxBar;
+    dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet;
   private
     { Private declarations }
   public

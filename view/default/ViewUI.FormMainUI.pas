@@ -14,7 +14,8 @@ uses
   dxNavBarBase, dxNavBarCollns,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter;
+  dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
+  dxRibbonBackstageView;
 
 type
   TFormMainUI = class(TFormDefaultUI)
@@ -35,9 +36,13 @@ type
     ImgDate: TImage;
     LblDate: TLabel;
     stbInforme: TdxStatusBar;
-    BrManager: TdxBarManager;
+    brnMenu: TdxBarManager;
     rbbMenuSistema: TdxRibbonTab;
     rbbMenu: TdxRibbon;
+    acnMenu: TActionList;
+    acnCadastroPerfilUsuario: TAction;
+    acnCadastroUsuario: TAction;
+    rbvMenu: TdxRibbonBackstageView;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
   private
@@ -55,6 +60,8 @@ implementation
 
 procedure TFormMainUI.FormCreate(Sender: TObject);
 begin
+  rbbMenu.ShowTabGroups := False;
+
   Self.Caption := Application.Title + ' - v' +
     gVersaoApp.ProductVersion + ' (Build ' +
     gVersaoApp.FileVersion + ')';

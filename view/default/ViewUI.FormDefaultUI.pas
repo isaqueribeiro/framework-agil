@@ -7,11 +7,12 @@ uses
   Controller.Rotina,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbon, dxRibbonForm, dxRibbonSkins;
 
 type
-  TFormDefaultUI = class(TForm, IObservador)
+  TFormDefaultUI = class(TdxRibbonForm, IObservador)
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     aRotinaController: TRotinaController;
@@ -48,6 +49,11 @@ begin
   Self.Create(AOwner);
 end;
 
+procedure TFormDefaultUI.FormCreate(Sender: TObject);
+begin
+  DisableAero := True;
+end;
+
 procedure TFormDefaultUI.FormShow(Sender: TObject);
 begin
   aRotinaController.Load;
@@ -56,7 +62,7 @@ end;
 procedure TFormDefaultUI.Update(Observable: IObservable);
 begin
   Self.Tag := aRotinaController.Model.Indice;
-  ShowMessage( aRotinaController.Model.Nome + ' - ' + aRotinaController.Model.Descricao );
+//  ShowMessage( aRotinaController.Model.Nome + ' - ' + aRotinaController.Model.Descricao );
 end;
 
 end.

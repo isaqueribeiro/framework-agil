@@ -6,6 +6,13 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   ExplicitHeight = 628
   PixelsPerInch = 96
   TextHeight = 13
+  inherited ImgLogoCompany: TImage
+    Left = 550
+    Top = 277
+    Anchors = [akRight, akBottom]
+    ExplicitLeft = 550
+    ExplicitTop = 277
+  end
   inherited PnlStatusBar: TPanel
     Top = 525
     Width = 997
@@ -28,57 +35,64 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   end
   inherited rbbMenu: TdxRibbon
     Width = 997
+    Height = 155
+    QuickAccessToolbar.Toolbar = brnAcessoRapido
     ExplicitWidth = 997
+    ExplicitHeight = 155
     inherited rbbMenuSistema: TdxRibbonTab
       Index = 0
     end
   end
   object nvbMenu: TdxNavBar [4]
     Left = 0
-    Top = 122
-    Width = 169
-    Height = 403
+    Top = 155
+    Width = 121
+    Height = 370
     Align = alLeft
     ActiveGroupIndex = 0
-    TabOrder = 7
+    TabOrder = 6
+    Cursors.HotTrackedGroupCursor = -1118
     ViewReal = 15
+    OptionsBehavior.Common.DragDropFlags = []
+    OptionsBehavior.NavigationPane.AllowCustomizing = False
     OptionsImage.DisabledLargeImages = DtmRecursos.imgFlat32Disable
     OptionsImage.HotLargeImages = DtmRecursos.imgFlat32Hot
     OptionsImage.LargeImages = DtmRecursos.imgFlat32
     OptionsImage.SmallImages = DtmRecursos.imgFlat16
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.BackColor = clNone
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.BackColor2 = clNone
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.Font.Charset = ANSI_CHARSET
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.Font.Color = clNone
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.Font.Height = -13
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.Font.Name = 'Tahoma'
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.Font.Style = [fsBold]
-    OptionsStyle.DefaultStyles.NavigationPaneHeader.AssignedValues = [savFont]
-    ExplicitTop = 120
-    object nvbMenuGrpCadastro: TdxNavBarGroup
+    object nvbGrpCadastro: TdxNavBarGroup
       Caption = 'Cadastro'
+      LargeImageIndex = 1
+      LinksUseSmallImages = False
       SelectedLinkIndex = -1
+      SmallImageIndex = 1
       TopVisibleLinkIndex = 0
-      Links = <>
+      OptionsExpansion.ShowExpandButton = False
+      Links = <
+        item
+          Item = nvbCadastroPerfilUsuario
+        end
+        item
+          Item = nvbCadastroUsuario
+        end>
     end
-    object nvbMenuGrpRelatorio: TdxNavBarGroup
-      Caption = 'Relat'#243'rios'
-      SelectedLinkIndex = -1
-      TopVisibleLinkIndex = 0
-      Links = <>
+    object nvbCadastroPerfilUsuario: TdxNavBarItem
+      Action = acnCadastroPerfilUsuario
     end
-    object nvbMenuGrpConfiguracao: TdxNavBarGroup
-      Caption = 'Configura'#231#245'es'
-      SelectedLinkIndex = -1
-      TopVisibleLinkIndex = 0
-      Links = <>
+    object nvbCadastroUsuario: TdxNavBarItem
+      Action = acnCadastroUsuario
     end
   end
-  inherited TmrContador: TTimer
-    Left = 280
-    Top = 480
+  inherited rbvMenu: TdxRibbonBackstageView
+    object dxRibbonBackstageViewTabSheet1: TdxRibbonBackstageViewTabSheet
+      Left = 132
+      Top = 0
+      Active = True
+      Caption = 'Teste'
+    end
   end
-  inherited BrManager: TdxBarManager
+  inherited brnMenu: TdxBarManager
+    Categories.Strings = (
+      'Cadastro')
     LookAndFeel.SkinName = ''
     LookAndFeel.SkinName = ''
     DockControlHeights = (
@@ -86,5 +100,36 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       0
       0
       0)
+    object brnAcessoRapido: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      Caption = 'Acesso R'#225'pido'
+      CaptionButtons = <>
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 1031
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      Images = DtmRecursos.imgFlat16
+      ItemLinks = <>
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = False
+    end
+    object BrBtnPerfilUsuario: TdxBarLargeButton
+      Caption = 'Perfil de Usu'#225'rio'
+      Category = 0
+      Hint = 'Perfil de Usu'#225'rio'
+      Visible = ivAlways
+      LargeImageIndex = 0
+      HotImageIndex = 0
+      SyncImageIndex = False
+      ImageIndex = 0
+    end
   end
 end

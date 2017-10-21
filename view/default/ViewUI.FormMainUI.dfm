@@ -10,8 +10,8 @@ inherited FormMainUI: TFormMainUI
   PixelsPerInch = 96
   TextHeight = 13
   object ImgLogoCompany: TImage
-    Left = 707
-    Top = 261
+    Left = 835
+    Top = 403
     Width = 128
     Height = 98
     Picture.Data = {
@@ -809,40 +809,48 @@ inherited FormMainUI: TFormMainUI
     Top = 545
     Width = 971
     Height = 26
+    Images = DtmRecursos.imgFlat16
     Panels = <
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 5
         Width = 270
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 6
         Width = 90
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 2
         Width = 226
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 7
       end>
     PaintStyle = stpsUseLookAndFeel
+    LookAndFeel.SkinName = 'Office2013DarkGray'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    ExplicitTop = 546
   end
   object rbbMenu: TdxRibbon
     Left = 0
     Top = 0
     Width = 971
     Height = 122
-    BarManager = BrManager
+    ApplicationButton.Menu = rbvMenu
+    BarManager = brnMenu
     Style = rs2013
     ColorSchemeAccent = rcsaGreen
     ColorSchemeName = 'Office2013DarkGray'
     Contexts = <>
-    TabOrder = 5
+    TabOrder = 4
     TabStop = False
     object rbbMenuSistema: TdxRibbonTab
       Active = True
@@ -851,19 +859,27 @@ inherited FormMainUI: TFormMainUI
       Index = 0
     end
   end
+  object rbvMenu: TdxRibbonBackstageView
+    Left = 128
+    Top = 161
+    Width = 466
+    Height = 328
+    Buttons = <>
+    Ribbon = rbbMenu
+  end
   object TmrContador: TTimer
     OnTimer = TmrContadorTimer
-    Left = 360
-    Top = 240
+    Left = 608
+    Top = 464
   end
-  object BrManager: TdxBarManager
+  object brnMenu: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
     Categories.Strings = (
-      'Padr'#195#163'o')
+      'Sistema')
     Categories.ItemsVisibles = (
       2)
     Categories.Visibles = (
@@ -874,12 +890,27 @@ inherited FormMainUI: TFormMainUI
     ImageOptions.LargeImages = DtmRecursos.imgFlat32
     PopupMenuLinks = <>
     UseSystemFont = True
-    Left = 360
-    Top = 192
+    Left = 640
+    Top = 416
     DockControlHeights = (
       0
       0
       0
       0)
+  end
+  object acnMenu: TActionList
+    Images = DtmRecursos.imgFlat16
+    Left = 608
+    Top = 416
+    object acnCadastroPerfilUsuario: TAction
+      Category = 'Sistema'
+      Caption = 'Perfil de Usu'#225'rio'
+      ImageIndex = 0
+    end
+    object acnCadastroUsuario: TAction
+      Category = 'Sistema'
+      Caption = 'Usu'#225'rio do Sistema'
+      ImageIndex = 2
+    end
   end
 end
