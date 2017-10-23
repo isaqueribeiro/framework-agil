@@ -1,7 +1,9 @@
 inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
+  ActiveControl = edPesquisa
   Caption = 'FormDefaultPesquisaUI'
   FormStyle = fsMDIChild
   Visible = True
+  WindowState = wsMaximized
   ExplicitWidth = 697
   ExplicitHeight = 425
   PixelsPerInch = 96
@@ -13,6 +15,8 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Height = 4
     Align = alTop
     Shape = bsSpacer
+    ExplicitLeft = -8
+    ExplicitTop = 34
   end
   object pnlHeader: TPanel
     Left = 0
@@ -106,34 +110,42 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   end
   object pnlBody: TPanel
     Left = 0
-    Top = 53
+    Top = 75
     Width = 681
-    Height = 333
+    Height = 311
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitLeft = 256
-    ExplicitTop = 128
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitTop = 53
+    ExplicitHeight = 333
     object bvlGrid: TBevel
       Left = 0
-      Top = 233
+      Top = 211
       Width = 681
       Height = 4
       Align = alBottom
       Shape = bsSpacer
       ExplicitTop = 49
     end
+    object bvlBr: TBevel
+      Left = 0
+      Top = 0
+      Width = 681
+      Height = 4
+      Align = alTop
+      Shape = bsSpacer
+      ExplicitTop = 8
+    end
     object dbgPesquisa: TcxGrid
       AlignWithMargins = True
       Left = 3
-      Top = 3
+      Top = 7
       Width = 675
-      Height = 227
+      Height = 201
       Align = alClient
       TabOrder = 0
-      ExplicitTop = 2
+      ExplicitTop = 3
+      ExplicitHeight = 227
       object dbgPesquisaDB: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
@@ -163,7 +175,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     object pgcPesquisa: TcxPageControl
       AlignWithMargins = True
       Left = 3
-      Top = 240
+      Top = 218
       Width = 675
       Height = 90
       Align = alBottom
@@ -172,6 +184,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Properties.CustomButtons.Buttons = <>
       Properties.Images = DtmRecursos.imgFlat16
       LookAndFeel.SkinName = 'Office2013DarkGray'
+      ExplicitTop = 240
       ClientRectBottom = 88
       ClientRectLeft = 2
       ClientRectRight = 673
@@ -179,47 +192,207 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       object tbsPesquisa: TcxTabSheet
         Caption = 'Pesquisa'
         ImageIndex = 0
-        ExplicitLeft = 0
-        ExplicitTop = 28
-        object cxLabel1: TcxLabel
+        DesignSize = (
+          671
+          59)
+        object lblTipoPesquisa: TcxLabel
           Left = 23
           Top = 11
-          Caption = 'cxLabel1'
+          Caption = 'Tipo pesquisa'
+          FocusControl = edTipoPesquisa
           Style.LookAndFeel.SkinName = 'Office2013DarkGray'
           StyleDisabled.LookAndFeel.SkinName = 'Office2013DarkGray'
           StyleFocused.LookAndFeel.SkinName = 'Office2013DarkGray'
           StyleHot.LookAndFeel.SkinName = 'Office2013DarkGray'
           Transparent = True
         end
-        object cxImageComboBox1: TcxImageComboBox
+        object edTipoPesquisa: TcxImageComboBox
           Left = 23
           Top = 26
-          Properties.Items = <>
+          EditValue = 0
+          Properties.DefaultImageIndex = 9
+          Properties.Images = DtmRecursos.imgOffice2013
+          Properties.Items = <
+            item
+              Description = 'Autom'#225'tico'
+              ImageIndex = 9
+              Value = 0
+            end>
           TabOrder = 1
-          Width = 121
+          Width = 154
         end
-        object cxTextEdit1: TcxTextEdit
-          Left = 150
+        object edPesquisa: TcxTextEdit
+          Left = 183
           Top = 26
+          Anchors = [akLeft, akTop, akRight]
+          Properties.CharCase = ecUpperCase
           TabOrder = 2
-          Text = 'cxTextEdit1'
-          Width = 419
+          Width = 386
         end
         object btnPesquisar: TcxButton
           Left = 575
           Top = 24
           Width = 75
           Height = 25
-          Caption = '&Pesquisar'
+          Action = acnPesquisar
+          Anchors = [akTop, akRight]
           LookAndFeel.SkinName = 'Office2013DarkGray'
-          OptionsImage.Images = DtmRecursos.imgFlat16
+          OptionsImage.Images = DtmRecursos.imgOffice2013
           TabOrder = 3
         end
       end
     end
   end
   object dtsPesquisa: TDataSource
-    Left = 120
-    Top = 165
+    Left = 32
+    Top = 197
+  end
+  object acnEvento: TActionList
+    Images = DtmRecursos.imgOffice2013
+    Left = 32
+    Top = 149
+    object acnNovo: TAction
+      Category = 'Cadastro'
+      Caption = 'Novo'
+      Hint = 'Novo Registro'
+      ImageIndex = 20
+      OnExecute = acnNovoExecute
+    end
+    object acnEditar: TAction
+      Category = 'Cadastro'
+      Caption = 'Editar'
+      Hint = 'Editar Registro'
+      ImageIndex = 137
+      ShortCut = 113
+      OnExecute = acnEditarExecute
+    end
+    object acnExcluir: TAction
+      Category = 'Cadastro'
+      Caption = 'Excluir'
+      Hint = 'Excluir Registro'
+      ImageIndex = 136
+      OnExecute = acnExcluirExecute
+    end
+    object acnExportar: TAction
+      Category = 'Registros'
+      Caption = 'Exportar'
+      Hint = 'Exportar Registro'
+      ImageIndex = 140
+      OnExecute = acnExportarExecute
+    end
+    object acnImprimir: TAction
+      Category = 'Registros'
+      Caption = 'Imprimir'
+      Hint = 'Imprimir'
+      ImageIndex = 213
+      OnExecute = acnImprimirExecute
+    end
+    object acnPesquisar: TAction
+      Category = 'Registros'
+      Caption = '&Pesquisar'
+      Hint = 'Pesquisar'
+      ImageIndex = 167
+      OnExecute = acnPesquisarExecute
+    end
+  end
+  object brnEvento: TdxBarManager
+    AllowReset = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    Categories.Strings = (
+      'Cadastro'
+      'Registros')
+    Categories.ItemsVisibles = (
+      2
+      2)
+    Categories.Visibles = (
+      True
+      True)
+    ImageOptions.Images = DtmRecursos.imgOffice2013
+    LookAndFeel.SkinName = 'Office2013DarkGray'
+    PopupMenuLinks = <>
+    UseSystemFont = True
+    Left = 64
+    Top = 149
+    DockControlHeights = (
+      0
+      0
+      22
+      0)
+    object brFerramentas: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      BorderStyle = bbsNone
+      Caption = 'Barra de Ferramentas'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsTop
+      FloatLeft = 715
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      Images = DtmRecursos.imgOffice2013
+      IsMainMenu = True
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'BrBtnNovo'
+        end
+        item
+          Visible = True
+          ItemName = 'BrBtnEditar'
+        end
+        item
+          Visible = True
+          ItemName = 'BrBtnExcluir'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BrBtnExportar'
+        end
+        item
+          Visible = True
+          ItemName = 'BrBtnImprimir'
+        end>
+      MultiLine = True
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object BrBtnNovo: TdxBarButton
+      Action = acnNovo
+      Category = 0
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnEditar: TdxBarButton
+      Action = acnEditar
+      Category = 0
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnExcluir: TdxBarButton
+      Action = acnExcluir
+      Category = 0
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnExportar: TdxBarButton
+      Action = acnExportar
+      Category = 1
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnImprimir: TdxBarButton
+      Action = acnImprimir
+      Category = 1
+      PaintStyle = psCaptionGlyph
+    end
   end
 end

@@ -26,7 +26,6 @@ uses
 
 type
   TDtmRecursos = class(TDataModule)
-    ImageList16: TImageList;
     SkinController: TdxSkinController;
     LookAndFeelController: TcxLookAndFeelController;
     imgFlat16: TcxImageList;
@@ -35,6 +34,7 @@ type
     imgFlat32Hot: TcxImageList;
     StyleControllerHint: TcxHintStyleController;
     StyleControllerDefaultEdit: TcxDefaultEditStyleController;
+    imgOffice2013: TcxImageList;
   private
     { Private declarations }
   public
