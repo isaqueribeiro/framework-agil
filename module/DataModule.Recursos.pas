@@ -17,6 +17,7 @@ interface
 uses
   Controller.VersaoAplicacao,
   Controller.Licenca,
+  ClasseAgil.Formulario,
 
   System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls, cxClasses, cxLookAndFeels,
 
@@ -45,6 +46,8 @@ var
   DtmRecursos : TDtmRecursos;
   gVersaoApp  : TVersaoAplicacaoController;
   gLicencaApp : TLicencaController;
+  gFormulario : TFormularios;
+
 
 implementation
 
@@ -55,5 +58,6 @@ implementation
 initialization
   gVersaoApp  := TVersaoAplicacaoController.GetInstance();
   gLicencaApp := TLicencaController.GetInstance();
+  gFormulario := TFormularios.Create;
 
 end.

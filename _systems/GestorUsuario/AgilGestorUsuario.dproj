@@ -148,6 +148,8 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\agil_lib\interfaces\InterfaceAgil.Observer.pas"/>
         <DCCReference Include="..\..\agil_lib\interfaces\InterfaceAgil.Controller.pas"/>
         <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.BaseObject.pas"/>
+        <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.FormFactory.pas"/>
+        <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.Formulario.pas"/>
         <DCCReference Include="..\..\model\Model.Rotina.pas"/>
         <DCCReference Include="..\..\model\Model.Licenca.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
@@ -178,6 +180,14 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DCCReference>
         <DCCReference Include="view\mdi\ViewUI.FormMainGestorUsuarioUI.pas">
             <Form>FormMainGestorUsuarioUI</Form>
+        </DCCReference>
+        <DCCReference Include="..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas">
+            <Form>FrmPerfilUsuarioPesquisaUI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas">
+            <Form>FrmUsuarioSistemaPesquisaUI</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>

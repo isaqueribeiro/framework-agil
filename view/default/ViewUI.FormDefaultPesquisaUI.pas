@@ -62,6 +62,7 @@ type
     procedure acnImprimirExecute(Sender: TObject);
     procedure acnPesquisarExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormResize(Sender: TObject);
   private
     { Private declarations }
   public
@@ -112,6 +113,18 @@ begin
   lblHeaderTitle.Top  := 8;
   lblHeaderDescription.Left := 28;
   lblHeaderDescription.Top  := 28;
+
+  lblHeaderTitle.Caption := Trim(Self.Caption);
+end;
+
+procedure TFormDefaultPesquisaUI.FormResize(Sender: TObject);
+begin
+  // Definindo tamanho mínimo do formulário
+  if (Self.Height < 425) then
+    Self.Height := 425;
+
+  if (Self.Width < 697) then
+    Self.Width := 697;
 end;
 
 procedure TFormDefaultPesquisaUI.FormShow(Sender: TObject);

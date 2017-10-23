@@ -4,8 +4,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   FormStyle = fsMDIChild
   Visible = True
   WindowState = wsMaximized
-  ExplicitWidth = 697
-  ExplicitHeight = 425
+  OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
   object bvlHeader: TBevel

@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>2014/06/06 14:13:35.000.990,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj=C:\Users\DESENV\Documents\RAD Studio\Projects\Project1.dproj</Transaction>
-    <Transaction>2014/06/06 14:44:59.000.914,C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormDefaultUI.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\uFormDefaultUI.dfm</Transaction>
-    <Transaction>2014/06/06 15:43:58.000.368,C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormSplashUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm</Transaction>
-    <Transaction>2014/08/28 15:50:51.000.735,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormMainUI.dfm</Transaction>
-    <Transaction>2014/08/28 15:55:16.000.810,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm</Transaction>
-    <Transaction>2014/08/28 15:58:08.000.465,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj</Transaction>
-    <Transaction>2014/08/28 16:45:41.000.096,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj</Transaction>
-    <Transaction>2014/08/28 16:48:08.000.723,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm</Transaction>
-    <Transaction>2014/08/29 19:24:03.000.565,C:\PROJETOS\Framework Agil\trunk\module\DataModule.Recursos.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
-    <Transaction>2014/08/29 20:58:11.000.665,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.SplashGestorUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
-    <Transaction>2014/09/02 17:01:58.000.311,C:\PROJETOS\Framework Agil\trunk\module\DataModule.Base.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
-    <Transaction>2017/10/21 14:44:04.114,D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
+    <Transaction>2014/06/06 14:13:35.000.990,C:\Users\DESENV\Documents\RAD Studio\Projects\Project1.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj</Transaction>
+    <Transaction>2014/06/06 14:44:59.000.914,C:\PROJETOS\Framework Agil\trunk\view\default\uFormDefaultUI.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormDefaultUI.dfm</Transaction>
+    <Transaction>2014/06/06 15:43:58.000.368,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormSplashUI.dfm</Transaction>
+    <Transaction>2014/08/28 15:50:51.000.735,C:\PROJETOS\Framework Agil\trunk\view\default\ViewUI.FormMainUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm</Transaction>
+    <Transaction>2014/08/28 15:55:16.000.810,C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\Unit1.dfm</Transaction>
+    <Transaction>2014/08/28 15:58:08.000.465,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\ControleUsuario.dproj</Transaction>
+    <Transaction>2014/08/28 16:45:41.000.096,C:\PROJETOS\Framework Agil\trunk\_systems\ControleUsuario\AgilControleUsuario.dproj=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj</Transaction>
+    <Transaction>2014/08/28 16:48:08.000.723,C:\PROJETOS\Framework Agil\trunk\_systems\view\mdi\ViewUI.FormMainControleUsuarioUI.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.dfm</Transaction>
+    <Transaction>2014/08/29 19:24:03.000.565,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\module\DataModule.Recursos.dfm</Transaction>
+    <Transaction>2014/08/29 20:58:11.000.665,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.SplashGestorUsuarioUI.dfm</Transaction>
+    <Transaction>2014/09/02 17:01:58.000.311,C:\PROJETOS\Framework Agil\trunk\_systems\GestorUsuario\Unit1.dfm=C:\PROJETOS\Framework Agil\trunk\module\DataModule.Base.dfm</Transaction>
+    <Transaction>2017/10/21 14:44:04.000.114,D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.dfm</Transaction>
+    <Transaction>2017/10/23 16:44:40.262,D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.PerfilUsuarioPesquisaUI.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
+    <Transaction>2017/10/23 16:52:17.942,D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.UsuarioSistemaPesquisaUI.pas=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.pas</Transaction>
+    <Transaction>2017/10/23 16:52:17.943,D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.UsuarioSistemaPesquisaUI.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

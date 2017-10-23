@@ -83,12 +83,12 @@ end;
 
 procedure TFormMainUI.acnCadastroPerfilUsuarioExecute(Sender: TObject);
 begin
-  ;
+  gFormulario.ShowForm(Self, 'FrmPerfilUsuarioPesquisaUI');
 end;
 
 procedure TFormMainUI.acnCadastroUsuarioExecute(Sender: TObject);
 begin
-  ;
+  gFormulario.ShowForm(Self, 'FrmUsuarioSistemaPesquisaUI');
 end;
 
 procedure TFormMainUI.acnFecharAppExecute(Sender: TObject);

@@ -9,6 +9,8 @@ uses
   InterfaceAgil.Observer in '..\..\agil_lib\interfaces\InterfaceAgil.Observer.pas',
   InterfaceAgil.Controller in '..\..\agil_lib\interfaces\InterfaceAgil.Controller.pas',
   ClasseAgil.BaseObject in '..\..\agil_lib\classes\ClasseAgil.BaseObject.pas',
+  ClasseAgil.FormFactory in '..\..\agil_lib\classes\ClasseAgil.FormFactory.pas',
+  ClasseAgil.Formulario in '..\..\agil_lib\classes\ClasseAgil.Formulario.pas',
   Model.Rotina in '..\..\model\Model.Rotina.pas',
   Model.Licenca in '..\..\model\Model.Licenca.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
@@ -21,7 +23,9 @@ uses
   ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI},
   ViewUI.FormMainUI in '..\..\view\default\ViewUI.FormMainUI.pas' {FormMainUI},
   ViewUI.SplashGestorUsuarioUI in 'view\sdi\ViewUI.SplashGestorUsuarioUI.pas' {FormSplashGestorUsuarioUI},
-  ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI};
+  ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
+  ViewUI.PerfilUsuarioPesquisaUI in '..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
+  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
 
 {$R *.res}
 
