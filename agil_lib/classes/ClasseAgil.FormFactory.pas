@@ -3,7 +3,7 @@ unit ClasseAgil.FormFactory;
 interface
 
 uses
-  System.Classes, Vcl.Forms;
+  System.Classes, System.StrUtils, System.SysUtils, Vcl.Forms;
 
   type
     TFormFactory = class
@@ -16,16 +16,14 @@ uses
       destructor Destroy; override;
     public
       function FormFactory: TFormFactory;
-      function CreateForm(const AOnwer : TComponent; const aFormName: String): TForm; //overload;
+      function CreateForm(const AOnwer : TComponent; const aFormName: String): TForm;
+      function GetForm(const aFormName: String): TForm;
 
       procedure RegisterForm(const aFormName: string; aFormClass: TComponentClass);
 
       class function GetInstance : TFormFactory;
   end;
 
-//var
-//  _FormFactory: TFormFactory;
-//
 implementation
 
 { TFormFactory }
@@ -58,6 +56,20 @@ begin
   Result := Self.GetInstance;
 end;
 
+function TFormFactory.GetForm(const aFormName: String): TForm;
+var
+  I : Integer;
+begin
+  // Verificar se já foi Chamada
+  Result := nil;
+  for I := Screen.FormCount - 1 downto 0 do
+    if AnsiUpperCase(Screen.Forms[I].Name) = AnsiUpperCase(aFormName) then
+    begin
+      Result := Screen.Forms[I];
+      Exit;
+    end;
+end;
+
 class function TFormFactory.GetInstance: TFormFactory;
 begin
   if not Assigned(_FormFactory) then
@@ -84,9 +96,5 @@ end;
 
 initialization
   TFormFactory.GetInstance;
-//  _FormFactory := TFormFactory.Create;
 
-//finalization
-//  _FormFactory.Free;
-//
 end.

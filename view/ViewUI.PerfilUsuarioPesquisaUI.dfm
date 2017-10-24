@@ -3,7 +3,7 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
   PixelsPerInch = 96
   TextHeight = 13
   inherited bvlHeader: TBevel
-    Top = 71
+    ExplicitTop = 71
   end
   inherited pnlHeader: TPanel
     inherited lblHeaderTitle: TcxLabel
@@ -14,14 +14,12 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
     end
   end
   inherited pnlBody: TPanel
-    ExplicitTop = 75
-    ExplicitHeight = 311
+    ExplicitHeight = 312
     inherited dbgPesquisa: TcxGrid
-      ExplicitTop = 7
-      ExplicitHeight = 201
+      ExplicitHeight = 202
     end
     inherited pgcPesquisa: TcxPageControl
-      ExplicitTop = 218
+      ExplicitTop = 219
     end
   end
   inherited brnEvento: TdxBarManager

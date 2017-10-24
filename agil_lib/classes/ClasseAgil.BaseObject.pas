@@ -50,16 +50,19 @@ var
   I        : Integer;
   Value    : Variant;
 begin
-  TypInfo   := Source.ClassInfo;
-  PropCount := GetPropList(TypInfo, tkAny, @PropList);
-
-  for I := 0 to PropCount - 1 do
+  if Assigned(Self) and Assigned(Source) and (Source is TBaseObject) then
   begin
-    // Verifica se possui acesso a escrita na propriedade
-    if ( PropList[I]^.SetProc <> nil ) then
+    TypInfo   := Source.ClassInfo;
+    PropCount := GetPropList(TypInfo, tkAny, @PropList);
+
+    for I := 0 to PropCount - 1 do
     begin
-      Value := GetPropValue(Source, PropList[I]^.Name);
-      SetPropValue(Self, PropList[I]^.Name, Value);
+      // Verifica se possui acesso a escrita na propriedade
+      if ( PropList[I]^.SetProc <> nil ) then
+      begin
+        Value := GetPropValue(Source, PropList[I]^.Name);
+        SetPropValue(Self, PropList[I]^.Name, Value);
+      end;
     end;
   end;
 end;
@@ -89,7 +92,7 @@ procedure TBaseObject.Notify;
 var
   I : Integer;
 begin
-//  if ( aObservers <> nil ) then
+  if ( aObservers <> nil ) then
     for I := 0 to aObservers.Count - 1 do
       IObservador(aObservers[I]).Update(Self);
 end;

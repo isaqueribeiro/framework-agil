@@ -100,6 +100,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
+      Active = True
       Caption = 'Configurar Empresa'
       DesignSize = (
         367
@@ -128,7 +129,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
-      Active = True
       Caption = 'Configurar Certificado'
       DesignSize = (
         367
@@ -157,7 +157,14 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
   end
   inherited brnMenu: TdxBarManager
     Categories.Strings = (
-      'Cadastro')
+      'Cadastro'
+      'Testes')
+    Categories.ItemsVisibles = (
+      2
+      2)
+    Categories.Visibles = (
+      True
+      True)
     LookAndFeel.SkinName = ''
     LookAndFeel.SkinName = ''
     DockControlHeights = (
@@ -187,6 +194,10 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         item
           Visible = True
           ItemName = 'BrBtnAlterarSenhaUsuario'
+        end
+        item
+          Visible = True
+          ItemName = 'BrBtnTeste'
         end>
       OneOnRow = True
       Row = 0
@@ -203,6 +214,16 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       HotImageIndex = 0
       SyncImageIndex = False
       ImageIndex = 0
+    end
+    object BrBtnTeste: TdxBarButton
+      Action = acnTeste
+      Category = 1
+    end
+  end
+  inherited acnMenu: TActionList
+    object acnTeste: TAction
+      Caption = 'acnTeste'
+      OnExecute = acnTesteExecute
     end
   end
 end

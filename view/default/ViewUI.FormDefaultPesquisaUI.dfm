@@ -1,15 +1,17 @@
 inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   ActiveControl = edPesquisa
   Caption = 'FormDefaultPesquisaUI'
+  ClientHeight = 387
   FormStyle = fsMDIChild
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
+  ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
   object bvlHeader: TBevel
     Left = 0
-    Top = 49
+    Top = 71
     Width = 681
     Height = 4
     Align = alTop
@@ -32,6 +34,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 162
     object imgHeader: TImage
       Left = 636
       Top = 4
@@ -111,15 +114,16 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Left = 0
     Top = 75
     Width = 681
-    Height = 311
+    Height = 312
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 53
-    ExplicitHeight = 333
+    ExplicitTop = 126
+    ExplicitWidth = 162
+    ExplicitHeight = 261
     object bvlGrid: TBevel
       Left = 0
-      Top = 211
+      Top = 212
       Width = 681
       Height = 4
       Align = alBottom
@@ -140,11 +144,11 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Left = 3
       Top = 7
       Width = 675
-      Height = 201
+      Height = 202
       Align = alClient
       TabOrder = 0
-      ExplicitTop = 3
-      ExplicitHeight = 227
+      ExplicitWidth = 156
+      ExplicitHeight = 151
       object dbgPesquisaDB: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
@@ -174,7 +178,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     object pgcPesquisa: TcxPageControl
       AlignWithMargins = True
       Left = 3
-      Top = 218
+      Top = 219
       Width = 675
       Height = 90
       Align = alBottom
@@ -183,7 +187,8 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Properties.CustomButtons.Buttons = <>
       Properties.Images = DtmRecursos.imgFlat16
       LookAndFeel.SkinName = 'Office2013DarkGray'
-      ExplicitTop = 240
+      ExplicitTop = 168
+      ExplicitWidth = 156
       ClientRectBottom = 88
       ClientRectLeft = 2
       ClientRectRight = 673
@@ -191,6 +196,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       object tbsPesquisa: TcxTabSheet
         Caption = 'Pesquisa'
         ImageIndex = 0
+        ExplicitWidth = 152
         DesignSize = (
           671
           59)
@@ -238,6 +244,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
           LookAndFeel.SkinName = 'Office2013DarkGray'
           OptionsImage.Images = DtmRecursos.imgOffice2013
           TabOrder = 3
+          ExplicitLeft = 56
         end
       end
     end

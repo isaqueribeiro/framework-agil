@@ -78,7 +78,7 @@ implementation
 
 procedure TFormDefaultPesquisaUI.acnEditarExecute(Sender: TObject);
 begin
-  ;
+  ShowMessage( Rotina.Parent.Nome + #13 + Rotina.Nome + ' - ' + Rotina.Descricao );
 end;
 
 procedure TFormDefaultPesquisaUI.acnExcluirExecute(Sender: TObject);

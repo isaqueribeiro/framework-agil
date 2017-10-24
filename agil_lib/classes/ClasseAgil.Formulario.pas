@@ -6,7 +6,7 @@ uses
   InterfaceAgil.Observer,
   ClasseAgil.FormFactory,
 
-  System.Classes, Vcl.Forms, Vcl.Controls, TypInfo;
+  System.Classes, System.StrUtils, System.SysUtils, Vcl.Forms, Vcl.Controls, TypInfo;
 
   type
     TFormularios = class
@@ -22,9 +22,6 @@ uses
   end;
 
 
-var
-  FForm : TForm;
-
 implementation
 
 { TFormularios }
@@ -36,7 +33,7 @@ begin
   // Verificar se já foi Chamada
   Result := False;
   for I := Screen.FormCount - 1 downto 0 do
-    if Screen.Forms[i].name  = sForm then
+    if AnsiUpperCase(Screen.Forms[i].Name) = AnsiUpperCase(sForm) then
     begin
       Result := True;
       Exit;
@@ -47,15 +44,19 @@ class procedure TFormularios.FecharTodos;
 var
   I : Integer;
   aForm : TForm;
+  sForm : String;
 begin
   // Fecha todos os formulários Abertos
   for I := Screen.FormCount - 1 downto 0 do
-    if (Screen.Forms[I].Name <> 'frmPrincipal') and (Screen.Forms[I].Name <> 'frmMain') then
+  begin
+    sForm := AnsiUpperCase(Screen.Forms[I].Name);
+    if (sForm <> AnsiUpperCase('frmPrincipal')) and (sForm <> AnsiUpperCase('frmMain')) then
       if Assigned(Screen.Forms[I]) then
       begin
          aForm := Screen.Forms[I];
          aForm.Close;
       end;
+  end;
 end;
 
 class procedure TFormularios.RegisterForm(const aFormName: string;
@@ -66,58 +67,69 @@ end;
 
 class procedure TFormularios.ShowForm(const AOnwer: TComponent;
   NomeForm: String);
+var
+  aForm : TForm;
 begin
   if TFormularios.EstaAberto(NomeForm) then
-    FForm.BringToFront
+  begin
+    aForm := TFormFactory.GetInstance.GetForm(NomeForm);
+    aForm.BringToFront;
+  end
   else
   begin
-    FForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
-    FForm.Show;
+    aForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+    aForm.Show;
   end;
-//  if not TFormularios.EstaAberto(NomeForm) then
-//    FForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
-//  FForm.Show;
 end;
 
 class function TFormularios.ShowModalForm(const AOnwer: TComponent;
   NomeForm: String): Boolean;
+var
+  aForm : TForm;
 begin
   try
-    if not TFormularios.EstaAberto(NomeForm) then
-      FForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+    if TFormularios.EstaAberto(NomeForm) then
+      aForm := TFormFactory.GetInstance.GetForm(NomeForm)
+    else
+      aForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+
     try
-      Result := (FForm.ShowModal = mrOk);
+      Result := (aForm.ShowModal = mrOk);
     except
-      FForm  := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
-      Result := (FForm.ShowModal = mrOk);
+      aForm  := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+      Result := (aForm.ShowModal = mrOk);
     end;
   finally
-    FForm.Free;
+    aForm.Free;
   end;
 end;
 
 class function TFormularios.ShowModalFormObserver(const AOnwer: TComponent;
   NomeForm: String; Observador: IObservador): Boolean;
+var
+  aForm : TForm;
 begin
   try
-    if not TFormularios.EstaAberto(NomeForm) then
-      FForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+    if TFormularios.EstaAberto(NomeForm) then
+      aForm := TFormFactory.GetInstance.GetForm(NomeForm)
+    else
+      aForm := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
 
     // Adicionando o "Observador" no formulário "Observado"
-    IObservable(FForm as IObservable).addObserver(Observador);
+    IObservable(aForm as IObservable).addObserver(Observador);
 
     try
-      Result := (FForm.ShowModal = mrOk);
+      Result := (aForm.ShowModal = mrOk);
     except
-      FForm  := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
+      aForm  := TFormFactory.GetInstance.CreateForm(AOnwer, NomeForm);
 
       // Adicionando o "Observador" no formulário "Observado"
-      IObservable(FForm as IObservable).addObserver(Observador);
+      IObservable(aForm as IObservable).addObserver(Observador);
 
-      Result := (FForm.ShowModal = mrOk);
+      Result := (aForm.ShowModal = mrOk);
     end;
   finally
-    FForm.Free;
+    aForm.Free;
   end;
 end;
 
