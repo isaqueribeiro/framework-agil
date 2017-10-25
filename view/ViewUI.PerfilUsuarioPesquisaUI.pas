@@ -17,7 +17,7 @@ uses
   cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White;
+  dxSkinOffice2013White, cxGroupBox;
 
 type
   TFrmPerfilUsuarioPesquisaUI = class(TFormDefaultPesquisaUI)

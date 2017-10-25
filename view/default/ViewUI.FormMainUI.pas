@@ -15,7 +15,7 @@ uses
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
-  dxRibbonBackstageView;
+  dxRibbonBackstageView, cxPC, dxSkinscxPCPainter, dxBarBuiltInMenu, dxTabbedMDI;
 
 type
   TFormMainUI = class(TFormDefaultUI)
@@ -51,6 +51,7 @@ type
     acnFecharApp: TAction;
     BrBtnFecharApp: TdxBarLargeButton;
     ImgLogoCompany: TImage;
+    tbsMDI: TdxTabbedMDIManager;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
     procedure acnFecharAppExecute(Sender: TObject);

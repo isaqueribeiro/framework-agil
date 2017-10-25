@@ -18,7 +18,8 @@ uses
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxImageComboBox, System.Actions, Vcl.ActnList,
   dxSkinsdxBarPainter, dxBar,
 
-  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White;
+  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
+  cxGroupBox;
 
 type
   TFormDefaultPesquisaUI = class(TFormDefaultUI)
@@ -35,10 +36,6 @@ type
     bvlGrid: TBevel;
     pgcPesquisa: TcxPageControl;
     tbsPesquisa: TcxTabSheet;
-    lblTipoPesquisa: TcxLabel;
-    edTipoPesquisa: TcxImageComboBox;
-    edPesquisa: TcxTextEdit;
-    btnPesquisar: TcxButton;
     acnEvento: TActionList;
     acnNovo: TAction;
     acnEditar: TAction;
@@ -54,6 +51,12 @@ type
     BrBtnExportar: TdxBarButton;
     BrBtnImprimir: TdxBarButton;
     bvlBr: TBevel;
+    grpTipoPesquisa: TcxGroupBox;
+    edTipoPesquisa: TcxImageComboBox;
+    grpPesquisa: TcxGroupBox;
+    edPesquisa: TcxTextEdit;
+    BrBtnPesquisar: TdxBarButton;
+    shpLimite: TShape;
     procedure FormCreate(Sender: TObject);
     procedure acnNovoExecute(Sender: TObject);
     procedure acnEditarExecute(Sender: TObject);
@@ -109,6 +112,8 @@ end;
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
 begin
   inherited;
+  Self.AutoSize := False;
+
   lblHeaderTitle.Left := 8;
   lblHeaderTitle.Top  := 8;
   lblHeaderDescription.Left := 28;
@@ -119,6 +124,10 @@ end;
 
 procedure TFormDefaultPesquisaUI.FormResize(Sender: TObject);
 begin
+  shpLimite.Top   := 0;
+  shpLimite.Left  := 0;
+  shpLimite.Width := 697;
+
   // Definindo tamanho mínimo do formulário
   if (Self.Height < 425) then
     Self.Height := 425;

@@ -956,4 +956,12 @@ inherited FormMainUI: TFormMainUI
       OnExecute = acnFecharAppExecute
     end
   end
+  object tbsMDI: TdxTabbedMDIManager
+    Active = True
+    LookAndFeel.SkinName = 'Office2013DarkGray'
+    TabProperties.CloseButtonMode = cbmEveryTab
+    TabProperties.CustomButtons.Buttons = <>
+    Left = 672
+    Top = 416
+  end
 end
