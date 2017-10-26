@@ -12,15 +12,12 @@ Uses
   Type
     TRotinaController = class(TInterfacedObject, IController)
     private
-      //class var aInstance : TRotinaController;
       aModel : TRotina;
       procedure SetModel(Value : TRotina);
       function GetModel : TRotina;
-    protected
-      constructor Create;
     public
-      //class function GetInstance: TRotinaController;
-      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
+      constructor Create;
+//      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
       destructor Destroy; override;
 
       procedure Load;
@@ -42,14 +39,14 @@ begin
   aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
 end;
 
-constructor TRotinaController.CriarRotina(const aParent : TRotina; aNome, aDescricao: String);
-begin
-  Self.Create;
-  aModel.Nome      := aNome;
-  aModel.Descricao := aDescricao;
-  aModel.Parent    := aParent;
-end;
-
+//constructor TRotinaController.CriarRotina(const aParent : TRotina; aNome, aDescricao: String);
+//begin
+//  Self.Create;
+//  aModel.Nome      := aNome;
+//  aModel.Descricao := aDescricao;
+//  aModel.Parent    := aParent;
+//end;
+//
 destructor TRotinaController.Destroy;
 begin
   aModel.Destroy;
@@ -61,13 +58,6 @@ begin
   Result := aModel.Buscar(ID);
 end;
 
-//class function TRotinaController.GetInstance: TRotinaController;
-//begin
-//  if not Assigned(aInstance) then
-//    aInstance := TRotinaController.Create;
-//  Result := aInstance;
-//end;
-//
 function TRotinaController.GetModel: TRotina;
 begin
   Result := aModel;

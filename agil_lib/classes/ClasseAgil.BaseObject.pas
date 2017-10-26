@@ -90,11 +90,15 @@ end;
 
 procedure TBaseObject.Notify;
 var
-  I : Integer;
+//  I : Integer;
+  O : IInterface;
 begin
+//  if ( aObservers <> nil ) then
+//    for I := 0 to aObservers.Count - 1 do
+//      IObservador(aObservers[I]).Update(Self);
   if ( aObservers <> nil ) then
-    for I := 0 to aObservers.Count - 1 do
-      IObservador(aObservers[I]).Update(Self);
+    for O in aObservers do
+      IObservador(O).Update(Self);
 end;
 
 procedure TBaseObject.removeObserver(Observer: IObservador);

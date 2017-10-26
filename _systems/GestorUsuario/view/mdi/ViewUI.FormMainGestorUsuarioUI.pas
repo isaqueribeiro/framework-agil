@@ -34,6 +34,7 @@ type
     acnTeste: TAction;
     BrBtnTeste: TdxBarButton;
     procedure acnTesteExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,6 +53,12 @@ begin
 //  SetRotina;
   ShowMessage( RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
 //  ShowMessage( Rotina.Nome + ' - ' + Rotina.Descricao );
+end;
+
+procedure TFormMainGestorUsuarioUI.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ;
 end;
 
 end.

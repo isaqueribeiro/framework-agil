@@ -11,7 +11,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   TextHeight = 13
   object bvlHeader: TBevel
     Left = 0
-    Top = 49
+    Top = 71
     Width = 681
     Height = 4
     Align = alTop
@@ -37,9 +37,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 126
-    ExplicitWidth = 162
-    ExplicitHeight = 261
     object bvlGrid: TBevel
       Left = 0
       Top = 212
@@ -66,8 +63,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Height = 202
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 156
-      ExplicitHeight = 151
       object dbgPesquisaDB: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
@@ -107,8 +102,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Properties.Images = DtmRecursos.imgFlat16
       Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradientClientArea, pcoRedrawOnResize]
       LookAndFeel.SkinName = 'Office2013DarkGray'
-      ExplicitTop = 168
-      ExplicitWidth = 156
       ClientRectBottom = 88
       ClientRectLeft = 2
       ClientRectRight = 673
@@ -130,8 +123,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
           Style.BorderStyle = ebsFlat
           TabOrder = 0
           Transparent = True
-          ExplicitLeft = 467
-          ExplicitHeight = 53
           Height = 45
           Width = 201
           object edTipoPesquisa: TcxImageComboBox
@@ -148,9 +139,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
                 Value = 0
               end>
             TabOrder = 0
-            ExplicitLeft = 2
-            ExplicitTop = 2
-            ExplicitWidth = 49
             Width = 189
           end
         end
@@ -166,7 +154,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
           Style.Shadow = False
           TabOrder = 1
           Transparent = True
-          ExplicitWidth = 327
           Height = 45
           Width = 450
           object edPesquisa: TcxTextEdit
@@ -175,9 +162,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
             Align = alBottom
             Properties.CharCase = ecUpperCase
             TabOrder = 0
-            ExplicitLeft = -177
-            ExplicitTop = 24
-            ExplicitWidth = 378
             Width = 438
           end
         end
@@ -199,7 +183,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitTop = -6
     object imgHeader: TImage
       Left = 636
       Top = 4
