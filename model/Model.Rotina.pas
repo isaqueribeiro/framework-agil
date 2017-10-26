@@ -64,9 +64,7 @@ end;
 
 procedure TRotina.SetParent(Value: TRotina);
 begin
-  aParent := TRotina.CriarRotina(EmptyStr, EmptyStr);
-  if (Value <> nil) then
-    aParent.Assign(Value);
+  aParent := Value;
 end;
 
 constructor TRotina.Create;

@@ -13,9 +13,9 @@ Uses
     TRotinaController = class(TInterfacedObject, IController)
     private
       //class var aInstance : TRotinaController;
-      aModelo : TRotina;
-      procedure SetModelo(Value : TRotina);
-      function GetModelo : TRotina;
+      aModel : TRotina;
+      procedure SetModel(Value : TRotina);
+      function GetModel : TRotina;
     protected
       constructor Create;
     public
@@ -29,7 +29,7 @@ Uses
       function Find(ID: String): TBaseObject;
       function New: TBaseObject;
     published
-      property Modelo : TRotina read GetModelo write SetModelo;
+      property Model : TRotina read GetModel write SetModel;
   end;
 
 implementation
@@ -39,24 +39,26 @@ implementation
 constructor TRotinaController.Create;
 begin
   inherited Create;
-  aModelo := TRotina.CriarRotina(EmptyStr, EmptyStr);
+  aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
 end;
 
 constructor TRotinaController.CriarRotina(const aParent : TRotina; aNome, aDescricao: String);
 begin
-  aModelo := TRotina.CriarRotina(aNome, aDescricao);
-  if (aParent <> nil) then
-    aModelo.Parent.Assign( aParent );
+  Self.Create;
+  aModel.Nome      := aNome;
+  aModel.Descricao := aDescricao;
+  aModel.Parent    := aParent;
 end;
 
 destructor TRotinaController.Destroy;
 begin
+  aModel.Destroy;
   inherited;
 end;
 
 function TRotinaController.Find(ID: String): TBaseObject;
 begin
-   Result := aModelo.Buscar(ID);
+  Result := aModel.Buscar(ID);
 end;
 
 //class function TRotinaController.GetInstance: TRotinaController;
@@ -66,9 +68,9 @@ end;
 //  Result := aInstance;
 //end;
 //
-function TRotinaController.GetModelo: TRotina;
+function TRotinaController.GetModel: TRotina;
 begin
-  Result := aModelo;
+  Result := aModel;
 end;
 
 procedure TRotinaController.Load;
@@ -76,23 +78,23 @@ begin
   // Carregar dados
   ;
   // Notificar observadores
-  aModelo.Notify;
+  aModel.Notify;
 end;
 
 function TRotinaController.New: TBaseObject;
 begin
-  aModelo := TRotina.CriarRotina(EmptyStr, EmptyStr);
-  Result  := aModelo;
+  aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
+  Result := aModel;
 end;
 
 procedure TRotinaController.Save;
 begin
-  aModelo.Salvar;
+  aModel.Salvar;
 end;
 
-procedure TRotinaController.SetModelo(Value: TRotina);
+procedure TRotinaController.SetModel(Value: TRotina);
 begin
-  aModelo := Value;
+  aModel := Value;
 end;
 
 end.

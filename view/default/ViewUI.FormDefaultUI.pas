@@ -18,14 +18,16 @@ type
   private
     { Private declarations }
     aRotina : TRotina;
-    aRotinaController: TRotinaController;
+    aRotinaController : TRotinaController;
+    procedure SetRotinaController(Value : TRotinaController);
+    function GetRotinaController : TRotinaController;
   protected
     constructor Create(AOwner: TComponent); overload; override;
     constructor Create(AOwner: TComponent; Controller: TRotinaController); overload;
   public
     { Public declarations }
     property Rotina : TRotina read aRotina write aRotina;
-    property RotinaController : TRotinaController read aRotinaController; // write aRotinaController;
+    property RotinaController : TRotinaController read GetRotinaController write SetRotinaController;
 
     constructor CreateForm(AOwner: TComponent; Controller: TRotinaController); reintroduce;
 //    procedure SetRotina;
@@ -56,21 +58,21 @@ begin
   end;
 
   if (aRC <> nil) then
-    aRotinaController := TRotinaController.CriarRotina(aRC.Modelo, Self.Name, Self.Caption)
+    aRotinaController := TRotinaController.CriarRotina(aRC.Model, Self.Name, Self.Caption)
   else
     aRotinaController := TRotinaController.CriarRotina(nil, Self.Name, Self.Caption);
 
   with aRotinaController do
-    Modelo.addObserver(Self);
+    Model.addObserver(Self);
 end;
 
 constructor TFormDefaultUI.Create(AOwner: TComponent; Controller: TRotinaController);
 begin
   inherited Create(AOwner);
-  aRotinaController := TRotinaController.CriarRotina(Controller.Modelo, Self.Name, Self.Caption);
+  aRotinaController := TRotinaController.CriarRotina(Controller.Model, Self.Name, Self.Caption);
 
   with aRotinaController do
-    Modelo.addObserver(Self);
+    Model.addObserver(Self);
 end;
 
 constructor TFormDefaultUI.CreateForm(AOwner: TComponent;
@@ -96,8 +98,7 @@ begin
       if (TFormDefaultUI(Self.Owner).Rotina <> nil) then
       begin
         aParent := TFormDefaultUI(Self.Owner).Rotina;
-        aRotina.Parent := TRotina.CriarRotina(EmptyStr, EmptyStr);
-        aRotina.Parent.Assign(aParent);
+        aRotina.Parent := aParent;
       end;
   end;
 end;
@@ -105,6 +106,16 @@ end;
 procedure TFormDefaultUI.FormShow(Sender: TObject);
 begin
   aRotinaController.Load;
+end;
+
+function TFormDefaultUI.GetRotinaController: TRotinaController;
+begin
+  Result := aRotinaController;
+end;
+
+procedure TFormDefaultUI.SetRotinaController(Value: TRotinaController);
+begin
+  aRotinaController := Value;
 end;
 
 //procedure TFormDefaultUI.SetRotina;
@@ -134,7 +145,7 @@ end;
 //
 procedure TFormDefaultUI.Update(Observable: IObservable);
 begin
-  Self.Tag := aRotinaController.Modelo.Indice;
+  Self.Tag := aRotinaController.Model.Indice;
 //  ShowMessage( aRotinaController.Modelo.Nome + ' - ' + aRotinaController.Modelo.Descricao );
 end;
 

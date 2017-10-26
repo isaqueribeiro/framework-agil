@@ -16,7 +16,8 @@ uses
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
   dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView,
-  cxContainer, cxEdit, cxLabel;
+  cxContainer, cxEdit, cxLabel, cxPC, dxSkinscxPCPainter, dxBarBuiltInMenu,
+  dxTabbedMDI;
 
 type
   TFormMainGestorUsuarioUI = class(TFormMainUI)
@@ -49,7 +50,7 @@ implementation
 procedure TFormMainGestorUsuarioUI.acnTesteExecute(Sender: TObject);
 begin
 //  SetRotina;
-//  ShowMessage( RotinaController.Modelo.Nome + ' - ' + RotinaController.Modelo.Descricao );
+  ShowMessage( RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
 //  ShowMessage( Rotina.Nome + ' - ' + Rotina.Descricao );
 end;
 
