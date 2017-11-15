@@ -1,0 +1,163 @@
+unit Controller.Sistema;
+
+interface
+
+Uses
+  TypeAgil.ComplexTypes,
+  TypeAgil.Constants,
+  InterfaceAgil.Controller,
+  ClasseAgil.BaseObject,
+  Model.Sistema,
+
+  System.Classes, System.SysUtils, System.StrUtils, IniFiles,
+
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  Data.DB, Datasnap.DBClient;
+
+  Type
+    TSistemaController = class(TInterfacedObject, IController)
+    private
+      class var aInstance : TSistemaController;
+      aModel : TSistema;
+      aConexao  : ct_Conexao;
+      procedure SetModel(Value : TSistema);
+      procedure SetConexao(Value : ct_Conexao);
+      function GetModel : TSistema;
+      function GetConexao : ct_Conexao;
+    protected
+      constructor Create;
+      function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
+      function New: TBaseObject;
+    public
+      class function GetInstance: TSistemaController;
+      destructor Destroy; override;
+      procedure Save(const aDataSet: TDataSet);
+      procedure Load(const aDataSet: TDataSet);
+    published
+      property Model : TSistema read GetModel write SetModel;
+      property Conexao : ct_Conexao read GetConexao write SetConexao;
+  end;
+
+implementation
+
+{ TSistemaController }
+
+constructor TSistemaController.Create;
+var
+  ini : TIniFile;
+begin
+  ini := TIniFile.Create('Conexao.ini');
+  try
+    inherited Create;
+    Self.New;
+
+    aConexao.Servidor := ini.ReadString ('Conexao', 'Servidor', 'localhost');
+    aConexao.Porta    := ini.ReadInteger('Conexao', 'Porta', SYS_SERVER_PORT);
+    aConexao.Base     := ini.ReadString ('Conexao', 'Base', SYS_DATABASE);
+    aConexao.Usuario  := SYS_SYSDBA_LOGIN;
+    aConexao.Senha    := SYS_SYSDBA_PWD;
+  finally
+    ini.UpdateFile;
+    ini.Destroy;
+  end;
+end;
+
+destructor TSistemaController.Destroy;
+begin
+  aModel.Destroy;
+  inherited;
+end;
+
+function TSistemaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
+begin
+  // Carregar dados da base
+  if Assigned(aDataSet) then
+    with TFDQuery(aDataSet) do
+    begin
+      if aDataSet.Active then
+        aDataSet.Close;
+
+      TFDQuery(aDataSet).ParamByName('key').AsString := ID;
+
+      aDataSet.Open;
+
+      if (FieldByName('id_sistema').AsString <> EmptyStr) then
+        aModel.ID := StringToGUID(FieldByName('id_sistema').AsString);
+
+      aModel.Nome := FieldByName('nm_sistema').AsString;
+      aModel.Descricao := FieldByName('ds_sistema').AsString;
+      aModel.Key       := FieldByName('ky_sistema').AsString;
+    end;
+
+  Result := aModel;
+end;
+
+class function TSistemaController.GetInstance: TSistemaController;
+begin
+  if not Assigned(aInstance) then
+    aInstance := TSistemaController.Create;
+  Result := aInstance;
+end;
+
+function TSistemaController.GetModel: TSistema;
+begin
+  Result := aModel;
+end;
+
+procedure TSistemaController.Load(const aDataSet: TDataSet);
+begin
+  Self.Find(aModel.Key, aDataSet);
+  aModel.Notify;
+end;
+
+function TSistemaController.New: TBaseObject;
+begin
+  try
+    aModel := TSistema.CriarSistema(EmptyStr, EmptyStr, EmptyStr);
+  finally
+    Result := aModel;
+  end;
+end;
+
+procedure TSistemaController.Save(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      with TFDQuery(aDataSet) do
+      begin
+        if TFDQuery(aDataSet).IsEmpty then
+          TFDQuery(aDataSet).Append
+        else
+          TFDQuery(aDataSet).Edit;
+
+        FieldByName('id_sistema').AsString  := GUIDToString(aModel.ID);
+        FieldByName('cd_sistema').AsInteger := aModel.Codigo;
+        FieldByName('nm_sistema').AsString  := aModel.Nome;
+        FieldByName('ds_sistema').AsString  := aModel.Descricao;
+        FieldByName('ky_sistema').AsString  := aModel.Key;
+
+        TFDQuery(aDataSet).Post;
+        if TFDQuery(aDataSet).CachedUpdates then
+          TFDQuery(aDataSet).ApplyUpdates(0);
+
+        TFDQuery(aDataSet).Connection.CommitRetaining;
+      end;
+end;
+
+function TSistemaController.GetConexao: ct_Conexao;
+begin
+  Result := aConexao;
+end;
+
+procedure TSistemaController.SetConexao(Value: ct_Conexao);
+begin
+  aConexao := Value;
+end;
+
+procedure TSistemaController.SetModel(Value: TSistema);
+begin
+  aModel := Value;
+end;
+
+end.

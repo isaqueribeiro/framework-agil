@@ -7,7 +7,11 @@ Uses
   ClasseAgil.BaseObject,
   Model.Rotina,
 
-  System.Classes, System.SysUtils, System.StrUtils;
+  System.Classes, System.SysUtils, System.StrUtils,
+
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  Data.DB, Datasnap.DBClient;
 
   Type
     TRotinaController = class(TInterfacedObject, IController)
@@ -20,10 +24,10 @@ Uses
 //      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
       destructor Destroy; override;
 
-      procedure Load;
-      procedure Save;
+      procedure Load(const aDataSet: TDataSet);
+      procedure Save(const aDataSet: TDataSet);
 
-      function Find(ID: String): TBaseObject;
+      function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject;
     published
       property Model : TRotina read GetModel write SetModel;
@@ -53,7 +57,7 @@ begin
   inherited;
 end;
 
-function TRotinaController.Find(ID: String): TBaseObject;
+function TRotinaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
 begin
   Result := aModel.Buscar(ID);
 end;
@@ -63,7 +67,7 @@ begin
   Result := aModel;
 end;
 
-procedure TRotinaController.Load;
+procedure TRotinaController.Load(const aDataSet: TDataSet);
 begin
   // Carregar dados
   ;

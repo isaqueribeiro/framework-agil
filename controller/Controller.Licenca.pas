@@ -6,7 +6,8 @@ Uses
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Licenca,
-  System.Classes, System.SysUtils, System.StrUtils;
+  System.Classes, System.SysUtils, System.StrUtils,
+  Data.DB, Datasnap.DBClient;
 
   Type
     TLicencaController = class(TInterfacedObject, IController)
@@ -19,9 +20,9 @@ Uses
     public
       class function GetInstance: TLicencaController;
       destructor Destroy; override;
-      procedure Save;
-      procedure Load;
-      function Find(ID: String): TBaseObject;
+      procedure Save(const aDataSet: TDataSet);
+      procedure Load(const aDataSet: TDataSet);
+      function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject;
     published
       property Model : TLicenca read GetModel;
@@ -42,7 +43,7 @@ begin
   inherited;
 end;
 
-function TLicencaController.Find(ID: String): TBaseObject;
+function TLicencaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
 begin
   Result := aModel;
 end;
@@ -59,7 +60,7 @@ begin
   Result := aModel;
 end;
 
-procedure TLicencaController.Load;
+procedure TLicencaController.Load(const aDataSet: TDataSet);
 begin
   ;
   aModel.Notify;
@@ -71,7 +72,7 @@ begin
   Result := aModel;
 end;
 
-procedure TLicencaController.Save;
+procedure TLicencaController.Save(const aDataSet: TDataSet);
 begin
   ;
 end;

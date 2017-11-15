@@ -9,16 +9,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
-  object bvlHeader: TBevel
-    Left = 0
-    Top = 71
-    Width = 681
-    Height = 4
-    Align = alTop
-    Shape = bsSpacer
-    ExplicitLeft = 8
-    ExplicitTop = 34
-  end
   object shpLimite: TShape
     Left = 0
     Top = 0
@@ -31,38 +21,33 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   end
   object pnlBody: TPanel
     Left = 0
-    Top = 75
+    Top = 71
     Width = 681
-    Height = 312
+    Height = 316
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
+    ExplicitTop = 75
+    ExplicitHeight = 312
     object bvlGrid: TBevel
       Left = 0
-      Top = 212
+      Top = 216
       Width = 681
       Height = 4
       Align = alBottom
       Shape = bsSpacer
       ExplicitTop = 49
     end
-    object bvlBr: TBevel
-      Left = 0
-      Top = 0
-      Width = 681
-      Height = 4
-      Align = alTop
-      Shape = bsSpacer
-      ExplicitTop = 8
-    end
     object dbgPesquisa: TcxGrid
       AlignWithMargins = True
       Left = 3
-      Top = 7
+      Top = 3
       Width = 675
-      Height = 202
+      Height = 210
       Align = alClient
       TabOrder = 0
+      ExplicitTop = 7
+      ExplicitHeight = 202
       object dbgPesquisaDB: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
@@ -92,7 +77,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     object pgcPesquisa: TcxPageControl
       AlignWithMargins = True
       Left = 3
-      Top = 219
+      Top = 223
       Width = 675
       Height = 90
       Align = alBottom
@@ -102,6 +87,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Properties.Images = DtmRecursos.imgFlat16
       Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradientClientArea, pcoRedrawOnResize]
       LookAndFeel.SkinName = 'Office2013DarkGray'
+      ExplicitTop = 219
       ClientRectBottom = 88
       ClientRectLeft = 2
       ClientRectRight = 673

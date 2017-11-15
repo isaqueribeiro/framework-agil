@@ -60,10 +60,10 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     OptionsImage.SmallImages = DtmRecursos.imgFlat16
     object nvbGrpCadastro: TdxNavBarGroup
       Caption = 'Cadastro'
-      LargeImageIndex = 1
+      LargeImageIndex = 12
       LinksUseSmallImages = False
       SelectedLinkIndex = -1
-      SmallImageIndex = 11
+      SmallImageIndex = 12
       TopVisibleLinkIndex = 0
       OptionsExpansion.ShowExpandButton = False
       Links = <
@@ -72,6 +72,9 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         end
         item
           Item = nvbCadastroUsuario
+        end
+        item
+          Item = nvbCadastroPermissaoAcesso
         end>
     end
     object nvbCadastroPerfilUsuario: TdxNavBarItem
@@ -79,6 +82,9 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     end
     object nvbCadastroUsuario: TdxNavBarItem
       Action = acnCadastroUsuario
+    end
+    object nvbCadastroPermissaoAcesso: TdxNavBarItem
+      Action = acnPermissaoAcesso
     end
   end
   inherited rbvMenu: TdxRibbonBackstageView
@@ -215,13 +221,13 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       SyncImageIndex = False
       ImageIndex = 0
     end
-    object BrBtnTeste: TdxBarButton
+    object BrBtnTeste: TdxBarButton [7]
       Action = acnTeste
       Category = 1
     end
   end
   inherited acnMenu: TActionList
-    object acnTeste: TAction
+    object acnTeste: TAction [5]
       Caption = 'acnTeste'
       OnExecute = acnTesteExecute
     end

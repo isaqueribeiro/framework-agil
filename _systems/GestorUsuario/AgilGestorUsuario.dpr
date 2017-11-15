@@ -1,6 +1,7 @@
 program AgilGestorUsuario;
 
 uses
+  MidasLib,
   Vcl.Forms,
   Vcl.Themes,
   Vcl.Styles,
@@ -13,9 +14,11 @@ uses
   ClasseAgil.Formulario in '..\..\agil_lib\classes\ClasseAgil.Formulario.pas',
   Model.Rotina in '..\..\model\Model.Rotina.pas',
   Model.Licenca in '..\..\model\Model.Licenca.pas',
+  Model.Sistema in '..\..\model\Model.Sistema.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
   Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
   Controller.Licenca in '..\..\controller\Controller.Licenca.pas',
+  Controller.Sistema in '..\..\controller\Controller.Sistema.pas',
   DataModule.Recursos in '..\..\module\DataModule.Recursos.pas' {DtmRecursos: TDataModule},
   DataModule.Base in '..\..\module\DataModule.Base.pas' {DtmBase: TDataModule},
   ViewUI.FormDefaultUI in '..\..\view\default\ViewUI.FormDefaultUI.pas' {FormDefaultUI},
@@ -25,7 +28,8 @@ uses
   ViewUI.SplashGestorUsuarioUI in 'view\sdi\ViewUI.SplashGestorUsuarioUI.pas' {FormSplashGestorUsuarioUI},
   ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
   ViewUI.PerfilUsuarioPesquisaUI in '..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
-  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
+  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
+  TypeAgil.Constants in '..\..\agil_lib\units\TypeAgil.Constants.pas';
 
 {$R *.res}
 
@@ -35,6 +39,16 @@ begin
   Application.Title := 'Ágil Gestor Usuários';
   Application.CreateForm(TDtmRecursos, DtmRecursos);
   Application.CreateForm(TDtmBase, DtmBase);
-  Application.CreateForm(TFormMainGestorUsuarioUI, FormMainGestorUsuarioUI);
-  Application.Run;
+
+  if DtmBase.Conectado then
+  begin
+    Application.CreateForm(TFormMainGestorUsuarioUI, FormMainGestorUsuarioUI);
+    Application.Run;
+  end
+  else
+  begin
+    DtmBase.Free;
+    DtmRecursos.Free;
+    Application.Terminate;
+  end;
 end.

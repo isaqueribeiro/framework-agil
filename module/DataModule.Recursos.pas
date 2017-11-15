@@ -2,7 +2,7 @@
   Autot : Isaque Marinho Ribeiro
   Data  : 29/08/2014
 
-  Objectivo:
+  Objetivo:
 
   Esta unidade poderá ser usada por todos os formulários do projeto para que estes
   tenham acesso a variáveis (objetos) globais do sistemas. E como recomendação
@@ -17,9 +17,13 @@ interface
 uses
   Controller.VersaoAplicacao,
   Controller.Licenca,
+  Controller.Sistema,
   ClasseAgil.Formulario,
 
-  System.SysUtils, System.Classes, Vcl.ImgList, Vcl.Controls, cxClasses, cxLookAndFeels,
+  Winapi.Windows,
+  System.SysUtils, System.Classes,
+  Vcl.Forms, Vcl.ImgList, Vcl.Controls, Vcl.Dialogs,
+  cxClasses, cxLookAndFeels,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsForm, cxGraphics, dxScreenTip, cxEdit,
@@ -46,8 +50,10 @@ var
   DtmRecursos : TDtmRecursos;
   gVersaoApp  : TVersaoAplicacaoController;
   gLicencaApp : TLicencaController;
+  gSistema    : TSistemaController;
   gFormulario : TFormularios;
 
+  procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
 
 implementation
 
@@ -55,9 +61,16 @@ implementation
 
 {$R *.dfm}
 
+procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
+begin
+  //MessageDlg(aMensagem, mtError, [mbOK], 0);
+  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONERROR);
+end;
+
 initialization
   gVersaoApp  := TVersaoAplicacaoController.GetInstance();
   gLicencaApp := TLicencaController.GetInstance();
+  gSistema    := TSistemaController.GetInstance();
   gFormulario := TFormularios.Create;
 
 end.

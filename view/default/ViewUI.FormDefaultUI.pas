@@ -3,8 +3,10 @@ unit ViewUI.FormDefaultUI;
 interface
 
 uses
+  TypeAgil.ComplexTypes,
   InterfaceAgil.Observer,
   Controller.Rotina,
+  DataModule.Base,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   TypInfo, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbon, dxRibbonForm, dxRibbonSkins;
@@ -58,6 +60,7 @@ begin
   begin
     Model.Nome      := Self.Name;
     Model.Descricao := Self.Caption;
+    Model.Tipo      := tr_Formulario;
 
     if (aParenteController <> nil) then
       Model.Parent := aParenteController.Model;
@@ -75,6 +78,7 @@ begin
   begin
     Model.Nome      := Self.Name;
     Model.Descricao := Self.Caption;
+    Model.Tipo      := tr_Formulario;
     Model.Parent    := Controller.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
@@ -100,7 +104,7 @@ end;
 
 procedure TFormDefaultUI.FormShow(Sender: TObject);
 begin
-  aRotinaController.Load;
+  aRotinaController.Load(DtmBase.fdQryRotina);
 end;
 
 function TFormDefaultUI.GetRotinaController: TRotinaController;

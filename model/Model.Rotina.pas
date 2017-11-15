@@ -3,6 +3,7 @@ unit Model.Rotina;
 interface
 
 Uses
+  TypeAgil.ComplexTypes,
   ClasseAgil.BaseObject,
   System.Classes, System.SysUtils, System.StrUtils;
 
@@ -13,6 +14,7 @@ Type
     aNome ,
     aDescricao : String;
     aIndice : Integer;
+    aTipo   : ct_TipoRotina;
     aParent : TRotina;
     procedure SetParent(Value : TRotina);
     procedure SetNome(Value : String);
@@ -27,6 +29,7 @@ Type
     property Nome : String read aNome write SetNome;
     property Descricao : String read aDescricao write SetDescricao;
     property Indice : Integer read aIndice write SetIndice;
+    property Tipo   : ct_TipoRotina read aTipo write aTipo;
     property Parent : TRotina read aParent write SetParent;
 
     procedure Salvar; virtual; abstract;
@@ -43,6 +46,7 @@ begin
   CreateGUID(aID);
   aNome      := Trim(pNome);
   aDescricao := Trim(pDescricao);
+  aTipo      := tr_Menu;
   aIndice    := 0;
 end;
 
@@ -70,6 +74,7 @@ end;
 constructor TRotina.Create;
 begin
   inherited Create;
+  aTipo   := tr_Menu;
   aParent := nil;
 end;
 

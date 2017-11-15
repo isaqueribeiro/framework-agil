@@ -33,6 +33,7 @@ type
     lblConfigurarEmpresa: TcxLabel;
     acnTeste: TAction;
     BrBtnTeste: TdxBarButton;
+    nvbCadastroPermissaoAcesso: TdxNavBarItem;
     procedure acnTesteExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

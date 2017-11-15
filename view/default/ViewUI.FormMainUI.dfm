@@ -600,7 +600,7 @@ inherited FormMainUI: TFormMainUI
     object PnlUser: TPanel
       Left = 364
       Top = 4
-      Width = 230
+      Width = 300
       Height = 34
       Align = alLeft
       Alignment = taLeftJustify
@@ -613,7 +613,7 @@ inherited FormMainUI: TFormMainUI
       ParentFont = False
       TabOrder = 2
       DesignSize = (
-        230
+        300
         34)
       object ImgUser: TImage
         AlignWithMargins = True
@@ -684,7 +684,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 102
+        Width = 172
         Height = 13
         Hint = 'user@server.base'
         Anchors = [akLeft, akTop, akRight]
@@ -697,12 +697,13 @@ inherited FormMainUI: TFormMainUI
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
+        ExplicitWidth = 102
       end
     end
     object PnlCompany: TPanel
-      Left = 594
+      Left = 664
       Top = 4
-      Width = 377
+      Width = 307
       Height = 34
       Align = alClient
       Alignment = taLeftJustify
@@ -714,8 +715,10 @@ inherited FormMainUI: TFormMainUI
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      ExplicitLeft = 594
+      ExplicitWidth = 377
       DesignSize = (
-        377
+        307
         34)
       object ImgCompany: TImage
         AlignWithMargins = True
@@ -788,7 +791,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 49
+        Width = -21
         Height = 13
         Hint = 'Empresa'
         Anchors = [akLeft, akTop, akRight]
@@ -801,6 +804,7 @@ inherited FormMainUI: TFormMainUI
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
+        ExplicitWidth = 49
       end
     end
   end
@@ -813,22 +817,22 @@ inherited FormMainUI: TFormMainUI
     Panels = <
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 6
+        PanelStyle.ImageIndex = 7
         Width = 270
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 7
+        PanelStyle.ImageIndex = 8
         Width = 90
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.ImageIndex = 2
-        Width = 226
+        Width = 296
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
-        PanelStyle.ImageIndex = 8
+        PanelStyle.ImageIndex = 9
       end>
     PaintStyle = stpsUseLookAndFeel
     LookAndFeel.SkinName = 'Office2013DarkGray'
@@ -906,6 +910,10 @@ inherited FormMainUI: TFormMainUI
       Action = acnCadastroUsuario
       Category = 0
     end
+    object BrBtnPermissaoAcesso: TdxBarLargeButton
+      Action = acnPermissaoAcesso
+      Category = 0
+    end
     object BrBtnAlterarSenhaUsuario: TdxBarLargeButton
       Action = acnAlterarSenhaUsuario
       Category = 0
@@ -935,23 +943,28 @@ inherited FormMainUI: TFormMainUI
       ImageIndex = 2
       OnExecute = acnCadastroUsuarioExecute
     end
+    object acnPermissaoAcesso: TAction
+      Category = 'Sistema'
+      Caption = 'Permiss'#227'o de Acesso'
+      ImageIndex = 3
+    end
     object acnAlterarSenhaUsuario: TAction
       Category = 'Sistema'
       Caption = 'Alterar Senha (%s)'
-      ImageIndex = 3
+      ImageIndex = 4
       OnExecute = acnAlterarSenhaUsuarioExecute
     end
     object acnBloquearApp: TAction
       Category = 'Sistema'
       Caption = 'Bloquear Aplica'#231#227'o'
-      ImageIndex = 5
+      ImageIndex = 6
       ShortCut = 12364
       OnExecute = acnBloquearAppExecute
     end
     object acnFecharApp: TAction
       Category = 'Sistema'
       Caption = 'Fechar Aplica'#231#227'o'
-      ImageIndex = 10
+      ImageIndex = 11
       ShortCut = 32883
       OnExecute = acnFecharAppExecute
     end

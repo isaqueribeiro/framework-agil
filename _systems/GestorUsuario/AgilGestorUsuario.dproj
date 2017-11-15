@@ -6,7 +6,7 @@
         <MainSource>AgilGestorUsuario.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -75,7 +75,7 @@
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_UsePackage>bindcompfmx;DBXSqliteDriver;frxDB18;vcldbx;frxDBX18;fmx;fs18;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;frx18;inetdbbde;vclib;DBXInterBaseDriver;DataSnapClient;DataSnapCommon;DBXOdbcDriver;DataSnapServer;Tee;fsADO18;DataSnapProviderClient;xmlrtl;svnui;DBXSybaseASEDriver;DbxCommonDriver;ibxpress;vclimg;fsIBX18;IndyProtocols;dbxcds;DBXMySQLDriver;DatasnapConnectorsFreePascal;MetropolisUILiveTile;vclactnband;bindengine;vcldb;soaprtl;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;frxADO18;vcltouch;DBXDb2Driver;DBXOracleDriver;CustomIPTransport;vclribbon;VclSmp;dsnap;IndyIPServer;DBXInformixDriver;Intraweb;fmxase;vcl;IndyCore;DataSnapConnectors;fsTee18;IndyIPCommon;CloudService;DBXMSSQLDriver;dsnapcon;DBXFirebirdDriver;FmxTeeUI;inet;CodeSiteExpressPkg;fmxobj;frxBDE18;frxIBX18;fsDB18;vclx;inetdbxpress;webdsnap;svn;DBXSybaseASADriver;fsBDE18;fmxdae;bdertl;frxTee18;dbexpress;adortl;DataSnapIndy10ServerTransport;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
@@ -91,7 +91,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <DCC_UsePackage>bindcompfmx;DBXSqliteDriver;fmx;rtl;dbrtl;DbxClientDriver;IndySystem;TeeDB;bindcomp;inetdb;vclib;DBXInterBaseDriver;DataSnapClient;DataSnapCommon;DBXOdbcDriver;DataSnapServer;Tee;DataSnapProviderClient;xmlrtl;DBXSybaseASEDriver;DbxCommonDriver;ibxpress;vclimg;IndyProtocols;dbxcds;DBXMySQLDriver;DatasnapConnectorsFreePascal;MetropolisUILiveTile;vclactnband;bindengine;vcldb;soaprtl;bindcompdbx;vcldsnap;bindcompvcl;FMXTee;TeeUI;vclie;vcltouch;DBXDb2Driver;DBXOracleDriver;CustomIPTransport;vclribbon;VclSmp;dsnap;IndyIPServer;DBXInformixDriver;Intraweb;fmxase;vcl;IndyCore;DataSnapConnectors;IndyIPCommon;CloudService;DBXMSSQLDriver;dsnapcon;DBXFirebirdDriver;FmxTeeUI;inet;fmxobj;vclx;inetdbxpress;webdsnap;DBXSybaseASADriver;fmxdae;dbexpress;adortl;DataSnapIndy10ServerTransport;IndyIPClient;$(DCC_UsePackage)</DCC_UsePackage>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
@@ -103,9 +103,9 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_ExeOutput>..\..\_bin\$(Platform)\$(Config)</DCC_ExeOutput>
@@ -114,7 +114,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=20221980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
@@ -125,18 +125,18 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <DCC_ExeOutput>..\..\_bin\$(Platform)\$(Config)</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+        <Icon_MainIcon>AgilGestorUsuario.ico</Icon_MainIcon>
         <VerInfo_Keys>CompanyName=Ágil Soluções em Softwares;FileDescription=Ágil Gestor Usuários;FileVersion=1.0.0.0;InternalName=;LegalCopyright=Copyright 2014 © Ágil Soluções em Softwares - ME
-Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=22021980</VerInfo_Keys>
+Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=AgilGestorUsuario;ProductVersion=1.0;Comments=;ReleaseDate=;Systems Analyst=Isaque Marinho Ribeiro;Contacts=;Owner=Isaque Marinho Ribeiro;SplashName=Ágil Gestor Usuários;SplashDescription=Sistema de gestão para Controle de Usuários;ProductKey=66710243249001</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <ItemGroup>
@@ -152,9 +152,11 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\agil_lib\classes\ClasseAgil.Formulario.pas"/>
         <DCCReference Include="..\..\model\Model.Rotina.pas"/>
         <DCCReference Include="..\..\model\Model.Licenca.pas"/>
+        <DCCReference Include="..\..\model\Model.Sistema.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Rotina.pas"/>
         <DCCReference Include="..\..\controller\Controller.Licenca.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Sistema.pas"/>
         <DCCReference Include="..\..\module\DataModule.Recursos.pas">
             <Form>DtmRecursos</Form>
             <DesignClass>TDataModule</DesignClass>
@@ -183,12 +185,11 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DCCReference>
         <DCCReference Include="..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas">
             <Form>FrmPerfilUsuarioPesquisaUI</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas">
             <Form>FrmUsuarioSistemaPesquisaUI</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\..\agil_lib\units\TypeAgil.Constants.pas"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\ViewUI\default.txvpck"/>

@@ -27,7 +27,6 @@ type
     lblHeaderTitle: TcxLabel;
     lblHeaderDescription: TcxLabel;
     imgHeader: TImage;
-    bvlHeader: TBevel;
     pnlBody: TPanel;
     dbgPesquisaLv: TcxGridLevel;
     dbgPesquisa: TcxGrid;
@@ -50,7 +49,6 @@ type
     BrBtnExcluir: TdxBarButton;
     BrBtnExportar: TdxBarButton;
     BrBtnImprimir: TdxBarButton;
-    bvlBr: TBevel;
     grpTipoPesquisa: TcxGroupBox;
     edTipoPesquisa: TcxImageComboBox;
     grpPesquisa: TcxGroupBox;

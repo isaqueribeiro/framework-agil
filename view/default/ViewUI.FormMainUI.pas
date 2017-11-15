@@ -52,6 +52,8 @@ type
     BrBtnFecharApp: TdxBarLargeButton;
     ImgLogoCompany: TImage;
     tbsMDI: TdxTabbedMDIManager;
+    acnPermissaoAcesso: TAction;
+    BrBtnPermissaoAcesso: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
     procedure acnFecharAppExecute(Sender: TObject);
@@ -117,8 +119,14 @@ begin
   LblTime.Caption := TimeToStr(Time);
   LblTime.Hint    := TimeToStr(Time);
 
+  LblUser.Caption := 'user_name@' +
+    AnsiLowerCase(gSistema.Conexao.Servidor) + '\' +
+    IntToStr(gSistema.Conexao.Porta)         + '.' +
+    AnsiLowerCase(gSistema.Conexao.Base);
+
   stbInforme.Panels.Items[0].Text := LblDate.Caption;
   stbInforme.Panels.Items[1].Text := LblTime.Caption;
+  stbInforme.Panels.Items[2].Text := LblUser.Caption;
 end;
 
 end.

@@ -4,50 +4,23 @@ inherited FrmUsuarioSistemaPesquisaUI: TFrmUsuarioSistemaPesquisaUI
   ExplicitHeight = 506
   PixelsPerInch = 96
   TextHeight = 13
-  inherited bvlHeader: TBevel
-    Top = 71
-    ExplicitTop = 71
-  end
   inherited pnlBody: TPanel
-    Height = 392
-    ExplicitTop = 75
-    ExplicitWidth = 681
+    Height = 396
     ExplicitHeight = 392
     inherited bvlGrid: TBevel
-      Top = 292
+      Top = 296
+      ExplicitTop = 292
     end
     inherited dbgPesquisa: TcxGrid
-      Height = 282
-      ExplicitWidth = 675
+      Height = 290
       ExplicitHeight = 282
     end
     inherited pgcPesquisa: TcxPageControl
-      Top = 299
+      Top = 303
       ExplicitTop = 299
-      ExplicitWidth = 675
-      inherited tbsPesquisa: TcxTabSheet
-        inherited grpTipoPesquisa: TcxGroupBox
-          ExplicitLeft = 3
-          ExplicitHeight = 45
-          inherited edTipoPesquisa: TcxImageComboBox
-            ExplicitLeft = 6
-            ExplicitTop = 18
-            ExplicitWidth = 189
-          end
-        end
-        inherited grpPesquisa: TcxGroupBox
-          ExplicitWidth = 450
-          inherited edPesquisa: TcxTextEdit
-            ExplicitLeft = 6
-            ExplicitTop = 18
-            ExplicitWidth = 438
-          end
-        end
-      end
     end
   end
   inherited pnlHeader: TPanel
-    ExplicitTop = 0
     inherited lblHeaderTitle: TcxLabel
       Style.IsFontAssigned = True
     end
