@@ -31,9 +31,9 @@ Type
     property Indice : Integer read aIndice write SetIndice;
     property Tipo   : ct_TipoRotina read aTipo write aTipo;
     property Parent : TRotina read aParent write SetParent;
-
-    procedure Salvar; virtual; abstract;
-    function Buscar(Codigo: String): TRotina; virtual; abstract;
+//
+//    procedure Salvar; virtual; abstract;
+//    function Buscar(Codigo: String): TRotina; virtual; abstract;
   end;
 
 implementation

@@ -99,12 +99,15 @@ procedure TDtmBase.GravarSistema;
 begin
   with gSistema, gVersaoApp do
   begin
+    Model.Key := ProductKey;
+    Load(fdQrySistema);
+
     Model.Nome      := SplashName;
     Model.Descricao := SplashDescription;
     Model.Key       := ProductKey;
+    Model.Versao    := FileVersion;
 
-    //Load(fdQrySistema);
-    //Save(fdQrySistema);
+    Save(fdQrySistema);
   end;
 end;
 

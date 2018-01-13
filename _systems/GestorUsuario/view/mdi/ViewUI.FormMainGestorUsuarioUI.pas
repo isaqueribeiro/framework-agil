@@ -11,13 +11,13 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
   Vcl.StdActns, System.Actions, Vcl.ActnList, Vcl.Imaging.pngimage, Vcl.Menus,
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxStatusBar, cxClasses,
-  dxBar, dxNavBar, dxRibbonSkins, dxSkinsdxRibbonPainter, dxRibbonCustomizationForm, dxRibbon,
+  dxBar, dxNavBar, dxRibbonSkins, dxSkinsdxRibbonPainter, dxRibbonCustomizationForm,
+  dxRibbon, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView, cxContainer,
+  cxEdit, cxLabel, cxPC, dxBarBuiltInMenu, dxTabbedMDI,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxStatusBarPainter, dxSkinsdxBarPainter,
-  dxSkinsdxNavBarPainter, dxNavBarBase, dxNavBarCollns, dxRibbonBackstageView,
-  cxContainer, cxEdit, cxLabel, cxPC, dxSkinscxPCPainter, dxBarBuiltInMenu,
-  dxTabbedMDI;
+  dxSkinscxPCPainter, dxSkinsdxNavBarPainter;
 
 type
   TFormMainGestorUsuarioUI = class(TFormMainUI)

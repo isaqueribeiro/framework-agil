@@ -44,7 +44,7 @@ begin
 
   aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
   aNomeFantasia := 'Empresa de Demonstração';
-  aCnpj         := '71.841.661/0001-98';
+  aCnpj         := '71.841.661/0001-98';      // CNJP virtual válido
 
   aNotificacaoSplash := EmptyStr;
 

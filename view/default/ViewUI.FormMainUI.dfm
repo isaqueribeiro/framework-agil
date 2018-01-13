@@ -684,7 +684,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = 172
+        Width = 102
         Height = 13
         Hint = 'user@server.base'
         Anchors = [akLeft, akTop, akRight]
@@ -697,7 +697,6 @@ inherited FormMainUI: TFormMainUI
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 102
       end
     end
     object PnlCompany: TPanel
@@ -715,8 +714,6 @@ inherited FormMainUI: TFormMainUI
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
-      ExplicitLeft = 594
-      ExplicitWidth = 377
       DesignSize = (
         307
         34)
@@ -791,7 +788,7 @@ inherited FormMainUI: TFormMainUI
         AlignWithMargins = True
         Left = 35
         Top = 11
-        Width = -21
+        Width = 49
         Height = 13
         Hint = 'Empresa'
         Anchors = [akLeft, akTop, akRight]
@@ -804,7 +801,6 @@ inherited FormMainUI: TFormMainUI
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
-        ExplicitWidth = 49
       end
     end
   end

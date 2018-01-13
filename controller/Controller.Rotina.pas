@@ -3,6 +3,7 @@ unit Controller.Rotina;
 interface
 
 Uses
+  TypeAgil.ComplexTypes,
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Rotina,
@@ -59,7 +60,30 @@ end;
 
 function TRotinaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
 begin
-  Result := aModel.Buscar(ID);
+  // Carregar dados da base
+  if Assigned(aDataSet) then
+    with TFDQuery(aDataSet) do
+    begin
+      if aDataSet.Active then
+        aDataSet.Close;
+
+      TFDQuery(aDataSet).ParamByName('key').AsString := ID;
+
+      aDataSet.Open;
+
+      if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
+        aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
+
+      aModel.Nome := FieldByName('nm_rotina').AsString;
+      aModel.Descricao := FieldByName('ds_rotina').AsString;
+      aModel.Indice    := FieldByName('ix_rotina').AsInteger;
+      aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+
+      if (not FieldByName('id_rotina').IsNull) then
+        aModel.Parent.ID := StringToGUID(FieldByName('id_pai').AsString);
+    end;
+
+  Result := aModel;
 end;
 
 function TRotinaController.GetModel: TRotina;
@@ -69,9 +93,7 @@ end;
 
 procedure TRotinaController.Load(const aDataSet: TDataSet);
 begin
-  // Carregar dados
-  ;
-  // Notificar observadores
+  Self.Find(aModel.Nome, aDataSet);
   aModel.Notify;
 end;
 
@@ -81,9 +103,32 @@ begin
   Result := aModel;
 end;
 
-procedure TRotinaController.Save;
+procedure TRotinaController.Save(const aDataSet: TDataSet);
 begin
-  aModel.Salvar;
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      with TFDQuery(aDataSet) do
+      begin
+//        if TFDQuery(aDataSet).IsEmpty then
+//        begin
+//          TFDQuery(aDataSet).Append;
+//          FieldByName('vs_sistema').AsString := aModel.Versao;
+//        end
+//        else
+//          TFDQuery(aDataSet).Edit;
+//
+//        FieldByName('id_sistema').AsString  := GUIDToString(aModel.ID);
+//        FieldByName('cd_sistema').AsInteger := aModel.Codigo;
+//        FieldByName('nm_sistema').AsString  := aModel.Nome;
+//        FieldByName('ds_sistema').AsString  := aModel.Descricao;
+//        FieldByName('ky_sistema').AsString  := aModel.Key;
+//
+//        TFDQuery(aDataSet).Post;
+//        if TFDQuery(aDataSet).CachedUpdates then
+//          TFDQuery(aDataSet).ApplyUpdates(0);
+//
+//        TFDQuery(aDataSet).Connection.CommitRetaining;
+      end;
 end;
 
 procedure TRotinaController.SetModel(Value: TRotina);

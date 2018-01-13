@@ -102,11 +102,11 @@ end;
 procedure TFormMainUI.FormCreate(Sender: TObject);
 begin
   rbbMenu.ShowTabGroups := False;
+  inherited;
 
   Self.Caption := Application.Title + ' - v' +
     gVersaoApp.ProductVersion + ' (Build ' +
     gVersaoApp.FileVersion + ')';
-  inherited;
 end;
 
 procedure TFormMainUI.TmrContadorTimer(Sender: TObject);

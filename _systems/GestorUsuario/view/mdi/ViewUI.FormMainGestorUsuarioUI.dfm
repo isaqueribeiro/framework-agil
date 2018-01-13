@@ -22,8 +22,8 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       ExplicitWidth = 997
     end
     inherited PnlCompany: TPanel
-      Width = 403
-      ExplicitWidth = 403
+      Width = 333
+      ExplicitWidth = 333
     end
   end
   inherited stbInforme: TdxStatusBar
@@ -221,7 +221,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       SyncImageIndex = False
       ImageIndex = 0
     end
-    object BrBtnTeste: TdxBarButton [7]
+    object BrBtnTeste: TdxBarButton
       Action = acnTeste
       Category = 1
     end

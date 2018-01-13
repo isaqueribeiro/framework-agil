@@ -27,8 +27,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
-    ExplicitTop = 75
-    ExplicitHeight = 312
     object bvlGrid: TBevel
       Left = 0
       Top = 216
@@ -46,8 +44,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Height = 210
       Align = alClient
       TabOrder = 0
-      ExplicitTop = 7
-      ExplicitHeight = 202
       object dbgPesquisaDB: TcxGridDBBandedTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
@@ -87,7 +83,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Properties.Images = DtmRecursos.imgFlat16
       Properties.Options = [pcoAlwaysShowGoDialogButton, pcoGradientClientArea, pcoRedrawOnResize]
       LookAndFeel.SkinName = 'Office2013DarkGray'
-      ExplicitTop = 219
       ClientRectBottom = 88
       ClientRectLeft = 2
       ClientRectRight = 673

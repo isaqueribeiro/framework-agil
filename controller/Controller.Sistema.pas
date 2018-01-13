@@ -82,7 +82,7 @@ begin
 
       aDataSet.Open;
 
-      if (FieldByName('id_sistema').AsString <> EmptyStr) then
+      if (not FieldByName('id_sistema').IsNull) and (FieldByName('id_sistema').AsString <> EmptyStr) then
         aModel.ID := StringToGUID(FieldByName('id_sistema').AsString);
 
       aModel.Nome := FieldByName('nm_sistema').AsString;
@@ -127,7 +127,10 @@ begin
       with TFDQuery(aDataSet) do
       begin
         if TFDQuery(aDataSet).IsEmpty then
-          TFDQuery(aDataSet).Append
+        begin
+          TFDQuery(aDataSet).Append;
+          FieldByName('vs_sistema').AsString := aModel.Versao;
+        end
         else
           TFDQuery(aDataSet).Edit;
 

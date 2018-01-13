@@ -13,10 +13,12 @@ Type
     aCodigo   : Integer;
     aNome     ,
     aDescricao,
-    aKey      : String;
+    aKey      ,
+    aVersao   : String;
     procedure SetNome(Value : String);
     procedure SetDescricao(Value : String);
     procedure SetKey(Value : String);
+    procedure SetVersao(Value : String);
     function GetCodigo :Integer;
   protected
     constructor Create;
@@ -28,6 +30,7 @@ Type
     property Nome : String read aNome write SetNome;
     property Descricao : String read aDescricao write SetDescricao;
     property Key : String read aKey write SetKey;
+    property Versao : String read aVersao write SetVersao;
   end;
 
 implementation
@@ -63,12 +66,18 @@ end;
 
 procedure TSistema.SetKey(Value: String);
 begin
-  aKey := Trim(Value);
+  aCodigo := StrToIntDef(Copy(Trim(Value), 12, 3), 0);
+  aKey    := Trim(Value);
 end;
 
 procedure TSistema.SetNome(Value: String);
 begin
   aNome := Trim(Value);
+end;
+
+procedure TSistema.SetVersao(Value: String);
+begin
+  aVersao := Trim(Value);
 end;
 
 end.
