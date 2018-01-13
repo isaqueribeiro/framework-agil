@@ -67,20 +67,23 @@ begin
       if aDataSet.Active then
         aDataSet.Close;
 
-      TFDQuery(aDataSet).ParamByName('key').AsString := ID;
+      TFDQuery(aDataSet).ParamByName('key').AsString := Trim(ID); // "cd_rotina" será o campo de referência para o projeto
 
       aDataSet.Open;
 
       if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
         aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
 
-      aModel.Nome := FieldByName('nm_rotina').AsString;
-      aModel.Descricao := FieldByName('ds_rotina').AsString;
+      aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
+      aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
+      aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
       aModel.Indice    := FieldByName('ix_rotina').AsInteger;
       aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
 
-      if (not FieldByName('id_rotina').IsNull) then
-        aModel.Parent.ID := StringToGUID(FieldByName('id_pai').AsString);
+      if (not FieldByName('id_mestre').IsNull) then
+        aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+      else
+        aModel.Parent := nil;
     end;
 
   Result := aModel;
