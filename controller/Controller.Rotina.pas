@@ -26,10 +26,12 @@ Uses
       destructor Destroy; override;
 
       procedure Load(const aDataSet: TDataSet);
-      procedure Save(const aDataSet: TDataSet);
+      procedure Save(const aDataSet: TDataSet); overload;
+      procedure Save(const aProcedure: TFDStoredProc); overload;
 
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject;
+      function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
       property Model : TRotina read GetModel write SetModel;
   end;
@@ -58,6 +60,19 @@ begin
   inherited;
 end;
 
+function TRotinaController.ExecuteQuery(const aTipoPesquisa: Integer;
+  const aDataSet: TDataSet; aPesquisa: String): Boolean;
+var
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    ;
+  finally
+    Result := aRetorno;
+  end;
+end;
+
 function TRotinaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
 begin
   // Carregar dados da base
@@ -70,20 +85,25 @@ begin
       TFDQuery(aDataSet).ParamByName('key').AsString := Trim(ID); // "cd_rotina" será o campo de referência para o projeto
 
       aDataSet.Open;
+      if not aDataSet.IsEmpty then
+      begin
+        if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
+          aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
 
-      if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
-        aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
+        aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
+        aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
+        aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
+        aModel.Indice    := FieldByName('ix_rotina').AsInteger;
+        aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+        aModel.Saved     := True;
 
-      aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
-      aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
-      aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
-      aModel.Indice    := FieldByName('ix_rotina').AsInteger;
-      aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
-
-      if (not FieldByName('id_mestre').IsNull) then
-        aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+        if (not FieldByName('id_mestre').IsNull) then
+          aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+        else
+          aModel.Parent := nil;
+      end
       else
-        aModel.Parent := nil;
+        aModel.Saved := False;
     end;
 
   Result := aModel;
@@ -96,7 +116,7 @@ end;
 
 procedure TRotinaController.Load(const aDataSet: TDataSet);
 begin
-  Self.Find(aModel.Nome, aDataSet);
+  Self.Find(aModel.Codigo, aDataSet);
   aModel.Notify;
 end;
 
@@ -112,26 +132,70 @@ begin
     if aDataSet.Active then
       with TFDQuery(aDataSet) do
       begin
-//        if TFDQuery(aDataSet).IsEmpty then
-//        begin
-//          TFDQuery(aDataSet).Append;
-//          FieldByName('vs_sistema').AsString := aModel.Versao;
-//        end
-//        else
-//          TFDQuery(aDataSet).Edit;
-//
-//        FieldByName('id_sistema').AsString  := GUIDToString(aModel.ID);
-//        FieldByName('cd_sistema').AsInteger := aModel.Codigo;
-//        FieldByName('nm_sistema').AsString  := aModel.Nome;
-//        FieldByName('ds_sistema').AsString  := aModel.Descricao;
-//        FieldByName('ky_sistema').AsString  := aModel.Key;
-//
-//        TFDQuery(aDataSet).Post;
-//        if TFDQuery(aDataSet).CachedUpdates then
-//          TFDQuery(aDataSet).ApplyUpdates(0);
-//
-//        TFDQuery(aDataSet).Connection.CommitRetaining;
+        if not aModel.Saved then
+        begin
+          if TFDQuery(aDataSet).IsEmpty then
+            TFDQuery(aDataSet).Append
+          else
+            TFDQuery(aDataSet).Edit;
+
+          FieldByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+          FieldByName('cd_rotina').AsString  := aModel.Codigo;
+          FieldByName('nm_rotina').AsString  := aModel.Nome;
+          FieldByName('ds_rotina').AsString  := aModel.Descricao;
+          FieldByName('ix_rotina').AsInteger := aModel.Indice;
+          FieldByName('tp_rotina').AsInteger := Ord(aModel.Tipo);
+          if Assigned(aModel.Parent) then
+            if (aModel.Parent.Indice > 0) then
+              FieldByName('id_mestre').AsString  := GUIDToString(aModel.Parent.ID)
+            else
+              FieldByName('id_mestre').Clear
+          else
+            FieldByName('id_mestre').Clear;
+
+          TFDQuery(aDataSet).Post;
+          if TFDQuery(aDataSet).CachedUpdates then
+            TFDQuery(aDataSet).ApplyUpdates(0);
+
+          TFDQuery(aDataSet).Connection.CommitRetaining;
+
+          aModel.Saved := True;
+        end;
       end;
+end;
+
+procedure TRotinaController.Save(const aProcedure: TFDStoredProc);
+begin
+  if Assigned(aProcedure) then
+    with aProcedure do
+    begin
+      if not aModel.Saved then
+      begin
+        ParamByName('id_sistema').AsString  := GUIDToString(aModel.Sistema.ID);
+        ParamByName('id_rotina').AsString   := GUIDToString(aModel.ID);
+        ParamByName('cd_rotina').AsString   := aModel.Codigo;
+        ParamByName('nm_rotina').AsString   := aModel.Nome;
+        ParamByName('ds_rotina').AsString   := aModel.Descricao;
+        ParamByName('ix_rotina').AsInteger  := aModel.Indice;
+        ParamByName('tp_rotina').AsSmallInt := Ord(aModel.Tipo);
+
+        if Assigned(aModel.Parent) then
+          if (aModel.Parent.Indice > 0) then
+            ParamByName('id_mestre').AsString  := GUIDToString(aModel.Parent.ID)
+          else
+            ParamByName('id_mestre').Clear
+        else
+          ParamByName('id_mestre').Clear;
+
+        aProcedure.ExecProc;
+        if aProcedure.CachedUpdates then
+          aProcedure.ApplyUpdates(0);
+
+        aProcedure.Connection.CommitRetaining;
+
+        aModel.Saved := True;
+      end;
+    end;
 end;
 
 procedure TRotinaController.SetModel(Value: TRotina);

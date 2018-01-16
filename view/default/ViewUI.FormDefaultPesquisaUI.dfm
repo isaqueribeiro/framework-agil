@@ -6,6 +6,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
+  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
@@ -51,6 +52,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
         Images = DtmRecursos.imgFlat16
+        OptionsBehavior.CellHints = True
         OptionsCustomize.ColumnMoving = False
         OptionsCustomize.BandMoving = False
         OptionsCustomize.BandSizing = False

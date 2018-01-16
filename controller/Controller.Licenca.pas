@@ -40,6 +40,7 @@ end;
 
 destructor TLicencaController.Destroy;
 begin
+  aModel.Free;
   inherited;
 end;
 

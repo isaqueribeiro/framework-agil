@@ -66,8 +66,12 @@ type
     procedure FormResize(Sender: TObject);
   private
     { Private declarations }
+    aAbrirTabela : Boolean;
   public
     { Public declarations }
+    property AbrirTabela : Boolean read aAbrirTabela write aAbrirTabela;
+
+    function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
 
 var
@@ -79,7 +83,6 @@ implementation
 
 procedure TFormDefaultPesquisaUI.acnEditarExecute(Sender: TObject);
 begin
-//  ShowMessage( Rotina.Parent.Nome + #13 + Rotina.Nome + ' - ' + Rotina.Descricao );
   ShowMessage( RotinaController.Model.Parent.Nome + #13 + RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
 end;
 
@@ -105,11 +108,16 @@ end;
 
 procedure TFormDefaultPesquisaUI.acnPesquisarExecute(Sender: TObject);
 begin
-  ;
+  if ExecutarPesquisa(True) then
+    if dbgPesquisa.Visible and dbgPesquisa.Enabled and dbgPesquisaDB.Visible then
+      dbgPesquisa.SetFocus;
 end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
 begin
+  Descricao   := lblHeaderDescription.Caption;
+  AbrirTabela := True;
+
   inherited;
   Self.AutoSize := False;
 
@@ -138,6 +146,9 @@ end;
 procedure TFormDefaultPesquisaUI.FormShow(Sender: TObject);
 begin
   inherited;
+  if aAbrirTabela then
+    ExecutarPesquisa(False);
+
   if (pgcPesquisa.ActivePage = tbsPesquisa) then
     if (edPesquisa.Visible and edPesquisa.Enabled) then
     begin

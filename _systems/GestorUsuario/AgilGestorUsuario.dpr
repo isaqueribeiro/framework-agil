@@ -5,6 +5,7 @@ uses
   Vcl.Forms,
   Vcl.Themes,
   Vcl.Styles,
+  TypeAgil.Constants in '..\..\agil_lib\units\TypeAgil.Constants.pas',
   TypeAgil.SimpleTypes in '..\..\agil_lib\units\TypeAgil.SimpleTypes.pas',
   TypeAgil.ComplexTypes in '..\..\agil_lib\units\TypeAgil.ComplexTypes.pas',
   InterfaceAgil.Observer in '..\..\agil_lib\interfaces\InterfaceAgil.Observer.pas',
@@ -15,12 +16,15 @@ uses
   Model.Rotina in '..\..\model\Model.Rotina.pas',
   Model.Licenca in '..\..\model\Model.Licenca.pas',
   Model.Sistema in '..\..\model\Model.Sistema.pas',
+  Model.Perfil in '..\..\model\Model.Perfil.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
-  Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
-  Controller.Licenca in '..\..\controller\Controller.Licenca.pas',
   Controller.Sistema in '..\..\controller\Controller.Sistema.pas',
+  Controller.Licenca in '..\..\controller\Controller.Licenca.pas',
+  Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
+  Controller.Perfil in '..\..\controller\Controller.Perfil.pas',
   DataModule.Recursos in '..\..\module\DataModule.Recursos.pas' {DtmRecursos: TDataModule},
   DataModule.Base in '..\..\module\DataModule.Base.pas' {DtmBase: TDataModule},
+  DataModule.ControleUsuario in '..\..\module\DataModule.ControleUsuario.pas' {DtmControleUsuario: TDataModule},
   ViewUI.FormDefaultUI in '..\..\view\default\ViewUI.FormDefaultUI.pas' {FormDefaultUI},
   ViewUI.FormDefaultPesquisaUI in '..\..\view\default\ViewUI.FormDefaultPesquisaUI.pas' {FormDefaultPesquisaUI},
   ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI},
@@ -28,8 +32,7 @@ uses
   ViewUI.SplashGestorUsuarioUI in 'view\sdi\ViewUI.SplashGestorUsuarioUI.pas' {FormSplashGestorUsuarioUI},
   ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
   ViewUI.PerfilUsuarioPesquisaUI in '..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
-  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
-  TypeAgil.Constants in '..\..\agil_lib\units\TypeAgil.Constants.pas';
+  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
 
 {$R *.res}
 
@@ -39,7 +42,7 @@ begin
   Application.Title := 'Ágil Gestor Usuários';
   Application.CreateForm(TDtmRecursos, DtmRecursos);
   Application.CreateForm(TDtmBase, DtmBase);
-
+  Application.CreateForm(TDtmControleUsuario, DtmControleUsuario);
   if DtmBase.Conectado then
   begin
     Application.CreateForm(TFormMainGestorUsuarioUI, FormMainGestorUsuarioUI);

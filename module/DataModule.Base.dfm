@@ -107,17 +107,195 @@ object DtmBase: TDtmBase
     Connection = fdConexao
     Transaction = trnConexao
     UpdateObject = fdUpdRotina
-    Left = 360
+    SQL.Strings = (
+      'Select'
+      '    r.id_rotina'
+      '  , r.cd_rotina'
+      '  , r.nm_rotina'
+      '  , r.ds_rotina'
+      '  , r.ix_rotina'
+      '  , r.tp_rotina'
+      '  , r.id_mestre'
+      'from SYS_ROTINA r'
+      'where r.cd_rotina = :key')
+    Left = 320
     Top = 80
+    ParamData = <
+      item
+        Name = 'KEY'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
   end
   object fdUpdRotina: TFDUpdateSQL
     Connection = fdConexao
-    Left = 360
+    InsertSQL.Strings = (
+      'INSERT INTO SYS_ROTINA'
+      '(ID_ROTINA, CD_ROTINA, NM_ROTINA, DS_ROTINA, '
+      '  IX_ROTINA, TP_ROTINA, ID_MESTRE)'
+      
+        'VALUES (:NEW_ID_ROTINA, :NEW_CD_ROTINA, :NEW_NM_ROTINA, :NEW_DS_' +
+        'ROTINA, '
+      '  :NEW_IX_ROTINA, :NEW_TP_ROTINA, :NEW_ID_MESTRE)'
+      'RETURNING ID_ROTINA')
+    ModifySQL.Strings = (
+      'UPDATE SYS_ROTINA'
+      
+        'SET ID_ROTINA = :NEW_ID_ROTINA, CD_ROTINA = :NEW_CD_ROTINA, NM_R' +
+        'OTINA = :NEW_NM_ROTINA, '
+      '  DS_ROTINA = :NEW_DS_ROTINA, IX_ROTINA = :NEW_IX_ROTINA, '
+      '  TP_ROTINA = :NEW_TP_ROTINA, ID_MESTRE = :NEW_ID_MESTRE'
+      'WHERE ID_ROTINA = :OLD_ID_ROTINA'
+      'RETURNING ID_ROTINA')
+    DeleteSQL.Strings = (
+      'DELETE FROM SYS_ROTINA'
+      'WHERE ID_ROTINA = :OLD_ID_ROTINA')
+    FetchRowSQL.Strings = (
+      
+        'SELECT ID_ROTINA, CD_ROTINA, NM_ROTINA, DS_ROTINA, IX_ROTINA, TP' +
+        '_ROTINA, '
+      '  ID_MESTRE'
+      'FROM SYS_ROTINA'
+      'WHERE ID_ROTINA = :ID_ROTINA')
+    Left = 320
     Top = 128
   end
   object FDGUIxErrorDialog: TFDGUIxErrorDialog
     Provider = 'Forms'
     Left = 96
     Top = 352
+  end
+  object fdQryExecute: TFDQuery
+    Connection = fdConexao
+    Transaction = trnConexao
+    UpdateTransaction = trnConexao
+    Left = 192
+    Top = 40
+  end
+  object fdQrySistemaRotina: TFDQuery
+    Connection = fdConexao
+    Transaction = trnConexao
+    UpdateObject = fdUpdSistemaRotina
+    SQL.Strings = (
+      'Select'
+      '    s.id'
+      '  , s.id_sistema'
+      '  , s.id_rotina'
+      '  , s.sn_ativo'
+      'from SYS_SISTEMA_ROTINA s'
+      'where s.id_sistema = :id_sistema'
+      '  and s.id_rotina  = :id_rotina')
+    Left = 352
+    Top = 80
+    ParamData = <
+      item
+        Name = 'ID_SISTEMA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 38
+        Value = Null
+      end
+      item
+        Name = 'ID_ROTINA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 38
+        Value = Null
+      end>
+  end
+  object fdUpdSistemaRotina: TFDUpdateSQL
+    Connection = fdConexao
+    InsertSQL.Strings = (
+      'INSERT INTO SYS_SISTEMA_ROTINA'
+      '(ID, ID_SISTEMA, ID_ROTINA, SN_ATIVO)'
+      'VALUES (:NEW_ID, :NEW_ID_SISTEMA, :NEW_ID_ROTINA, :NEW_SN_ATIVO)'
+      'RETURNING ID')
+    ModifySQL.Strings = (
+      'UPDATE SYS_SISTEMA_ROTINA'
+      
+        'SET ID = :NEW_ID, ID_SISTEMA = :NEW_ID_SISTEMA, ID_ROTINA = :NEW' +
+        '_ID_ROTINA, '
+      '  SN_ATIVO = :NEW_SN_ATIVO'
+      'WHERE ID = :OLD_ID'
+      'RETURNING ID')
+    DeleteSQL.Strings = (
+      'DELETE FROM SYS_SISTEMA_ROTINA'
+      'WHERE ID = :OLD_ID')
+    FetchRowSQL.Strings = (
+      'SELECT ID, ID_SISTEMA, ID_ROTINA, SN_ATIVO'
+      'FROM SYS_SISTEMA_ROTINA'
+      'WHERE ID = :ID')
+    Left = 352
+    Top = 128
+  end
+  object fdSetSistemaRotina: TFDStoredProc
+    Connection = fdConexao
+    Transaction = trnConexao
+    UpdateTransaction = trnConexao
+    StoredProcName = 'SET_ROTINA'
+    Left = 320
+    Top = 48
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_SISTEMA'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 38
+      end
+      item
+        Position = 2
+        Name = 'ID_ROTINA'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 38
+      end
+      item
+        Position = 3
+        Name = 'CD_ROTINA'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 150
+      end
+      item
+        Position = 4
+        Name = 'NM_ROTINA'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 150
+      end
+      item
+        Position = 5
+        Name = 'DS_ROTINA'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 150
+      end
+      item
+        Position = 6
+        Name = 'IX_ROTINA'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 7
+        Name = 'TP_ROTINA'
+        DataType = ftSmallint
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = 'ID_MESTRE'
+        DataType = ftString
+        FDDataType = dtWideString
+        ParamType = ptInput
+        Size = 38
+      end>
   end
 end

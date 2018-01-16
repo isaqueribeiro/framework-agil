@@ -15,5 +15,6 @@
     <Transaction>2017/10/21 14:44:04.000.114,D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.dfm</Transaction>
     <Transaction>2017/10/23 16:44:40.000.262,D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.PerfilUsuarioPesquisaUI.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
     <Transaction>2017/10/23 16:52:17.000.943,D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.UsuarioSistemaPesquisaUI.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
+    <Transaction>2018/01/16 13:38:46.936,D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.dfm=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

@@ -11,6 +11,7 @@ Type
   private
     aObservers : TInterfaceList;
     aIDGuid : String;
+    aSaved  : Boolean;
     procedure SetIDGuid(const Value: String);
     function GetIDGuid : String;
   protected
@@ -23,7 +24,9 @@ Type
     procedure Notify;
     procedure Assign(const Source : TBaseObject);
   published
+    property Observers : TInterfaceList read aObservers;
     property IDGuid: String read GetIDGuid write SetIDGuid;
+    property Saved : Boolean read aSaved write aSaved;
   end;
 
 implementation
@@ -34,9 +37,9 @@ procedure TBaseObject.addObserver(Observer: IObservador);
 var
   I : Integer;
 begin
-//  if ( aObservers = nil ) then
-//    aObservers := TInterfaceList.Create;
-//
+  if ( aObservers = nil ) then
+    aObservers := TInterfaceList.Create;
+
   I := aObservers.IndexOf(Observer);
   if ( I < 0 ) then
     aObservers.Add(Observer);
@@ -72,6 +75,7 @@ var
   gID: TGUID;
 begin
   aObservers := TInterfaceList.Create;
+  aSaved     := False;
 
   if CreateGUID(gID) = S_OK then
     aIDGuid := GUIDToString(gID);
@@ -105,9 +109,12 @@ procedure TBaseObject.removeObserver(Observer: IObservador);
 var
   I : Integer;
 begin
-  I := aObservers.IndexOf(Observer);
-  if ( I > - 1 ) then
-    aObservers.Remove(Observer);
+  if ( aObservers <> nil ) then
+  begin
+    I := aObservers.IndexOf(Observer);
+    if ( I > - 1 ) then
+      aObservers.Remove(Observer);
+  end;
 end;
 
 procedure TBaseObject.SetIDGuid(const Value: String);

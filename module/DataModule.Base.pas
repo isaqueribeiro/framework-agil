@@ -29,15 +29,22 @@ type
     fdQryRotina: TFDQuery;
     fdUpdRotina: TFDUpdateSQL;
     FDGUIxErrorDialog: TFDGUIxErrorDialog;
+    fdQryExecute: TFDQuery;
+    fdQrySistemaRotina: TFDQuery;
+    fdUpdSistemaRotina: TFDUpdateSQL;
+    fdSetSistemaRotina: TFDStoredProc;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
     procedure Conectar;
     procedure GravarSistema;
+
     function GetConectado : Boolean;
   public
     { Public declarations }
     property Conectado : Boolean read GetConectado;
+
+    function GetNewValueDB(aTabela, aCampo, aCondicao : String) : Integer;
   end;
 
 var
@@ -52,10 +59,25 @@ implementation
 { TDtmBase }
 
 procedure TDtmBase.Conectar;
+var
+  aBase   ,
+  aFileDB : String;
 begin
   try
     with fdConexao do
     begin
+      aBase := gSistema.Conexao.Base;
+
+      aFileDB := ExtractFilePath(ParamStr(0)) + aBase + '.fdb';
+      if FileExists(aFileDB) then
+        aBase := aFileDB
+      else
+      begin
+        aFileDB := ExtractFilePath(ParamStr(0)) + 'db\' + aBase + '.fdb';
+        if FileExists(aFileDB) then
+          aBase := aFileDB
+      end;
+
       if Connected then
         Connected := False;
 
@@ -64,7 +86,7 @@ begin
       Params.Clear;
       Params.Add('DriverID=FB');
       Params.Add('Server='   + gSistema.Conexao.Servidor);
-      Params.Add('Database=' + gSistema.Conexao.Base);
+      Params.Add('Database=' + aBase);
       Params.Add('Port='     + IntToStr(gSistema.Conexao.Porta));
       Params.Add('Protocol=TCPIP');
       Params.Add('User_Name=' + gSistema.Conexao.Usuario);
@@ -93,6 +115,39 @@ end;
 function TDtmBase.GetConectado: Boolean;
 begin
   Result := fdConexao.Connected;
+end;
+
+function TDtmBase.GetNewValueDB(aTabela, aCampo, aCondicao: String): Integer;
+var
+  aRetorno : Integer;
+begin
+  aRetorno := 0;
+  try
+    with fdQryExecute, SQL do
+    begin
+      if fdQryExecute.Active then
+        fdQryExecute.Close;
+
+      BeginUpdate;
+      Clear;
+
+      Add('Select');
+      Add('  max(' + aCampo + ') as ID');
+      Add('from ' + aTabela);
+
+      if (Trim(aCondicao) <> EmptyStr) then
+        Add('where ' + aCondicao);
+
+      EndUpdate;
+      if OpenOrExecute then
+        aRetorno := FieldByName('ID').AsInteger + 1;
+    end;
+  finally
+    if fdQryExecute.Active then
+      fdQryExecute.Close;
+
+    Result := aRetorno;
+  end;
 end;
 
 procedure TDtmBase.GravarSistema;

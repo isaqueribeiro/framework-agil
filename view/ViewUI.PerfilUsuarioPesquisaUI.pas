@@ -4,6 +4,8 @@ interface
 
 uses
   ViewUI.FormDefaultPesquisaUI,
+  InterfaceAgil.Observer,
+  Controller.Perfil,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
@@ -14,17 +16,26 @@ uses
   Vcl.ActnList, Vcl.StdCtrls, cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxImageComboBox, cxPC, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls,
+  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox, cxCheckBox,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, cxGroupBox;
+  dxSkinOffice2013White;
 
 type
-  TFrmPerfilUsuarioPesquisaUI = class(TFormDefaultPesquisaUI)
+  TFrmPerfilUsuarioPesquisaUI = class(TFormDefaultPesquisaUI, IObservador)
+    dbgPesquisaDBCD_PERFIL: TcxGridDBBandedColumn;
+    dbgPesquisaDBDS_PERFIL: TcxGridDBBandedColumn;
+    dbgPesquisaDBSN_SISTEMA: TcxGridDBBandedColumn;
+    dbgPesquisaDBSN_ATIVO: TcxGridDBBandedColumn;
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    aController : TPerfilController;
   public
     { Public declarations }
+    procedure Update(Observable: IObservable); reintroduce;
+    function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
 
 var
@@ -35,7 +46,35 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule.Base, DataModule.Recursos;
+  DataModule.Recursos,
+  DataModule.Base,
+  DataModule.ControleUsuario;
+
+function TFrmPerfilUsuarioPesquisaUI.ExecutarPesquisa(
+  const aAlertar: Boolean): Boolean;
+begin
+  Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryPerfil, edPesquisa.Text);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+  if Assigned(aController) then
+    aController.Model.removeObserver(Self);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.FormCreate(Sender: TObject);
+begin
+  inherited;
+  aController := TPerfilController.GetInstance;
+  aController.Model.addObserver(Self);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.Update(Observable: IObservable);
+begin
+  Self.Tag := RotinaController.Model.Indice;
+end;
 
 initialization
   gFormulario.RegisterForm('FrmPerfilUsuarioPesquisaUI', TFrmPerfilUsuarioPesquisaUI);

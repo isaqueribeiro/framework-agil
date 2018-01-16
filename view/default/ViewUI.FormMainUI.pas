@@ -102,6 +102,7 @@ end;
 procedure TFormMainUI.FormCreate(Sender: TObject);
 begin
   rbbMenu.ShowTabGroups := False;
+  Descricao := gSistema.Model.Descricao;
   inherited;
 
   Self.Caption := Application.Title + ' - v' +

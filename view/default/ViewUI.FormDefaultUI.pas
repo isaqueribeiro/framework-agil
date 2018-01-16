@@ -7,6 +7,7 @@ uses
   InterfaceAgil.Observer,
   Controller.Rotina,
   DataModule.Base,
+  DataModule.Recursos,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   TypInfo, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbon, dxRibbonForm, dxRibbonSkins;
@@ -20,13 +21,16 @@ type
     { Private declarations }
     aRotinaController : TRotinaController;
     procedure SetRotinaController(Value : TRotinaController);
+    procedure SetDescricao(Value : String);
     function GetRotinaController : TRotinaController;
+    function GetDescricao : String;
   protected
     constructor Create(AOwner: TComponent); overload; override;
     constructor Create(AOwner: TComponent; Controller: TRotinaController); overload;
   public
     { Public declarations }
     property RotinaController : TRotinaController read GetRotinaController;// write SetRotinaController;
+    property Descricao : String read GetDescricao write SetDescricao;
 
     constructor CreateForm(AOwner: TComponent; Controller: TRotinaController); reintroduce;
     procedure Update(Observable: IObservable);
@@ -58,9 +62,11 @@ begin
   aRotinaController := TRotinaController.Create;
   with aRotinaController do
   begin
-    Model.Nome      := Self.Name;
-    Model.Descricao := Self.Caption;
+    Model.Codigo    := Self.Name;
+    Model.Nome      := Self.Caption;
+    Model.Descricao := Self.Hint;
     Model.Tipo      := tr_Formulario;
+    Model.Sistema   := gSistema.Model;
 
     if (aParenteController <> nil) then
       Model.Parent := aParenteController.Model;
@@ -76,9 +82,11 @@ begin
   aRotinaController := TRotinaController.Create;
   with aRotinaController do
   begin
-    Model.Nome      := Self.Name;
-    Model.Descricao := Self.Caption;
+    Model.Codigo    := Self.Name;
+    Model.Nome      := Self.Caption;
+    Model.Descricao := Self.Hint;
     Model.Tipo      := tr_Formulario;
+    Model.Sistema   := gSistema.Model;
     Model.Parent    := Controller.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
@@ -105,11 +113,28 @@ end;
 procedure TFormDefaultUI.FormShow(Sender: TObject);
 begin
   aRotinaController.Load(DtmBase.fdQryRotina);
+  if (aRotinaController.Model.Indice = 0) then
+  begin
+    aRotinaController.Model.Indice := DtmBase.GetNewValueDB('SYS_ROTINA', 'IX_ROTINA', EmptyStr);
+    aRotinaController.Save(DtmBase.fdSetSistemaRotina);
+  end;
+end;
+
+function TFormDefaultUI.GetDescricao: String;
+begin
+  Result := aRotinaController.Model.Descricao;
 end;
 
 function TFormDefaultUI.GetRotinaController: TRotinaController;
 begin
   Result := aRotinaController;
+end;
+
+procedure TFormDefaultUI.SetDescricao(Value: String);
+begin
+  Self.Hint := Trim(Value);
+  if Assigned(aRotinaController) then
+    aRotinaController.Model.Descricao := Trim(Self.Hint);
 end;
 
 procedure TFormDefaultUI.SetRotinaController(Value: TRotinaController);

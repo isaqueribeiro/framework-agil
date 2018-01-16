@@ -85,9 +85,10 @@ begin
       if (not FieldByName('id_sistema').IsNull) and (FieldByName('id_sistema').AsString <> EmptyStr) then
         aModel.ID := StringToGUID(FieldByName('id_sistema').AsString);
 
-      aModel.Nome := FieldByName('nm_sistema').AsString;
+      aModel.Nome      := FieldByName('nm_sistema').AsString;
       aModel.Descricao := FieldByName('ds_sistema').AsString;
       aModel.Key       := FieldByName('ky_sistema').AsString;
+      aModel.Saved     := True;
     end;
 
   Result := aModel;
@@ -126,25 +127,32 @@ begin
     if aDataSet.Active then
       with TFDQuery(aDataSet) do
       begin
-        if TFDQuery(aDataSet).IsEmpty then
+        if not aModel.Saved then
         begin
-          TFDQuery(aDataSet).Append;
-          FieldByName('vs_sistema').AsString := aModel.Versao;
-        end
-        else
-          TFDQuery(aDataSet).Edit;
+          if TFDQuery(aDataSet).IsEmpty then
+          begin
+            TFDQuery(aDataSet).Append;
+            FieldByName('vs_sistema').AsString := aModel.Versao;
+          end
+          else
+            TFDQuery(aDataSet).Edit;
 
-        FieldByName('id_sistema').AsString  := GUIDToString(aModel.ID);
-        FieldByName('cd_sistema').AsInteger := aModel.Codigo;
-        FieldByName('nm_sistema').AsString  := aModel.Nome;
-        FieldByName('ds_sistema').AsString  := aModel.Descricao;
-        FieldByName('ky_sistema').AsString  := aModel.Key;
+          FieldByName('id_sistema').AsString  := GUIDToString(aModel.ID);
+          FieldByName('cd_sistema').AsInteger := aModel.Codigo;
+          FieldByName('nm_sistema').AsString  := aModel.Nome;
+          FieldByName('ds_sistema').AsString  := aModel.Descricao;
+          FieldByName('ky_sistema').AsString  := aModel.Key;
 
-        TFDQuery(aDataSet).Post;
-        if TFDQuery(aDataSet).CachedUpdates then
-          TFDQuery(aDataSet).ApplyUpdates(0);
+          if (FieldByName('vs_sistema').AsString <> aModel.Versao) then
+            FieldByName('vs_sistema').AsString := aModel.Versao;
 
-        TFDQuery(aDataSet).Connection.CommitRetaining;
+          TFDQuery(aDataSet).Post;
+          if TFDQuery(aDataSet).CachedUpdates then
+            TFDQuery(aDataSet).ApplyUpdates(0);
+
+          TFDQuery(aDataSet).Connection.CommitRetaining;
+          aModel.Saved := True;
+        end;
       end;
 end;
 
