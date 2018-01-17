@@ -35,6 +35,11 @@ type
   public
     { Public declarations }
     procedure Update(Observable: IObservable); reintroduce;
+    procedure New; override;
+    procedure Edit; override;
+    procedure Delete; override;
+    procedure Refresh; override;
+
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
 
@@ -50,10 +55,24 @@ uses
   DataModule.Base,
   DataModule.ControleUsuario;
 
+procedure TFrmPerfilUsuarioPesquisaUI.Delete;
+begin
+  aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
+  //aController.Edit(DtmControleUsuario.fdQryPerfil);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.Edit;
+begin
+  aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
+  //aController.Edit(DtmControleUsuario.fdQryPerfil);
+end;
+
 function TFrmPerfilUsuarioPesquisaUI.ExecutarPesquisa(
   const aAlertar: Boolean): Boolean;
 begin
   Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryPerfil, edPesquisa.Text);
+  if (not Result) and aAlertar then
+    ShowInforme(Self, 'Pesquisar', 'Dados não localizados!');
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.FormClose(Sender: TObject;
@@ -67,8 +86,19 @@ end;
 procedure TFrmPerfilUsuarioPesquisaUI.FormCreate(Sender: TObject);
 begin
   inherited;
+  AbrirTabela := True;
   aController := TPerfilController.GetInstance;
   aController.Model.addObserver(Self);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.New;
+begin
+  aController.New(DtmControleUsuario.fdQryPerfil);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.Refresh;
+begin
+  aController.Refresh(DtmControleUsuario.fdQryPerfil);
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Update(Observable: IObservable);

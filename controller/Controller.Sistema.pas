@@ -27,13 +27,16 @@ Uses
       function GetConexao : ct_Conexao;
     protected
       constructor Create;
+      procedure New(const aDataSet: TDataSet); overload;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
-      function New: TBaseObject;
+      function New: TBaseObject; overload;
     public
       class function GetInstance: TSistemaController;
       destructor Destroy; override;
       procedure Save(const aDataSet: TDataSet);
       procedure Load(const aDataSet: TDataSet);
+      procedure Refresh(const aDataSet: TDataSet);
+      procedure RefreshRecord(const aDataSet: TDataSet);
     published
       property Model : TSistema read GetModel write SetModel;
       property Conexao : ct_Conexao read GetConexao write SetConexao;
@@ -112,6 +115,11 @@ begin
   aModel.Notify;
 end;
 
+procedure TSistemaController.New(const aDataSet: TDataSet);
+begin
+  ;
+end;
+
 function TSistemaController.New: TBaseObject;
 begin
   try
@@ -169,6 +177,20 @@ end;
 procedure TSistemaController.SetModel(Value: TSistema);
 begin
   aModel := Value;
+end;
+
+procedure TSistemaController.Refresh(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).Refresh;
+end;
+
+procedure TSistemaController.RefreshRecord(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).RefreshRecord;
 end;
 
 end.

@@ -25,12 +25,15 @@ Uses
 //      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
       destructor Destroy; override;
 
+      procedure New(const aDataSet: TDataSet); overload;
       procedure Load(const aDataSet: TDataSet);
       procedure Save(const aDataSet: TDataSet); overload;
       procedure Save(const aProcedure: TFDStoredProc); overload;
+      procedure Refresh(const aDataSet: TDataSet);
+      procedure RefreshRecord(const aDataSet: TDataSet);
 
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
-      function New: TBaseObject;
+      function New: TBaseObject; overload;
       function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
       property Model : TRotina read GetModel write SetModel;
@@ -120,10 +123,29 @@ begin
   aModel.Notify;
 end;
 
+procedure TRotinaController.New(const aDataSet: TDataSet);
+begin
+  ;
+end;
+
 function TRotinaController.New: TBaseObject;
 begin
   aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
   Result := aModel;
+end;
+
+procedure TRotinaController.Refresh(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).Refresh;
+end;
+
+procedure TRotinaController.RefreshRecord(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).RefreshRecord;
 end;
 
 procedure TRotinaController.Save(const aDataSet: TDataSet);

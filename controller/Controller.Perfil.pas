@@ -3,6 +3,7 @@ unit Controller.Perfil;
 interface
 
 Uses
+  TypeAgil.Constants,
   TypeAgil.ComplexTypes,
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
@@ -27,11 +28,14 @@ Uses
       class function GetInstance: TPerfilController;
       destructor Destroy; override;
 
+      procedure New(const aDataSet: TDataSet); overload;
       procedure Load(const aDataSet: TDataSet);
-      procedure Save(const aDataSet: TDataSet); overload;
+      procedure Save(const aDataSet: TDataSet);
+      procedure Refresh(const aDataSet: TDataSet);
+      procedure RefreshRecord(const aDataSet: TDataSet);
 
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
-      function New: TBaseObject;
+      function New: TBaseObject; overload;
       function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
       property Model : TPerfil read GetModel write SetModel;
@@ -60,7 +64,30 @@ var
 begin
   aRetorno := False;
   try
-    ;
+    if Assigned(aDataSet) then
+      with TFDQuery(aDataSet) do
+      begin
+        if aDataSet.Active then
+          aDataSet.Close;
+
+        ParamByName('id_perfil').Clear;
+        ParamByName('cd_perfil').Clear;
+        ParamByName('ds_perfil').Clear;
+
+        aDataSet.Open;
+
+        Case aTipoPesquisa of
+          TYPE_DEFAULT_QUERY_AUTOMATICO :
+            if StrToIntDef(aPesquisa, 0) > 0 then
+              ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0)
+            else
+              ParamByName('ds_perfil').AsString  := aPesquisa + '%';
+          TYPE_DEFAULT_QUERY_CODIGO     : ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0);
+          TYPE_DEFAULT_QUERY_DESCRITIVA : ParamByName('ds_perfil').AsString  := aPesquisa + '%';
+        end;
+
+        aRetorno := not aDataSet.IsEmpty;
+      end;
   finally
     Result := aRetorno;
   end;
@@ -69,7 +96,34 @@ end;
 function TPerfilController.Find(ID: String;
   const aDataSet: TDataSet): TBaseObject;
 begin
-  ;
+  // Carregar dados da base
+  if Assigned(aDataSet) then
+    with TFDQuery(aDataSet) do
+    begin
+      if aDataSet.Active then
+        aDataSet.Close;
+
+      ParamByName('id_perfil').AsString := Trim(ID);
+      ParamByName('cd_perfil').Clear;
+      ParamByName('ds_perfil').Clear;
+
+      aDataSet.Open;
+      if not aDataSet.IsEmpty then
+      begin
+        if (not FieldByName('id_perfil').IsNull) and (FieldByName('id_perfil').AsString <> EmptyStr) then
+          aModel.ID := StringToGUID(FieldByName('id_perfil').AsString);
+
+        aModel.Codigo     := FieldByName('cd_perfil').AsInteger;
+        aModel.Descricao  := Trim(FieldByName('ds_perfil').AsString);
+        aModel.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+        aModel.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+        aModel.Saved      := True;
+      end
+      else
+        aModel.Saved := False;
+    end;
+
+  Result := aModel;
 end;
 
 class function TPerfilController.GetInstance: TPerfilController;
@@ -89,10 +143,38 @@ begin
   ;
 end;
 
+procedure TPerfilController.New(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+  begin
+    if not aDataSet.Active then
+      TFDQuery(aDataSet).CreateDataSet;
+
+    TFDQuery(aDataSet).Append;
+  end;
+end;
+
 function TPerfilController.New: TBaseObject;
 begin
+  if Assigned(aModel) then
+    aModel.Free;
+
   aModel := TPerfil.Create;
   Result := aModel;
+end;
+
+procedure TPerfilController.Refresh(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).Refresh;
+end;
+
+procedure TPerfilController.RefreshRecord(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      TFDQuery(aDataSet).RefreshRecord;
 end;
 
 procedure TPerfilController.Save(const aDataSet: TDataSet);

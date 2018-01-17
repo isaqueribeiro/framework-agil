@@ -53,6 +53,7 @@ var
   gSistema    : TSistemaController;
   gFormulario : TFormularios;
 
+  procedure ShowInforme(const AOnwer : TComponent; aTitulo, aMensagem : String);
   procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
 
 implementation
@@ -60,6 +61,12 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure ShowInforme(const AOnwer : TComponent; aTitulo, aMensagem : String);
+begin
+  //MessageDlg(aMensagem, mtError, [mbOK], 0);
+  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONINFORMATION);
+end;
 
 procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
 begin

@@ -16,10 +16,10 @@ uses
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxClasses,
   cxGridLevel, cxGrid, dxBarBuiltInMenu, cxPC, Vcl.Menus, Vcl.StdCtrls, cxButtons,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxImageComboBox, System.Actions, Vcl.ActnList,
-  dxSkinsdxBarPainter, dxBar,
+  dxBar, cxGroupBox,
 
-  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
-  cxGroupBox;
+  dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
+  dxSkinOffice2013White, dxSkinsdxBarPainter;
 
 type
   TFormDefaultPesquisaUI = class(TFormDefaultUI)
@@ -55,6 +55,9 @@ type
     edPesquisa: TcxTextEdit;
     BrBtnPesquisar: TdxBarButton;
     shpLimite: TShape;
+    acnPrepararPesquisa: TAction;
+    acnAtualizar: TAction;
+    BrBtnAtualizar: TdxBarButton;
     procedure FormCreate(Sender: TObject);
     procedure acnNovoExecute(Sender: TObject);
     procedure acnEditarExecute(Sender: TObject);
@@ -64,6 +67,8 @@ type
     procedure acnPesquisarExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure acnPrepararPesquisaExecute(Sender: TObject);
+    procedure acnAtualizarExecute(Sender: TObject);
   private
     { Private declarations }
     aAbrirTabela : Boolean;
@@ -71,6 +76,11 @@ type
     { Public declarations }
     property AbrirTabela : Boolean read aAbrirTabela write aAbrirTabela;
 
+    procedure New; virtual; abstract;
+    procedure Edit; virtual; abstract;
+    procedure Delete; virtual; abstract;
+    procedure Refresh; virtual; abstract;
+    
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
 
@@ -81,14 +91,26 @@ implementation
 
 {$R *.dfm}
 
+procedure TFormDefaultPesquisaUI.acnAtualizarExecute(Sender: TObject);
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+    if dtsPesquisa.DataSet.Active then
+      Self.Refresh;
+end;
+
 procedure TFormDefaultPesquisaUI.acnEditarExecute(Sender: TObject);
 begin
-  ShowMessage( RotinaController.Model.Parent.Nome + #13 + RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
+//  ShowMessage( RotinaController.Model.Parent.Nome + #13 + RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
+  if Assigned(dtsPesquisa.DataSet) then
+    if dtsPesquisa.DataSet.Active then
+      Self.Edit;
 end;
 
 procedure TFormDefaultPesquisaUI.acnExcluirExecute(Sender: TObject);
 begin
-  ;
+  if Assigned(dtsPesquisa.DataSet) then
+    if dtsPesquisa.DataSet.Active then
+      Self.Delete;
 end;
 
 procedure TFormDefaultPesquisaUI.acnExportarExecute(Sender: TObject);
@@ -103,7 +125,8 @@ end;
 
 procedure TFormDefaultPesquisaUI.acnNovoExecute(Sender: TObject);
 begin
-  ;
+  if Assigned(dtsPesquisa.DataSet) then
+    Self.New;
 end;
 
 procedure TFormDefaultPesquisaUI.acnPesquisarExecute(Sender: TObject);
@@ -111,6 +134,13 @@ begin
   if ExecutarPesquisa(True) then
     if dbgPesquisa.Visible and dbgPesquisa.Enabled and dbgPesquisaDB.Visible then
       dbgPesquisa.SetFocus;
+end;
+
+procedure TFormDefaultPesquisaUI.acnPrepararPesquisaExecute(Sender: TObject);
+begin
+  if (pgcPesquisa.ActivePage = tbsPesquisa) then
+    if edPesquisa.Visible and edPesquisa.Enabled then
+      edPesquisa.SetFocus;
 end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);

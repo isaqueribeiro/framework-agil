@@ -292,6 +292,18 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       ImageIndex = 167
       OnExecute = acnPesquisarExecute
     end
+    object acnPrepararPesquisa: TAction
+      Category = 'zOutras'
+      ShortCut = 114
+      OnExecute = acnPrepararPesquisaExecute
+    end
+    object acnAtualizar: TAction
+      Category = 'Registros'
+      Caption = 'Atualizar'
+      ImageIndex = 22
+      ShortCut = 116
+      OnExecute = acnAtualizarExecute
+    end
   end
   object brnEvento: TdxBarManager
     AllowReset = False
@@ -344,6 +356,10 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
           ItemName = 'BrBtnPesquisar'
         end
         item
+          Visible = True
+          ItemName = 'BrBtnAtualizar'
+        end
+        item
           BeginGroup = True
           Visible = True
           ItemName = 'BrBtnNovo'
@@ -389,6 +405,11 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     end
     object BrBtnPesquisar: TdxBarButton
       Action = acnPesquisar
+      Category = 1
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnAtualizar: TdxBarButton
+      Action = acnAtualizar
       Category = 1
       PaintStyle = psCaptionGlyph
     end

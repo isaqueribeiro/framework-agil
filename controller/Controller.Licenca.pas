@@ -20,10 +20,14 @@ Uses
     public
       class function GetInstance: TLicencaController;
       destructor Destroy; override;
+      procedure New(const aDataSet: TDataSet); overload;
       procedure Save(const aDataSet: TDataSet);
       procedure Load(const aDataSet: TDataSet);
+      procedure Refresh(const aDataSet: TDataSet);
+      procedure RefreshRecord(const aDataSet: TDataSet);
+
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
-      function New: TBaseObject;
+      function New: TBaseObject; overload;
     published
       property Model : TLicenca read GetModel;
   end;
@@ -67,10 +71,25 @@ begin
   aModel.Notify;
 end;
 
+procedure TLicencaController.New(const aDataSet: TDataSet);
+begin
+  ;
+end;
+
 function TLicencaController.New: TBaseObject;
 begin
   aModel := TLicenca.Create;
   Result := aModel;
+end;
+
+procedure TLicencaController.Refresh(const aDataSet: TDataSet);
+begin
+  ;
+end;
+
+procedure TLicencaController.RefreshRecord(const aDataSet: TDataSet);
+begin
+  ;
 end;
 
 procedure TLicencaController.Save(const aDataSet: TDataSet);
