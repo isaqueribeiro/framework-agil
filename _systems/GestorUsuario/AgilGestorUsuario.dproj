@@ -178,6 +178,9 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\view\default\ViewUI.FormDefaultPesquisaUI.pas">
             <Form>FormDefaultPesquisaUI</Form>
         </DCCReference>
+        <DCCReference Include="..\..\view\default\ViewUI.FormDefaultCadastroUI.pas">
+            <Form>FormDefaultCadastroUI</Form>
+        </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormSplashUI.pas">
             <Form>FormSplashUI</Form>
         </DCCReference>
@@ -190,10 +193,13 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="view\mdi\ViewUI.FormMainGestorUsuarioUI.pas">
             <Form>FormMainGestorUsuarioUI</Form>
         </DCCReference>
-        <DCCReference Include="..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas">
+        <DCCReference Include="view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas">
             <Form>FrmPerfilUsuarioPesquisaUI</Form>
         </DCCReference>
-        <DCCReference Include="..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas">
+        <DCCReference Include="view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas">
+            <Form>FrmPerfilUsuarioCadastroUI</Form>
+        </DCCReference>
+        <DCCReference Include="view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas">
             <Form>FrmUsuarioSistemaPesquisaUI</Form>
         </DCCReference>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>

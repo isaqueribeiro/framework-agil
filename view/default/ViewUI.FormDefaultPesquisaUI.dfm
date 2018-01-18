@@ -6,7 +6,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
-  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
@@ -242,6 +241,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     end
   end
   object dtsPesquisa: TDataSource
+    OnStateChange = dtsPesquisaStateChange
     Left = 32
     Top = 197
   end

@@ -14,10 +14,10 @@ uses
   Vcl.ActnList, Vcl.StdCtrls, cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxImageComboBox, cxPC, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls,
+  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, cxGroupBox;
+  dxSkinOffice2013White;
 
 type
   TFrmUsuarioSistemaPesquisaUI = class(TFormDefaultPesquisaUI)
@@ -25,6 +25,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
 
 var
@@ -36,6 +37,17 @@ implementation
 
 uses
   DataModule.Base, DataModule.Recursos;
+
+{ TFrmUsuarioSistemaPesquisaUI }
+
+function TFrmUsuarioSistemaPesquisaUI.ExecutarPesquisa(
+  const aAlertar: Boolean): Boolean;
+begin
+//  Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryPerfil, edPesquisa.Text);
+  Result := False;
+  if (not Result) and aAlertar then
+    ShowInforme(Self, 'Pesquisar', 'Dados não localizados!');
+end;
 
 initialization
   gFormulario.RegisterForm('FrmUsuarioSistemaPesquisaUI', TFrmUsuarioSistemaPesquisaUI);

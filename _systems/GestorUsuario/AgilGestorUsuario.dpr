@@ -27,12 +27,14 @@ uses
   DataModule.ControleUsuario in '..\..\module\DataModule.ControleUsuario.pas' {DtmControleUsuario: TDataModule},
   ViewUI.FormDefaultUI in '..\..\view\default\ViewUI.FormDefaultUI.pas' {FormDefaultUI},
   ViewUI.FormDefaultPesquisaUI in '..\..\view\default\ViewUI.FormDefaultPesquisaUI.pas' {FormDefaultPesquisaUI},
+  ViewUI.FormDefaultCadastroUI in '..\..\view\default\ViewUI.FormDefaultCadastroUI.pas' {FormDefaultCadastroUI},
   ViewUI.FormSplashUI in '..\..\view\default\ViewUI.FormSplashUI.pas' {FormSplashUI},
   ViewUI.FormMainUI in '..\..\view\default\ViewUI.FormMainUI.pas' {FormMainUI},
   ViewUI.SplashGestorUsuarioUI in 'view\sdi\ViewUI.SplashGestorUsuarioUI.pas' {FormSplashGestorUsuarioUI},
   ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
-  ViewUI.PerfilUsuarioPesquisaUI in '..\..\view\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
-  ViewUI.UsuarioSistemaPesquisaUI in '..\..\view\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
+  ViewUI.PerfilUsuarioPesquisaUI in 'view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
+  ViewUI.PerfilUsuarioCadastroUI in 'view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas' {FrmPerfilUsuarioCadastroUI},
+  ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
 
 {$R *.res}
 

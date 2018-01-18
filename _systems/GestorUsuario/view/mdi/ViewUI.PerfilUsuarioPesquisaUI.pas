@@ -94,6 +94,10 @@ end;
 procedure TFrmPerfilUsuarioPesquisaUI.New;
 begin
   aController.New(DtmControleUsuario.fdQryPerfil);
+  if gFormulario.ShowModalForm(Self, 'FrmPerfilUsuarioCadastroUI') then
+    aController.RefreshRecord(DtmControleUsuario.fdQryPerfil)
+  else
+    ;
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Refresh;

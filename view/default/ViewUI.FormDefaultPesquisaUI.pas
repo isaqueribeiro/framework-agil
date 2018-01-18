@@ -69,6 +69,7 @@ type
     procedure FormResize(Sender: TObject);
     procedure acnPrepararPesquisaExecute(Sender: TObject);
     procedure acnAtualizarExecute(Sender: TObject);
+    procedure dtsPesquisaStateChange(Sender: TObject);
   private
     { Private declarations }
     aAbrirTabela : Boolean;
@@ -141,6 +142,18 @@ begin
   if (pgcPesquisa.ActivePage = tbsPesquisa) then
     if edPesquisa.Visible and edPesquisa.Enabled then
       edPesquisa.SetFocus;
+end;
+
+procedure TFormDefaultPesquisaUI.dtsPesquisaStateChange(Sender: TObject);
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+  begin
+    acnNovo.Enabled     := not (dtsPesquisa.DataSet.State in [dsEdit, dsInsert]);
+    acnEditar.Enabled   := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnExcluir.Enabled  := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnExportar.Enabled := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnImprimir.Enabled := (dtsPesquisa.DataSet.RecordCount > 0);
+  end;
 end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
