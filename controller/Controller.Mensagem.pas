@@ -17,7 +17,9 @@ Uses
     public
       class function GetInstance: TMensagemController;
     published
+      procedure ShowInformation(aTitulo, aMensagem : String);
       procedure ShowWarning(aTitulo, aMensagem : String);
+      procedure ShowError(aTitulo, aMensagem : String);
 
       function ShowConfirmation(aTitulo, aMensagem : String) : Boolean;
   end;
@@ -47,10 +49,22 @@ begin
     MB_ICONQUESTION + MB_YESNO + MB_DEFBUTTON2) = ID_YES);
 end;
 
+procedure TMensagemController.ShowInformation(aTitulo, aMensagem: String);
+begin
+  //MessageDlg(aMensagem, mtInformation, [mbOK], 0);
+  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONINFORMATION);
+end;
+
 procedure TMensagemController.ShowWarning(aTitulo, aMensagem: String);
 begin
   //MessageDlg(aMensagem, mtWarning, [mbOK], 0);
   Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONEXCLAMATION);
+end;
+
+procedure TMensagemController.ShowError(aTitulo, aMensagem: String);
+begin
+  //MessageDlg(aMensagem, mtError, [mbOK], 0);
+  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONERROR);
 end;
 
 end.

@@ -32,6 +32,7 @@ Type
   end;
 
   ct_TipoRotina = (tr_Menu, tr_Formulario, tr_Processo, tr_Impressao);
+  ct_ExtensaoFileExport = (efe_NULL, efe_XLS, efe_XLSX, efe_TXT, efe_XML);
 
 implementation
 

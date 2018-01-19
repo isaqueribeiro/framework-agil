@@ -6,6 +6,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
+  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
@@ -294,6 +295,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Caption = 'Imprimir'
       Hint = 'Imprimir'
       ImageIndex = 213
+      ShortCut = 16464
       OnExecute = acnImprimirExecute
     end
     object acnPesquisar: TAction

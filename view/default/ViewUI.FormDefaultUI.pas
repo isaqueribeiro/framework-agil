@@ -5,6 +5,7 @@ interface
 uses
   TypeAgil.ComplexTypes,
   InterfaceAgil.Observer,
+  Controller.Mensagem,
   Controller.Rotina,
   DataModule.Base,
   DataModule.Recursos,
@@ -22,6 +23,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    aMsg : TMensagemController;
     aRotinaController : TRotinaController;
     procedure SetRotinaController(Value : TRotinaController);
     procedure SetDescricao(Value : String);
@@ -34,6 +36,7 @@ type
     { Public declarations }
     property RotinaController : TRotinaController read GetRotinaController;// write SetRotinaController;
     property Descricao : String read GetDescricao write SetDescricao;
+    property Msg : TMensagemController read aMsg;
 
     constructor CreateForm(AOwner: TComponent; Controller: TRotinaController); reintroduce;
     procedure Update(Observable: IObservable);
@@ -115,6 +118,7 @@ end;
 procedure TFormDefaultUI.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
+  aMsg := TMensagemController.GetInstance;
 end;
 
 procedure TFormDefaultUI.FormShow(Sender: TObject);

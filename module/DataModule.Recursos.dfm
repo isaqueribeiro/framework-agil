@@ -14646,4 +14646,13 @@ object DtmRecursos: TDtmRecursos
       Font.Style = [fsBold]
     end
   end
+  object svdExportar: TSaveDialog
+    Filter = 
+      'Planilhas do Excel 97-2003|*.xls|Planilha do Excel|*.xlsx|Arquiv' +
+      'o Texto|*.txt|Arquivo XML|*.xml'
+    FilterIndex = 2
+    Title = 'Salvar Arquivo'
+    Left = 64
+    Top = 280
+  end
 end

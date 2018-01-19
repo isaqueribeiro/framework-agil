@@ -19,6 +19,7 @@ uses
   Controller.Licenca,
   Controller.Sistema,
   ClasseAgil.Formulario,
+  TypeAgil.ComplexTypes,
 
   Winapi.Windows,
   System.SysUtils, System.Classes,
@@ -45,6 +46,7 @@ type
     stl_Content: TcxStyle;
     stl_ContentEven: TcxStyle;
     stl_Inactive: TcxStyle;
+    svdExportar: TSaveDialog;
   private
     { Private declarations }
   public
@@ -58,8 +60,8 @@ var
   gSistema    : TSistemaController;
   gFormulario : TFormularios;
 
-  procedure ShowInforme(const AOnwer : TComponent; aTitulo, aMensagem : String);
-  procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
+  function ExportTable(const AOnwer : TComponent;
+    var aFileName : String; var aExtensao : ct_ExtensaoFileExport) : Boolean;
 
 implementation
 
@@ -67,16 +69,23 @@ implementation
 
 {$R *.dfm}
 
-procedure ShowInforme(const AOnwer : TComponent; aTitulo, aMensagem : String);
+function ExportTable(const AOnwer : TComponent;
+  var aFileName : String; var aExtensao : ct_ExtensaoFileExport) : Boolean;
+var
+  aRetorno : Boolean;
 begin
-  //MessageDlg(aMensagem, mtError, [mbOK], 0);
-  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONINFORMATION);
-end;
-
-procedure ShowError(const AOnwer : TComponent; aTitulo, aMensagem : String);
-begin
-  //MessageDlg(aMensagem, mtError, [mbOK], 0);
-  Application.MessageBox(PWideChar(aMensagem), PWideChar(aTitulo), MB_ICONERROR);
+  aRetorno := False;
+  try
+    DtmRecursos.svdExportar.Title := 'Exportar Registros';
+    aRetorno := DtmRecursos.svdExportar.Execute;
+    if aRetorno then
+    begin
+      aFileName := DtmRecursos.svdExportar.FileName;
+      aExtensao := ct_ExtensaoFileExport(DtmRecursos.svdExportar.FilterIndex);
+    end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 initialization

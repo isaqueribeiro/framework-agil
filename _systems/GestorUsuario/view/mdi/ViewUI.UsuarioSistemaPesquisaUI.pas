@@ -46,7 +46,7 @@ begin
 //  Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryPerfil, edPesquisa.Text);
   Result := False;
   if (not Result) and aAlertar then
-    ShowInforme(Self, 'Pesquisar', 'Dados não localizados!');
+    Msg.ShowInformation('Pesquisar', 'Dados não localizados!');
 end;
 
 initialization

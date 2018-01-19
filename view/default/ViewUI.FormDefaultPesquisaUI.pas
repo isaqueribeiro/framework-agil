@@ -3,6 +3,7 @@ unit ViewUI.FormDefaultPesquisaUI;
 interface
 
 uses
+  TypeAgil.ComplexTypes,
   InterfaceAgil.Observer,
   Controller.Rotina,
   DataModule.Recursos,
@@ -91,6 +92,7 @@ type
     procedure Delete; virtual; abstract;
     procedure Refresh; virtual; abstract;
     procedure ShowRegister; virtual;
+    procedure PrintRegisters; virtual;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
@@ -101,6 +103,9 @@ var
 implementation
 
 {$R *.dfm}
+
+Uses
+  cxGridExportLink;
 
 procedure TFormDefaultPesquisaUI.acnAtualizarExecute(Sender: TObject);
 begin
@@ -125,13 +130,24 @@ begin
 end;
 
 procedure TFormDefaultPesquisaUI.acnExportarExecute(Sender: TObject);
+var
+  aFileName : String;
+  aExtensao : ct_ExtensaoFileExport;
 begin
-  ;
+  if Assigned(dtsPesquisa.DataSet) then
+    if ExportTable(Self, aFileName, aExtensao) then
+      Case aExtensao of
+        efe_XLS  : ExportGridToExcel(aFileName + '.xls',  dbgPesquisa);
+        efe_XLSX : ExportGridToXLSX(aFileName  + '.xlsx', dbgPesquisa);
+        efe_TXT  : ExportGridToText(aFileName  + '.txt',  dbgPesquisa);
+        efe_XML  : ExportGridToXML(aFileName   + '.xml',  dbgPesquisa);
+      end;
 end;
 
 procedure TFormDefaultPesquisaUI.acnImprimirExecute(Sender: TObject);
 begin
-  ;
+  if Assigned(dtsPesquisa.DataSet) then
+    Self.PrintRegisters;
 end;
 
 procedure TFormDefaultPesquisaUI.acnNovoExecute(Sender: TObject);
@@ -250,6 +266,11 @@ begin
     Result := (dtsPesquisa.DataSet.State in [dsEdit, dsInsert])
   else
     Result := False;
+end;
+
+procedure TFormDefaultPesquisaUI.PrintRegisters;
+begin
+  Self.Print;
 end;
 
 procedure TFormDefaultPesquisaUI.ShowRegister;

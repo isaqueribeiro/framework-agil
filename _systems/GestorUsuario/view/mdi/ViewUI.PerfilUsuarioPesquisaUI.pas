@@ -84,7 +84,7 @@ function TFrmPerfilUsuarioPesquisaUI.ExecutarPesquisa(
 begin
   Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryPerfil, edPesquisa.Text);
   if (not Result) and aAlertar then
-    ShowInforme(Self, 'Pesquisar', 'Dados não localizados!');
+    Msg.ShowInformation('Pesquisar', 'Dados não localizados!');
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.FormClose(Sender: TObject;

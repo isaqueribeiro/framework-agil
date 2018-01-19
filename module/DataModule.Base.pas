@@ -4,6 +4,7 @@ interface
 
 uses
   DataModule.Recursos,
+  Controller.Mensagem,
 
   Vcl.Forms, System.SysUtils, System.Classes,
 
@@ -36,6 +37,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
+    aMsg : TMensagemController;
     procedure Conectar;
     procedure GravarSistema;
 
@@ -99,12 +101,14 @@ begin
     end;
   except
     On E : Exception do
-      ShowError(Application, 'Erro', 'Erro ao tentar conectar na base de dados.' + #13#13 + E.Message);
+      aMsg.ShowError('Erro', 'Erro ao tentar conectar na base de dados.' + #13#13 + E.Message);
   end;
 end;
 
 procedure TDtmBase.DataModuleCreate(Sender: TObject);
 begin
+  aMsg := TMensagemController.GetInstance;
+
   FDGUIxScriptDialog.Caption := gVersaoApp.SplashName + ', processando...';
   FDGUIxErrorDialog.Caption  := gVersaoApp.SplashName + ' - Erro';
 
