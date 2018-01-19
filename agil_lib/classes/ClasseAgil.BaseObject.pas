@@ -102,7 +102,8 @@ begin
 //      IObservador(aObservers[I]).Update(Self);
   if ( aObservers <> nil ) then
     for O in aObservers do
-      IObservador(O).Update(Self);
+      if (O <> nil) then
+        IObservador(O).Update(Self);
 end;
 
 procedure TBaseObject.removeObserver(Observer: IObservador);

@@ -9,6 +9,9 @@ uses
   DataModule.Base,
   DataModule.Recursos,
 
+  cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
+  cxEdit, cxLabel, Vcl.StdCtrls,
+
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   TypInfo, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbon, dxRibbonForm, dxRibbonSkins;
 
@@ -34,6 +37,8 @@ type
 
     constructor CreateForm(AOwner: TComponent; Controller: TRotinaController); reintroduce;
     procedure Update(Observable: IObservable);
+
+    function IdentifyEmptyFields(aListFields : TStringList) : TStringList;
   end;
 
 var
@@ -72,6 +77,7 @@ begin
       Model.Parent := aParenteController.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
+//    Funcionará se o padrão do Controller for Sington, que não se aplica a este caso
 //    Model.addObserver(Self);
   end;
 end;
@@ -90,6 +96,7 @@ begin
     Model.Parent    := Controller.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
+//    Funcionará se o padrão do Controller for Sington, que não se aplica a este caso
 //    Model.addObserver(Self);
   end;
 end;
@@ -118,6 +125,7 @@ begin
     aRotinaController.Model.Indice := DtmBase.GetNewValueDB('SYS_ROTINA', 'IX_ROTINA', EmptyStr);
     aRotinaController.Save(DtmBase.fdSetSistemaRotina);
   end;
+  Self.Tag := aRotinaController.Model.Indice;
 end;
 
 function TFormDefaultUI.GetDescricao: String;
@@ -128,6 +136,25 @@ end;
 function TFormDefaultUI.GetRotinaController: TRotinaController;
 begin
   Result := aRotinaController;
+end;
+
+function TFormDefaultUI.IdentifyEmptyFields(
+  aListFields: TStringList): TStringList;
+var
+  I : Integer;
+  sComponente : String;
+  aComponente : TComponent;
+begin
+  for I := 0 to aListFields.Count - 1 do
+  begin
+    sComponente := 'lbl_' + AnsiLowerCase(StringReplace(aListFields.Strings[I], '_', '', [rfReplaceAll]));
+    aComponente := Self.FindComponent(sComponente);
+    if (aComponente is TLabel) then
+      aListFields.Strings[I] := TLabel(aComponente).Caption
+    else
+    if (aComponente is TcxLabel) then
+      aListFields.Strings[I] := TcxLabel(aComponente).Caption;
+  end;
 end;
 
 procedure TFormDefaultUI.SetDescricao(Value: String);

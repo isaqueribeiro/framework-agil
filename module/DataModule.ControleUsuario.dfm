@@ -3,7 +3,7 @@ object DtmControleUsuario: TDtmControleUsuario
   Height = 451
   Width = 712
   object fdQryPerfil: TFDQuery
-    Active = True
+    OnNewRecord = fdQryPerfilNewRecord
     Connection = DtmBase.fdConexao
     Transaction = DtmBase.trnConexao
     UpdateTransaction = DtmBase.trnConexao
@@ -21,7 +21,7 @@ object DtmControleUsuario: TDtmControleUsuario
       '   or (upper(p.ds_perfil) like upper(:ds_perfil))'
       'order by'
       '   p.ds_perfil')
-    Left = 288
+    Left = 120
     Top = 80
     ParamData = <
       item
@@ -70,7 +70,7 @@ object DtmControleUsuario: TDtmControleUsuario
       'SELECT ID_PERFIL, CD_PERFIL, DS_PERFIL, SN_SISTEMA, SN_ATIVO'
       'FROM USR_PERFIL'
       'WHERE ID_PERFIL = :ID_PERFIL')
-    Left = 288
+    Left = 120
     Top = 128
   end
 end

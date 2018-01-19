@@ -27,7 +27,7 @@ uses
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsForm, cxGraphics, dxScreenTip, cxEdit,
-  dxCustomHint, cxHint;
+  dxCustomHint, cxHint, cxStyles;
 
 type
   TDtmRecursos = class(TDataModule)
@@ -40,6 +40,11 @@ type
     StyleControllerHint: TcxHintStyleController;
     StyleControllerDefaultEdit: TcxDefaultEditStyleController;
     imgOffice2013: TcxImageList;
+    StyleRepository: TcxStyleRepository;
+    stl_Selection: TcxStyle;
+    stl_Content: TcxStyle;
+    stl_ContentEven: TcxStyle;
+    stl_Inactive: TcxStyle;
   private
     { Private declarations }
   public

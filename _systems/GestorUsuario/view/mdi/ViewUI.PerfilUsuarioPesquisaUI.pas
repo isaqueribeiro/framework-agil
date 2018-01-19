@@ -34,9 +34,9 @@ type
     aController : TPerfilController;
   public
     { Public declarations }
-    procedure Update(Observable: IObservable); reintroduce;
     procedure New; override;
     procedure Edit; override;
+    procedure Cancel; override;
     procedure Delete; override;
     procedure Refresh; override;
 
@@ -54,6 +54,11 @@ uses
   DataModule.Recursos,
   DataModule.Base,
   DataModule.ControleUsuario;
+
+procedure TFrmPerfilUsuarioPesquisaUI.Cancel;
+begin
+  aController.Cancel(DtmControleUsuario.fdQryPerfil);
+end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Delete;
 begin
@@ -97,17 +102,12 @@ begin
   if gFormulario.ShowModalForm(Self, 'FrmPerfilUsuarioCadastroUI') then
     aController.RefreshRecord(DtmControleUsuario.fdQryPerfil)
   else
-    ;
+    aController.Cancel(DtmControleUsuario.fdQryPerfil);
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Refresh;
 begin
   aController.Refresh(DtmControleUsuario.fdQryPerfil);
-end;
-
-procedure TFrmPerfilUsuarioPesquisaUI.Update(Observable: IObservable);
-begin
-  Self.Tag := RotinaController.Model.Indice;
 end;
 
 initialization

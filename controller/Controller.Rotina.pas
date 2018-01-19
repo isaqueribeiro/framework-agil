@@ -27,11 +27,12 @@ Uses
 
       procedure New(const aDataSet: TDataSet); overload;
       procedure Load(const aDataSet: TDataSet);
-      procedure Save(const aDataSet: TDataSet); overload;
-      procedure Save(const aProcedure: TFDStoredProc); overload;
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Save(const aDataSet: TDataSet) : Boolean; overload;
+      function Save(const aProcedure: TFDStoredProc) : Boolean; overload;
+      function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
       function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
@@ -74,6 +75,11 @@ begin
   finally
     Result := aRetorno;
   end;
+end;
+
+function TRotinaController.Cancel(const aDataSet: TDataSet) : Boolean;
+begin
+  Result := False;
 end;
 
 function TRotinaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
@@ -148,7 +154,7 @@ begin
       TFDQuery(aDataSet).RefreshRecord;
 end;
 
-procedure TRotinaController.Save(const aDataSet: TDataSet);
+function TRotinaController.Save(const aDataSet: TDataSet) : Boolean;
 begin
   if Assigned(aDataSet) then
     if aDataSet.Active then
@@ -184,9 +190,11 @@ begin
           aModel.Saved := True;
         end;
       end;
+
+  Result := aModel.Saved;
 end;
 
-procedure TRotinaController.Save(const aProcedure: TFDStoredProc);
+function TRotinaController.Save(const aProcedure: TFDStoredProc) : Boolean;
 begin
   if Assigned(aProcedure) then
     with aProcedure do
@@ -218,6 +226,8 @@ begin
         aModel.Saved := True;
       end;
     end;
+
+  Result := aModel.Saved;
 end;
 
 procedure TRotinaController.SetModel(Value: TRotina);

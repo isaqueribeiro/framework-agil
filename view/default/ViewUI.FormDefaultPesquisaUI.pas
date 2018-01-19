@@ -73,15 +73,18 @@ type
   private
     { Private declarations }
     aAbrirTabela : Boolean;
+    function GetEmEdicao : Boolean;
   public
     { Public declarations }
-    property AbrirTabela : Boolean read aAbrirTabela write aAbrirTabela;
+    property AbrirTabela    : Boolean read aAbrirTabela write aAbrirTabela;
+    property TabelaEmEdicao : Boolean read GetEmEdicao;
 
     procedure New; virtual; abstract;
     procedure Edit; virtual; abstract;
+    procedure Cancel; virtual; abstract;
     procedure Delete; virtual; abstract;
     procedure Refresh; virtual; abstract;
-    
+
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
 
@@ -148,11 +151,12 @@ procedure TFormDefaultPesquisaUI.dtsPesquisaStateChange(Sender: TObject);
 begin
   if Assigned(dtsPesquisa.DataSet) then
   begin
-    acnNovo.Enabled     := not (dtsPesquisa.DataSet.State in [dsEdit, dsInsert]);
-    acnEditar.Enabled   := (dtsPesquisa.DataSet.RecordCount > 0);
-    acnExcluir.Enabled  := (dtsPesquisa.DataSet.RecordCount > 0);
-    acnExportar.Enabled := (dtsPesquisa.DataSet.RecordCount > 0);
-    acnImprimir.Enabled := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnNovo.Enabled      := not (dtsPesquisa.DataSet.State in [dsEdit, dsInsert]);
+    acnEditar.Enabled    := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnExcluir.Enabled   := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnExportar.Enabled  := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnImprimir.Enabled  := (dtsPesquisa.DataSet.RecordCount > 0);
+    acnAtualizar.Enabled := dtsPesquisa.DataSet.Active and (not (dtsPesquisa.DataSet.State in [dsEdit, dsInsert]));
   end;
 end;
 
@@ -198,6 +202,14 @@ begin
       edPesquisa.SelStart := Length(Trim(edPesquisa.Text)) + 1;
       edPesquisa.SetFocus;
     end;
+end;
+
+function TFormDefaultPesquisaUI.GetEmEdicao: Boolean;
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+    Result := (dtsPesquisa.DataSet.State in [dsEdit, dsInsert])
+  else
+    Result := False;
 end;
 
 end.

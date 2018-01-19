@@ -30,10 +30,11 @@ Uses
 
       procedure New(const aDataSet: TDataSet); overload;
       procedure Load(const aDataSet: TDataSet);
-      procedure Save(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Save(const aDataSet: TDataSet) : Boolean;
+      function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
       function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
@@ -44,6 +45,23 @@ Uses
 implementation
 
 { TPerfilController }
+
+function TPerfilController.Cancel(const aDataSet: TDataSet) : Boolean;
+var
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    if Assigned(aDataSet) then
+      if (aDataSet.State in [dsEdit, dsInsert]) then
+      begin
+        TFDQuery(aDataSet).Cancel;
+        aRetorno := True;
+      end;
+  finally
+    Result := aRetorno;
+  end;
+end;
 
 constructor TPerfilController.Create;
 begin
@@ -74,8 +92,6 @@ begin
         ParamByName('cd_perfil').Clear;
         ParamByName('ds_perfil').Clear;
 
-        aDataSet.Open;
-
         Case aTipoPesquisa of
           TYPE_DEFAULT_QUERY_AUTOMATICO :
             if StrToIntDef(aPesquisa, 0) > 0 then
@@ -85,6 +101,8 @@ begin
           TYPE_DEFAULT_QUERY_CODIGO     : ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0);
           TYPE_DEFAULT_QUERY_DESCRITIVA : ParamByName('ds_perfil').AsString  := aPesquisa + '%';
         end;
+
+        aDataSet.Open;
 
         aRetorno := not aDataSet.IsEmpty;
       end;
@@ -151,6 +169,13 @@ begin
       TFDQuery(aDataSet).CreateDataSet;
 
     TFDQuery(aDataSet).Append;
+
+    // Recuperar os valores padrão do DataSet para o Model
+    aModel.ID     := StringToGUID(aDataSet.FieldByName('id_perfil').AsString);
+    aModel.Codigo := aDataSet.FieldByName('cd_perfil').AsInteger;
+    aModel.Ativo  := (aDataSet.FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+    aModel.UsoSistema := (aDataSet.FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+    aModel.Saved      := False;
   end;
 end;
 
@@ -177,9 +202,26 @@ begin
       TFDQuery(aDataSet).RefreshRecord;
 end;
 
-procedure TPerfilController.Save(const aDataSet: TDataSet);
+function TPerfilController.Save(const aDataSet: TDataSet) : Boolean;
 begin
-  ;
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      with TFDQuery(aDataSet) do
+      begin
+//        FieldByName('id_perfil').AsString  := GUIDToString(aModel.ID);
+//        FieldByName('cd_perfil').AsString  := aModel.Codigo;
+//        FieldByName('ds_perfil').AsString  := aModel.Descricao;
+
+        TFDQuery(aDataSet).Post;
+        if TFDQuery(aDataSet).CachedUpdates then
+          TFDQuery(aDataSet).ApplyUpdates(0);
+
+        TFDQuery(aDataSet).Connection.CommitRetaining;
+
+        aModel.Saved := True;
+      end;
+
+  Result := aModel.Saved;
 end;
 
 procedure TPerfilController.SetModel(Value: TPerfil);

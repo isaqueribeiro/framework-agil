@@ -26,7 +26,6 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
           MinWidth = 50
           Options.HorzSizing = False
           Options.Moving = False
-          VisibleForCustomization = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 0
@@ -36,7 +35,6 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
           Caption = 'Descri'#231#227'o'
           DataBinding.FieldName = 'DS_PERFIL'
           Options.Moving = False
-          VisibleForCustomization = False
           Position.BandIndex = 0
           Position.ColIndex = 1
           Position.RowIndex = 0
@@ -54,7 +52,6 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
           Options.HorzSizing = False
           Options.Moving = False
           Options.Sorting = False
-          VisibleForCustomization = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 2
@@ -72,7 +69,6 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
           Options.HorzSizing = False
           Options.Moving = False
           Options.Sorting = False
-          VisibleForCustomization = False
           Width = 50
           Position.BandIndex = 0
           Position.ColIndex = 3

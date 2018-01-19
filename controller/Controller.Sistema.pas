@@ -28,15 +28,17 @@ Uses
     protected
       constructor Create;
       procedure New(const aDataSet: TDataSet); overload;
+      function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
     public
       class function GetInstance: TSistemaController;
       destructor Destroy; override;
-      procedure Save(const aDataSet: TDataSet);
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
+
+      function Save(const aDataSet: TDataSet) : Boolean;
     published
       property Model : TSistema read GetModel write SetModel;
       property Conexao : ct_Conexao read GetConexao write SetConexao;
@@ -70,6 +72,11 @@ destructor TSistemaController.Destroy;
 begin
   aModel.Destroy;
   inherited;
+end;
+
+function TSistemaController.Cancel(const aDataSet: TDataSet) : Boolean;
+begin
+  Result := False;
 end;
 
 function TSistemaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
@@ -129,7 +136,7 @@ begin
   end;
 end;
 
-procedure TSistemaController.Save(const aDataSet: TDataSet);
+function TSistemaController.Save(const aDataSet: TDataSet) : Boolean;
 begin
   if Assigned(aDataSet) then
     if aDataSet.Active then
@@ -162,6 +169,8 @@ begin
           aModel.Saved := True;
         end;
       end;
+
+  Result := aModel.Saved;
 end;
 
 function TSistemaController.GetConexao: ct_Conexao;

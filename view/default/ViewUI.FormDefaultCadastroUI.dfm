@@ -4,6 +4,8 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
   ClientHeight = 396
   ClientWidth = 691
   Position = poOwnerFormCenter
+  ExplicitWidth = 697
+  ExplicitHeight = 425
   PixelsPerInch = 96
   TextHeight = 13
   object wcCadastro: TdxWizardControl
@@ -76,16 +78,31 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
     OptionsViewStyleAero.Title.Font.Height = -11
     OptionsViewStyleAero.Title.Font.Name = 'Tahoma'
     OptionsViewStyleAero.Title.Font.Style = []
-    ExplicitLeft = 224
-    ExplicitTop = 72
-    ExplicitWidth = 100
-    ExplicitHeight = 49
+    OnButtonClick = wcCadastroButtonClick
     object pgNominal: TdxWizardControlPage
     end
   end
   object dtsCadastro: TDataSource
+    AutoEdit = False
     OnStateChange = dtsCadastroStateChange
     Left = 608
     Top = 16
+  end
+  object acnEvento: TActionList
+    Images = DtmRecursos.imgOffice2013
+    Left = 576
+    Top = 16
+    object acnCancelarFechar: TAction
+      Category = 'zOutras'
+      ShortCut = 27
+      OnExecute = acnCancelarFecharExecute
+    end
+    object acnNovo: TAction
+      Caption = 'Cadastro'
+      Hint = 'Novo Registro'
+      ImageIndex = 20
+      ShortCut = 45
+      OnExecute = acnNovoExecute
+    end
   end
 end

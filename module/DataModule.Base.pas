@@ -45,6 +45,7 @@ type
     property Conectado : Boolean read GetConectado;
 
     function GetNewValueDB(aTabela, aCampo, aCondicao : String) : Integer;
+    function EmptyFields(const aDataSet : TDataSet) : TStringList;
   end;
 
 var
@@ -110,6 +111,33 @@ begin
   Conectar;
   if Self.Conectado then
     GravarSistema;
+end;
+
+function TDtmBase.EmptyFields(const aDataSet: TDataSet): TStringList;
+var
+  I : Integer;
+  aLista : TStringList;
+begin
+  aLista := TStringList.Create;
+  try
+    // Limpar as campos que são cadeias de caracteres e que estão em branco
+    for I := 0 to aDataSet.Fields.Count - 1 do
+      if (aDataSet.Fields[I].DataType in [ftString, ftMemo, ftWideString, ftWideMemo]) then
+        if ( Trim(aDataSet.Fields[I].AsString) = EmptyStr ) then
+          aDataSet.Fields[I].Clear;
+
+    aLista.BeginUpdate;
+    aLista.Clear;
+
+    // Buscar campos com preenchimento obrigatório que estão vazios
+    for I := 0 to aDataSet.Fields.Count - 1 do
+      if (aDataSet.Fields[I].Required and aDataSet.Fields[I].IsNull) then
+        aLista.Add(aDataSet.Fields[I].FieldName);
+
+    aLista.EndUpdate;
+  finally
+    Result := aLista;
+  end;
 end;
 
 function TDtmBase.GetConectado: Boolean;

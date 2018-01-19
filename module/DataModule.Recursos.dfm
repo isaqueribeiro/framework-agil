@@ -14605,4 +14605,45 @@ object DtmRecursos: TDtmRecursos
           0000000000000000000097A776FF000000000000000000000000}
       end>
   end
+  object StyleRepository: TcxStyleRepository
+    Left = 64
+    Top = 232
+    PixelsPerInch = 96
+    object stl_Selection: TcxStyle
+      AssignedValues = [svColor, svFont, svTextColor]
+      Color = 13077064
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      TextColor = clWhite
+    end
+    object stl_Content: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = clGradientActiveCaption
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+    end
+    object stl_ContentEven: TcxStyle
+      AssignedValues = [svFont]
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+    end
+    object stl_Inactive: TcxStyle
+      AssignedValues = [svColor, svFont]
+      Color = clInfoBk
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+    end
+  end
 end

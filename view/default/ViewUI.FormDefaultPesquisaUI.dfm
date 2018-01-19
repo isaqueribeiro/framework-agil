@@ -6,6 +6,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
+  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
@@ -53,6 +54,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
         Images = DtmRecursos.imgFlat16
         OptionsBehavior.CellHints = True
         OptionsCustomize.ColumnMoving = False
+        OptionsCustomize.ColumnsQuickCustomization = True
         OptionsCustomize.BandMoving = False
         OptionsCustomize.BandSizing = False
         OptionsData.CancelOnExit = False
@@ -60,11 +62,17 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
         OptionsData.DeletingConfirmation = False
         OptionsData.Editing = False
         OptionsData.Inserting = False
+        OptionsSelection.CellSelect = False
         OptionsView.CellEndEllipsis = True
         OptionsView.NoDataToDisplayInfoText = '<N'#227'o h'#225' registros. Fa'#231'a uma nova pesquisa>'
         OptionsView.CellAutoHeight = True
         OptionsView.ColumnAutoWidth = True
         OptionsView.GroupByBox = False
+        OptionsView.Indicator = True
+        Styles.Content = DtmRecursos.stl_Content
+        Styles.ContentEven = DtmRecursos.stl_ContentEven
+        Styles.Inactive = DtmRecursos.stl_Inactive
+        Styles.Selection = DtmRecursos.stl_Selection
         Bands = <>
       end
       object dbgPesquisaLv: TcxGridLevel
@@ -241,6 +249,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     end
   end
   object dtsPesquisa: TDataSource
+    AutoEdit = False
     OnStateChange = dtsPesquisaStateChange
     Left = 32
     Top = 197
@@ -254,6 +263,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Caption = 'Novo'
       Hint = 'Novo Registro'
       ImageIndex = 20
+      ShortCut = 45
       OnExecute = acnNovoExecute
     end
     object acnEditar: TAction
@@ -300,6 +310,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
     object acnAtualizar: TAction
       Category = 'Registros'
       Caption = 'Atualizar'
+      Hint = 'Atualizar'
       ImageIndex = 22
       ShortCut = 116
       OnExecute = acnAtualizarExecute
