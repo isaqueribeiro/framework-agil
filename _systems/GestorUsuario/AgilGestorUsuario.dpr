@@ -34,7 +34,9 @@ uses
   ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
   ViewUI.PerfilUsuarioPesquisaUI in 'view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
   ViewUI.PerfilUsuarioCadastroUI in 'view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas' {FrmPerfilUsuarioCadastroUI},
-  ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
+  ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
+  ViewUI.FormRequiredFields in '..\..\view\ViewUI.FormRequiredFields.pas' {FormRequiredFields},
+  Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas';
 
 {$R *.res}
 

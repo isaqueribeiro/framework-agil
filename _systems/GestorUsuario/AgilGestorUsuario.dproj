@@ -202,6 +202,11 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas">
             <Form>FrmUsuarioSistemaPesquisaUI</Form>
         </DCCReference>
+        <DCCReference Include="..\..\view\ViewUI.FormRequiredFields.pas">
+            <Form>FormRequiredFields</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\..\controller\Controller.Mensagem.pas"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\ViewUI\default.txvpck"/>

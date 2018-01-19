@@ -33,6 +33,7 @@ type
   public
     { Public declarations }
     procedure New; override;
+    procedure Edit; override;
     procedure Cancel; override;
     procedure Save; override;
     procedure RefreshRecord; override;
@@ -53,6 +54,15 @@ uses
 procedure TFrmPerfilUsuarioCadastroUI.Cancel;
 begin
   aController.Cancel(DtmControleUsuario.fdQryPerfil);
+end;
+
+procedure TFrmPerfilUsuarioCadastroUI.Edit;
+begin
+  if Assigned(aController) then
+  begin
+    aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
+    aController.Edit(DtmControleUsuario.fdQryPerfil);
+  end;
 end;
 
 procedure TFrmPerfilUsuarioCadastroUI.FormClose(Sender: TObject;
@@ -83,18 +93,10 @@ begin
 end;
 
 procedure TFrmPerfilUsuarioCadastroUI.Save;
-var
-  aLista : TStringList;
 begin
-//  if Assigned(aController) then
-//    aController.Save(DtmControleUsuario.fdQryPerfil);
-
-  DtmControleUsuario.fdQryPerfil.FieldByName('cd_perfil').Clear;
-  DtmControleUsuario.fdQryPerfil.FieldByName('sn_ativo').Clear;
-  DtmControleUsuario.fdQryPerfil.FieldByName('sn_sistema').Clear;
-  aLista := IdentifyEmptyFields( DtmBase.EmptyFields(DtmControleUsuario.fdQryPerfil) );
-  ShowInforme(Self, 'Teste', aLista.Text);
-
+  if Assigned(aController) then
+    if not RequiredFields(Self, 'Perfil de Usuário') then
+      aController.Save(DtmControleUsuario.fdQryPerfil);
 //  if Assigned(aController) then
 //  begin
 //

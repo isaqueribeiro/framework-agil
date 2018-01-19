@@ -14,6 +14,8 @@ uses
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Edit(const aDataSet: TDataSet) : Boolean;
+      function Delete(const aDataSet: TDataSet) : Boolean;
       function Save(const aDataSet: TDataSet) : Boolean;
       function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;

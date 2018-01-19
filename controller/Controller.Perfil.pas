@@ -8,6 +8,7 @@ Uses
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Perfil,
+  Controller.Mensagem,
 
   System.Classes, System.SysUtils, System.StrUtils,
 
@@ -19,6 +20,7 @@ Uses
     TPerfilController = class(TInterfacedObject, IController)
     private
       class var aInstance : TPerfilController;
+      aMsg   : TMensagemController;
       aModel : TPerfil;
       procedure SetModel(Value : TPerfil);
       function GetModel : TPerfil;
@@ -33,6 +35,8 @@ Uses
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Edit(const aDataSet: TDataSet) : Boolean;
+      function Delete(const aDataSet: TDataSet) : Boolean;
       function Save(const aDataSet: TDataSet) : Boolean;
       function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
@@ -66,13 +70,61 @@ end;
 constructor TPerfilController.Create;
 begin
   inherited Create;
+  aMsg   := TMensagemController.GetInstance;
   aModel := TPerfil.Create;
+end;
+
+function TPerfilController.Delete(const aDataSet: TDataSet): Boolean;
+var
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    if Assigned(aDataSet) then
+      if (aDataSet.Active and (not aDataSet.IsEmpty)) then
+        if aModel.UsoSistema then
+          aMsg.ShowWarning('Alerta', 'Perfil de usuário de uso do sistema não pode ser excuído')
+        else
+        if aMsg.ShowConfirmation('Excluir', 'Confirma a exclusão do registros selecionado?') then
+        begin
+          TFDQuery(aDataSet).Delete;
+
+          if TFDQuery(aDataSet).CachedUpdates then
+            TFDQuery(aDataSet).ApplyUpdates(0);
+
+          TFDQuery(aDataSet).Connection.CommitRetaining;
+
+          aRetorno := True;
+        end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 destructor TPerfilController.Destroy;
 begin
   aModel.Free;
   inherited;
+end;
+
+function TPerfilController.Edit(const aDataSet: TDataSet) : Boolean;
+var
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    if Assigned(aDataSet) then
+      if (aDataSet.Active and (not aDataSet.IsEmpty)) then
+        if aModel.UsoSistema then
+          aMsg.ShowWarning('Alerta', 'Perfil de usuário de uso do sistema não pode ser alterado')
+        else
+        begin
+          TFDQuery(aDataSet).Edit;
+          aRetorno := True;
+        end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 function TPerfilController.ExecuteQuery(const aTipoPesquisa: Integer;
@@ -199,7 +251,18 @@ procedure TPerfilController.RefreshRecord(const aDataSet: TDataSet);
 begin
   if Assigned(aDataSet) then
     if aDataSet.Active then
-      TFDQuery(aDataSet).RefreshRecord;
+      with TFDQuery(aDataSet) do
+      begin
+        if RefreshRecord then
+        begin
+          aModel.ID         := StringToGUID(FieldByName('id_perfil').AsString);
+          aModel.Codigo     := FieldByName('cd_perfil').AsInteger;
+          aModel.Descricao  := FieldByName('ds_perfil').AsString;
+          aModel.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+          aModel.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+          aModel.Saved      := True;
+        end;
+      end;
 end;
 
 function TPerfilController.Save(const aDataSet: TDataSet) : Boolean;

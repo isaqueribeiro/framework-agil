@@ -20,6 +20,9 @@ const
   IDX_OFFICE13_IMAGE_CLOSE  = 8;
   IDX_OFFICE13_IMAGE_CANCEL = 11;
 
+  CD_PERFIL_SYSTEM  = 1;
+  CD_PERFIL_SUPORTE = 2;
+
 implementation
 
 end.

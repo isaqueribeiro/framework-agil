@@ -77,7 +77,7 @@ begin
       Model.Parent := aParenteController.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
-//    Funcionará se o padrão do Controller for Sington, que não se aplica a este caso
+//    Funcionará se o padrão do Controller for Singleton, que não se aplica a este caso
 //    Model.addObserver(Self);
   end;
 end;
@@ -96,7 +96,7 @@ begin
     Model.Parent    := Controller.Model;
 
 //    Esta rotina está fazendo o objeto ser destruído antes do tempo
-//    Funcionará se o padrão do Controller for Sington, que não se aplica a este caso
+//    Funcionará se o padrão do Controller for Singleton, que não se aplica a este caso
 //    Model.addObserver(Self);
   end;
 end;
@@ -150,11 +150,13 @@ begin
     sComponente := 'lbl_' + AnsiLowerCase(StringReplace(aListFields.Strings[I], '_', '', [rfReplaceAll]));
     aComponente := Self.FindComponent(sComponente);
     if (aComponente is TLabel) then
-      aListFields.Strings[I] := TLabel(aComponente).Caption
+      aListFields.Strings[I] := StringReplace(TLabel(aComponente).Caption, '&', '', [rfReplaceAll])
     else
     if (aComponente is TcxLabel) then
-      aListFields.Strings[I] := TcxLabel(aComponente).Caption;
+      aListFields.Strings[I] := StringReplace(TcxLabel(aComponente).Caption, '&', '', []);
   end;
+
+  Result := aListFields;
 end;
 
 procedure TFormDefaultUI.SetDescricao(Value: String);

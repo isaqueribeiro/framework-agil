@@ -30,6 +30,8 @@ Uses
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Edit(const aDataSet: TDataSet) : Boolean;
+      function Delete(const aDataSet: TDataSet) : Boolean;
       function Save(const aDataSet: TDataSet) : Boolean; overload;
       function Save(const aProcedure: TFDStoredProc) : Boolean; overload;
       function Cancel(const aDataSet: TDataSet) : Boolean;
@@ -58,6 +60,11 @@ end;
 //  aModel.Parent    := aParent;
 //end;
 //
+function TRotinaController.Delete(const aDataSet: TDataSet): Boolean;
+begin
+  Result := False;
+end;
+
 destructor TRotinaController.Destroy;
 begin
   aModel.Destroy;
@@ -78,6 +85,11 @@ begin
 end;
 
 function TRotinaController.Cancel(const aDataSet: TDataSet) : Boolean;
+begin
+  Result := False;
+end;
+
+function TRotinaController.Edit(const aDataSet: TDataSet) : Boolean;
 begin
   Result := False;
 end;

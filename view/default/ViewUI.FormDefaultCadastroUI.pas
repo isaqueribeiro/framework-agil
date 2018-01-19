@@ -7,7 +7,9 @@ uses
   InterfaceAgil.Observer,
   Controller.Rotina,
   DataModule.Recursos,
+  DataModule.Base,
   ViewUI.FormDefaultUI,
+  ViewUI.FormRequiredFields,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, Data.DB,
@@ -25,12 +27,14 @@ type
     acnEvento: TActionList;
     acnCancelarFechar: TAction;
     acnNovo: TAction;
+    acnEditar: TAction;
     procedure FormCreate(Sender: TObject);
     procedure dtsCadastroStateChange(Sender: TObject);
     procedure wcCadastroButtonClick(Sender: TObject;
       AKind: TdxWizardControlButtonKind; var AHandled: Boolean);
     procedure acnCancelarFecharExecute(Sender: TObject);
     procedure acnNovoExecute(Sender: TObject);
+    procedure acnEditarExecute(Sender: TObject);
   private
     { Private declarations }
     function GetEmEdicao : Boolean;
@@ -39,10 +43,12 @@ type
     property FormularioEmEdicao : Boolean read GetEmEdicao;
 
     procedure New; virtual; abstract;
+    procedure Edit; virtual; abstract;
     procedure Cancel; virtual; abstract;
     procedure Save; virtual; abstract;
     procedure RefreshRecord; virtual; abstract;
 
+    function RequiredFields(const AOnwer : TComponent; aTableName : String) : Boolean;
   end;
 
 var
@@ -58,6 +64,13 @@ begin
     Cancel
   else
     Self.Close;
+end;
+
+procedure TFormDefaultCadastroUI.acnEditarExecute(Sender: TObject);
+begin
+  if Assigned(dtsCadastro.DataSet) then
+    if dtsCadastro.DataSet.Active then
+      Self.Edit;
 end;
 
 procedure TFormDefaultCadastroUI.acnNovoExecute(Sender: TObject);
@@ -103,6 +116,24 @@ begin
     Result := (dtsCadastro.DataSet.State in [dsEdit, dsInsert])
   else
     Result := False;
+end;
+
+function TFormDefaultCadastroUI.RequiredFields(const AOnwer: TComponent;
+  aTableName: String): Boolean;
+var
+  aLista   : TStringList;
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    if Assigned(dtsCadastro.DataSet) then
+    begin
+      aLista   := IdentifyEmptyFields( DtmBase.EmptyFields(dtsCadastro.DataSet) );
+      aRetorno := ShowRequiredFields(Self, aLista, aTableName);
+    end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 procedure TFormDefaultCadastroUI.wcCadastroButtonClick(Sender: TObject;

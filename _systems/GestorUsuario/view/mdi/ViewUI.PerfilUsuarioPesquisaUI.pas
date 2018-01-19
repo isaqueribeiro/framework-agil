@@ -3,6 +3,7 @@ unit ViewUI.PerfilUsuarioPesquisaUI;
 interface
 
 uses
+  TypeAgil.Constants,
   ViewUI.FormDefaultPesquisaUI,
   InterfaceAgil.Observer,
   Controller.Perfil,
@@ -29,15 +30,17 @@ type
     dbgPesquisaDBSN_ATIVO: TcxGridDBBandedColumn;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     aController : TPerfilController;
+    procedure PerfilUsoSistema;
   public
     { Public declarations }
     procedure New; override;
     procedure Edit; override;
-    procedure Cancel; override;
     procedure Delete; override;
+    procedure Cancel; override;
     procedure Refresh; override;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
@@ -63,13 +66,17 @@ end;
 procedure TFrmPerfilUsuarioPesquisaUI.Delete;
 begin
   aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
-  //aController.Edit(DtmControleUsuario.fdQryPerfil);
+  aController.Delete(DtmControleUsuario.fdQryPerfil);
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Edit;
 begin
   aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
-  //aController.Edit(DtmControleUsuario.fdQryPerfil);
+  if aController.Edit(DtmControleUsuario.fdQryPerfil) then
+    if gFormulario.ShowModalForm(Self, FormularioCadastro) then
+      aController.RefreshRecord(DtmControleUsuario.fdQryPerfil)
+    else
+      aController.Cancel(DtmControleUsuario.fdQryPerfil);
 end;
 
 function TFrmPerfilUsuarioPesquisaUI.ExecutarPesquisa(
@@ -91,18 +98,59 @@ end;
 procedure TFrmPerfilUsuarioPesquisaUI.FormCreate(Sender: TObject);
 begin
   inherited;
-  AbrirTabela := True;
+  AbrirTabela        := True;
+  FormularioCadastro := 'FrmPerfilUsuarioCadastroUI';
+
   aController := TPerfilController.GetInstance;
   aController.Model.addObserver(Self);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.FormShow(Sender: TObject);
+begin
+  PerfilUsoSistema;
+  inherited;
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.New;
 begin
   aController.New(DtmControleUsuario.fdQryPerfil);
-  if gFormulario.ShowModalForm(Self, 'FrmPerfilUsuarioCadastroUI') then
+  if gFormulario.ShowModalForm(Self, FormularioCadastro) then
     aController.RefreshRecord(DtmControleUsuario.fdQryPerfil)
   else
     aController.Cancel(DtmControleUsuario.fdQryPerfil);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.PerfilUsoSistema;
+begin
+  // Inserir Perfil "Administrador do Sistema"
+  if aController.ExecuteQuery(TYPE_DEFAULT_QUERY_CODIGO, DtmControleUsuario.fdQryPerfil, IntToStr(CD_PERFIL_SYSTEM)) then
+    aController.Edit(DtmControleUsuario.fdQryPerfil)
+  else
+    aController.New(DtmControleUsuario.fdQryPerfil);
+
+  with DtmControleUsuario.fdQryPerfil do
+  begin
+    FieldByName('cd_perfil').AsInteger  := CD_PERFIL_SYSTEM;
+    FieldByName('ds_perfil').AsString   := 'Administrador do Sistema';
+    FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
+    FieldByName('sn_sistema').AsInteger := FLAG_SIM;
+  end;
+
+  // Inserir Perfil "Suporte DTI"
+  if aController.ExecuteQuery(TYPE_DEFAULT_QUERY_CODIGO, DtmControleUsuario.fdQryPerfil, IntToStr(CD_PERFIL_SUPORTE)) then
+    aController.Edit(DtmControleUsuario.fdQryPerfil)
+  else
+    aController.New(DtmControleUsuario.fdQryPerfil);
+
+  with DtmControleUsuario.fdQryPerfil do
+  begin
+    FieldByName('cd_perfil').AsInteger  := CD_PERFIL_SUPORTE;
+    FieldByName('ds_perfil').AsString   := 'Suporte DTI';
+    FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
+    FieldByName('sn_sistema').AsInteger := FLAG_SIM;
+  end;
+
+  aController.Save(DtmControleUsuario.fdQryPerfil);
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Refresh;

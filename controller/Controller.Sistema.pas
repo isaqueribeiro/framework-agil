@@ -28,6 +28,9 @@ Uses
     protected
       constructor Create;
       procedure New(const aDataSet: TDataSet); overload;
+
+      function Edit(const aDataSet: TDataSet) : Boolean;
+      function Delete(const aDataSet: TDataSet) : Boolean;
       function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
@@ -68,6 +71,11 @@ begin
   end;
 end;
 
+function TSistemaController.Delete(const aDataSet: TDataSet): Boolean;
+begin
+  Result := False;
+end;
+
 destructor TSistemaController.Destroy;
 begin
   aModel.Destroy;
@@ -75,6 +83,11 @@ begin
 end;
 
 function TSistemaController.Cancel(const aDataSet: TDataSet) : Boolean;
+begin
+  Result := False;
+end;
+
+function TSistemaController.Edit(const aDataSet: TDataSet) : Boolean;
 begin
   Result := False;
 end;

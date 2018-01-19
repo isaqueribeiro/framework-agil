@@ -4,8 +4,6 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
   ClientHeight = 396
   ClientWidth = 691
   Position = poOwnerFormCenter
-  ExplicitWidth = 697
-  ExplicitHeight = 425
   PixelsPerInch = 96
   TextHeight = 13
   object wcCadastro: TdxWizardControl
@@ -67,11 +65,12 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
     Header.TitleFont.Height = -13
     Header.TitleFont.Name = 'Tahoma'
     Header.TitleFont.Style = [fsBold]
+    InfoPanel.Caption = 'Novo (Ins) | Editar (F2)'
     InfoPanel.Font.Charset = DEFAULT_CHARSET
     InfoPanel.Font.Color = clDefault
     InfoPanel.Font.Height = -11
     InfoPanel.Font.Name = 'Tahoma'
-    InfoPanel.Font.Style = []
+    InfoPanel.Font.Style = [fsBold]
     LookAndFeel.NativeStyle = False
     OptionsViewStyleAero.Title.Font.Charset = DEFAULT_CHARSET
     OptionsViewStyleAero.Title.Font.Color = clDefault
@@ -98,11 +97,20 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
       OnExecute = acnCancelarFecharExecute
     end
     object acnNovo: TAction
-      Caption = 'Cadastro'
+      Category = 'Cadastro'
+      Caption = 'Novo'
       Hint = 'Novo Registro'
       ImageIndex = 20
       ShortCut = 45
       OnExecute = acnNovoExecute
+    end
+    object acnEditar: TAction
+      Category = 'Cadastro'
+      Caption = 'Editar'
+      Hint = 'Editar Registro'
+      ImageIndex = 137
+      ShortCut = 113
+      OnExecute = acnEditarExecute
     end
   end
 end

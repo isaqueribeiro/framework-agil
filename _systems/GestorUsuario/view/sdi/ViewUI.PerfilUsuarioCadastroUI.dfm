@@ -1,4 +1,5 @@
 inherited FrmPerfilUsuarioCadastroUI: TFrmPerfilUsuarioCadastroUI
+  ActiveControl = dsPerfil
   Caption = 'Perfil de Usu'#225'rio, cadastro!'
   PixelsPerInch = 96
   TextHeight = 13
@@ -36,7 +37,7 @@ inherited FrmPerfilUsuarioCadastroUI: TFrmPerfilUsuarioCadastroUI
       object lbl_dsPerfil: TcxLabel
         Left = 40
         Top = 31
-        Caption = 'Descri'#231#227'o'
+        Caption = '&Descri'#231#227'o'
         FocusControl = dsPerfil
         Properties.Alignment.Horz = taRightJustify
         Transparent = True

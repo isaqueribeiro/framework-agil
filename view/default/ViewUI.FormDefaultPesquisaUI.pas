@@ -70,20 +70,27 @@ type
     procedure acnPrepararPesquisaExecute(Sender: TObject);
     procedure acnAtualizarExecute(Sender: TObject);
     procedure dtsPesquisaStateChange(Sender: TObject);
+    procedure dbgPesquisaDBKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edPesquisaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     aAbrirTabela : Boolean;
+    aFormularioCadastro  : String;
     function GetEmEdicao : Boolean;
   public
     { Public declarations }
     property AbrirTabela    : Boolean read aAbrirTabela write aAbrirTabela;
     property TabelaEmEdicao : Boolean read GetEmEdicao;
+    property FormularioCadastro : String read aFormularioCadastro write aFormularioCadastro;
 
     procedure New; virtual; abstract;
     procedure Edit; virtual; abstract;
     procedure Cancel; virtual; abstract;
     procedure Delete; virtual; abstract;
     procedure Refresh; virtual; abstract;
+    procedure ShowRegister; virtual;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
@@ -106,14 +113,14 @@ procedure TFormDefaultPesquisaUI.acnEditarExecute(Sender: TObject);
 begin
 //  ShowMessage( RotinaController.Model.Parent.Nome + #13 + RotinaController.Model.Nome + ' - ' + RotinaController.Model.Descricao );
   if Assigned(dtsPesquisa.DataSet) then
-    if dtsPesquisa.DataSet.Active then
+    if not dtsPesquisa.DataSet.IsEmpty then
       Self.Edit;
 end;
 
 procedure TFormDefaultPesquisaUI.acnExcluirExecute(Sender: TObject);
 begin
   if Assigned(dtsPesquisa.DataSet) then
-    if dtsPesquisa.DataSet.Active then
+    if not dtsPesquisa.DataSet.IsEmpty then
       Self.Delete;
 end;
 
@@ -147,6 +154,21 @@ begin
       edPesquisa.SetFocus;
 end;
 
+procedure TFormDefaultPesquisaUI.dbgPesquisaDBKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  Case Key of
+    VK_RETURN :
+      if Assigned(dtsPesquisa.DataSet) then
+        Self.ShowRegister;
+
+    VK_DELETE :
+      if Assigned(dtsPesquisa.DataSet) then
+        if not dtsPesquisa.DataSet.IsEmpty then
+          Self.Delete;
+  end;
+end;
+
 procedure TFormDefaultPesquisaUI.dtsPesquisaStateChange(Sender: TObject);
 begin
   if Assigned(dtsPesquisa.DataSet) then
@@ -160,10 +182,28 @@ begin
   end;
 end;
 
+procedure TFormDefaultPesquisaUI.edPesquisaKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  Case Key of
+    VK_UP   :
+      if Assigned(dtsPesquisa.DataSet) then
+        if not dtsPesquisa.DataSet.IsEmpty then
+          dtsPesquisa.DataSet.Prior;
+    VK_DOWN :
+      if Assigned(dtsPesquisa.DataSet) then
+        if not dtsPesquisa.DataSet.IsEmpty then
+          dtsPesquisa.DataSet.Next;
+    VK_RETURN :
+      acnPesquisar.Execute;
+  end;
+end;
+
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
 begin
   Descricao   := lblHeaderDescription.Caption;
   AbrirTabela := True;
+  aFormularioCadastro := EmptyStr;
 
   inherited;
   Self.AutoSize := False;
@@ -210,6 +250,13 @@ begin
     Result := (dtsPesquisa.DataSet.State in [dsEdit, dsInsert])
   else
     Result := False;
+end;
+
+procedure TFormDefaultPesquisaUI.ShowRegister;
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+    if (Trim(aFormularioCadastro) <> EmptyStr) then
+      gFormulario.ShowModalForm(Self, aFormularioCadastro);
 end;
 
 end.

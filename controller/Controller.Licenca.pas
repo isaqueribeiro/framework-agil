@@ -25,6 +25,8 @@ Uses
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
 
+      function Edit(const aDataSet: TDataSet) : Boolean;
+      function Delete(const aDataSet: TDataSet) : Boolean;
       function Save(const aDataSet: TDataSet) : Boolean;
       function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
@@ -43,6 +45,11 @@ begin
   aModel := TLicenca.Create;
 end;
 
+function TLicencaController.Delete(const aDataSet: TDataSet): Boolean;
+begin
+  Result := False;
+end;
+
 destructor TLicencaController.Destroy;
 begin
   aModel.Free;
@@ -50,6 +57,11 @@ begin
 end;
 
 function TLicencaController.Save(const aDataSet: TDataSet) : Boolean;
+begin
+  Result := False;
+end;
+
+function TLicencaController.Edit(const aDataSet: TDataSet) : Boolean;
 begin
   Result := False;
 end;

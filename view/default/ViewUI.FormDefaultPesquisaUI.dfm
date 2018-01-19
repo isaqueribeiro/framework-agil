@@ -6,7 +6,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   Visible = True
   WindowState = wsMaximized
   OnResize = FormResize
-  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13
@@ -46,6 +45,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       Align = alClient
       TabOrder = 0
       object dbgPesquisaDB: TcxGridDBBandedTableView
+        OnKeyDown = dbgPesquisaDBKeyDown
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dtsPesquisa
         DataController.Summary.DefaultGroupSummaryItems = <>
@@ -152,6 +152,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
             Align = alBottom
             Properties.CharCase = ecUpperCase
             TabOrder = 0
+            OnKeyDown = edPesquisaKeyDown
             Width = 438
           end
         end
