@@ -21,6 +21,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     aMsg : TMensagemController;
@@ -119,6 +120,13 @@ procedure TFormDefaultUI.FormCreate(Sender: TObject);
 begin
   DisableAero := True;
   aMsg := TMensagemController.GetInstance;
+end;
+
+procedure TFormDefaultUI.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  // Para remover o som de "Beep" ao pressionar ENTER
+  if (Key = #13) then
+    Key := #0;
 end;
 
 procedure TFormDefaultUI.FormShow(Sender: TObject);

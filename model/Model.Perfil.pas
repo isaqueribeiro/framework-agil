@@ -36,7 +36,7 @@ implementation
 
 constructor TPerfil.Create;
 begin
-  Self.Create;
+  inherited Create;
   CreateGUID(aID);
   aCodigo    := 0;
   aDescricao := EmptyStr;

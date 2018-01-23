@@ -55,7 +55,7 @@ constructor TSistemaController.Create;
 var
   ini : TIniFile;
 begin
-  ini := TIniFile.Create('Conexao.ini');
+  ini := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Conexao.ini');
   try
     inherited Create;
     Self.New;
@@ -66,6 +66,11 @@ begin
     aConexao.Usuario  := SYS_SYSDBA_LOGIN;
     aConexao.Senha    := SYS_SYSDBA_PWD;
   finally
+    ini.WriteString  ('Conexao', 'Servidor', aConexao.Servidor);
+    ini.WriteInteger ('Conexao', 'Porta',    aConexao.Porta);
+    ini.WriteString  ('Conexao', 'Base',     aConexao.Base);
+    ini.WriteDateTime('Informe', 'Acesso',   Now);
+
     ini.UpdateFile;
     ini.Destroy;
   end;

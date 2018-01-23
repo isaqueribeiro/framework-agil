@@ -155,11 +155,14 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\model\Model.Licenca.pas"/>
         <DCCReference Include="..\..\model\Model.Sistema.pas"/>
         <DCCReference Include="..\..\model\Model.Perfil.pas"/>
+        <DCCReference Include="..\..\model\Model.Usuario.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Mensagem.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Sistema.pas"/>
         <DCCReference Include="..\..\controller\Controller.Licenca.pas"/>
         <DCCReference Include="..\..\controller\Controller.Rotina.pas"/>
         <DCCReference Include="..\..\controller\Controller.Perfil.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Usuario.pas"/>
         <DCCReference Include="..\..\module\DataModule.Recursos.pas">
             <Form>DtmRecursos</Form>
             <DesignClass>TDataModule</DesignClass>
@@ -171,6 +174,9 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\module\DataModule.ControleUsuario.pas">
             <Form>DtmControleUsuario</Form>
             <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\view\ViewUI.FormRequiredFields.pas">
+            <Form>FormRequiredFields</Form>
         </DCCReference>
         <DCCReference Include="..\..\view\default\ViewUI.FormDefaultUI.pas">
             <Form>FormDefaultUI</Form>
@@ -202,11 +208,6 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas">
             <Form>FrmUsuarioSistemaPesquisaUI</Form>
         </DCCReference>
-        <DCCReference Include="..\..\view\ViewUI.FormRequiredFields.pas">
-            <Form>FormRequiredFields</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
-        <DCCReference Include="..\..\controller\Controller.Mensagem.pas"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\ViewUI\default.txvpck"/>

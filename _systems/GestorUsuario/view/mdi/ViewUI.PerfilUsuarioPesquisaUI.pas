@@ -151,6 +151,7 @@ begin
   end;
 
   aController.Save(DtmControleUsuario.fdQryPerfil);
+  aController.ExecuteQuery(TYPE_DEFAULT_QUERY_CODIGO, DtmControleUsuario.fdQryPerfil, '-1');
 end;
 
 procedure TFrmPerfilUsuarioPesquisaUI.Refresh;

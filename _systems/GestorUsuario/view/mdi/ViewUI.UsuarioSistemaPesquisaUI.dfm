@@ -1,6 +1,7 @@
 inherited FrmUsuarioSistemaPesquisaUI: TFrmUsuarioSistemaPesquisaUI
   Caption = 'Usu'#225'rio de Sistema, pesquisa!'
   ClientHeight = 467
+  ExplicitWidth = 320
   ExplicitHeight = 506
   PixelsPerInch = 96
   TextHeight = 13
@@ -31,6 +32,9 @@ inherited FrmUsuarioSistemaPesquisaUI: TFrmUsuarioSistemaPesquisaUI
       Style.IsFontAssigned = True
       ExplicitWidth = 444
     end
+  end
+  inherited dtsPesquisa: TDataSource
+    DataSet = DtmControleUsuario.fdQryUsuario
   end
   inherited brnEvento: TdxBarManager
     DockControlHeights = (

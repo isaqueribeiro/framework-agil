@@ -17,14 +17,18 @@ uses
   Model.Licenca in '..\..\model\Model.Licenca.pas',
   Model.Sistema in '..\..\model\Model.Sistema.pas',
   Model.Perfil in '..\..\model\Model.Perfil.pas',
+  Model.Usuario in '..\..\model\Model.Usuario.pas',
+  Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
   Controller.Sistema in '..\..\controller\Controller.Sistema.pas',
   Controller.Licenca in '..\..\controller\Controller.Licenca.pas',
   Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
   Controller.Perfil in '..\..\controller\Controller.Perfil.pas',
+  Controller.Usuario in '..\..\controller\Controller.Usuario.pas',
   DataModule.Recursos in '..\..\module\DataModule.Recursos.pas' {DtmRecursos: TDataModule},
   DataModule.Base in '..\..\module\DataModule.Base.pas' {DtmBase: TDataModule},
   DataModule.ControleUsuario in '..\..\module\DataModule.ControleUsuario.pas' {DtmControleUsuario: TDataModule},
+  ViewUI.FormRequiredFields in '..\..\view\ViewUI.FormRequiredFields.pas' {FormRequiredFields},
   ViewUI.FormDefaultUI in '..\..\view\default\ViewUI.FormDefaultUI.pas' {FormDefaultUI},
   ViewUI.FormDefaultPesquisaUI in '..\..\view\default\ViewUI.FormDefaultPesquisaUI.pas' {FormDefaultPesquisaUI},
   ViewUI.FormDefaultCadastroUI in '..\..\view\default\ViewUI.FormDefaultCadastroUI.pas' {FormDefaultCadastroUI},
@@ -34,9 +38,7 @@ uses
   ViewUI.FormMainGestorUsuarioUI in 'view\mdi\ViewUI.FormMainGestorUsuarioUI.pas' {FormMainGestorUsuarioUI},
   ViewUI.PerfilUsuarioPesquisaUI in 'view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
   ViewUI.PerfilUsuarioCadastroUI in 'view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas' {FrmPerfilUsuarioCadastroUI},
-  ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
-  ViewUI.FormRequiredFields in '..\..\view\ViewUI.FormRequiredFields.pas' {FormRequiredFields},
-  Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas';
+  ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI};
 
 {$R *.res}
 

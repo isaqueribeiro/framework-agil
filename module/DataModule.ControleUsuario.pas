@@ -20,6 +20,8 @@ type
   TDtmControleUsuario = class(TDataModule)
     fdQryPerfil: TFDQuery;
     fdUpdPerfil: TFDUpdateSQL;
+    fdQryUsuario: TFDQuery;
+    fdUpdUsuario: TFDUpdateSQL;
     procedure fdQryPerfilNewRecord(DataSet: TDataSet);
   private
     { Private declarations }

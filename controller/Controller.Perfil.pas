@@ -25,9 +25,10 @@ Uses
       procedure SetModel(Value : TPerfil);
       function GetModel : TPerfil;
     protected
-      constructor Create;
+//      constructor Create;
     public
       class function GetInstance: TPerfilController;
+      constructor Create;
       destructor Destroy; override;
 
       procedure New(const aDataSet: TDataSet); overload;

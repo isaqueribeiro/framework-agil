@@ -61,6 +61,7 @@ type
     procedure acnCadastroUsuarioExecute(Sender: TObject);
     procedure acnAlterarSenhaUsuarioExecute(Sender: TObject);
     procedure acnBloquearAppExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -97,6 +98,12 @@ end;
 procedure TFormMainUI.acnFecharAppExecute(Sender: TObject);
 begin
   Self.Close;
+end;
+
+procedure TFormMainUI.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  Action := caFree;
 end;
 
 procedure TFormMainUI.FormCreate(Sender: TObject);
