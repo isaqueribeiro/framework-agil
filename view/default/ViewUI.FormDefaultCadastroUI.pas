@@ -35,6 +35,7 @@ type
     procedure acnCancelarFecharExecute(Sender: TObject);
     procedure acnNovoExecute(Sender: TObject);
     procedure acnEditarExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     function GetEmEdicao : Boolean;
@@ -100,6 +101,13 @@ begin
         Cancel.ImageIndex := IDX_OFFICE13_IMAGE_CLOSE;
       end;
     end;
+end;
+
+procedure TFormDefaultCadastroUI.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+//  inherited;
+  Action := caFree;
 end;
 
 procedure TFormDefaultCadastroUI.FormCreate(Sender: TObject);

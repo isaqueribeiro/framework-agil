@@ -4,6 +4,7 @@ inherited FormMainUI: TFormMainUI
   ClientWidth = 971
   FormStyle = fsMDIForm
   WindowState = wsMaximized
+  OnClose = FormClose
   ExplicitWidth = 987
   ExplicitHeight = 610
   PixelsPerInch = 96

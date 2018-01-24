@@ -10,10 +10,10 @@ Uses
   Model.Usuario,
   Controller.Mensagem,
 
-//  IdCoder,
-//  IdCoder3to4,
-//  IdCoderMIME,
-//  IdBaseComponent,
+  IdCoder,
+  IdCoder3to4,
+  IdCoderMIME,
+  IdBaseComponent,
 
   System.Classes, System.SysUtils, System.StrUtils,
 
@@ -106,41 +106,41 @@ begin
 end;
 
 procedure TUsuarioController.GerarHash;
-//var
-//  sKeyChar    ,
-//  sStrEncode  : String;
-//  iTamanhoStr ,
-//  iPosicaoKey : Integer;
-//  IdEncoder   : TIdEncoderMIME;
+var
+  sKeyChar    ,
+  sStrEncode  : String;
+  iTamanhoStr ,
+  iPosicaoKey : Integer;
+  IdEncoder   : TIdEncoderMIME;
 begin
-//  IdEncoder := TIdEncoderMIME.Create(nil);
-//  with aModel, Hash do
-//  begin
-//    BeginUpdate;
-//    try
-//      sKeyChar   := IdEncoder.EncodeString(SYS_PASSWD_KEY);
-//      sStrEncode := IdEncoder.EncodeString(
-//          GUIDToString(ID)
-//        + Login
-//        + PrimeiroNome
-//        + Sobrenome
-//        + GUIDToString(Perfil.ID));
-//      iTamanhoStr := Length(sStrEncode);
-//
-//      iPosicaoKey := -1;
-//      while (iPosicaoKey < 0) do
-//        iPosicaoKey := Random(iTamanhoStr);
-//
-//      if ((iPosicaoKey mod 2) = 0) then
-//        sKeyChar := ReverseString(sKeyChar);
-//
-//      Clear;
-//      Add( Copy(sStrEncode, 1, iPosicaoKey) + sKeyChar + Copy(sStrEncode, iPosicaoKey + 1, iTamanhoStr) );
-//    finally
-//      IdEncoder.Free;
-//      EndUpdate;
-//    end;
-//  end;
+  IdEncoder := TIdEncoderMIME.Create(nil);
+  with aModel, Hash do
+  begin
+    BeginUpdate;
+    try
+      sKeyChar   := IdEncoder.EncodeString(SYS_PASSWD_KEY);
+      sStrEncode := IdEncoder.EncodeString(
+          GUIDToString(ID)
+        + Login
+        + PrimeiroNome
+        + Sobrenome
+        + GUIDToString(Perfil.ID));
+      iTamanhoStr := Length(sStrEncode);
+
+      iPosicaoKey := -1;
+      while (iPosicaoKey < 0) do
+        iPosicaoKey := Random(iTamanhoStr);
+
+      if ((iPosicaoKey mod 2) = 0) then
+        sKeyChar := ReverseString(sKeyChar);
+
+      Clear;
+      Add( Copy(sStrEncode, 1, iPosicaoKey) + sKeyChar + Copy(sStrEncode, iPosicaoKey + 1, iTamanhoStr) );
+    finally
+      IdEncoder.Free;
+      EndUpdate;
+    end;
+  end;
 end;
 
 class function TUsuarioController.GetInstance: TUsuarioController;

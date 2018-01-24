@@ -20,7 +20,6 @@ type
   TFormDefaultUI = class(TdxRibbonForm, IObservador)
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
@@ -109,11 +108,6 @@ constructor TFormDefaultUI.CreateForm(AOwner: TComponent;
   Controller: TRotinaController);
 begin
   Self.Create(AOwner, Controller);
-end;
-
-procedure TFormDefaultUI.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Action := caFree;
 end;
 
 procedure TFormDefaultUI.FormCreate(Sender: TObject);

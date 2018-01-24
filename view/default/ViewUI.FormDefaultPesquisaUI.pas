@@ -75,6 +75,7 @@ type
       Shift: TShiftState);
     procedure edPesquisaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     aAbrirTabela : Boolean;
@@ -213,6 +214,13 @@ begin
     VK_RETURN :
       acnPesquisar.Execute;
   end;
+end;
+
+procedure TFormDefaultPesquisaUI.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+//  inherited;
+  Action := caFree;
 end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);

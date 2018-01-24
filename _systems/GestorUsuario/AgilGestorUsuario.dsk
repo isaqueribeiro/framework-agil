@@ -1,69 +1,65 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas',0,1,58,1,95,0,0,,
-File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10093,1,10108,0,0,,
-File_2=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,5149,1,5164,0,0,{{1650,4},{1668,15},{'TScrollWindow'}},
-File_3=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Forms.pas',0,1,10520,1,10538,0,0,{{1716,4},{1732,15},{'TScrollWindow'}}{{1819,4},{1919,15},{'TMainMenuBarStyleHook'}},
-File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\win\Winapi.Windows.pas',0,1,37042,1,37057,0,0,,
-File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,24567,1,24590,0,0,,
-File_6=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas',0,1,82,1,85,0,0,,
-File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,15694,1,15712,0,0,,
-File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.IniFiles.pas',0,1,1052,54,1070,0,0,,
-File_9=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas',0,1,54,74,59,0,0,,
-File_10=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\model\Model.Sistema.pas',0,1,1,3,10,0,0,,
-File_11=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.dfm',0,1,1,1,1,0,0,,
-File_12=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\Data.DB.pas',0,1,40,36,57,0,0,,
-File_13=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\agil_lib\classes\ClasseAgil.BaseObject.pas',0,1,84,1,107,0,0,,
-File_14=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\agil_lib\classes\ClasseAgil.Formulario.pas',0,1,101,3,112,0,0,,
+File_0=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\Indy10\Protocols\IdHashMessageDigest.pas',0,1,73,71,30,0,0,,
+File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Forms.pas',0,1,6851,10,6863,0,0,{{1716,4},{1732,15},{'TScrollWindow'}}{{1819,4},{1919,15},{'TMainMenuBarStyleHook'}},{1,6863,21}
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.Classes.pas',0,1,15996,1,16011,0,0,,
+File_3=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.ActnList.pas',0,1,250,1,265,0,0,,
+File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,16280,1,16306,0,0,,
+File_5=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas',0,1,58,1,95,0,0,,
+File_6=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Controls.pas',0,1,10093,1,10108,0,0,,
+File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.StdCtrls.pas',0,1,5149,1,5164,0,0,{{1650,4}
+File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\win\Winapi.Windows.pas',0,1,37042,1,37057,0,0,,
+File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.SysUtils.pas',0,1,24567,1,24590,0,0,,
+File_10=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas',0,1,82,1,85,0,0,,
+File_11=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.IniFiles.pas',0,1,1052,54,1070,0,0,,
+File_12=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas',0,1,54,74,59,0,0,,
+File_13=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\model\Model.Sistema.pas',0,1,1,3,10,0,0,,
+File_14=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.dfm',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj
-Module1=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
-Module2=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
-Module3=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
-Module4=D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas
-Module5=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas
-Module6=c:\program files (x86)\embarcadero\studio\15.0\source\Indy10\Protocols\IdHashMessageDigest.pas
-Module7=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
-Module8=default.htm
-Module9=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
-Module10=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas
-Module11=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas
-Module12=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Recursos.pas
-Module13=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
+Module0=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
+Module1=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas
+Module2=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
+Module3=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
+Module4=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas
+Module5=default.htm
+Module6=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj
+Module7=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas
+Module8=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Recursos.pas
+Module9=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
+Module10=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
+Module11=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.pas
+Module12=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
+Module13=D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas
 Module14=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas
-Module15=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.pas
-Module16=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.pas
-Module17=D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas
-Module18=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.Constants.pas
-Module19=D:\Projetos\ASS\framework-agil\trunk\agil_lib\interfaces\InterfaceAgil.Controller.pas
-Module20=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Sistema.pas
-Module21=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.ComplexTypes.pas
-Module22=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Mensagem.pas
-Module23=D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.pas
-Count=24
+Module15=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.pas
+Module16=D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas
+Module17=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.Constants.pas
+Module18=D:\Projetos\ASS\framework-agil\trunk\agil_lib\interfaces\InterfaceAgil.Controller.pas
+Module19=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Sistema.pas
+Module20=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.ComplexTypes.pas
+Module21=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Mensagem.pas
+Module22=D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.pas
+Count=23
 EditWindowCount=1
 
-[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj]
-ModuleType=TBaseProject
-
-[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas]
+[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas]
+[D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas]
+[D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas]
 ModuleType=TSourceModule
 FormState=0
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas]
+ModuleType=TSourceModule
+FormState=1
 FormOnTop=0
 
 [D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas]
@@ -71,28 +67,11 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[c:\program files (x86)\embarcadero\studio\15.0\source\Indy10\Protocols\IdHashMessageDigest.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
 [default.htm]
 ModuleType=TURLModule
 
-[D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
-[D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
+[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj]
+ModuleType=TBaseProject
 
 [D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas]
 ModuleType=TSourceModule
@@ -109,7 +88,7 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas]
+[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -117,6 +96,21 @@ FormOnTop=0
 [D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.pas]
 ModuleType=TSourceModule
 FormState=0
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas]
+ModuleType=TSourceModule
+FormState=0
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas]
+ModuleType=TSourceModule
+FormState=1
 FormOnTop=0
 
 [D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.pas]
@@ -160,8 +154,8 @@ FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=24
-CurrentEditView=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dpr
+ViewCount=23
+CurrentEditView=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
 View0=0
 View1=1
 View2=2
@@ -185,7 +179,6 @@ View19=19
 View20=20
 View21=21
 View22=22
-View23=23
 PercentageSizes=1
 Create=1
 Visible=1
@@ -204,13 +197,13 @@ BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
 LeftPanelSize=1341
 LeftPanelClients=PropertyInspector,DockSite3
-LeftPanelData=000008000101000000004B11000000000000013D050000000000000100000000550E000009000000446F636B53697465330100000000BE1E00001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=000008000101000000001E11000000000000013D050000000000000100000000550E000009000000446F636B536974653301000000006D1E00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=1309
 RightPanelClients=DockSite2,DockSite4
-RightPanelData=000008000101000000004B11000000000000011D0500000000000001000000004412000009000000446F636B53697465320100000000BE1E000009000000446F636B5369746534FFFFFFFF
-BottomPanelSize=729
+RightPanelData=000008000101000000001E11000000000000011D0500000000000001000000004412000009000000446F636B536974653201000000006D1E000009000000446F636B5369746534FFFFFFFF
+BottomPanelSize=810
 BottomPanelClients=DockSite1,MessageView
-BottomPanelData=0000080001020100000009000000446F636B5369746531724500000000000002D9020000000000000100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
+BottomPanelData=0000080001020100000009000000446F636B53697465317245000000000000022A030000000000000100000000724500000F0000004D65737361676556696577466F726DFFFFFFFF
 BottomMiddlePanelSize=0
 BottomMiddlePanelClients=DockSite0,GraphDrawingModel
 BottomMiddelPanelData=0000080001020200000009000000446F636B536974653010000000477261706844726177696E67566965779D1D00000000000002F606000000000000FFFFFFFF
@@ -222,9 +215,9 @@ WelcomePageURL=bds:/default.htm
 [View1]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dpr
-CursorX=1
-CursorY=61
-TopLine=34
+CursorX=14
+CursorY=59
+TopLine=29
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -288,9 +281,9 @@ EditViewName=Borland.FormDesignerView
 [View7]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas
-CursorX=54
-CursorY=127
-TopLine=125
+CursorX=1
+CursorY=116
+TopLine=113
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -365,9 +358,9 @@ EditViewName=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.p
 [View14]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas
-CursorX=1
-CursorY=113
-TopLine=96
+CursorX=18
+CursorY=131
+TopLine=80
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -409,68 +402,57 @@ EditViewName=D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas
 [View18]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
-CursorX=1
-CursorY=12
+CursorX=27
+CursorY=13
 TopLine=1
 LeftCol=1
 Elisions=
-Bookmarks={1,139,1}
+Bookmarks={1,101,1}
 EditViewName=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
 
 [View19]
 CustomEditViewType=TEditView
-Module=c:\program files (x86)\embarcadero\studio\15.0\source\Indy10\Protocols\IdHashMessageDigest.pas
-CursorX=1
-CursorY=43
-TopLine=25
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=c:\program files (x86)\embarcadero\studio\15.0\source\Indy10\Protocols\IdHashMessageDigest.pas
-
-[View20]
-CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
 CursorX=1
-CursorY=106
-TopLine=103
+CursorY=107
+TopLine=82
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
 
-[View21]
+[View20]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
 CursorX=1
-CursorY=62
-TopLine=36
+CursorY=64
+TopLine=59
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
+
+[View21]
+CustomEditViewType=TEditView
+Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
+CursorX=3
+CursorY=222
+TopLine=219
+LeftCol=1
+Elisions=
+Bookmarks={1,136,37}
+EditViewName=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
 
 [View22]
 CustomEditViewType=TEditView
-Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
-CursorX=1
-CursorY=155
-TopLine=153
-LeftCol=1
-Elisions=
-Bookmarks={1,135,37}
-EditViewName=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
-
-[View23]
-CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
-CursorX=32
-CursorY=131
-TopLine=98
+CursorX=3
+CursorY=109
+TopLine=106
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
 
 [Watches]
 Count=0
@@ -486,11 +468,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=218
 LRDockWidth=13600
 Dockable=1
@@ -562,12 +544,12 @@ State=0
 Left=0
 Top=23
 Width=10000
-Height=484
+Height=569
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=10000
-ClientHeight=484
-TBDockHeight=484
+ClientHeight=569
+TBDockHeight=569
 LRDockWidth=2767
 Dockable=1
 StayOnTop=0
@@ -581,11 +563,11 @@ State=0
 Left=0
 Top=0
 Width=1309
-Height=3063
+Height=2978
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1309
-ClientHeight=3063
+ClientHeight=2978
 TBDockHeight=7155
 LRDockWidth=1999
 Dockable=1
@@ -600,11 +582,11 @@ State=0
 Left=0
 Top=340
 Width=1341
-Height=4116
+Height=4031
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1341
-ClientHeight=4116
+ClientHeight=4031
 TBDockHeight=6707
 LRDockWidth=1341
 Dockable=1
@@ -737,11 +719,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=412
 LRDockWidth=4948
 Dockable=1
@@ -756,11 +738,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=218
 LRDockWidth=7409
 Dockable=1
@@ -779,11 +761,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=1538
 LRDockWidth=3483
 Dockable=1
@@ -798,11 +780,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=2058
 LRDockWidth=3483
 Dockable=1
@@ -920,11 +902,11 @@ State=0
 Left=0
 Top=0
 Width=3828
-Height=182
+Height=266
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=182
+ClientHeight=266
 TBDockHeight=1550
 LRDockWidth=8743
 Dockable=1
@@ -1013,12 +995,12 @@ State=0
 Left=0
 Top=23
 Width=3828
-Height=484
+Height=569
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3828
-ClientHeight=484
-TBDockHeight=484
+ClientHeight=569
+TBDockHeight=569
 LRDockWidth=3828
 Dockable=1
 StayOnTop=0
@@ -1085,11 +1067,11 @@ State=0
 Left=0
 Top=427
 Width=1309
-Height=3063
+Height=2978
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1309
-ClientHeight=3063
+ClientHeight=2978
 TBDockHeight=6707
 LRDockWidth=1309
 Dockable=1

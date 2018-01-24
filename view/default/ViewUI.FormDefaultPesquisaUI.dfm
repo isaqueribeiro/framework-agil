@@ -5,6 +5,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   FormStyle = fsMDIChild
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnResize = FormResize
   ExplicitWidth = 697
   ExplicitHeight = 426
