@@ -26,6 +26,7 @@ Uses
       function GetModel : TPerfil;
     protected
 //      constructor Create;
+      procedure CarregarDados(const aDataSet : TDataSet);
     public
       class function GetInstance: TPerfilController;
       constructor Create;
@@ -68,6 +69,22 @@ begin
   end;
 end;
 
+procedure TPerfilController.CarregarDados(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    with aDataSet do
+    begin
+      if (not FieldByName('id_perfil').IsNull) and (FieldByName('id_perfil').AsString <> EmptyStr) then
+        aModel.ID := StringToGUID(FieldByName('id_perfil').AsString);
+
+      aModel.Codigo     := FieldByName('cd_perfil').AsInteger;
+      aModel.Descricao  := Trim(FieldByName('ds_perfil').AsString);
+      aModel.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+      aModel.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+      aModel.Saved      := True;
+    end;
+end;
+
 constructor TPerfilController.Create;
 begin
   inherited Create;
@@ -84,7 +101,7 @@ begin
     if Assigned(aDataSet) then
       if (aDataSet.Active and (not aDataSet.IsEmpty)) then
         if aModel.UsoSistema then
-          aMsg.ShowWarning('Alerta', 'Perfil de usuário de uso do sistema não pode ser excuído')
+          aMsg.ShowWarning('Alerta', 'Perfil padrão de usuário de não pode ser excuído')
         else
         if aMsg.ShowConfirmation('Excluir', 'Confirma a exclusão do registros selecionado?') then
         begin
@@ -117,7 +134,7 @@ begin
     if Assigned(aDataSet) then
       if (aDataSet.Active and (not aDataSet.IsEmpty)) then
         if aModel.UsoSistema then
-          aMsg.ShowWarning('Alerta', 'Perfil de usuário de uso do sistema não pode ser alterado')
+          aMsg.ShowWarning('Alerta', 'Perfil padrão de usuário não pode ser alterado')
         else
         begin
           TFDQuery(aDataSet).Edit;
@@ -158,6 +175,9 @@ begin
         aDataSet.Open;
 
         aRetorno := not aDataSet.IsEmpty;
+
+        if aRetorno then
+          CarregarDados(aDataSet);
       end;
   finally
     Result := aRetorno;
@@ -180,16 +200,7 @@ begin
 
       aDataSet.Open;
       if not aDataSet.IsEmpty then
-      begin
-        if (not FieldByName('id_perfil').IsNull) and (FieldByName('id_perfil').AsString <> EmptyStr) then
-          aModel.ID := StringToGUID(FieldByName('id_perfil').AsString);
-
-        aModel.Codigo     := FieldByName('cd_perfil').AsInteger;
-        aModel.Descricao  := Trim(FieldByName('ds_perfil').AsString);
-        aModel.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
-        aModel.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
-        aModel.Saved      := True;
-      end
+        CarregarDados(aDataSet)
       else
         aModel.Saved := False;
     end;

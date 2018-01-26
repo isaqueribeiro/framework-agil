@@ -25,9 +25,11 @@ uses
 //  IdCoder3to4,
 //  IdCoderMIME,
 //  IdBaseComponent,
-//
+  IdHashMessageDigest,
+  idHash,
+
   Winapi.Windows,
-  System.SysUtils, System.Classes,
+  System.SysUtils, System.StrUtils, System.Classes,
   Vcl.Forms, Vcl.ImgList, Vcl.Controls, Vcl.Dialogs,
   cxClasses, cxLookAndFeels,
 
@@ -67,6 +69,9 @@ var
 
 //  function EncriptSenha(const Value, Key : String) : String;
 //  function DecriptarSenha(const Value, Key : String) : String;
+  function EncriptSenhaMD5(const Value, Key : String) : String;
+  function IsEncriptSenhaMD5(const aSenha, Key : String) : Boolean;
+
   function ExportTable(const AOnwer : TComponent;
     var aFileName : String; var aExtensao : ct_ExtensaoFileExport) : Boolean;
 
@@ -128,6 +133,55 @@ implementation
 //  end;
 //end;
 //
+function EncriptSenhaMD5(const Value, Key : String) : String;
+var
+  sKeyChar    ,
+  sStrEncode  ,
+  sResult     : String;
+  iTamanhoStr ,
+  iPosicaoKey : Integer;
+  idHash   : TIdHashMessageDigest5;
+begin
+  idHash := TIdHashMessageDigest5.Create;
+  try
+    sKeyChar    := idHash.HashStringAsHex(Key);
+    sStrEncode  := idHash.HashStringAsHex(Value);
+    iTamanhoStr := Length(sStrEncode);
+
+    iPosicaoKey := -1;
+    while (iPosicaoKey < 0) do
+      iPosicaoKey := Random(iTamanhoStr);
+
+    if ((iPosicaoKey mod 2) = 0) then
+      sKeyChar := ReverseString(sKeyChar);
+
+    sResult := Copy(sStrEncode, 1, iPosicaoKey) + sKeyChar + Copy(sStrEncode, iPosicaoKey + 1, iTamanhoStr);
+    sResult := ReverseString(sResult);
+  finally
+    idHash.Free;
+    Result := sResult;
+  end;
+end;
+
+function IsEncriptSenhaMD5(const aSenha, Key : String) : Boolean;
+var
+  sKeyChar : String;
+  aRetorno : Boolean;
+  idHash   : TIdHashMessageDigest5;
+begin
+  aRetorno := False;
+  idHash := TIdHashMessageDigest5.Create;
+  try
+    sKeyChar := idHash.HashStringAsHex(Key);
+
+    if not aRetorno then aRetorno := (Pos(sKeyChar, aSenha) > 0);
+    if not aRetorno then aRetorno := (Pos(ReverseString(sKeyChar), aSenha) > 0);
+  finally
+    idHash.Free;
+    Result := aRetorno;
+  end;
+end;
+
 function ExportTable(const AOnwer : TComponent;
   var aFileName : String; var aExtensao : ct_ExtensaoFileExport) : Boolean;
 var

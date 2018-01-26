@@ -8,6 +8,7 @@ const
   SYS_PASSWD_KEY    = 'TheLordIsGod';
   SYS_SYSDBA_LOGIN  = 'SYSDBA';
   SYS_SYSDBA_PWD    = 'masterkey';
+  SYS_USER_SYSTEM   = 'sistemas@agilsoftwares.com';
   SYS_EMPTY_DATE    = '30/12/1899';
   SYS_EMPTY_GUID    = '{00000000-0000-0000-0000-000000000000}';
 

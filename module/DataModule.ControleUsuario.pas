@@ -23,6 +23,8 @@ type
     fdQryUsuario: TFDQuery;
     fdUpdUsuario: TFDUpdateSQL;
     procedure fdQryPerfilNewRecord(DataSet: TDataSet);
+    procedure fdQryUsuarioNewRecord(DataSet: TDataSet);
+    procedure fdQryUsuarioBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -48,6 +50,33 @@ begin
     FieldByName('id_perfil').AsString   := GUIDToString(aID);
     FieldByName('cd_perfil').AsInteger  := DtmBase.GetNewValueDB('USR_PERFIL', 'CD_PERFIL', EmptyStr);
     FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
+    FieldByName('sn_sistema').AsInteger := FLAG_NAO;
+  end;
+end;
+
+procedure TDtmControleUsuario.fdQryUsuarioBeforePost(DataSet: TDataSet);
+begin
+  with fdQryUsuario do
+  begin
+    if not IsEncriptSenhaMD5(FieldByName('ds_senha').AsString, SYS_PASSWD_KEY) then
+      FieldByName('ds_senha').AsString := EncriptSenhaMD5(
+        FieldByName('ds_login').AsString +
+        FieldByName('ds_senha').AsString, SYS_PASSWD_KEY);
+  end;
+end;
+
+procedure TDtmControleUsuario.fdQryUsuarioNewRecord(DataSet: TDataSet);
+var
+  aID : TGUID;
+begin
+  with fdQryUsuario do
+  begin
+    CreateGUID(aID);
+    FieldByName('id_usuario').AsString := GUIDToString(aID);
+    FieldByName('ds_login').Clear;
+    FieldByName('id_perfil').Clear;
+    FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
+    FieldByName('dt_ativo').AsDateTime  := Now;
     FieldByName('sn_sistema').AsInteger := FLAG_NAO;
   end;
 end;

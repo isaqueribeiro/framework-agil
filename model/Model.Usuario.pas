@@ -35,6 +35,8 @@ Type
     procedure SetDataAtivacao(Value : TDateTime);
 
     function GetUserID : String;
+    function GetUser : String;
+    function GetNome : String;
   public
     constructor Create;
     destructor Destroy;
@@ -50,6 +52,7 @@ Type
     property Ativo : Boolean read aAtivo write SetAtivo;
     property DataAtivacao : TDateTime read aDataAtivacao write SetDataAtivacao;
     property UserID : String read GetUserID;
+    property Nome   : String read GetNome;
   end;
 
 implementation
@@ -79,6 +82,19 @@ begin
   aPerfil.Free;
   aHash.Free;
   inherited Destroy;
+end;
+
+function TUsuario.GetNome: String;
+begin
+  Result := Trim(aPrimeiroNome + ' ' + aSobrenome);
+end;
+
+function TUsuario.GetUser: String;
+begin
+  if (Pos('@', aLogin) > -1) then
+    Result := Copy(aLogin, 1, Pos('@', aLogin) - 1)
+  else
+    Result := aLogin;
 end;
 
 function TUsuario.GetUserID: String;

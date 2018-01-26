@@ -59,6 +59,7 @@ type
     acnPrepararPesquisa: TAction;
     acnAtualizar: TAction;
     BrBtnAtualizar: TdxBarButton;
+    acnRefreshRegistro: TAction;
     procedure FormCreate(Sender: TObject);
     procedure acnNovoExecute(Sender: TObject);
     procedure acnEditarExecute(Sender: TObject);
@@ -76,9 +77,12 @@ type
     procedure edPesquisaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormActivate(Sender: TObject);
+    procedure acnRefreshRegistroExecute(Sender: TObject);
   private
     { Private declarations }
-    aAbrirTabela : Boolean;
+    aAlreadyActivated,
+    aAbrirTabela     : Boolean;
     aFormularioCadastro  : String;
     function GetEmEdicao : Boolean;
   public
@@ -92,6 +96,7 @@ type
     procedure Cancel; virtual; abstract;
     procedure Delete; virtual; abstract;
     procedure Refresh; virtual; abstract;
+    procedure RefreshRecord; virtual; abstract;
     procedure ShowRegister; virtual;
     procedure PrintRegisters; virtual;
 
@@ -171,6 +176,13 @@ begin
       edPesquisa.SetFocus;
 end;
 
+procedure TFormDefaultPesquisaUI.acnRefreshRegistroExecute(Sender: TObject);
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+    if not dtsPesquisa.DataSet.IsEmpty then
+      Self.RefreshRecord;
+end;
+
 procedure TFormDefaultPesquisaUI.dbgPesquisaDBKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
@@ -216,6 +228,26 @@ begin
   end;
 end;
 
+procedure TFormDefaultPesquisaUI.FormActivate(Sender: TObject);
+begin
+  if aAlreadyActivated then
+  begin
+    if Assigned(dtsPesquisa.DataSet) then
+      if dtsPesquisa.DataSet.Active then
+      begin
+        if (dtsPesquisa.DataSet.IsEmpty) then
+        begin
+          if aAbrirTabela then
+            ExecutarPesquisa(False);
+        end
+        else
+          acnRefreshRegistro.Execute;
+      end;
+  end
+  else
+    aAlreadyActivated := True;
+end;
+
 procedure TFormDefaultPesquisaUI.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -225,6 +257,7 @@ end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
 begin
+  aAlreadyActivated := False;
   Descricao   := lblHeaderDescription.Caption;
   AbrirTabela := True;
   aFormularioCadastro := EmptyStr;

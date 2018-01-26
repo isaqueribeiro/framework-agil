@@ -42,6 +42,7 @@ type
     procedure Delete; override;
     procedure Cancel; override;
     procedure Refresh; override;
+    procedure RefreshRecord; override;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
@@ -124,7 +125,10 @@ procedure TFrmPerfilUsuarioPesquisaUI.PerfilUsoSistema;
 begin
   // Inserir Perfil "Administrador do Sistema"
   if aController.ExecuteQuery(TYPE_DEFAULT_QUERY_CODIGO, DtmControleUsuario.fdQryPerfil, IntToStr(CD_PERFIL_SYSTEM)) then
-    aController.Edit(DtmControleUsuario.fdQryPerfil)
+  begin
+    aController.Model.UsoSistema := False; // Forçar a edição do registros
+    aController.Edit(DtmControleUsuario.fdQryPerfil);
+  end
   else
     aController.New(DtmControleUsuario.fdQryPerfil);
 
@@ -138,7 +142,10 @@ begin
 
   // Inserir Perfil "Suporte DTI"
   if aController.ExecuteQuery(TYPE_DEFAULT_QUERY_CODIGO, DtmControleUsuario.fdQryPerfil, IntToStr(CD_PERFIL_SUPORTE)) then
-    aController.Edit(DtmControleUsuario.fdQryPerfil)
+  begin
+    aController.Model.UsoSistema := False; // Forçar a edição do registros
+    aController.Edit(DtmControleUsuario.fdQryPerfil);
+  end
   else
     aController.New(DtmControleUsuario.fdQryPerfil);
 
@@ -157,6 +164,11 @@ end;
 procedure TFrmPerfilUsuarioPesquisaUI.Refresh;
 begin
   aController.Refresh(DtmControleUsuario.fdQryPerfil);
+end;
+
+procedure TFrmPerfilUsuarioPesquisaUI.RefreshRecord;
+begin
+  aController.RefreshRecord(DtmControleUsuario.fdQryPerfil);
 end;
 
 initialization

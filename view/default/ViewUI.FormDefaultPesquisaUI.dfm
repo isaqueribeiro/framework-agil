@@ -5,6 +5,7 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   FormStyle = fsMDIChild
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   OnResize = FormResize
   ExplicitWidth = 697
@@ -318,6 +319,10 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
       ImageIndex = 22
       ShortCut = 116
       OnExecute = acnAtualizarExecute
+    end
+    object acnRefreshRegistro: TAction
+      Category = 'zOutras'
+      OnExecute = acnRefreshRegistroExecute
     end
   end
   object brnEvento: TdxBarManager
