@@ -5,6 +5,7 @@ interface
 uses
   TypeAgil.Constants,
   InterfaceAgil.Observer,
+  InterfaceAgil.Controller,
   Controller.Rotina,
   DataModule.Recursos,
   DataModule.Base,
@@ -48,6 +49,7 @@ type
     procedure Cancel; virtual; abstract;
     procedure Save; virtual; abstract;
     procedure RefreshRecord; virtual; abstract;
+    procedure SaveFieldsRestinctions(const aController : IController; const aDataSet : TDataSet); virtual;
 
     function RequiredFields(const AOnwer : TComponent; aTableName : String) : Boolean;
   end;
@@ -142,6 +144,14 @@ begin
   finally
     Result := aRetorno;
   end;
+end;
+
+procedure TFormDefaultCadastroUI.SaveFieldsRestinctions(const aController : IController;
+  const aDataSet: TDataSet);
+begin
+  if Assigned(aController) then
+    if RotinaController.Model.RestricaoCampo then
+      RotinaController.SaveFieldsRestinctions(Self, aDataSet);
 end;
 
 procedure TFormDefaultCadastroUI.wcCadastroButtonClick(Sender: TObject;

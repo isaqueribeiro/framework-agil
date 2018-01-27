@@ -3,12 +3,13 @@ unit Controller.Rotina;
 interface
 
 Uses
+  TypeAgil.Constants,
   TypeAgil.ComplexTypes,
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Rotina,
 
-  System.Classes, System.SysUtils, System.StrUtils,
+  System.Classes, System.SysUtils, System.StrUtils, System.Math,
 
   FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Stan.Param,
   FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
@@ -30,6 +31,7 @@ Uses
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
+      procedure SaveFieldsRestinctions(const AOnwer : TComponent; const aDataSet: TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -44,6 +46,11 @@ Uses
   end;
 
 implementation
+
+uses
+  Vcl.StdCtrls,
+  cxLabel,
+  cxDBEdit;
 
 { TRotinaController }
 
@@ -117,6 +124,7 @@ begin
         aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
         aModel.Indice    := FieldByName('ix_rotina').AsInteger;
         aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+        aModel.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
         aModel.Saved     := True;
 
         if (not FieldByName('id_mestre').IsNull) then
@@ -126,14 +134,22 @@ begin
       end
       else
         aModel.Saved := False;
+
+      FreeFieldsReadOnly(aDataSet);
     end;
 
   Result := aModel;
 end;
 
 procedure TRotinaController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+var
+  I : Integer;
 begin
-  ;
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      for I := 0 to aDataSet.Fields.Count - 1 do
+        if aDataSet.Fields[I].ReadOnly then
+          aDataSet.Fields[I].ReadOnly := False;
 end;
 
 function TRotinaController.GetModel: TRotina;
@@ -196,6 +212,7 @@ begin
           FieldByName('ds_rotina').AsString  := aModel.Descricao;
           FieldByName('ix_rotina').AsInteger := aModel.Indice;
           FieldByName('tp_rotina').AsInteger := Ord(aModel.Tipo);
+          FieldByName('sn_restringir_campo').AsInteger := IfThen(aModel.RestricaoCampo, FLAG_SIM, FLAG_NAO);
           if Assigned(aModel.Parent) then
             if (aModel.Parent.Indice > 0) then
               FieldByName('id_mestre').AsString  := GUIDToString(aModel.Parent.ID)
@@ -236,6 +253,7 @@ begin
         ParamByName('ds_rotina').AsString   := aModel.Descricao;
         ParamByName('ix_rotina').AsInteger  := aModel.Indice;
         ParamByName('tp_rotina').AsSmallInt := Ord(aModel.Tipo);
+        ParamByName('sn_restringir_campo').AsInteger := IfThen(aModel.RestricaoCampo, FLAG_SIM, FLAG_NAO);
 
         if Assigned(aModel.Parent) then
           if (aModel.Parent.Indice > 0) then
@@ -256,6 +274,59 @@ begin
     end;
 
   Result := aModel.Saved;
+end;
+
+procedure TRotinaController.SaveFieldsRestinctions(const AOnwer: TComponent;
+  const aDataSet: TDataSet);
+var
+  I : Integer;
+  aCampo    ,
+  aRotulo   ,
+  aRotina   : String;
+  aControle ,
+  aLabel    : TComponent;
+  aListagem : TStringList;
+begin
+  aListagem := TStringList.Create;
+  try
+    if Assigned(aDataSet) then
+    begin
+      aListagem.BeginUpdate;
+      aListagem.Clear;
+      aListagem.Delimiter := '|';
+      for I := 0 to aDataSet.FieldCount - 1 do
+      begin
+        aCampo    := StringReplace(aDataSet.Fields[I].FieldName, '_', '', [rfReplaceAll]);
+        aRotulo   := 'lbl_' + aCampo;
+        aControle := AOnwer.FindComponent(aCampo);
+        aLabel    := AOnwer.FindComponent(aRotulo);
+        if (aControle <> nil) then
+        begin
+          // Identificar campos de controles e seus rótulos
+          aRotina := aModel.Codigo + '.' + aControle.Name;
+          if Assigned(aLabel) then
+          begin
+            if (aLabel is TcxLabel) then
+              aRotina := aRotina + '|' + StringReplace(TcxLabel(aLabel).Caption, '&', '', [rfReplaceAll])
+            else
+            if (aLabel is TLabel)   then
+              aRotina := aRotina + '|' + StringReplace(TLabel(aLabel).Caption,   '&', '', [rfReplaceAll]);
+          end
+          else
+          if (aControle is TcxDBCheckBox) then
+            aRotina := aRotina + '|' + StringReplace(TcxDBCheckBox(aControle).Caption,   '&', '', [rfReplaceAll]);
+
+          aListagem.Add(aRotina);
+        end;
+      end;
+      aListagem.EndUpdate;
+
+      // Gravar campos identificados com Rotinas do Tipo (4) para aplicar regras de restrição por perfis de acesso
+      // ...
+    end;
+  finally
+    aListagem.Free;
+  end;
 end;
 
 procedure TRotinaController.SetModel(Value: TRotina);

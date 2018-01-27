@@ -21,10 +21,10 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Top = 30
         DataBinding.DataField = 'DS_PRIMEIRONOME'
         DataBinding.DataSource = dtsCadastro
-        TabOrder = 3
+        TabOrder = 2
         Width = 345
       end
-      object dbcAtivo: TcxDBCheckBox
+      object snAtivo: TcxDBCheckBox
         Left = 96
         Top = 160
         Caption = 'Cadastro ativo'
@@ -33,7 +33,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 11
+        TabOrder = 10
         Transparent = True
         Width = 121
       end
@@ -65,7 +65,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Top = 54
         DataBinding.DataField = 'DS_SOBRENOME'
         DataBinding.DataSource = dtsCadastro
-        TabOrder = 5
+        TabOrder = 3
         Width = 345
       end
       object lbl_dsLogin: TcxLabel
@@ -107,7 +107,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
           end>
         Properties.ListOptions.ShowHeader = False
         Properties.ListSource = dtsPerfil
-        TabOrder = 7
+        TabOrder = 5
         Width = 345
       end
       object dsSenha: TcxTextEdit
@@ -115,7 +115,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Top = 108
         Properties.CharCase = ecLowerCase
         Properties.EchoMode = eemPassword
-        TabOrder = 9
+        TabOrder = 7
         Text = 'dssenha'
         Width = 193
       end
@@ -137,7 +137,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 10
+        TabOrder = 8
         Transparent = True
         Width = 193
       end

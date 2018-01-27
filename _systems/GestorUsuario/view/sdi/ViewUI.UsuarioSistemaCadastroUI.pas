@@ -23,7 +23,7 @@ type
   TFrmUsuarioSistemaCadastroUI = class(TFormDefaultCadastroUI)
     lbl_dsPrimeiroNome: TcxLabel;
     dsPrimeiroNome: TcxDBTextEdit;
-    dbcAtivo: TcxDBCheckBox;
+    snAtivo: TcxDBCheckBox;
     dbcUsoSistema: TcxDBCheckBox;
     lbl_dsSobreNome: TcxLabel;
     dsSobreNome: TcxDBTextEdit;
@@ -116,6 +116,8 @@ end;
 procedure TFrmUsuarioSistemaCadastroUI.FormShow(Sender: TObject);
 begin
   inherited;
+  SaveFieldsRestinctions(aController, DtmControleUsuario.fdQryUsuario);
+
   LimparCampoSenha;
   CarregarPerfis;
   if (wcCadastro.ActivePage = pgNominal) then

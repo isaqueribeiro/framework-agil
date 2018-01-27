@@ -11,7 +11,7 @@ uses
   DataModule.Recursos,
 
   cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, cxContainer,
-  cxEdit, cxLabel, Vcl.StdCtrls,
+  cxEdit, cxLabel, Vcl.StdCtrls, Data.DB, Datasnap.DBClient,
 
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   TypInfo, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dxRibbon, dxRibbonForm, dxRibbonSkins;
@@ -179,7 +179,7 @@ end;
 
 procedure TFormDefaultUI.Update(Observable: IObservable);
 begin
-  Self.Tag := aRotinaController.Model.Indice;
+  ; //Self.Tag := aRotinaController.Model.Indice;
 end;
 
 end.

@@ -228,14 +228,14 @@ begin
 end;
 
 procedure TUsuarioController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+var
+  I : Integer;
 begin
   if Assigned(aDataSet) then
     if aDataSet.Active then
-      with aDataSet do
-      begin
-        FieldByName('ds_nome').ReadOnly   := False;
-        FieldByName('ds_perfil').ReadOnly := False;
-      end;
+      for I := 0 to aDataSet.Fields.Count - 1 do
+        if aDataSet.Fields[I].ReadOnly then
+          aDataSet.Fields[I].ReadOnly := False;
 end;
 
 procedure TUsuarioController.GerarHash(const aDataSet : TDataSet);

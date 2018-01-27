@@ -20,6 +20,7 @@ Type
     aTipo    : ct_TipoRotina;
     aParent  : TRotina;
     aSistema : TSistema;
+    aRestricaoCampo : Boolean;
     procedure SetParent(Value : TRotina);
     procedure SetCodigo(Value : String);
     procedure SetNome(Value : String);
@@ -39,6 +40,7 @@ Type
     property Tipo    : ct_TipoRotina read aTipo write aTipo;
     property Parent  : TRotina read aParent write SetParent;
     property Sistema : TSistema read aSistema write SetSistema;
+    property RestricaoCampo : Boolean read aRestricaoCampo write aRestricaoCampo;
 //
 //    procedure Salvar; virtual; abstract;
 //    function Buscar(Codigo: String): TRotina; virtual; abstract;
@@ -56,6 +58,7 @@ begin
   aDescricao := Trim(pDescricao);
   aTipo      := tr_Menu;
   aIndice    := 0;
+  aRestricaoCampo := False;
 end;
 
 procedure TRotina.SetCodigo(Value: String);
@@ -95,6 +98,7 @@ begin
   aCodigo := EmptyStr;
   aTipo   := tr_Menu;
   aParent := nil;
+  aRestricaoCampo := False;
 end;
 
 end.

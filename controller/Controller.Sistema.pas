@@ -29,6 +29,7 @@ Uses
       constructor Create;
       procedure New(const aDataSet: TDataSet); overload;
       procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
+      procedure SaveFieldsRestinctions(const AOnwer : TComponent; const aDataSet: TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -195,6 +196,12 @@ begin
       end;
 
   Result := aModel.Saved;
+end;
+
+procedure TSistemaController.SaveFieldsRestinctions(const AOnwer: TComponent;
+  const aDataSet: TDataSet);
+begin
+  ;
 end;
 
 function TSistemaController.GetConexao: ct_Conexao;

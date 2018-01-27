@@ -115,6 +115,7 @@ object DtmBase: TDtmBase
       '  , r.ds_rotina'
       '  , r.ix_rotina'
       '  , r.tp_rotina'
+      '  , r.sn_restringir_campo'
       '  , r.id_mestre'
       'from SYS_ROTINA r'
       'where r.cd_rotina = :key')
@@ -133,11 +134,13 @@ object DtmBase: TDtmBase
     InsertSQL.Strings = (
       'INSERT INTO SYS_ROTINA'
       '(ID_ROTINA, CD_ROTINA, NM_ROTINA, DS_ROTINA, '
-      '  IX_ROTINA, TP_ROTINA, ID_MESTRE)'
+      '  IX_ROTINA, TP_ROTINA, SN_RESTRINGIR_CAMPO, '
+      '  ID_MESTRE)'
       
         'VALUES (:NEW_ID_ROTINA, :NEW_CD_ROTINA, :NEW_NM_ROTINA, :NEW_DS_' +
         'ROTINA, '
-      '  :NEW_IX_ROTINA, :NEW_TP_ROTINA, :NEW_ID_MESTRE)'
+      '  :NEW_IX_ROTINA, :NEW_TP_ROTINA, :NEW_SN_RESTRINGIR_CAMPO, '
+      '  :NEW_ID_MESTRE)'
       'RETURNING ID_ROTINA')
     ModifySQL.Strings = (
       'UPDATE SYS_ROTINA'
@@ -145,7 +148,10 @@ object DtmBase: TDtmBase
         'SET ID_ROTINA = :NEW_ID_ROTINA, CD_ROTINA = :NEW_CD_ROTINA, NM_R' +
         'OTINA = :NEW_NM_ROTINA, '
       '  DS_ROTINA = :NEW_DS_ROTINA, IX_ROTINA = :NEW_IX_ROTINA, '
-      '  TP_ROTINA = :NEW_TP_ROTINA, ID_MESTRE = :NEW_ID_MESTRE'
+      
+        '  TP_ROTINA = :NEW_TP_ROTINA, SN_RESTRINGIR_CAMPO = :NEW_SN_REST' +
+        'RINGIR_CAMPO, '
+      '  ID_MESTRE = :NEW_ID_MESTRE'
       'WHERE ID_ROTINA = :OLD_ID_ROTINA'
       'RETURNING ID_ROTINA')
     DeleteSQL.Strings = (
@@ -155,7 +161,7 @@ object DtmBase: TDtmBase
       
         'SELECT ID_ROTINA, CD_ROTINA, NM_ROTINA, DS_ROTINA, IX_ROTINA, TP' +
         '_ROTINA, '
-      '  ID_MESTRE'
+      '  SN_RESTRINGIR_CAMPO, ID_MESTRE'
       'FROM SYS_ROTINA'
       'WHERE ID_ROTINA = :ID_ROTINA')
     Left = 320
@@ -286,6 +292,12 @@ object DtmBase: TDtmBase
       item
         Position = 7
         Name = 'TP_ROTINA'
+        DataType = ftSmallint
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = 'SN_RESTRINGIR_CAMPO'
         DataType = ftSmallint
         ParamType = ptInput
       end

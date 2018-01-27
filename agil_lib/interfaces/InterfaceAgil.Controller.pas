@@ -4,7 +4,7 @@ interface
 
 uses
   ClasseAgil.BaseObject,
-  Data.DB, Datasnap.DBClient;
+  System.Classes, Data.DB, Datasnap.DBClient;
 
   Type
     IController = Interface
