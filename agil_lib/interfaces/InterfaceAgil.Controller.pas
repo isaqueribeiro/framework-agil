@@ -13,6 +13,7 @@ uses
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;

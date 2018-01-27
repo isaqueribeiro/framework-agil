@@ -1,6 +1,7 @@
 inherited FrmUsuarioSistemaPesquisaUI: TFrmUsuarioSistemaPesquisaUI
   Caption = 'Usu'#225'rio de Sistema, pesquisa!'
   ClientHeight = 467
+  ExplicitWidth = 320
   ExplicitHeight = 506
   PixelsPerInch = 96
   TextHeight = 13

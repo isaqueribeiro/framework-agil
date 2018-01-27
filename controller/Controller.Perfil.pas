@@ -27,6 +27,7 @@ Uses
     protected
 //      constructor Create;
       procedure CarregarDados(const aDataSet : TDataSet);
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
     public
       class function GetInstance: TPerfilController;
       constructor Create;
@@ -206,6 +207,11 @@ begin
     end;
 
   Result := aModel;
+end;
+
+procedure TPerfilController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+begin
+  ;
 end;
 
 class function TPerfilController.GetInstance: TPerfilController;

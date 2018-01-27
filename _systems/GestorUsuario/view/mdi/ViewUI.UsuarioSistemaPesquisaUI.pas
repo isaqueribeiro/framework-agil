@@ -151,11 +151,13 @@ begin
         aController.Edit(DtmControleUsuario.fdQryUsuario);
       end
       else
+      begin
         aController.New(DtmControleUsuario.fdQryUsuario);
+        DtmControleUsuario.fdQryUsuario.FieldByName('ds_login').AsString := AnsiLowerCase(SYS_USER_SYSTEM);
+      end;
 
       with DtmControleUsuario.fdQryUsuario do
       begin
-        FieldByName('ds_login').AsString        := AnsiLowerCase(SYS_USER_SYSTEM);
         FieldByName('id_perfil').AsString       := GUIDToString(aPerfil.Model.ID);
         FieldByName('ds_primeironome').AsString := 'Ágil';
         FieldByName('ds_sobrenome').AsString    := 'Soluções';

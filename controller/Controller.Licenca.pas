@@ -17,6 +17,7 @@ Uses
       function GetModel : TLicenca;
     protected
       constructor Create;
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
     public
       class function GetInstance: TLicencaController;
       destructor Destroy; override;
@@ -74,6 +75,11 @@ end;
 function TLicencaController.Find(ID: String; const aDataSet: TDataSet): TBaseObject;
 begin
   Result := aModel;
+end;
+
+procedure TLicencaController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+begin
+  ;
 end;
 
 class function TLicencaController.GetInstance: TLicencaController;

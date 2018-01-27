@@ -28,6 +28,7 @@ Uses
     protected
       constructor Create;
       procedure New(const aDataSet: TDataSet); overload;
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -120,6 +121,11 @@ begin
     end;
 
   Result := aModel;
+end;
+
+procedure TSistemaController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+begin
+  ;
 end;
 
 class function TSistemaController.GetInstance: TSistemaController;

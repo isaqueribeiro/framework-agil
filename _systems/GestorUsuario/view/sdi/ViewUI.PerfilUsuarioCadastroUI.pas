@@ -27,6 +27,7 @@ type
     dbcUsoSistema: TcxDBCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
     aController : TPerfilController;
@@ -78,6 +79,14 @@ begin
   inherited;
   aController := TPerfilController.GetInstance;
   aController.Model.addObserver(Self);
+end;
+
+procedure TFrmPerfilUsuarioCadastroUI.FormShow(Sender: TObject);
+begin
+  inherited;
+  if (wcCadastro.ActivePage = pgNominal) then
+    if dsPerfil.Visible and dsPerfil.Enabled then
+      dsPerfil.SetFocus;
 end;
 
 procedure TFrmPerfilUsuarioCadastroUI.New;

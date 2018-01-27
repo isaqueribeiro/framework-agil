@@ -23,15 +23,17 @@ Type
     aHash   : TStringList;
     aPerfil : TPerfil;
     aSistema,
-    aAtivo  : Boolean;
+    aAlterarSenha,
+    aAtivo       : Boolean;
     aDataAtivacao : TDateTime;
     procedure SetLogin(Value : String);
     procedure SetPrimeiroNome(Value : String);
     procedure SetSobrenome(Value : String);
     procedure SetSenha(Value : String);
     procedure SetPerfil(Value : TPerfil);
-    procedure SetSistema(Value : Boolean);
+    procedure SetAlterarSenha(Value : Boolean);
     procedure SetAtivo(Value : Boolean);
+    procedure SetSistema(Value : Boolean);
     procedure SetDataAtivacao(Value : TDateTime);
 
     function GetUserID : String;
@@ -48,8 +50,9 @@ Type
     property Senha  : String read aSenha write SetSenha;
     property Hash   : TStringList read aHash write aHash;
     property Perfil : TPerfil read aPerfil write SetPerfil;
-    property UsoSistema : Boolean read aSistema write SetSistema;
+    property AlterarSenha : Boolean read aAlterarSenha write SetAlterarSenha;
     property Ativo : Boolean read aAtivo write SetAtivo;
+    property UsoSistema : Boolean read aSistema write SetSistema;
     property DataAtivacao : TDateTime read aDataAtivacao write SetDataAtivacao;
     property UserID : String read GetUserID;
     property Nome   : String read GetNome;
@@ -112,6 +115,11 @@ begin
     idHash.Free;
     Result := aRetorno;
   end;
+end;
+
+procedure TUsuario.SetAlterarSenha(Value: Boolean);
+begin
+  aAlterarSenha := Value;
 end;
 
 procedure TUsuario.SetAtivo(Value: Boolean);

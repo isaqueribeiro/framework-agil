@@ -19,6 +19,7 @@ Uses
     private
       aModel : TRotina;
       procedure SetModel(Value : TRotina);
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
       function GetModel : TRotina;
     public
       constructor Create;
@@ -130,6 +131,11 @@ begin
   Result := aModel;
 end;
 
+procedure TRotinaController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+begin
+  ;
+end;
+
 function TRotinaController.GetModel: TRotina;
 begin
   Result := aModel;
@@ -179,6 +185,11 @@ begin
           else
             TFDQuery(aDataSet).Edit;
 
+          // Remover identicadores de pesquisa
+          aModel.Nome := Trim(StringReplace(aModel.Nome, ', pesquisa!', '', []));
+          aModel.Nome := Trim(StringReplace(aModel.Nome, '!', '', []));
+          aModel.Nome := Trim(StringReplace(aModel.Nome, ', pesquisa', '', []));
+
           FieldByName('id_rotina').AsString  := GUIDToString(aModel.ID);
           FieldByName('cd_rotina').AsString  := aModel.Codigo;
           FieldByName('nm_rotina').AsString  := aModel.Nome;
@@ -213,6 +224,11 @@ begin
     begin
       if not aModel.Saved then
       begin
+        // Remover identicadores de pesquisa
+        aModel.Nome := Trim(StringReplace(aModel.Nome, ', pesquisa!', '', []));
+        aModel.Nome := Trim(StringReplace(aModel.Nome, '!', '', []));
+        aModel.Nome := Trim(StringReplace(aModel.Nome, ', pesquisa', '', []));
+
         ParamByName('id_sistema').AsString  := GUIDToString(aModel.Sistema.ID);
         ParamByName('id_rotina').AsString   := GUIDToString(aModel.ID);
         ParamByName('cd_rotina').AsString   := aModel.Codigo;

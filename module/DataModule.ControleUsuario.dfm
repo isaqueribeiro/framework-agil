@@ -90,6 +90,7 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , u.ds_senha'
       '  , u.hs_usuario'
       '  , u.id_perfil'
+      '  , u.sn_alterar_senha'
       '  , u.sn_ativo'
       '  , u.sn_sistema'
       '  , u.dt_ativo'
@@ -108,8 +109,8 @@ object DtmControleUsuario: TDtmControleUsuario
       'order by'
       '     u.ds_primeironome'
       '   , u.ds_sobrenome')
-    Left = 392
-    Top = 224
+    Left = 120
+    Top = 176
     ParamData = <
       item
         Name = 'ID_USUARIO'
@@ -137,20 +138,20 @@ object DtmControleUsuario: TDtmControleUsuario
     InsertSQL.Strings = (
       'INSERT INTO USR_USUARIO'
       '(ID_USUARIO, DS_LOGIN, DS_PRIMEIRONOME, DS_SOBRENOME, '
-      '  DS_SENHA, HS_USUARIO, ID_PERFIL, SN_ATIVO, '
-      '  SN_SISTEMA, DT_ATIVO, DT_CADASTRO, US_CADASTRO, '
-      '  DH_ACESSO)'
+      '  DS_SENHA, HS_USUARIO, ID_PERFIL, SN_ALTERAR_SENHA, '
+      '  SN_ATIVO, SN_SISTEMA, DT_ATIVO, DT_CADASTRO, '
+      '  US_CADASTRO, DH_ACESSO)'
       
         'VALUES (:NEW_ID_USUARIO, :NEW_DS_LOGIN, :NEW_DS_PRIMEIRONOME, :N' +
         'EW_DS_SOBRENOME, '
       
-        '  :NEW_DS_SENHA, :NEW_HS_USUARIO, :NEW_ID_PERFIL, :NEW_SN_ATIVO,' +
-        ' '
+        '  :NEW_DS_SENHA, :NEW_HS_USUARIO, :NEW_ID_PERFIL, :NEW_SN_ALTERA' +
+        'R_SENHA, '
       
-        '  :NEW_SN_SISTEMA, :NEW_DT_ATIVO, :NEW_DT_CADASTRO, :NEW_US_CADA' +
-        'STRO, '
-      '  :NEW_DH_ACESSO)'
-      'RETURNING ID_USUARIO, DT_CADASTRO, DH_ACESSO')
+        '  :NEW_SN_ATIVO, :NEW_SN_SISTEMA, :NEW_DT_ATIVO, :NEW_DT_CADASTR' +
+        'O, '
+      '  :NEW_US_CADASTRO, :NEW_DH_ACESSO)'
+      'RETURNING ID_USUARIO, DT_CADASTRO, US_CADASTRO, DH_ACESSO')
     ModifySQL.Strings = (
       'UPDATE USR_USUARIO'
       
@@ -158,11 +159,16 @@ object DtmControleUsuario: TDtmControleUsuario
         'RIMEIRONOME = :NEW_DS_PRIMEIRONOME, '
       '  DS_SOBRENOME = :NEW_DS_SOBRENOME, DS_SENHA = :NEW_DS_SENHA, '
       '  HS_USUARIO = :NEW_HS_USUARIO, ID_PERFIL = :NEW_ID_PERFIL, '
-      '  SN_ATIVO = :NEW_SN_ATIVO, SN_SISTEMA = :NEW_SN_SISTEMA, '
-      '  DT_ATIVO = :NEW_DT_ATIVO, DT_CADASTRO = :NEW_DT_CADASTRO, '
-      '  US_CADASTRO = :NEW_US_CADASTRO, DH_ACESSO = :NEW_DH_ACESSO'
+      
+        '  SN_ALTERAR_SENHA = :NEW_SN_ALTERAR_SENHA, SN_ATIVO = :NEW_SN_A' +
+        'TIVO, '
+      '  SN_SISTEMA = :NEW_SN_SISTEMA, DT_ATIVO = :NEW_DT_ATIVO, '
+      
+        '  DT_CADASTRO = :NEW_DT_CADASTRO, US_CADASTRO = :NEW_US_CADASTRO' +
+        ', '
+      '  DH_ACESSO = :NEW_DH_ACESSO'
       'WHERE ID_USUARIO = :OLD_ID_USUARIO'
-      'RETURNING ID_USUARIO, DT_CADASTRO, DH_ACESSO')
+      'RETURNING ID_USUARIO, DT_CADASTRO, US_CADASTRO, DH_ACESSO')
     DeleteSQL.Strings = (
       'DELETE FROM USR_USUARIO'
       'WHERE ID_USUARIO = :OLD_ID_USUARIO')
@@ -175,6 +181,7 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , u.ds_senha'
       '  , u.hs_usuario'
       '  , u.id_perfil'
+      '  , u.sn_alterar_senha'
       '  , u.sn_ativo'
       '  , u.sn_sistema'
       '  , u.dt_ativo'
@@ -186,7 +193,7 @@ object DtmControleUsuario: TDtmControleUsuario
       'from USR_USUARIO u'
       '  left join USR_PERFIL p on (p.id_perfil = u.id_perfil)'
       'WHERE u.ID_USUARIO = :ID_USUARIO')
-    Left = 392
-    Top = 272
+    Left = 120
+    Top = 224
   end
 end

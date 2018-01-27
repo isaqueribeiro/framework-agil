@@ -26,20 +26,20 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
       end
       object dbcAtivo: TcxDBCheckBox
         Left = 96
-        Top = 108
+        Top = 160
         Caption = 'Cadastro ativo'
         DataBinding.DataField = 'SN_ATIVO'
         DataBinding.DataSource = dtsCadastro
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 8
+        TabOrder = 11
         Transparent = True
         Width = 121
       end
       object dbcUsoSistema: TcxDBCheckBox
         Left = 96
-        Top = 133
+        Top = 185
         Caption = 'Usu'#225'rio padr'#227'o do sistema'
         DataBinding.DataField = 'SN_SISTEMA'
         DataBinding.DataSource = dtsCadastro
@@ -47,7 +47,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 9
+        TabOrder = 12
         Transparent = True
         Width = 153
       end
@@ -100,13 +100,55 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Top = 81
         DataBinding.DataField = 'ID_PERFIL'
         DataBinding.DataSource = dtsCadastro
-        Properties.ListColumns = <>
+        Properties.KeyFieldNames = 'ID_PERFIL'
+        Properties.ListColumns = <
+          item
+            FieldName = 'DS_PERFIL'
+          end>
+        Properties.ListOptions.ShowHeader = False
+        Properties.ListSource = dtsPerfil
         TabOrder = 7
         Width = 345
+      end
+      object dsSenha: TcxTextEdit
+        Left = 96
+        Top = 108
+        Properties.CharCase = ecLowerCase
+        Properties.EchoMode = eemPassword
+        TabOrder = 9
+        Text = 'dssenha'
+        Width = 193
+      end
+      object lbl_dsSenha: TcxLabel
+        Left = 56
+        Top = 109
+        Caption = 'Senha'
+        FocusControl = idPerfil
+        Properties.Alignment.Horz = taRightJustify
+        Transparent = True
+        AnchorX = 90
+      end
+      object snAlterarSenha: TcxDBCheckBox
+        Left = 96
+        Top = 135
+        Caption = 'Alterar senha no primeiro acesso'
+        DataBinding.DataField = 'SN_ALTERAR_SENHA'
+        DataBinding.DataSource = dtsCadastro
+        Properties.Alignment = taLeftJustify
+        Properties.ValueChecked = '1'
+        Properties.ValueUnchecked = '0'
+        TabOrder = 10
+        Transparent = True
+        Width = 193
       end
     end
   end
   inherited dtsCadastro: TDataSource
     DataSet = DtmControleUsuario.fdQryUsuario
+  end
+  object dtsPerfil: TDataSource
+    DataSet = DtmControleUsuario.fdQryPerfil
+    Left = 608
+    Top = 64
   end
 end

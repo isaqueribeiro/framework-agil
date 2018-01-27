@@ -33,6 +33,8 @@ Uses
     protected
       constructor Create;
       procedure CarregarDados(const aDataSet : TDataSet);
+      procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
+      function LoginCadastro(const aDataSet : TFDQuery) : Boolean;
     public
       class function GetInstance: TUsuarioController;
       destructor Destroy; override;
@@ -86,6 +88,7 @@ begin
       aModel.PrimeiroNome := FieldByName('ds_primeironome').AsString;
       aModel.Sobrenome    := FieldByName('ds_sobrenome').AsString;
       aModel.Senha        := FieldByName('ds_senha').AsString;
+      aModel.AlterarSenha := (FieldByName('sn_alterar_senha').AsInteger = FLAG_SIM);
       aModel.Ativo        := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
       aModel.UsoSistema   := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
       aModel.Saved        := True;
@@ -191,6 +194,7 @@ begin
         end;
 
         aDataSet.Open;
+        FreeFieldsReadOnly(aDataSet);
 
         aRetorno := not aDataSet.IsEmpty;
       end;
@@ -221,6 +225,17 @@ begin
     end;
 
   Result := aModel;
+end;
+
+procedure TUsuarioController.FreeFieldsReadOnly(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    if aDataSet.Active then
+      with aDataSet do
+      begin
+        FieldByName('ds_nome').ReadOnly   := False;
+        FieldByName('ds_perfil').ReadOnly := False;
+      end;
 end;
 
 procedure TUsuarioController.GerarHash(const aDataSet : TDataSet);
@@ -283,6 +298,40 @@ begin
   Result := aModel;
 end;
 
+function TUsuarioController.LoginCadastro(const aDataSet: TFDQuery): Boolean;
+var
+  aRetorno : Boolean;
+  aQry : TFDQuery;
+begin
+  aRetorno := False;
+  aQry := TFDQuery.Create(nil);
+  try
+    with aQry, SQL do
+    begin
+      Connection  := aDataSet.Connection;
+      Transaction := aDataSet.Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Select');
+      Add('  u.ds_login');
+      Add('from USR_USUARIO u');
+      Add('where (u.id_usuario <> :id_usuario)');
+      Add('  and (u.ds_login    = :ds_login)');
+      EndUpdate;
+
+      ParamByName('id_usuario').AsString := aDataSet.FieldByName('id_usuario').AsString;
+      ParamByName('ds_login').AsString   := aDataSet.FieldByName('ds_login').AsString;
+      OpenOrExecute;
+
+      aRetorno := not IsEmpty;
+    end;
+  finally
+    aQry.Free;
+    Result := aRetorno;
+  end;
+end;
+
 function TUsuarioController.New: TBaseObject;
 begin
   if Assigned(aModel) then
@@ -316,20 +365,34 @@ begin
     if aDataSet.Active then
       with TFDQuery(aDataSet) do
       begin
-//        FieldByName('id_usuario').AsString := GUIDToString(aModel.ID);
-//        FieldByName('ds_login').AsString   := aModel.Login;
-
         Self.GerarHash(aDataSet);
         TMemoField(FieldByName('hs_usuario')).Text := aModel.Hash.Text;
         FieldByName('ds_login').AsString := AnsiLowerCase(Trim(FieldByName('ds_login').AsString));
 
-        TFDQuery(aDataSet).Post;
-        if TFDQuery(aDataSet).CachedUpdates then
-          TFDQuery(aDataSet).ApplyUpdates(0);
+        if (aModel.Senha <> EmptyStr) then
+          FieldByName('ds_senha').AsString := aModel.Senha;
 
-        TFDQuery(aDataSet).Connection.CommitRetaining;
+        if (FieldByName('sn_ativo').OldValue <> FieldByName('sn_ativo').NewValue) then
+        begin
+          if (FieldByName('sn_ativo').AsInteger = FLAG_SIM) then
+            FieldByName('dt_ativo').AsDateTime := Now
+          else
+            FieldByName('dt_ativo').Clear;
+        end;
 
-        aModel.Saved := True;
+        if LoginCadastro(TFDQuery(aDataSet)) then
+          aMsg.ShowWarning('Alerta', 'Login informado já existe!')
+        else
+        begin
+          TFDQuery(aDataSet).Post;
+          if TFDQuery(aDataSet).CachedUpdates then
+            TFDQuery(aDataSet).ApplyUpdates(0);
+
+          TFDQuery(aDataSet).Connection.CommitRetaining;
+          Self.RefreshRecord(aDataSet);
+
+          aModel.Saved := True;
+        end;
       end;
 
   Result := aModel.Saved;
