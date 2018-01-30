@@ -151,7 +151,7 @@ procedure TFormDefaultCadastroUI.SaveFieldsRestinctions(const aController : ICon
 begin
   if Assigned(aController) then
     if RotinaController.Model.RestricaoCampo then
-      RotinaController.SaveFieldsRestinctions(Self, aDataSet);
+      RotinaController.SaveFieldsRestinctions(Self, aDataSet, DtmBase.fdSetSistemaRotina);
 end;
 
 procedure TFormDefaultCadastroUI.wcCadastroButtonClick(Sender: TObject;

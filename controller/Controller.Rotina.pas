@@ -22,6 +22,8 @@ Uses
       procedure SetModel(Value : TRotina);
       procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
       function GetModel : TRotina;
+      function NewIndex(const aProcedure: TFDStoredProc) : Integer;
+      function RotinaCadastrada(const aProcedure: TFDStoredProc; const aCodigo : String) : Boolean;
     public
       constructor Create;
 //      constructor CriarRotina(const aParent : TRotina; aNome, aDescricao : String);
@@ -31,7 +33,8 @@ Uses
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
-      procedure SaveFieldsRestinctions(const AOnwer : TComponent; const aDataSet: TDataSet);
+      procedure SaveFieldsRestinctions(const AOnwer : TComponent;
+        const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -163,6 +166,37 @@ begin
   aModel.Notify;
 end;
 
+function TRotinaController.NewIndex(
+  const aProcedure: TFDStoredProc): Integer;
+var
+  aRetorno : Integer;
+  aQry : TFDQuery;
+begin
+  aRetorno := 0;
+  aQry := TFDQuery.Create(nil);
+  try
+    with aQry, SQL do
+    begin
+      Connection  := aProcedure.Connection;
+      Transaction := aProcedure.Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Select');
+      Add('  max(IX_ROTINA) as ID');
+      Add('from SYS_ROTINA');
+      EndUpdate;
+
+      OpenOrExecute;
+
+      aRetorno := FieldByName('ID').AsInteger + 1;
+    end;
+  finally
+    aQry.Free;
+    Result := aRetorno;
+  end;
+end;
+
 procedure TRotinaController.New(const aDataSet: TDataSet);
 begin
   ;
@@ -186,6 +220,39 @@ begin
   if Assigned(aDataSet) then
     if aDataSet.Active then
       TFDQuery(aDataSet).RefreshRecord;
+end;
+
+function TRotinaController.RotinaCadastrada(
+  const aProcedure: TFDStoredProc; const aCodigo : String): Boolean;
+var
+  aRetorno : Boolean;
+  aQry : TFDQuery;
+begin
+  aRetorno := False;
+  aQry := TFDQuery.Create(nil);
+  try
+    with aQry, SQL do
+    begin
+      Connection  := aProcedure.Connection;
+      Transaction := aProcedure.Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Select');
+      Add('  r.id_rotina');
+      Add('from SYS_ROTINA r');
+      Add('where (r.cd_rotina = :cd_rotina)');
+      EndUpdate;
+
+      ParamByName('cd_rotina').AsString := aCodigo;
+      OpenOrExecute;
+
+      aRetorno := not IsEmpty;
+    end;
+  finally
+    aQry.Free;
+    Result := aRetorno;
+  end;
 end;
 
 function TRotinaController.Save(const aDataSet: TDataSet) : Boolean;
@@ -277,15 +344,17 @@ begin
 end;
 
 procedure TRotinaController.SaveFieldsRestinctions(const AOnwer: TComponent;
-  const aDataSet: TDataSet);
+  const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
 var
-  I : Integer;
+  I  ,
+  ix : Integer;
   aCampo    ,
   aRotulo   ,
   aRotina   : String;
   aControle ,
   aLabel    : TComponent;
   aListagem : TStringList;
+  aID : TGUID;
 begin
   aListagem := TStringList.Create;
   try
@@ -322,7 +391,36 @@ begin
       aListagem.EndUpdate;
 
       // Gravar campos identificados com Rotinas do Tipo (4) para aplicar regras de restrição por perfis de acesso
-      // ...
+      for I := 0 to aListagem.Count - 1 do
+        if (Trim(aListagem.Strings[I]) <> EmptyStr) then
+        begin
+          if Assigned(aProcedure) then
+            with aProcedure do
+            begin
+              aRotina := aListagem.Strings[I];
+              if not RotinaCadastrada(aProcedure, Copy(aRotina, 1, Pos(aListagem.Delimiter, aRotina) - 1)) then
+              begin
+                ix := NewIndex(aProcedure);
+                CreateGUID(aID);
+
+                ParamByName('id_sistema').AsString  := GUIDToString(aModel.Sistema.ID);
+                ParamByName('id_rotina').AsString   := GUIDToString(aID);
+                ParamByName('cd_rotina').AsString   := Copy(aRotina, 1, Pos(aListagem.Delimiter, aRotina) - 1);
+                ParamByName('nm_rotina').AsString   := Copy(aRotina, Pos(aListagem.Delimiter, aRotina) + 1, Length(aRotina));
+                ParamByName('ds_rotina').AsString   := EmptyStr;
+                ParamByName('ix_rotina').AsInteger  := ix;
+                ParamByName('tp_rotina').AsSmallInt := Ord(tr_CampoCadastro);
+                ParamByName('sn_restringir_campo').AsSmallInt := FLAG_NAO;
+                ParamByName('id_mestre').AsString  := GUIDToString(aModel.ID);
+
+                aProcedure.ExecProc;
+                if aProcedure.CachedUpdates then
+                  aProcedure.ApplyUpdates(0);
+
+                aProcedure.Connection.CommitRetaining;
+              end;
+            end;
+        end;
     end;
   finally
     aListagem.Free;
