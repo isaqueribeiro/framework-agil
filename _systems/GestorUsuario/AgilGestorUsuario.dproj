@@ -212,6 +212,10 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
             <Form>FrmUsuarioSistemaCadastroUI</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas">
+            <Form>FrmRotinaSistemaPesquisaUI</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\ViewUI\default.txvpck"/>

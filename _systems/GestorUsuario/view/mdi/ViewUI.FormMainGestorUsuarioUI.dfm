@@ -72,6 +72,19 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         end
         item
           Item = nvbCadastroUsuario
+        end>
+    end
+    object nvbGrpConfiguracao: TdxNavBarGroup
+      Caption = 'Configura'#231#245'es'
+      LargeImageIndex = 15
+      LinksUseSmallImages = False
+      SelectedLinkIndex = -1
+      SmallImageIndex = 15
+      TopVisibleLinkIndex = 0
+      OptionsExpansion.ShowExpandButton = False
+      Links = <
+        item
+          Item = nvbControleRotinaSistema
         end
         item
           Item = nvbCadastroPermissaoAcesso
@@ -82,6 +95,9 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     end
     object nvbCadastroUsuario: TdxNavBarItem
       Action = acnCadastroUsuario
+    end
+    object nvbControleRotinaSistema: TdxNavBarItem
+      Action = acnControleRotinaSistema
     end
     object nvbCadastroPermissaoAcesso: TdxNavBarItem
       Action = acnPermissaoAcesso
@@ -165,12 +181,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     Categories.Strings = (
       'Cadastro'
       'Testes')
-    Categories.ItemsVisibles = (
-      2
-      2)
-    Categories.Visibles = (
-      True
-      True)
     LookAndFeel.SkinName = ''
     LookAndFeel.SkinName = ''
     DockControlHeights = (
@@ -221,7 +231,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       SyncImageIndex = False
       ImageIndex = 0
     end
-    object BrBtnTeste: TdxBarButton
+    object BrBtnTeste: TdxBarButton [5]
       Action = acnTeste
       Category = 1
     end

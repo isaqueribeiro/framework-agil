@@ -1,7 +1,9 @@
 inherited FrmUsuarioSistemaPesquisaUI: TFrmUsuarioSistemaPesquisaUI
+  Hint = 
+    'Controle para pesquisa e manuten'#231#227'o dos registros de usu'#225'rios de' +
+    ' acesso ao(s) sistema(s).'
   Caption = 'Usu'#225'rio de Sistema, pesquisa!'
   ClientHeight = 467
-  ExplicitWidth = 320
   ExplicitHeight = 506
   PixelsPerInch = 96
   TextHeight = 13

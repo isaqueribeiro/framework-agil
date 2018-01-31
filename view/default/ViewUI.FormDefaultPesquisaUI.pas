@@ -252,6 +252,9 @@ procedure TFormDefaultPesquisaUI.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
 //  inherited;
+  if Assigned(dtsPesquisa.DataSet) then
+    if dtsPesquisa.DataSet.Active then
+      dtsPesquisa.DataSet.Close;
   Action := caFree;
 end;
 

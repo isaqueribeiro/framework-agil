@@ -1,4 +1,7 @@
 inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
+  Hint = 
+    'Controle para pesquisa e manuten'#231#227'o dos registros de perfis de a' +
+    'cesso ao(s) sistema(s).'
   Caption = 'Perfil de Usu'#225'rio, pesquisa!'
   ClientHeight = 467
   ExplicitHeight = 506

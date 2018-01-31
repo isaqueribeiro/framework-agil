@@ -35,6 +35,8 @@ Uses
       procedure RefreshRecord(const aDataSet: TDataSet);
       procedure SaveFieldsRestinctions(const AOnwer : TComponent;
         const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
+      procedure ClearFieldsRestinctions(const AOnwer : TComponent;
+        const aDataSet: TFDQuery);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -56,6 +58,35 @@ uses
   cxDBEdit;
 
 { TRotinaController }
+
+procedure TRotinaController.ClearFieldsRestinctions(const AOnwer: TComponent;
+  const aDataSet: TFDQuery);
+var
+  aQry : TFDQuery;
+begin
+  aQry := TFDQuery.Create(nil);
+  try
+    with aQry, SQL do
+    begin
+      Connection  := aDataSet.Connection;
+      Transaction := aDataSet.Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Delete');
+      Add('from SYS_ROTINA r');
+      Add('where (r.id_mestre = :id_mestre)');
+      Add('  and (r.tp_rotina = :tp_rotina)');
+      EndUpdate;
+
+      ParamByName('id_mestre').AsString  := GUIDToString(aModel.ID);
+      ParamByName('tp_rotina').AsInteger := Ord(tr_CampoCadastro);
+      OpenOrExecute;
+    end;
+  finally
+    aQry.Free;
+  end;
+end;
 
 constructor TRotinaController.Create;
 begin
@@ -320,7 +351,7 @@ begin
         ParamByName('ds_rotina').AsString   := aModel.Descricao;
         ParamByName('ix_rotina').AsInteger  := aModel.Indice;
         ParamByName('tp_rotina').AsSmallInt := Ord(aModel.Tipo);
-        ParamByName('sn_restringir_campo').AsInteger := IfThen(aModel.RestricaoCampo, FLAG_SIM, FLAG_NAO);
+        ParamByName('sn_restringir_campo').AsSmallInt := IfThen(aModel.RestricaoCampo, FLAG_SIM, FLAG_NAO);
 
         if Assigned(aModel.Parent) then
           if (aModel.Parent.Indice > 0) then

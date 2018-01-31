@@ -39,7 +39,8 @@ uses
   ViewUI.PerfilUsuarioPesquisaUI in 'view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas' {FrmPerfilUsuarioPesquisaUI},
   ViewUI.PerfilUsuarioCadastroUI in 'view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas' {FrmPerfilUsuarioCadastroUI},
   ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
-  ViewUI.UsuarioSistemaCadastroUI in 'view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas' {FrmUsuarioSistemaCadastroUI};
+  ViewUI.UsuarioSistemaCadastroUI in 'view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas' {FrmUsuarioSistemaCadastroUI},
+  ViewUI.RotinaSistemaPesquisaUI in 'view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas' {FrmRotinaSistemaPesquisaUI};
 
 {$R *.res}
 

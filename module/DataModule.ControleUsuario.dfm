@@ -74,7 +74,6 @@ object DtmControleUsuario: TDtmControleUsuario
     Top = 128
   end
   object fdQryUsuario: TFDQuery
-    Active = True
     BeforePost = fdQryUsuarioBeforePost
     OnNewRecord = fdQryUsuarioNewRecord
     Connection = DtmBase.fdConexao
@@ -195,5 +194,69 @@ object DtmControleUsuario: TDtmControleUsuario
       'WHERE u.ID_USUARIO = :ID_USUARIO')
     Left = 120
     Top = 224
+  end
+  object fdQryRotinaSistema: TFDQuery
+    Connection = DtmBase.fdConexao
+    Transaction = DtmBase.trnConexao
+    UpdateTransaction = DtmBase.trnConexao
+    UpdateObject = fdUpdRotinaSistema
+    SQL.Strings = (
+      'Select'
+      '    sr.id'
+      '  , sr.id_sistema'
+      '  , sr.id_rotina'
+      '  , sr.sn_ativo'
+      '  , s.cd_sistema'
+      '  , s.nm_sistema'
+      '  , r.cd_rotina'
+      '  , r.nm_rotina'
+      '  , r.ds_rotina'
+      '  , r.ix_rotina'
+      '  , r.tp_rotina'
+      '  , r.id_mestre'
+      '  , r.sn_restringir_campo'
+      'from SYS_SISTEMA_ROTINA sr'
+      '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
+      '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
+      'where (r.tp_rotina <> 4)'
+      '  and (upper(r.nm_rotina) like upper(:nm_rotina))'
+      'order by'
+      '    r.ix_rotina')
+    Left = 424
+    Top = 192
+    ParamData = <
+      item
+        Name = 'NM_ROTINA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 150
+        Value = '%'
+      end>
+  end
+  object fdUpdRotinaSistema: TFDUpdateSQL
+    Connection = DtmBase.fdConexao
+    ModifySQL.Strings = (
+      '')
+    FetchRowSQL.Strings = (
+      'Select'
+      '    sr.id'
+      '  , sr.id_sistema'
+      '  , sr.id_rotina'
+      '  , sr.sn_ativo'
+      '  , s.cd_sistema'
+      '  , s.nm_sistema'
+      '  , r.cd_rotina'
+      '  , r.nm_rotina'
+      '  , r.ds_rotina'
+      '  , r.ix_rotina'
+      '  , r.tp_rotina'
+      '  , r.id_mestre'
+      '  , r.sn_restringir_campo'
+      'from SYS_SISTEMA_ROTINA sr'
+      '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
+      '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
+      'WHERE sr.ID = :ID')
+    Left = 424
+    Top = 240
   end
 end

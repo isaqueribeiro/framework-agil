@@ -18,10 +18,10 @@ uses
   Vcl.ActnList, Vcl.StdCtrls, cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxImageComboBox, cxPC, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox,
+  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox, cxCheckBox,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, cxCheckBox;
+  dxSkinOffice2013White;
 
 type
   TFrmUsuarioSistemaPesquisaUI = class(TFormDefaultPesquisaUI)

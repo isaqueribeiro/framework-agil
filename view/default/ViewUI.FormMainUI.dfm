@@ -880,10 +880,13 @@ inherited FormMainUI: TFormMainUI
     Font.Style = []
     CanCustomize = False
     Categories.Strings = (
-      'Controle de Usu'#225'rio')
+      'Controle de Usu'#225'rio'
+      'Sistema')
     Categories.ItemsVisibles = (
+      2
       2)
     Categories.Visibles = (
+      True
       True)
     ImageOptions.DisabledLargeImages = DtmRecursos.imgFlat32Disable
     ImageOptions.HotImages = DtmRecursos.imgFlat32Hot
@@ -907,20 +910,25 @@ inherited FormMainUI: TFormMainUI
       Action = acnCadastroUsuario
       Category = 0
     end
-    object BrBtnPermissaoAcesso: TdxBarLargeButton
-      Action = acnPermissaoAcesso
-      Category = 0
-    end
     object BrBtnAlterarSenhaUsuario: TdxBarLargeButton
       Action = acnAlterarSenhaUsuario
-      Category = 0
+      Category = 1
     end
     object BrBtnBloquearApp: TdxBarLargeButton
       Action = acnBloquearApp
-      Category = 0
+      Category = 1
     end
     object BrBtnFecharApp: TdxBarLargeButton
       Action = acnFecharApp
+      Category = 1
+    end
+    object BrBtnControleRotinaSistema: TdxBarButton
+      Action = acnControleRotinaSistema
+      Category = 0
+      LargeImageIndex = 16
+    end
+    object BrBtnPermissaoAcesso: TdxBarLargeButton
+      Action = acnPermissaoAcesso
       Category = 0
     end
   end
@@ -929,19 +937,25 @@ inherited FormMainUI: TFormMainUI
     Left = 608
     Top = 416
     object acnCadastroPerfilUsuario: TAction
-      Category = 'Sistema'
+      Category = 'Controle de Usu'#225'rio'
       Caption = 'Perfil de Usu'#225'rio'
       ImageIndex = 0
       OnExecute = acnCadastroPerfilUsuarioExecute
     end
     object acnCadastroUsuario: TAction
-      Category = 'Sistema'
+      Category = 'Controle de Usu'#225'rio'
       Caption = 'Usu'#225'rio do Sistema'
       ImageIndex = 2
       OnExecute = acnCadastroUsuarioExecute
     end
+    object acnControleRotinaSistema: TAction
+      Category = 'Controle de Usu'#225'rio'
+      Caption = 'Rotinas do(s) Sistema(s)'
+      ImageIndex = 16
+      OnExecute = acnControleRotinaSistemaExecute
+    end
     object acnPermissaoAcesso: TAction
-      Category = 'Sistema'
+      Category = 'Controle de Usu'#225'rio'
       Caption = 'Permiss'#227'o de Acesso'
       ImageIndex = 3
     end

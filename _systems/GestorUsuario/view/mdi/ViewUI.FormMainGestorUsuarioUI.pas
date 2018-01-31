@@ -34,6 +34,8 @@ type
     acnTeste: TAction;
     BrBtnTeste: TdxBarButton;
     nvbCadastroPermissaoAcesso: TdxNavBarItem;
+    nvbGrpConfiguracao: TdxNavBarGroup;
+    nvbControleRotinaSistema: TdxNavBarItem;
     procedure acnTesteExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private

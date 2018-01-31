@@ -54,6 +54,8 @@ type
     tbsMDI: TdxTabbedMDIManager;
     acnPermissaoAcesso: TAction;
     BrBtnPermissaoAcesso: TdxBarLargeButton;
+    acnControleRotinaSistema: TAction;
+    BrBtnControleRotinaSistema: TdxBarButton;
     procedure FormCreate(Sender: TObject);
     procedure TmrContadorTimer(Sender: TObject);
     procedure acnFecharAppExecute(Sender: TObject);
@@ -62,6 +64,7 @@ type
     procedure acnAlterarSenhaUsuarioExecute(Sender: TObject);
     procedure acnBloquearAppExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure acnControleRotinaSistemaExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -128,6 +131,11 @@ end;
 procedure TFormMainUI.acnFecharAppExecute(Sender: TObject);
 begin
   Self.Close;
+end;
+
+procedure TFormMainUI.acnControleRotinaSistemaExecute(Sender: TObject);
+begin
+  gFormulario.ShowForm(Self, 'FrmRotinaSistemaPesquisaUI');
 end;
 
 procedure TFormMainUI.FormClose(Sender: TObject; var Action: TCloseAction);
