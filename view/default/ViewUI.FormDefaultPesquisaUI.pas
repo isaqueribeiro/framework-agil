@@ -17,7 +17,7 @@ uses
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxClasses,
   cxGridLevel, cxGrid, dxBarBuiltInMenu, cxPC, Vcl.Menus, Vcl.StdCtrls, cxButtons,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, cxImageComboBox, System.Actions, Vcl.ActnList,
-  dxBar, cxGroupBox,
+  dxBar, cxGroupBox, cxTL, cxTLdxBarBuiltInMenu, cxInplaceContainer, cxTLData, cxDBTL,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White, dxSkinsdxBarPainter;
@@ -167,6 +167,9 @@ begin
   if ExecutarPesquisa(True) then
     if dbgPesquisa.Visible and dbgPesquisa.Enabled and dbgPesquisaDB.Visible then
       dbgPesquisa.SetFocus;
+//    else
+//    if dbgTreePesquisaDB.Visible and dbgTreePesquisaDB.Enabled then
+//      dbgTreePesquisaDB.SetFocus;
 end;
 
 procedure TFormDefaultPesquisaUI.acnPrepararPesquisaExecute(Sender: TObject);

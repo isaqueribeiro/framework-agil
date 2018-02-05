@@ -18,21 +18,21 @@ uses
   Vcl.ActnList, Vcl.StdCtrls, cxButtons, cxTextEdit, cxMaskEdit, cxDropDownEdit,
   cxImageComboBox, cxPC, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridBandedTableView, cxGridDBBandedTableView, cxGrid,
-  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox, cxCheckBox,
+  cxLabel, dxGDIPlusClasses, Vcl.ExtCtrls, cxGroupBox, cxCheckBox, cxTL,
+  cxTLdxBarBuiltInMenu, cxInplaceContainer, cxTLData, cxDBTL,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
   dxSkinOffice2013White;
 
 type
   TFrmRotinaSistemaPesquisaUI = class(TFormDefaultPesquisaUI)
-    dbgPesquisaDBID: TcxGridDBBandedColumn;
-    dbgPesquisaDBID_ROTINA: TcxGridDBBandedColumn;
-    dbgPesquisaDBSN_ATIVO: TcxGridDBBandedColumn;
-    dbgPesquisaDBNM_SISTEMA: TcxGridDBBandedColumn;
-    dbgPesquisaDBNM_ROTINA: TcxGridDBBandedColumn;
-    dbgPesquisaDBIX_ROTINA: TcxGridDBBandedColumn;
-    dbgPesquisaDBID_MESTRE: TcxGridDBBandedColumn;
-    dbgPesquisaDBSN_RESTRINGIR_CAMPO: TcxGridDBBandedColumn;
+    dbgPesquisaDBColumn1: TcxGridDBBandedColumn;
+    dbgPesquisaDBColumn2: TcxGridDBBandedColumn;
+    dbgPesquisaDBColumn3: TcxGridDBBandedColumn;
+    dbtPesquisaDB: TcxDBTreeList;
+    cxDBTreeList1cxDBTreeListColumn1: TcxDBTreeListColumn;
+    cxDBTreeList1cxDBTreeListColumn2: TcxDBTreeListColumn;
+    cxDBTreeList1cxDBTreeListColumn3: TcxDBTreeListColumn;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
