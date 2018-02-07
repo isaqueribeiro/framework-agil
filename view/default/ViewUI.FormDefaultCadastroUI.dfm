@@ -5,8 +5,6 @@ inherited FormDefaultCadastroUI: TFormDefaultCadastroUI
   ClientWidth = 691
   Position = poOwnerFormCenter
   OnClose = FormClose
-  ExplicitWidth = 697
-  ExplicitHeight = 425
   PixelsPerInch = 96
   TextHeight = 13
   object wcCadastro: TdxWizardControl

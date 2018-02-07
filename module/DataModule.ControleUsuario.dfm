@@ -215,6 +215,67 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , r.tp_rotina'
       '  , r.id_mestre'
       '  , r.sn_restringir_campo'
+      
+        '  , (case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39',' +
+        ' '#39#39') then 1 else 0 end) as sn_cadastro'
+      
+        '  , case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39', ' +
+        #39#39')'
+      '      then r.sn_restringir_campo'
+      '      else -1'
+      '    end as sn_restringir_campo_edit'
+      '  , ('
+      '      ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      
+        '            inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema =' +
+        ' sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '          where xx.id_mestre = sr.id_rotina'
+      '            and xx.tp_rotina <> 4'
+      '      ) + ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      '          where xx.id_mestre in ('
+      '              Select'
+      '                xx.id_rotina'
+      '              from SYS_ROTINA xx'
+      
+        '                inner join SYS_SISTEMA_ROTINA xy on (xy.id_siste' +
+        'ma = sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '              where xx.id_mestre = sr.id_rotina'
+      '                and xx.tp_rotina <> 4'
+      '          ) and xx.tp_rotina <> 4'
+      '      )'
+      '    ) as qt_total_rotinas'
+      '  , ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    ) as qt_rotinas'
+      '  , Case ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    )'
+      '      when 0'
+      '        then 190 -- Cadastro'
+      '      when 1'
+      '        then 210 -- Pesquisa'
+      '        else 021 -- Sistema'
+      '    end as idx_image'
       'from SYS_SISTEMA_ROTINA sr'
       '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
       '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
@@ -230,7 +291,7 @@ object DtmControleUsuario: TDtmControleUsuario
         DataType = ftString
         ParamType = ptInput
         Size = 150
-        Value = '%'
+        Value = ''
       end>
   end
   object fdUpdRotinaSistema: TFDUpdateSQL
@@ -252,6 +313,67 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , r.tp_rotina'
       '  , r.id_mestre'
       '  , r.sn_restringir_campo'
+      
+        '  , (case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39',' +
+        ' '#39#39') then 1 else 0 end) as sn_cadastro'
+      
+        '  , case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39', ' +
+        #39#39')'
+      '      then r.sn_restringir_campo'
+      '      else -1'
+      '    end as sn_restringir_campo_edit'
+      '  , ('
+      '      ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      
+        '            inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema =' +
+        ' sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '          where xx.id_mestre = sr.id_rotina'
+      '            and xx.tp_rotina <> 4'
+      '      ) + ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      '          where xx.id_mestre in ('
+      '              Select'
+      '                xx.id_rotina'
+      '              from SYS_ROTINA xx'
+      
+        '                inner join SYS_SISTEMA_ROTINA xy on (xy.id_siste' +
+        'ma = sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '              where xx.id_mestre = sr.id_rotina'
+      '                and xx.tp_rotina <> 4'
+      '          ) and xx.tp_rotina <> 4'
+      '      )'
+      '    ) as qt_total_rotinas'
+      '  , ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    ) as qt_rotinas'
+      '  , Case ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    )'
+      '      when 0'
+      '        then 190 -- Cadastro'
+      '      when 1'
+      '        then 210 -- Pesquisa'
+      '        else 021 -- Sistema'
+      '    end as idx_image'
       'from SYS_SISTEMA_ROTINA sr'
       '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
       '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'

@@ -8,6 +8,7 @@ Uses
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Rotina,
+  Controller.Mensagem,
 
   System.Classes, System.SysUtils, System.StrUtils, System.Math,
 
@@ -19,8 +20,11 @@ Uses
     TRotinaController = class(TInterfacedObject, IController)
     private
       aModel : TRotina;
+      aMsg   : TMensagemController;
       procedure SetModel(Value : TRotina);
       procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
+      procedure CarregarDados(const aDataSet : TDataSet);
+
       function GetModel : TRotina;
       function NewIndex(const aProcedure: TFDStoredProc) : Integer;
       function RotinaCadastrada(const aProcedure: TFDStoredProc; const aCodigo : String) : Boolean;
@@ -36,7 +40,7 @@ Uses
       procedure SaveFieldsRestinctions(const AOnwer : TComponent;
         const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
       procedure ClearFieldsRestinctions(const AOnwer : TComponent;
-        const aDataSet: TFDQuery);
+        const aDataSet: TFDQuery; const aConfirmar : Boolean);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -59,13 +63,41 @@ uses
 
 { TRotinaController }
 
+procedure TRotinaController.CarregarDados(const aDataSet: TDataSet);
+begin
+  if Assigned(aDataSet) then
+    with aDataSet do
+    begin
+      if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
+        aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
+
+      aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
+      aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
+      aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
+      aModel.Indice    := FieldByName('ix_rotina').AsInteger;
+      aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+      aModel.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
+
+      if (not FieldByName('id_mestre').IsNull) then
+        aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+      else
+        aModel.Parent := nil;
+
+      aModel.Saved := True;
+    end;
+end;
+
 procedure TRotinaController.ClearFieldsRestinctions(const AOnwer: TComponent;
-  const aDataSet: TFDQuery);
+  const aDataSet: TFDQuery; const aConfirmar : Boolean);
 var
   aQry : TFDQuery;
 begin
   aQry := TFDQuery.Create(nil);
   try
+    if aConfirmar then
+      if not aMsg.ShowConfirmation('Remover', 'Confirma a remoção para restrição de controles da rotina selecionada?') then
+        Abort;
+
     with aQry, SQL do
     begin
       Connection  := aDataSet.Connection;
@@ -82,6 +114,37 @@ begin
       ParamByName('id_mestre').AsString  := GUIDToString(aModel.ID);
       ParamByName('tp_rotina').AsInteger := Ord(tr_CampoCadastro);
       OpenOrExecute;
+
+      if aQry.CachedUpdates then
+        aQry.ApplyUpdates(0);
+
+      BeginUpdate;
+      Clear;
+      Add('Update SYS_ROTINA r Set');
+      Add('  r.sn_restringir_campo = 0');
+      Add('where (r.id_rotina = :id_rotina)');
+      EndUpdate;
+
+      ParamByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+      OpenOrExecute;
+
+      if aQry.CachedUpdates then
+        aQry.ApplyUpdates(0);
+
+      BeginUpdate;
+      Clear;
+      Add('Update SYS_SISTEMA_ROTINA r Set');
+      Add('  r.sn_restringir_campo = 0');
+      Add('where (r.id_rotina = :id_rotina)');
+      EndUpdate;
+
+      ParamByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+      OpenOrExecute;
+
+      if aQry.CachedUpdates then
+        aQry.ApplyUpdates(0);
+
+      aQry.Connection.CommitRetaining;
     end;
   finally
     aQry.Free;
@@ -92,6 +155,7 @@ constructor TRotinaController.Create;
 begin
   inherited Create;
   aModel := TRotina.CriarRotina(EmptyStr, EmptyStr);
+  aMsg   := TMensagemController.GetInstance;
 end;
 
 //constructor TRotinaController.CriarRotina(const aParent : TRotina; aNome, aDescricao: String);
@@ -120,7 +184,33 @@ var
 begin
   aRetorno := False;
   try
-    ;
+    if Assigned(aDataSet) then
+      with TFDQuery(aDataSet) do
+      begin
+        if aDataSet.Active then
+          aDataSet.Close;
+
+        if (TFDQuery(aDataSet).Params.FindParam('key') <> nil) then
+          ParamByName('key').Clear;
+        if (TFDQuery(aDataSet).Params.FindParam('nm_rotina') <> nil) then
+          ParamByName('nm_rotina').Clear;
+
+        Case aTipoPesquisa of
+          TYPE_DEFAULT_QUERY_AUTOMATICO :
+            if (TFDQuery(aDataSet).Params.FindParam('nm_rotina') <> nil) then
+              ParamByName('nm_rotina').AsString  := aPesquisa + '%';
+          else
+            if (TFDQuery(aDataSet).Params.FindParam('nm_rotina') <> nil) then
+              ParamByName('nm_rotina').AsString  := aPesquisa + '%';
+        end;
+
+        aDataSet.Open;
+
+        aRetorno := not aDataSet.IsEmpty;
+
+        if aRetorno then
+          CarregarDados(aDataSet);
+      end;
   finally
     Result := aRetorno;
   end;
@@ -142,30 +232,35 @@ begin
   if Assigned(aDataSet) then
     with TFDQuery(aDataSet) do
     begin
-      if aDataSet.Active then
-        aDataSet.Close;
-
-      TFDQuery(aDataSet).ParamByName('key').AsString := Trim(ID); // "cd_rotina" será o campo de referência para o projeto
-
-      aDataSet.Open;
-      if not aDataSet.IsEmpty then
+      if (TFDQuery(aDataSet).Params.FindParam('key') <> nil) then
       begin
-        if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
-          aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
+        if aDataSet.Active then
+          aDataSet.Close;
 
-        aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
-        aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
-        aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
-        aModel.Indice    := FieldByName('ix_rotina').AsInteger;
-        aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
-        aModel.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
-        aModel.Saved     := True;
+        TFDQuery(aDataSet).ParamByName('key').AsString := Trim(ID); // "cd_rotina" será o campo de referência para o projeto
 
-        if (not FieldByName('id_mestre').IsNull) then
-          aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
-        else
-          aModel.Parent := nil;
-      end
+        aDataSet.Open;
+      end;
+
+      if not aDataSet.IsEmpty then
+//      begin
+//        if (not FieldByName('id_rotina').IsNull) and (FieldByName('id_rotina').AsString <> EmptyStr) then
+//          aModel.ID := StringToGUID(FieldByName('id_rotina').AsString);
+//
+//        aModel.Codigo    := Trim(FieldByName('cd_rotina').AsString);
+//        aModel.Nome      := Trim(FieldByName('nm_rotina').AsString);
+//        aModel.Descricao := Trim(FieldByName('ds_rotina').AsString);
+//        aModel.Indice    := FieldByName('ix_rotina').AsInteger;
+//        aModel.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+//        aModel.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
+//        aModel.Saved     := True;
+//
+//        if (not FieldByName('id_mestre').IsNull) then
+//          aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+//        else
+//          aModel.Parent := nil;
+//      end
+        CarregarDados(aDataSet)
       else
         aModel.Saved := False;
 
@@ -386,6 +481,7 @@ var
   aLabel    : TComponent;
   aListagem : TStringList;
   aID : TGUID;
+  aQry : TFDQuery;
 begin
   aListagem := TStringList.Create;
   try
@@ -452,9 +548,32 @@ begin
               end;
             end;
         end;
+
+      aQry := TFDQuery.Create(nil);
+      with aQry, SQL do
+      begin
+        Connection  := aProcedure.Connection;
+        Transaction := aProcedure.Transaction;
+
+        BeginUpdate;
+        Clear;
+        Add('Update SYS_SISTEMA_ROTINA r Set');
+        Add('  r.sn_restringir_campo = 1');
+        Add('where (r.id_rotina = :id_rotina)');
+        EndUpdate;
+
+        ParamByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+        OpenOrExecute;
+
+        if CachedUpdates then
+          ApplyUpdates(0);
+
+        Connection.CommitRetaining;
+      end;
     end;
   finally
     aListagem.Free;
+    aQry.Free;
   end;
 end;
 

@@ -167,9 +167,6 @@ begin
   if ExecutarPesquisa(True) then
     if dbgPesquisa.Visible and dbgPesquisa.Enabled and dbgPesquisaDB.Visible then
       dbgPesquisa.SetFocus;
-//    else
-//    if dbgTreePesquisaDB.Visible and dbgTreePesquisaDB.Enabled then
-//      dbgTreePesquisaDB.SetFocus;
 end;
 
 procedure TFormDefaultPesquisaUI.acnPrepararPesquisaExecute(Sender: TObject);

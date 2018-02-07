@@ -153,7 +153,7 @@ begin
     if RotinaController.Model.RestricaoCampo then
       RotinaController.SaveFieldsRestinctions(Self, aDataSet, DtmBase.fdSetSistemaRotina)
     else
-      RotinaController.ClearFieldsRestinctions(Self, DtmBase.fdQryRotina);
+      RotinaController.ClearFieldsRestinctions(Self, DtmBase.fdQryRotina, False);
 end;
 
 procedure TFormDefaultCadastroUI.wcCadastroButtonClick(Sender: TObject;

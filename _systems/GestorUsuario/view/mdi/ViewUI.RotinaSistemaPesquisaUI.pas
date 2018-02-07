@@ -6,6 +6,7 @@ uses
   TypeAgil.Constants,
   ViewUI.FormDefaultPesquisaUI,
   InterfaceAgil.Observer,
+  Controller.Rotina,
 //  Controller.Perfil,
 //  Controller.Usuario,
 
@@ -26,18 +27,27 @@ uses
 
 type
   TFrmRotinaSistemaPesquisaUI = class(TFormDefaultPesquisaUI)
-    dbgPesquisaDBColumn1: TcxGridDBBandedColumn;
-    dbgPesquisaDBColumn2: TcxGridDBBandedColumn;
-    dbgPesquisaDBColumn3: TcxGridDBBandedColumn;
     dbtPesquisaDB: TcxDBTreeList;
-    cxDBTreeList1cxDBTreeListColumn1: TcxDBTreeListColumn;
-    cxDBTreeList1cxDBTreeListColumn2: TcxDBTreeListColumn;
-    cxDBTreeList1cxDBTreeListColumn3: TcxDBTreeListColumn;
+    dbtPesquisaDBNM_ROTINA: TcxDBTreeListColumn;
+    dbtPesquisaDBSN_ATIVO: TcxDBTreeListColumn;
+    dbtPesquisaDBSN_RESTRINGIR_CAMPO: TcxDBTreeListColumn;
     procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure dbtPesquisaDBKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure dbgPesquisaEnter(Sender: TObject);
   private
     { Private declarations }
+    aController : TRotinaController;
   public
     { Public declarations }
+    procedure New; override;
+    procedure Edit; override;
+    procedure Delete; override;
+    procedure Cancel; override;
+    procedure Refresh; override;
+    procedure RefreshRecord; override;
+
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
 
@@ -55,20 +65,86 @@ uses
 
 { TFrmRotinaSistemaPesquisaUI }
 
+procedure TFrmRotinaSistemaPesquisaUI.Cancel;
+begin
+  if Assigned(aController) then
+    aController.Cancel(DtmControleUsuario.fdQryRotinaSistema);
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.dbgPesquisaEnter(Sender: TObject);
+begin
+  if dbtPesquisaDB.Visible and dbtPesquisaDB.Enabled then
+    dbtPesquisaDB.SetFocus;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.dbtPesquisaDBKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if (Key = VK_DELETE) then
+    Self.Delete;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.Delete;
+begin
+  if Assigned(aController) then
+  begin
+    try
+      aController.Find(EmptyStr, DtmControleUsuario.fdQryRotinaSistema);
+    except
+    end;
+    aController.ClearFieldsRestinctions(Self, DtmControleUsuario.fdQryRotinaSistema, True);
+    aController.RefreshRecord(DtmControleUsuario.fdQryRotinaSistema);
+  end;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.Edit;
+begin
+  ;
+end;
+
 function TFrmRotinaSistemaPesquisaUI.ExecutarPesquisa(
   const aAlertar: Boolean): Boolean;
 begin
-  DtmControleUsuario.fdQryRotinaSistema.Open;
+  Result := aController.ExecuteQuery(edTipoPesquisa.ItemIndex, DtmControleUsuario.fdQryRotinaSistema, edPesquisa.Text);
+  if (not Result) and aAlertar then
+    Msg.ShowInformation('Pesquisar', 'Dados não localizados!')
+  else
+    dbtPesquisaDB.FullExpand;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  inherited;
+//  if Assigned(aController) then
+//    aController.Model.removeObserver(Self);
 end;
 
 procedure TFrmRotinaSistemaPesquisaUI.FormCreate(Sender: TObject);
 begin
   inherited;
-  AbrirTabela        := True;
-//  FormularioCadastro := 'FrmUsuarioSistemaCadastroUI';
-//
-//  aController := TUsuarioController.GetInstance;
-//  aController.Model.addObserver(Self);
+  AbrirTabela := True;
+
+  aController := TRotinaController.Create;
+  //aController.Model.addObserver(Self);
+  dbtPesquisaDB.Align := alClient;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.New;
+begin
+  ;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.Refresh;
+begin
+  if Assigned(aController) then
+    aController.Refresh(DtmControleUsuario.fdQryRotinaSistema);
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.RefreshRecord;
+begin
+  if Assigned(aController) then
+    aController.RefreshRecord(DtmControleUsuario.fdQryRotinaSistema);
 end;
 
 initialization
