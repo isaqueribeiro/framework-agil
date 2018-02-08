@@ -111,7 +111,8 @@ implementation
 {$R *.dfm}
 
 Uses
-  cxGridExportLink;
+  cxGridExportLink,
+  Vcl.Printers;
 
 procedure TFormDefaultPesquisaUI.acnAtualizarExecute(Sender: TObject);
 begin
@@ -314,9 +315,13 @@ end;
 
 procedure TFormDefaultPesquisaUI.PrintRegisters;
 begin
-  // Ajustar o tamanho da tele à página
-  Self.PrintScale := poPrintToFit;
-  Self.Print;
+  try
+    Self.PrintScale     := poPrintToFit; // Ajustar o tamanho da tele à página
+    Printer.Orientation := poLandscape;  // Colocar a impressão em Paisagem
+    Self.Print;
+  finally
+    Printer.Orientation := poPortrait;   // Voltar a impressão para Retrato
+  end;
 end;
 
 procedure TFormDefaultPesquisaUI.ShowRegister;
