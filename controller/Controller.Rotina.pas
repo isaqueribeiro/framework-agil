@@ -94,6 +94,12 @@ var
 begin
   aQry := TFDQuery.Create(nil);
   try
+    if not aModel.Cadastro then
+      Abort;
+
+    if not aModel.RestricaoCampo then
+      Abort;
+
     if aConfirmar then
       if not aMsg.ShowConfirmation('Remover', 'Confirma a remoção para restrição de controles da rotina selecionada?') then
         Abort;
@@ -485,6 +491,9 @@ var
 begin
   aListagem := TStringList.Create;
   try
+    if not aModel.Cadastro then
+      Abort;
+
     if Assigned(aDataSet) then
     begin
       aListagem.BeginUpdate;

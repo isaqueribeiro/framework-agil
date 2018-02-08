@@ -314,6 +314,8 @@ end;
 
 procedure TFormDefaultPesquisaUI.PrintRegisters;
 begin
+  // Ajustar o tamanho da tele à página
+  Self.PrintScale := poPrintToFit;
   Self.Print;
 end;
 

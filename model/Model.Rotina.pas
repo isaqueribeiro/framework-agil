@@ -27,6 +27,8 @@ Type
     procedure SetDescricao(Value : String);
     procedure SetIndice(Value : Integer);
     procedure SetSistema(Value : TSistema);
+
+    function GetCadastro : Boolean;
   protected
     constructor Create;
   public
@@ -41,6 +43,7 @@ Type
     property Parent  : TRotina read aParent write SetParent;
     property Sistema : TSistema read aSistema write SetSistema;
     property RestricaoCampo : Boolean read aRestricaoCampo write aRestricaoCampo;
+    property Cadastro : Boolean read GetCadastro;
 //
 //    procedure Salvar; virtual; abstract;
 //    function Buscar(Codigo: String): TRotina; virtual; abstract;
@@ -59,6 +62,11 @@ begin
   aTipo      := tr_Menu;
   aIndice    := 0;
   aRestricaoCampo := False;
+end;
+
+function TRotina.GetCadastro: Boolean;
+begin
+  Result := (Pos('CadastroUI', aCodigo) > 0);
 end;
 
 procedure TRotina.SetCodigo(Value: String);

@@ -152,7 +152,8 @@ inherited FrmRotinaSistemaPesquisaUI: TFrmRotinaSistemaPesquisaUI
       Visible = False
     end
     inherited acnExcluir: TAction
-      Visible = False
+      Caption = 'Remover Restri'#231#245'es'
+      Hint = 'Remover Restri'#231#245'es do Cadastro'
     end
   end
   inherited brnEvento: TdxBarManager
@@ -172,6 +173,11 @@ inherited FrmRotinaSistemaPesquisaUI: TFrmRotinaSistemaPesquisaUI
         item
           Visible = True
           ItemName = 'BrBtnAtualizar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BrBtnExcluir'
         end
         item
           BeginGroup = True
