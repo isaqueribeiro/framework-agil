@@ -81,7 +81,17 @@ procedure TFrmRotinaSistemaPesquisaUI.dbtPesquisaDBKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if (Key = VK_DELETE) then
-    Self.Delete;
+    Self.Delete
+  else
+  if (Key = VK_RETURN) then
+  begin
+    try
+      aController.CarregarDados(DtmControleUsuario.fdQryRotinaSistema);
+    except
+    end;
+    if aController.Model.Cadastro then
+      gFormulario.ShowModalForm(Self, aController.Model.Codigo);
+  end;
 end;
 
 procedure TFrmRotinaSistemaPesquisaUI.Delete;

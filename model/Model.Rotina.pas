@@ -29,6 +29,7 @@ Type
     procedure SetSistema(Value : TSistema);
 
     function GetCadastro : Boolean;
+    function GetBusca : Boolean;
   protected
     constructor Create;
   public
@@ -44,6 +45,7 @@ Type
     property Sistema : TSistema read aSistema write SetSistema;
     property RestricaoCampo : Boolean read aRestricaoCampo write aRestricaoCampo;
     property Cadastro : Boolean read GetCadastro;
+    property Busca : Boolean read GetBusca;
 //
 //    procedure Salvar; virtual; abstract;
 //    function Buscar(Codigo: String): TRotina; virtual; abstract;
@@ -62,6 +64,11 @@ begin
   aTipo      := tr_Menu;
   aIndice    := 0;
   aRestricaoCampo := False;
+end;
+
+function TRotina.GetBusca: Boolean;
+begin
+  Result := (Pos('BuscaUI', aCodigo) > 0);
 end;
 
 function TRotina.GetCadastro: Boolean;

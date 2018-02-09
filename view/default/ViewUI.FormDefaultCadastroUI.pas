@@ -71,18 +71,20 @@ end;
 
 procedure TFormDefaultCadastroUI.acnEditarExecute(Sender: TObject);
 begin
-  if Assigned(dtsCadastro.DataSet) then
-    if dtsCadastro.DataSet.Active then
-      Self.Edit;
+  if IsOwnerForm(Owner) or RotinaController.Model.Parent.Busca then
+    if Assigned(dtsCadastro.DataSet) then
+      if dtsCadastro.DataSet.Active then
+        Self.Edit;
 end;
 
 procedure TFormDefaultCadastroUI.acnNovoExecute(Sender: TObject);
 begin
-  if Assigned(dtsCadastro.DataSet) then
-  begin
-    Self.New;
-    wcCadastro.ActivePage := pgNominal;
-  end;
+  if IsOwnerForm(Owner) or RotinaController.Model.Parent.Busca then
+    if Assigned(dtsCadastro.DataSet) then
+    begin
+      Self.New;
+      wcCadastro.ActivePage := pgNominal;
+    end;
 end;
 
 procedure TFormDefaultCadastroUI.dtsCadastroStateChange(Sender: TObject);

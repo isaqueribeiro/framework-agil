@@ -42,6 +42,7 @@ type
     procedure Update(Observable: IObservable);
 
     function IdentifyEmptyFields(aListFields : TStringList) : TStringList;
+    function IsOwnerForm(aOwner : TComponent) : Boolean;
   end;
 
 var
@@ -163,6 +164,15 @@ begin
   end;
 
   Result := aListFields;
+end;
+
+function TFormDefaultUI.IsOwnerForm(aOwner: TComponent): Boolean;
+begin
+  with aRotinaController do
+  begin
+    Find(RotinaController.Model.Codigo, DtmBase.fdQryRotina);
+    Result := (Model.Parent.Codigo = aOwner.Name);
+  end;
 end;
 
 procedure TFormDefaultUI.SetDescricao(Value: String);

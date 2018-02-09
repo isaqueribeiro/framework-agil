@@ -33,7 +33,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 10
+        TabOrder = 9
         Transparent = True
         Width = 121
       end
@@ -107,7 +107,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
           end>
         Properties.ListOptions.ShowHeader = False
         Properties.ListSource = dtsPerfil
-        TabOrder = 5
+        TabOrder = 4
         Width = 345
       end
       object dsSenha: TcxTextEdit
@@ -115,7 +115,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Top = 108
         Properties.CharCase = ecLowerCase
         Properties.EchoMode = eemPassword
-        TabOrder = 7
+        TabOrder = 5
         Text = 'dssenha'
         Width = 193
       end
@@ -137,7 +137,7 @@ inherited FrmUsuarioSistemaCadastroUI: TFrmUsuarioSistemaCadastroUI
         Properties.Alignment = taLeftJustify
         Properties.ValueChecked = '1'
         Properties.ValueUnchecked = '0'
-        TabOrder = 8
+        TabOrder = 6
         Transparent = True
         Width = 193
       end

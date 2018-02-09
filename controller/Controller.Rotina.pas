@@ -23,7 +23,7 @@ Uses
       aMsg   : TMensagemController;
       procedure SetModel(Value : TRotina);
       procedure FreeFieldsReadOnly(const aDataSet: TDataSet);
-      procedure CarregarDados(const aDataSet : TDataSet);
+      procedure CarregarDadosParent(const aDataSet : TDataSet);
 
       function GetModel : TRotina;
       function NewIndex(const aProcedure: TFDStoredProc) : Integer;
@@ -41,6 +41,7 @@ Uses
         const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
       procedure ClearFieldsRestinctions(const AOnwer : TComponent;
         const aDataSet: TFDQuery; const aConfirmar : Boolean);
+      procedure CarregarDados(const aDataSet : TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -79,12 +80,53 @@ begin
       aModel.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
 
       if (not FieldByName('id_mestre').IsNull) then
-        aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+      begin
+        aModel.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString);
+        CarregarDadosParent(aDataSet);
+      end
       else
         aModel.Parent := nil;
 
       aModel.Saved := True;
     end;
+end;
+
+procedure TRotinaController.CarregarDadosParent(const aDataSet: TDataSet);
+var
+  aQry : TFDQuery;
+begin
+  aQry := TFDQuery.Create(nil);
+  try
+    with aQry, SQL do
+    begin
+      Connection  := TFDQuery(aDataSet).Connection;
+      Transaction := TFDQuery(aDataSet).Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Select *');
+      Add('from SYS_ROTINA r');
+      Add('where (r.id_rotina = :id_rotina)');
+      EndUpdate;
+
+      ParamByName('id_rotina').AsString := GUIDToString(aModel.Parent.ID);
+      OpenOrExecute;
+
+      aModel.Parent.Codigo    := Trim(FieldByName('cd_rotina').AsString);
+      aModel.Parent.Nome      := Trim(FieldByName('nm_rotina').AsString);
+      aModel.Parent.Descricao := Trim(FieldByName('ds_rotina').AsString);
+      aModel.Parent.Indice    := FieldByName('ix_rotina').AsInteger;
+      aModel.Parent.Tipo      := ct_TipoRotina(FieldByName('tp_rotina').AsInteger);
+      aModel.Parent.RestricaoCampo := (FieldByName('sn_restringir_campo').AsInteger = FLAG_SIM);
+
+      if (not FieldByName('id_mestre').IsNull) then
+        aModel.Parent.Parent.ID := StringToGUID(FieldByName('id_mestre').AsString)
+      else
+        aModel.Parent.Parent := nil;
+    end;
+  finally
+    aQry.Free;
+  end;
 end;
 
 procedure TRotinaController.ClearFieldsRestinctions(const AOnwer: TComponent;
