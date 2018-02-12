@@ -1,44 +1,44 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas',0,1,29,15,49,0,0,,
-File_1=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Controls.pas',0,1,9741,1,9756,0,0,,
-File_2=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\agil_lib\classes\ClasseAgil.Formulario.pas',0,1,72,3,90,0,0,,
-File_3=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas',0,1,1,57,28,0,0,,
-File_4=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Forms.pas',0,1,6972,19,7006,0,0,{{1716,4}
-File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Printers.pas',0,1,1,18,9,0,0,,
-File_6=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas',0,1,68,17,71,0,0,,
-File_7=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Comp.Client.pas',0,1,10461,1,10476,0,0,,
-File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Comp.DataSet.pas',0,1,3083,1,3102,0,0,,
-File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Phys.pas',0,1,8177,75,8184,0,0,,
-File_10=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.pas',0,1,35,1,46,0,0,,
-File_11=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.Math.pas',0,1,1,13,11,0,0,,
-File_12=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas',0,1,1,37,88,0,0,,
-File_13=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,16959,1,16975,0,0,,
+File_0=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas',0,1,278,60,331,0,0,,
+File_1=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas',0,1,29,15,49,0,0,,
+File_2=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Controls.pas',0,1,9741,1,9756,0,0,,
+File_3=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\agil_lib\classes\ClasseAgil.Formulario.pas',0,1,72,3,90,0,0,,
+File_4=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas',0,1,1,57,28,0,0,,
+File_5=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Forms.pas',0,1,6972,19,7006,0,0,{{1716,4}
+File_6=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\VCL\Vcl.Printers.pas',0,1,1,18,9,0,0,,
+File_7=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.PerfilUsuarioPesquisaUI.pas',0,1,68,17,71,0,0,,
+File_8=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Comp.Client.pas',0,1,10461,1,10476,0,0,,
+File_9=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Comp.DataSet.pas',0,1,3083,1,3102,0,0,,
+File_10=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\data\firedac\FireDAC.Phys.pas',0,1,8177,75,8184,0,0,,
+File_11=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\view\ViewUI.FormRequiredFields.pas',0,1,35,1,46,0,0,,
+File_12=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\source\rtl\common\System.Math.pas',0,1,1,13,11,0,0,,
+File_13=TSourceModule,'D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas',0,1,1,37,88,0,0,,
+File_14=TSourceModule,'c:\program files (x86)\embarcadero\studio\15.0\SOURCE\RTL\SYS\System.pas',0,1,16959,1,16975,0,0,,
 
 [Modules]
 Module0=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas
-Module1=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
-Module2=D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas
-Module3=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas
+Module1=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas
+Module2=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
+Module3=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
 Module4=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas
-Module5=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
-Module6=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
-Module7=default.htm
-Module8=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj
-Module9=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Recursos.pas
-Module10=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas
+Module5=default.htm
+Module6=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\AgilGestorUsuario.dproj
+Module7=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Recursos.pas
+Module8=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas
+Module9=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas
+Module10=D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas
 Module11=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas
-Module12=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas
-Module13=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.pas
-Module14=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas
-Module15=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.ComplexTypes.pas
-Module16=D:\Projetos\ASS\framework-agil\trunk\agil_lib\interfaces\InterfaceAgil.Controller.pas
-Module17=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.pas
-Module18=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Sistema.pas
-Module19=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.Constants.pas
-Module20=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
-Module21=D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas
-Module22=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Mensagem.pas
-Count=23
+Module12=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Perfil.pas
+Module13=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Usuario.pas
+Module14=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.ComplexTypes.pas
+Module15=D:\Projetos\ASS\framework-agil\trunk\agil_lib\interfaces\InterfaceAgil.Controller.pas
+Module16=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.pas
+Module17=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Sistema.pas
+Module18=D:\Projetos\ASS\framework-agil\trunk\agil_lib\units\TypeAgil.Constants.pas
+Module19=D:\Projetos\ASS\framework-agil\trunk\model\Model.Usuario.pas
+Module20=D:\Projetos\ASS\framework-agil\trunk\model\Model.Perfil.pas
+Module21=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Mensagem.pas
+Count=22
 EditWindowCount=1
 
 [D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas]
@@ -46,32 +46,22 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas]
-ModuleType=TSourceModule
-FormState=0
-FormOnTop=0
-
 [D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas]
+[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas]
 ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
-[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas]
+[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -87,17 +77,22 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.FormMainGestorUsuarioUI.pas]
+[D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas]
 ModuleType=TSourceModule
 FormState=1
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultCadastroUI.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[D:\Projetos\ASS\framework-agil\trunk\model\Model.Rotina.pas]
+ModuleType=TSourceModule
+FormState=0
 FormOnTop=0
 
 [D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormMainUI.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=0
-
-[D:\Projetos\ASS\framework-agil\trunk\module\DataModule.ControleUsuario.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -152,8 +147,12 @@ ModuleType=TSourceModule
 FormState=0
 FormOnTop=0
 
+[D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas]
+FormState=1
+FormOnTop=1
+
 [EditWindow0]
-ViewCount=23
+ViewCount=22
 CurrentEditView=D:\Projetos\ASS\framework-agil\trunk\module\DataModule.Base.pas
 View0=0
 View1=1
@@ -177,7 +176,6 @@ View18=18
 View19=19
 View20=20
 View21=21
-View22=22
 PercentageSizes=1
 Create=1
 Visible=1
@@ -280,9 +278,9 @@ EditViewName=Borland.FormDesignerView
 [View7]
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultUI.pas
-CursorX=36
-CursorY=169
-TopLine=169
+CursorX=1
+CursorY=104
+TopLine=84
 LeftCol=1
 Elisions=
 Bookmarks={1,129,1}
@@ -325,11 +323,11 @@ EditViewName=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Licenca.
 CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
 CursorX=1
-CursorY=85
-TopLine=70
+CursorY=643
+TopLine=636
 LeftCol=1
 Elisions=
-Bookmarks={1,603,15}
+Bookmarks={1,605,15}
 EditViewName=D:\Projetos\ASS\framework-agil\trunk\controller\Controller.Rotina.pas
 
 [View12]
@@ -433,21 +431,10 @@ EditViewName=Borland.FormDesignerView
 
 [View21]
 CustomEditViewType=TEditView
-Module=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
-CursorX=60
-CursorY=331
-TopLine=327
-LeftCol=1
-Elisions=
-Bookmarks=
-EditViewName=D:\Projetos\ASS\framework-agil\trunk\view\default\ViewUI.FormDefaultPesquisaUI.pas
-
-[View22]
-CustomEditViewType=TEditView
 Module=D:\Projetos\ASS\framework-agil\trunk\_systems\GestorUsuario\view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas
-CursorX=7
-CursorY=93
-TopLine=80
+CursorX=15
+CursorY=3
+TopLine=3
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -594,8 +581,8 @@ SplitPos=79
 
 [PropInspDesignerSelection]
 ArrangeBy=Name
-SelectedItem=Name,AfterCommit
-ExpandedItems=Anchors=0,BorderIcons=0,Images=0,LiveBindings=0,"LiveBindings Designer=0",LookAndFeel=0,Margins=0,Navigator=0,ConnectedStoredUsage=0,FetchOptions=0,FormatOptions=0,Params=0
+SelectedItem=Connected,
+ExpandedItems=ConnectedStoredUsage=0,FetchOptions=0,FormatOptions=0,"LiveBindings Designer=0",Params=0,ResourceOptions=0
 
 [ModelViewTool]
 PercentageSizes=1

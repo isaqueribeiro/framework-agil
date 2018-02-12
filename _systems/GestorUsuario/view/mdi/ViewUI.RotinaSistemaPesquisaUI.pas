@@ -83,6 +83,9 @@ begin
   if (Key = VK_DELETE) then
     Self.Delete
   else
+  if (Key = VK_F2) then
+    Self.Edit
+  else
   if (Key = VK_RETURN) then
   begin
     try
@@ -109,7 +112,17 @@ end;
 
 procedure TFrmRotinaSistemaPesquisaUI.Edit;
 begin
-  ;
+  if Assigned(aController) then
+  begin
+    try
+      aController.Find(EmptyStr, DtmControleUsuario.fdQryRotinaSistema);
+    except
+    end;
+    aController.SetFieldRestinction(Self, DtmControleUsuario.fdQryRotinaSistema, True);
+    aController.RefreshRecord(DtmControleUsuario.fdQryRotinaSistema);
+    if aController.Model.Cadastro then
+      gFormulario.ShowModalForm(Self, aController.Model.Codigo);
+  end;
 end;
 
 function TFrmRotinaSistemaPesquisaUI.ExecutarPesquisa(
@@ -126,6 +139,9 @@ procedure TFrmRotinaSistemaPesquisaUI.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   inherited;
+//  Esta rotina está fazendo o objeto ser destruído antes do tempo
+//  Funcionará se o padrão do Controller for Singleton, que não se aplica a este caso
+//
 //  if Assigned(aController) then
 //    aController.Model.removeObserver(Self);
 end;
@@ -136,8 +152,11 @@ begin
   AbrirTabela := True;
 
   aController := TRotinaController.Create;
-  //aController.Model.addObserver(Self);
   dbtPesquisaDB.Align := alClient;
+//  Esta rotina está fazendo o objeto ser destruído antes do tempo
+//  Funcionará se o padrão do Controller for Singleton, que não se aplica a este caso
+//
+//  aController.Model.addObserver(Self);
 end;
 
 procedure TFrmRotinaSistemaPesquisaUI.New;

@@ -41,6 +41,8 @@ Uses
         const aDataSet: TDataSet; const aProcedure: TFDStoredProc);
       procedure ClearFieldsRestinctions(const AOnwer : TComponent;
         const aDataSet: TFDQuery; const aConfirmar : Boolean);
+      procedure SetFieldRestinction(const AOnwer : TComponent;
+        const aDataSet: TFDQuery; const aConfirmar : Boolean);
       procedure CarregarDados(const aDataSet : TDataSet);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
@@ -624,6 +626,58 @@ begin
     end;
   finally
     aListagem.Free;
+    aQry.Free;
+  end;
+end;
+
+procedure TRotinaController.SetFieldRestinction(const AOnwer: TComponent;
+  const aDataSet: TFDQuery; const aConfirmar: Boolean);
+var
+  aQry : TFDQuery;
+begin
+  aQry := TFDQuery.Create(nil);
+  try
+    if not aModel.Cadastro then
+      Abort;
+
+    if aConfirmar then
+      if not aMsg.ShowConfirmation('Inserir', 'Confirma a inserção de políticas para restrição de controles da rotina selecionada?') then
+        Abort;
+
+    with aQry, SQL do
+    begin
+      Connection  := aDataSet.Connection;
+      Transaction := aDataSet.Transaction;
+
+      BeginUpdate;
+      Clear;
+      Add('Update SYS_ROTINA r Set');
+      Add('  r.sn_restringir_campo = 1');
+      Add('where (r.id_rotina = :id_rotina)');
+      EndUpdate;
+
+      ParamByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+      OpenOrExecute;
+
+      if aQry.CachedUpdates then
+        aQry.ApplyUpdates(0);
+
+      BeginUpdate;
+      Clear;
+      Add('Update SYS_SISTEMA_ROTINA r Set');
+      Add('  r.sn_restringir_campo = 1');
+      Add('where (r.id_rotina = :id_rotina)');
+      EndUpdate;
+
+      ParamByName('id_rotina').AsString  := GUIDToString(aModel.ID);
+      OpenOrExecute;
+
+      if aQry.CachedUpdates then
+        aQry.ApplyUpdates(0);
+
+      aQry.Connection.CommitRetaining;
+    end;
+  finally
     aQry.Free;
   end;
 end;

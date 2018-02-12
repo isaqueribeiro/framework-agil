@@ -148,12 +148,12 @@ inherited FrmRotinaSistemaPesquisaUI: TFrmRotinaSistemaPesquisaUI
       Visible = False
     end
     inherited acnEditar: TAction
-      Enabled = False
-      Visible = False
+      Caption = 'Inserir Restin'#231#245'es'
+      Hint = 'Inserir Restin'#231#245'es nos Controles do Cadastro'
     end
     inherited acnExcluir: TAction
       Caption = 'Remover Restri'#231#245'es'
-      Hint = 'Remover Restri'#231#245'es do Cadastro'
+      Hint = 'Remover Restri'#231#245'es dos Controles do Cadastro'
     end
   end
   inherited brnEvento: TdxBarManager
@@ -176,6 +176,10 @@ inherited FrmRotinaSistemaPesquisaUI: TFrmRotinaSistemaPesquisaUI
         end
         item
           BeginGroup = True
+          Visible = True
+          ItemName = 'BrBtnEditar'
+        end
+        item
           Visible = True
           ItemName = 'BrBtnExcluir'
         end
