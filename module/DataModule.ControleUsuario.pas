@@ -51,7 +51,6 @@ begin
     CreateGUID(aID);
     FieldByName('id_perfil').AsString   := GUIDToString(aID);
     FieldByName('cd_perfil').AsInteger  := DtmBase.GetNewValueDB('USR_PERFIL', 'CD_PERFIL', EmptyStr);
-    FieldByName('sn_alterar_senha').AsInteger := FLAG_SIM;
     FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
     FieldByName('sn_sistema').AsInteger := FLAG_NAO;
   end;
@@ -81,6 +80,7 @@ begin
     FieldByName('sn_ativo').AsInteger   := FLAG_SIM;
     FieldByName('dt_ativo').AsDateTime  := Now;
     FieldByName('sn_sistema').AsInteger := FLAG_NAO;
+    FieldByName('sn_alterar_senha').AsInteger := FLAG_SIM;
   end;
 end;
 

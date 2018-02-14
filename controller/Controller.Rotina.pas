@@ -540,6 +540,13 @@ begin
 
     if Assigned(aDataSet) then
     begin
+      if not aDataSet.Active then
+      begin
+        for I := 0 to TFDQuery(aDataSet).ParamCount - 1 do
+          TFDQuery(aDataSet).Params[I].Clear;
+        aDataSet.Open;
+      end;
+
       aListagem.BeginUpdate;
       aListagem.Clear;
       aListagem.Delimiter := '|';
