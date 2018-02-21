@@ -99,6 +99,7 @@ type
     procedure RefreshRecord; virtual; abstract;
     procedure ShowRegister; virtual;
     procedure PrintRegisters; virtual;
+    procedure ExportData; virtual;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; virtual; abstract;
   end;
@@ -137,18 +138,8 @@ begin
 end;
 
 procedure TFormDefaultPesquisaUI.acnExportarExecute(Sender: TObject);
-var
-  aFileName : String;
-  aExtensao : ct_ExtensaoFileExport;
 begin
-  if Assigned(dtsPesquisa.DataSet) then
-    if ExportTable(Self, aFileName, aExtensao) then
-      Case aExtensao of
-        efe_XLS  : ExportGridToExcel(aFileName + '.xls',  dbgPesquisa);
-        efe_XLSX : ExportGridToXLSX(aFileName  + '.xlsx', dbgPesquisa);
-        efe_TXT  : ExportGridToText(aFileName  + '.txt',  dbgPesquisa);
-        efe_XML  : ExportGridToXML(aFileName   + '.xml',  dbgPesquisa);
-      end;
+  Self.ExportData;
 end;
 
 procedure TFormDefaultPesquisaUI.acnImprimirExecute(Sender: TObject);
@@ -227,6 +218,21 @@ begin
     VK_RETURN :
       acnPesquisar.Execute;
   end;
+end;
+
+procedure TFormDefaultPesquisaUI.ExportData;
+var
+  aFileName : String;
+  aExtensao : ct_ExtensaoFileExport;
+begin
+  if Assigned(dtsPesquisa.DataSet) then
+    if ExportTable(Self, aFileName, aExtensao) then
+      Case aExtensao of
+        efe_XLS  : ExportGridToExcel(aFileName + '.xls',  dbgPesquisa);
+        efe_XLSX : ExportGridToXLSX(aFileName  + '.xlsx', dbgPesquisa);
+        efe_TXT  : ExportGridToText(aFileName  + '.txt',  dbgPesquisa);
+        efe_XML  : ExportGridToXML(aFileName   + '.xml',  dbgPesquisa);
+      end;
 end;
 
 procedure TFormDefaultPesquisaUI.FormActivate(Sender: TObject);

@@ -4,6 +4,7 @@ interface
 
 uses
   TypeAgil.Constants,
+  TypeAgil.ComplexTypes,
   ViewUI.FormDefaultPesquisaUI,
   InterfaceAgil.Observer,
   Controller.Rotina,
@@ -47,6 +48,7 @@ type
     procedure Cancel; override;
     procedure Refresh; override;
     procedure RefreshRecord; override;
+    procedure ExportData; override;
 
     function ExecutarPesquisa(const aAlertar : Boolean = TRUE) : Boolean; override;
   end;
@@ -59,9 +61,11 @@ implementation
 {$R *.dfm}
 
 uses
+  cxGridExportLink,
   DataModule.Recursos,
   DataModule.Base,
   DataModule.ControleUsuario;
+
 
 { TFrmRotinaSistemaPesquisaUI }
 
@@ -133,6 +137,21 @@ begin
     Msg.ShowInformation('Pesquisar', 'Dados não localizados!')
   else
     dbtPesquisaDB.FullExpand;
+end;
+
+procedure TFrmRotinaSistemaPesquisaUI.ExportData;
+//var
+//  aFileName : String;
+//  aExtensao : ct_ExtensaoFileExport;
+begin
+//  if Assigned(dtsPesquisa.DataSet) then
+//    if ExportTable(Self, aFileName, aExtensao) then
+//      Case aExtensao of
+//        efe_XLS  : ExportGridToExcel(aFileName + '.xls',  dbgPesquisa);
+//        efe_XLSX : ExportGridToXLSX(aFileName  + '.xlsx', dbgPesquisa);
+//        efe_TXT  : ExportGridToText(aFileName  + '.txt',  dbgPesquisa);
+//        efe_XML  : ExportGridToXML(aFileName   + '.xml',  dbgPesquisa);
+//      end;
 end;
 
 procedure TFrmRotinaSistemaPesquisaUI.FormClose(Sender: TObject;
