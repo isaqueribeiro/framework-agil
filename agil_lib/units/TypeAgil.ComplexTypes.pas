@@ -32,6 +32,7 @@ Type
   end;
 
   ct_TipoRotina = (tr_Menu, tr_Formulario, tr_Processo, tr_Impressao, tr_CampoCadastro);
+  ct_TipoPermissao = (tp_SemAcesso, tp_Visualizar, tp_Alterar, tp_IncluirAlterar, tp_ControleTotal);
   ct_ExtensaoFileExport = (efe_NULL, efe_XLS, efe_XLSX, efe_TXT, efe_XML);
 
 implementation

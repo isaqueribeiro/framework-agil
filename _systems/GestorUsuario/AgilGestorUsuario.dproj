@@ -155,6 +155,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\model\Model.Licenca.pas"/>
         <DCCReference Include="..\..\model\Model.Sistema.pas"/>
         <DCCReference Include="..\..\model\Model.Perfil.pas"/>
+        <DCCReference Include="..\..\model\Model.Perfil.Permissao.pas"/>
         <DCCReference Include="..\..\model\Model.Usuario.pas"/>
         <DCCReference Include="..\..\controller\Controller.Mensagem.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
@@ -210,11 +211,9 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DCCReference>
         <DCCReference Include="view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas">
             <Form>FrmUsuarioSistemaCadastroUI</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas">
             <Form>FrmRotinaSistemaPesquisaUI</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>

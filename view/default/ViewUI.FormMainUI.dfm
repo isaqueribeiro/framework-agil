@@ -910,6 +910,15 @@ inherited FormMainUI: TFormMainUI
       Action = acnCadastroUsuario
       Category = 0
     end
+    object BrBtnControleRotinaSistema: TdxBarButton
+      Action = acnControleRotinaSistema
+      Category = 0
+      LargeImageIndex = 16
+    end
+    object BrBtnPermissaoAcesso: TdxBarLargeButton
+      Action = acnPermissaoAcesso
+      Category = 0
+    end
     object BrBtnAlterarSenhaUsuario: TdxBarLargeButton
       Action = acnAlterarSenhaUsuario
       Category = 1
@@ -921,15 +930,6 @@ inherited FormMainUI: TFormMainUI
     object BrBtnFecharApp: TdxBarLargeButton
       Action = acnFecharApp
       Category = 1
-    end
-    object BrBtnControleRotinaSistema: TdxBarButton
-      Action = acnControleRotinaSistema
-      Category = 0
-      LargeImageIndex = 16
-    end
-    object BrBtnPermissaoAcesso: TdxBarLargeButton
-      Action = acnPermissaoAcesso
-      Category = 0
     end
   end
   object acnMenu: TActionList

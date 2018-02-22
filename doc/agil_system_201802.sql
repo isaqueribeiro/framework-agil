@@ -35,3 +35,54 @@ Historico:
     21/02/2018 - IMR :
         * Documentacao do objeto.';
 
+
+
+
+/*------ SYSDBA 22/02/2018 17:46:01 --------*/
+
+ALTER TABLE USR_PERFIL_PERMISSAO DROP CONSTRAINT PK_USR_PERFIL_PERMISSAO;
+
+
+
+
+/*------ SYSDBA 22/02/2018 17:46:11 --------*/
+
+ALTER TABLE USR_PERFIL_PERMISSAO
+ADD CONSTRAINT PK_USR_PERFIL_PERMISSAO
+PRIMARY KEY (ID_ACESSO,ID_PERFIL);
+
+
+
+/*------ SYSDBA 22/02/2018 17:57:08 --------*/
+
+/*!!! Error occured !!!
+Invalid token.
+Dynamic SQL Error.
+SQL error code = -104.
+Token unknown - line 4, column 3.
+.
+
+*/
+
+/*------ SYSDBA 22/02/2018 18:15:00 --------*/
+
+/*!!! Error occured !!!
+Invalid token.
+Dynamic SQL Error.
+SQL error code = -104.
+Token unknown - line 4, column 3.
+.
+
+*/
+
+
+/*------ SYSDBA 22/02/2018 19:07:00 --------*/
+
+COMMENT ON COLUMN USR_PERFIL_PERMISSAO.TP_PERMISSAO IS
+'Tipo de acesso:
+0 - Sem acesso
+1 - Visualizar
+2 - Alterar
+3 - Incluir / Alterar
+4 - Controle Total';
+

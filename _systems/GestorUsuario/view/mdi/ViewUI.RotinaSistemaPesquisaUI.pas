@@ -6,7 +6,7 @@ uses
   TypeAgil.Constants,
   TypeAgil.ComplexTypes,
   ViewUI.FormDefaultPesquisaUI,
-  InterfaceAgil.Observer,
+//  InterfaceAgil.Observer,
   Controller.Rotina,
 //  Controller.Perfil,
 //  Controller.Usuario,
@@ -65,7 +65,6 @@ uses
   DataModule.Recursos,
   DataModule.Base,
   DataModule.ControleUsuario;
-
 
 { TFrmRotinaSistemaPesquisaUI }
 

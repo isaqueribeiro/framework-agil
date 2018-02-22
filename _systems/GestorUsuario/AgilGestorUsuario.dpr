@@ -17,6 +17,7 @@ uses
   Model.Licenca in '..\..\model\Model.Licenca.pas',
   Model.Sistema in '..\..\model\Model.Sistema.pas',
   Model.Perfil in '..\..\model\Model.Perfil.pas',
+  Model.Perfil.Permissao in '..\..\model\Model.Perfil.Permissao.pas',
   Model.Usuario in '..\..\model\Model.Usuario.pas',
   Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
