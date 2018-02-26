@@ -267,6 +267,9 @@ end;
 
 procedure TFormDefaultPesquisaUI.FormCreate(Sender: TObject);
 begin
+  lblHeaderTitle.Caption       := Trim(Self.Caption);
+  lblHeaderDescription.Caption := Trim(Self.Hint);
+
   aAlreadyActivated := False;
   Descricao   := lblHeaderDescription.Caption;
   AbrirTabela := True;
@@ -279,8 +282,6 @@ begin
   lblHeaderTitle.Top  := 8;
   lblHeaderDescription.Left := 28;
   lblHeaderDescription.Top  := 28;
-
-  lblHeaderTitle.Caption := Trim(Self.Caption);
 end;
 
 procedure TFormDefaultPesquisaUI.FormResize(Sender: TObject);

@@ -45,6 +45,7 @@ Uses
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
       function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
+      function PesquisarPerfilUsuario(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
       property Model : TPerfil read GetModel write SetModel;
   end;
@@ -159,18 +160,35 @@ begin
         if aDataSet.Active then
           aDataSet.Close;
 
-        ParamByName('id_perfil').Clear;
-        ParamByName('cd_perfil').Clear;
-        ParamByName('ds_perfil').Clear;
+        if (Params.FindParam('id_perfil') <> nil) then
+          ParamByName('id_perfil').Clear;
+        if (Params.FindParam('cd_perfil') <> nil) then
+          ParamByName('cd_perfil').Clear;
+        if (Params.FindParam('ds_perfil') <> nil) then
+          ParamByName('ds_perfil').Clear;
 
         Case aTipoPesquisa of
           TYPE_DEFAULT_QUERY_AUTOMATICO :
             if StrToIntDef(aPesquisa, 0) > 0 then
-              ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0)
+            begin
+              if (Params.FindParam('cd_perfil') <> nil) then
+                ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0);
+            end
             else
-              ParamByName('ds_perfil').AsString  := aPesquisa + '%';
-          TYPE_DEFAULT_QUERY_CODIGO     : ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0);
-          TYPE_DEFAULT_QUERY_DESCRITIVA : ParamByName('ds_perfil').AsString  := aPesquisa + '%';
+            begin
+              if (Params.FindParam('ds_perfil') <> nil) then
+                ParamByName('ds_perfil').AsString  := aPesquisa + '%';
+            end;
+          TYPE_DEFAULT_QUERY_CODIGO     :
+            begin
+              if (Params.FindParam('cd_perfil') <> nil) then
+                ParamByName('cd_perfil').AsInteger := StrToIntDef(aPesquisa, 0);
+            end;
+          TYPE_DEFAULT_QUERY_DESCRITIVA :
+            begin
+              if (Params.FindParam('ds_perfil') <> nil) then
+                ParamByName('ds_perfil').AsString  := aPesquisa + '%';
+            end;
         end;
 
         aDataSet.Open;
@@ -256,6 +274,33 @@ begin
 
   aModel := TPerfil.Create;
   Result := aModel;
+end;
+
+function TPerfilController.PesquisarPerfilUsuario(const aTipoPesquisa: Integer;
+  const aDataSet: TDataSet; aPesquisa: String): Boolean;
+var
+  aRetorno : Boolean;
+begin
+  aRetorno := False;
+  try
+    if Assigned(aDataSet) then
+      with TFDQuery(aDataSet) do
+      begin
+        if aDataSet.Active then
+          aDataSet.Close;
+
+        if (Params.FindParam('descricao') <> nil) then
+          ParamByName('descricao').Clear;
+        if (Params.FindParam('descricao') <> nil) then
+          ParamByName('descricao').AsString  := aPesquisa + '%';
+
+        aDataSet.Open;
+
+        aRetorno := not aDataSet.IsEmpty;
+      end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 procedure TPerfilController.Refresh(const aDataSet: TDataSet);

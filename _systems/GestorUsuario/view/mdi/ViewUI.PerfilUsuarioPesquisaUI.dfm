@@ -69,6 +69,7 @@ inherited FrmPerfilUsuarioPesquisaUI: TFrmPerfilUsuarioPesquisaUI
           HeaderAlignmentHorz = taCenter
           MinWidth = 50
           Options.Editing = False
+          Options.Filtering = False
           Options.HorzSizing = False
           Options.Moving = False
           Options.Sorting = False

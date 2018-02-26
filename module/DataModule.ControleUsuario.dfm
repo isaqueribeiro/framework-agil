@@ -21,8 +21,8 @@ object DtmControleUsuario: TDtmControleUsuario
       '   or (upper(p.ds_perfil) like upper(:ds_perfil))'
       'order by'
       '   p.ds_perfil')
-    Left = 120
-    Top = 80
+    Left = 72
+    Top = 40
     ParamData = <
       item
         Name = 'ID_PERFIL'
@@ -70,8 +70,8 @@ object DtmControleUsuario: TDtmControleUsuario
       'SELECT ID_PERFIL, CD_PERFIL, DS_PERFIL, SN_SISTEMA, SN_ATIVO'
       'FROM USR_PERFIL'
       'WHERE ID_PERFIL = :ID_PERFIL')
-    Left = 120
-    Top = 128
+    Left = 72
+    Top = 88
   end
   object fdQryUsuario: TFDQuery
     BeforePost = fdQryUsuarioBeforePost
@@ -108,8 +108,8 @@ object DtmControleUsuario: TDtmControleUsuario
       'order by'
       '     u.ds_primeironome'
       '   , u.ds_sobrenome')
-    Left = 120
-    Top = 176
+    Left = 72
+    Top = 136
     ParamData = <
       item
         Name = 'ID_USUARIO'
@@ -192,8 +192,8 @@ object DtmControleUsuario: TDtmControleUsuario
       'from USR_USUARIO u'
       '  left join USR_PERFIL p on (p.id_perfil = u.id_perfil)'
       'WHERE u.ID_USUARIO = :ID_USUARIO')
-    Left = 120
-    Top = 224
+    Left = 72
+    Top = 184
   end
   object fdQryRotinaSistema: TFDQuery
     Connection = DtmBase.fdConexao
@@ -283,8 +283,8 @@ object DtmControleUsuario: TDtmControleUsuario
       '  and (upper(r.nm_rotina) like upper(:nm_rotina))'
       'order by'
       '    r.ix_rotina')
-    Left = 424
-    Top = 192
+    Left = 72
+    Top = 232
     ParamData = <
       item
         Name = 'NM_ROTINA'
@@ -378,7 +378,156 @@ object DtmControleUsuario: TDtmControleUsuario
       '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
       '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
       'WHERE sr.ID = :ID')
-    Left = 424
-    Top = 240
+    Left = 72
+    Top = 280
+  end
+  object fdQryPerfilUsuario: TFDQuery
+    Active = True
+    Connection = DtmBase.fdConexao
+    Transaction = DtmBase.trnConexao
+    UpdateTransaction = DtmBase.trnConexao
+    SQL.Strings = (
+      'Select'
+      '    p.cd_perfil as codigo'
+      '  , p.id_perfil as id'
+      '  , p.ds_perfil as description'
+      '  , null as parent'
+      '  , 0 as image'
+      '  , p.sn_sistema'
+      '  , p.sn_ativo'
+      '  , 1 as sn_perfil'
+      'from USR_PERFIL p'
+      'where upper(p.ds_perfil) like :descricao'
+      ''
+      'union'
+      ''
+      'Select'
+      '    p.cd_perfil  as codigo'
+      '  , u.id_usuario as id'
+      
+        '  , trim(u.ds_primeironome || '#39' '#39' || u.ds_sobrenome) as descript' +
+        'ion'
+      '  , u.id_perfil as parent'
+      '  , 2 as image'
+      '  , u.sn_sistema'
+      '  , u.sn_ativo'
+      '  , 0 as sn_perfil'
+      'from USR_USUARIO u'
+      '  left join USR_PERFIL p on (p.id_perfil = u.id_perfil)'
+      
+        'where upper(trim(u.ds_primeironome || '#39' '#39' || u.ds_sobrenome)) li' +
+        'ke :descricao'
+      ''
+      'order by'
+      '    1'
+      '  , 3')
+    Left = 368
+    Top = 40
+    ParamData = <
+      item
+        Name = 'DESCRICAO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+        Value = Null
+      end>
+  end
+  object fdQryPermissaoAcesso: TFDQuery
+    Connection = DtmBase.fdConexao
+    Transaction = DtmBase.trnConexao
+    UpdateTransaction = DtmBase.trnConexao
+    SQL.Strings = (
+      'Select'
+      '    sr.id'
+      '  , sr.id_sistema'
+      '  , sr.id_rotina'
+      '  , sr.sn_ativo'
+      '  , s.cd_sistema'
+      '  , s.nm_sistema'
+      '  , r.cd_rotina'
+      '  , r.nm_rotina'
+      '  , r.ds_rotina'
+      '  , r.ix_rotina'
+      '  , r.tp_rotina'
+      '  , r.id_mestre'
+      '  , r.sn_restringir_campo'
+      
+        '  , (case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39',' +
+        ' '#39#39') then 1 else 0 end) as sn_cadastro'
+      
+        '  , case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39', ' +
+        #39#39')'
+      '      then r.sn_restringir_campo'
+      '      else -1'
+      '    end as sn_restringir_campo_edit'
+      '  , ('
+      '      ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      
+        '            inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema =' +
+        ' sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '          where xx.id_mestre = sr.id_rotina'
+      '            and xx.tp_rotina <> 4'
+      '      ) + ('
+      '          Select'
+      '            count(xx.id_rotina)'
+      '          from SYS_ROTINA xx'
+      '          where xx.id_mestre in ('
+      '              Select'
+      '                xx.id_rotina'
+      '              from SYS_ROTINA xx'
+      
+        '                inner join SYS_SISTEMA_ROTINA xy on (xy.id_siste' +
+        'ma = sr.id_sistema and xy.id_rotina = xx.id_rotina)'
+      '              where xx.id_mestre = sr.id_rotina'
+      '                and xx.tp_rotina <> 4'
+      '          ) and xx.tp_rotina <> 4'
+      '      )'
+      '    ) as qt_total_rotinas'
+      '  , ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    ) as qt_rotinas'
+      '  , Case ('
+      '      Select'
+      '        count(xx.id_rotina)'
+      '      from SYS_ROTINA xx'
+      
+        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
+        'id_sistema and xy.id_rotina = xx.id_rotina)'
+      '      where xx.id_mestre = sr.id_rotina'
+      '        and xx.tp_rotina <> 4'
+      '    )'
+      '      when 0'
+      '        then 190 -- Cadastro'
+      '      when 1'
+      '        then 210 -- Pesquisa'
+      '        else 021 -- Sistema'
+      '    end as idx_image'
+      'from SYS_SISTEMA_ROTINA sr'
+      '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
+      '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
+      'where (r.tp_rotina <> 4)'
+      '  and (upper(r.nm_rotina) like upper(:nm_rotina))'
+      'order by'
+      '    r.ix_rotina')
+    Left = 368
+    Top = 88
+    ParamData = <
+      item
+        Name = 'NM_ROTINA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 150
+        Value = ''
+      end>
   end
 end

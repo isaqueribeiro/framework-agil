@@ -24,6 +24,8 @@ type
     fdUpdUsuario: TFDUpdateSQL;
     fdQryRotinaSistema: TFDQuery;
     fdUpdRotinaSistema: TFDUpdateSQL;
+    fdQryPerfilUsuario: TFDQuery;
+    fdQryPermissaoAcesso: TFDQuery;
     procedure fdQryPerfilNewRecord(DataSet: TDataSet);
     procedure fdQryUsuarioNewRecord(DataSet: TDataSet);
     procedure fdQryUsuarioBeforePost(DataSet: TDataSet);

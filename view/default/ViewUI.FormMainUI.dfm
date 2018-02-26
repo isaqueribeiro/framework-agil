@@ -958,6 +958,7 @@ inherited FormMainUI: TFormMainUI
       Category = 'Controle de Usu'#225'rio'
       Caption = 'Permiss'#227'o de Acesso'
       ImageIndex = 3
+      OnExecute = acnPermissaoAcessoExecute
     end
     object acnAlterarSenhaUsuario: TAction
       Category = 'Sistema'

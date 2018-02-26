@@ -65,6 +65,7 @@ type
     procedure acnBloquearAppExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure acnControleRotinaSistemaExecute(Sender: TObject);
+    procedure acnPermissaoAcessoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -131,6 +132,11 @@ end;
 procedure TFormMainUI.acnFecharAppExecute(Sender: TObject);
 begin
   Self.Close;
+end;
+
+procedure TFormMainUI.acnPermissaoAcessoExecute(Sender: TObject);
+begin
+  gFormulario.ShowForm(Self, 'FrmPermissaoAcessoPesquisaUI');
 end;
 
 procedure TFormMainUI.acnControleRotinaSistemaExecute(Sender: TObject);

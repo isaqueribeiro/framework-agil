@@ -163,6 +163,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\controller\Controller.Licenca.pas"/>
         <DCCReference Include="..\..\controller\Controller.Rotina.pas"/>
         <DCCReference Include="..\..\controller\Controller.Perfil.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Perfil.Permissao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Usuario.pas"/>
         <DCCReference Include="..\..\module\DataModule.Recursos.pas">
             <Form>DtmRecursos</Form>
@@ -214,6 +215,10 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         </DCCReference>
         <DCCReference Include="view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas">
             <Form>FrmRotinaSistemaPesquisaUI</Form>
+        </DCCReference>
+        <DCCReference Include="view\mdi\ViewUI.PermissaoAcessoPesquisaUI.pas">
+            <Form>FrmPermissaoAcessoPesquisaUI</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txaPackage"/>
         <None Include="..\ControleUsuario\ModelSupport_AgilControleUsuario\default.txvpck"/>

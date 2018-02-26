@@ -116,10 +116,12 @@ end;
 
 procedure TFormDefaultCadastroUI.FormCreate(Sender: TObject);
 begin
+  pgNominal.Header.Title       := Trim(Self.Caption);
+  pgNominal.Header.Description := Trim(Self.Hint);
+
   Descricao := pgNominal.Header.Description;
   inherited;
   wcCadastro.ActivePage  := pgNominal;
-  pgNominal.Header.Title := Trim(Self.Caption);
 end;
 
 function TFormDefaultCadastroUI.GetEmEdicao: Boolean;

@@ -25,6 +25,7 @@ uses
   Controller.Licenca in '..\..\controller\Controller.Licenca.pas',
   Controller.Rotina in '..\..\controller\Controller.Rotina.pas',
   Controller.Perfil in '..\..\controller\Controller.Perfil.pas',
+  Controller.Perfil.Permissao in '..\..\controller\Controller.Perfil.Permissao.pas',
   Controller.Usuario in '..\..\controller\Controller.Usuario.pas',
   DataModule.Recursos in '..\..\module\DataModule.Recursos.pas' {DtmRecursos: TDataModule},
   DataModule.Base in '..\..\module\DataModule.Base.pas' {DtmBase: TDataModule},
@@ -41,7 +42,8 @@ uses
   ViewUI.PerfilUsuarioCadastroUI in 'view\sdi\ViewUI.PerfilUsuarioCadastroUI.pas' {FrmPerfilUsuarioCadastroUI},
   ViewUI.UsuarioSistemaPesquisaUI in 'view\mdi\ViewUI.UsuarioSistemaPesquisaUI.pas' {FrmUsuarioSistemaPesquisaUI},
   ViewUI.UsuarioSistemaCadastroUI in 'view\sdi\ViewUI.UsuarioSistemaCadastroUI.pas' {FrmUsuarioSistemaCadastroUI},
-  ViewUI.RotinaSistemaPesquisaUI in 'view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas' {FrmRotinaSistemaPesquisaUI};
+  ViewUI.RotinaSistemaPesquisaUI in 'view\mdi\ViewUI.RotinaSistemaPesquisaUI.pas' {FrmRotinaSistemaPesquisaUI},
+  ViewUI.PermissaoAcessoPesquisaUI in 'view\mdi\ViewUI.PermissaoAcessoPesquisaUI.pas' {FrmPermissaoAcessoPesquisaUI};
 
 {$R *.res}
 

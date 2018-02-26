@@ -2,7 +2,7 @@ inherited FrmRotinaSistemaPesquisaUI: TFrmRotinaSistemaPesquisaUI
   Hint = 
     'Controle das rotinas no(s) sistema(s) para pesquisa e ativa'#231#227'o d' +
     'a disponibilidade aos usu'#225'rios'
-  Caption = 'Rotina de Sistema, pesquisa!'
+  Caption = 'Rotinas do(s) Sistema(s), pesquisa!'
   ClientHeight = 467
   ExplicitHeight = 506
   PixelsPerInch = 96
