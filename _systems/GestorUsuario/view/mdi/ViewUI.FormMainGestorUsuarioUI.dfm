@@ -231,7 +231,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
       SyncImageIndex = False
       ImageIndex = 0
     end
-    object BrBtnTeste: TdxBarButton [5]
+    object BrBtnTeste: TdxBarButton [6]
       Action = acnTeste
       Category = 1
     end

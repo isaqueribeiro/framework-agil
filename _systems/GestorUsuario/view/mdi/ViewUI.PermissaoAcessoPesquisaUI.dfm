@@ -12,6 +12,7 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
     ExplicitHeight = 396
     inherited bvlGrid: TBevel
       Top = 296
+      ExplicitTop = 296
     end
     inherited dbgPesquisa: TcxGrid
       Height = 290
@@ -53,16 +54,18 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
         Navigator.Buttons.CustomButtons = <>
         OptionsBehavior.CellHints = True
         OptionsBehavior.ExpandOnIncSearch = True
+        OptionsBehavior.IncSearch = True
         OptionsData.Editing = False
         OptionsData.Deleting = False
         OptionsView.CellAutoHeight = True
         OptionsView.CellEndEllipsis = True
         OptionsView.ColumnAutoWidth = True
-        RootValue = -1
+        RootValue = '-1'
         Styles.Content = DtmRecursos.stl_Content
         Styles.Inactive = DtmRecursos.stl_Inactive
         Styles.Selection = DtmRecursos.stl_Selection
         Styles.ContentEven = DtmRecursos.stl_ContentEven
+        Styles.IncSearch = DtmRecursos.stl_Selection
         TabOrder = 0
         object dbtPesquisaDBNM_ROTINA: TcxDBTreeListColumn
           Caption.Text = 'Perfis / Usu'#225'rios'
@@ -145,7 +148,6 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
         Styles.Selection = DtmRecursos.stl_Selection
         Styles.ContentEven = DtmRecursos.stl_ContentEven
         TabOrder = 1
-        ExplicitLeft = 292
       end
     end
   end

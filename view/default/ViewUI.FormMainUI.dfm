@@ -939,24 +939,28 @@ inherited FormMainUI: TFormMainUI
     object acnCadastroPerfilUsuario: TAction
       Category = 'Controle de Usu'#225'rio'
       Caption = 'Perfil de Usu'#225'rio'
+      Hint = 'Controle de Usu'#225'rios'
       ImageIndex = 0
       OnExecute = acnCadastroPerfilUsuarioExecute
     end
     object acnCadastroUsuario: TAction
       Category = 'Controle de Usu'#225'rio'
       Caption = 'Usu'#225'rio do Sistema'
+      Hint = 'Cadastro de Usu'#225'rios do(s) Sistema(s)'
       ImageIndex = 2
       OnExecute = acnCadastroUsuarioExecute
     end
     object acnControleRotinaSistema: TAction
       Category = 'Controle de Usu'#225'rio'
       Caption = 'Rotinas do(s) Sistema(s)'
+      Hint = 'Controle das Rotinas do(s) Sistema(s)'
       ImageIndex = 16
       OnExecute = acnControleRotinaSistemaExecute
     end
     object acnPermissaoAcesso: TAction
       Category = 'Controle de Usu'#225'rio'
-      Caption = 'Permiss'#227'o de Acesso'
+      Caption = 'Permiss'#245'es de Acesso'
+      Hint = 'Controle de Permiss'#245'es de Acesso'
       ImageIndex = 3
       OnExecute = acnPermissaoAcessoExecute
     end
