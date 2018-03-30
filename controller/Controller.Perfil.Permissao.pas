@@ -37,6 +37,7 @@ Uses
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
+      procedure RemoverPermissoes(const aDataSet: TFDQuery);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -44,7 +45,7 @@ Uses
       function Cancel(const aDataSet: TDataSet) : Boolean;
       function Find(ID: String; const aDataSet: TDataSet): TBaseObject;
       function New: TBaseObject; overload;
-      function ExecuteQuery(const aTipoPesquisa : Integer; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
+      function ExecuteQuery(const aPerfil : Boolean; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
       property Model : TPermissaoPerfil read GetModel write SetModel;
     end;
@@ -98,10 +99,31 @@ begin
   end;
 end;
 
-function TPermissaoPerfilController.ExecuteQuery(const aTipoPesquisa: Integer;
+function TPermissaoPerfilController.ExecuteQuery(const aPerfil : Boolean;
   const aDataSet: TDataSet; aPesquisa: String): Boolean;
+var
+  aRetorno : Boolean;
 begin
-  ;
+  aRetorno := False;
+  try
+    if Assigned(aDataSet) then
+      with TFDQuery(aDataSet) do
+      begin
+        if aDataSet.Active then
+          aDataSet.Close;
+
+        if (Params.FindParam('perfil') <> nil) then
+          ParamByName('perfil').Clear;
+        if (Params.FindParam('perfil') <> nil) then
+          ParamByName('perfil').AsString  := aPesquisa;
+
+        aDataSet.Open;
+
+        aRetorno := not aDataSet.IsEmpty;
+      end;
+  finally
+    Result := aRetorno;
+  end;
 end;
 
 function TPermissaoPerfilController.Find(ID: String;
@@ -170,6 +192,70 @@ begin
 //          aModel.Saved      := True;
         end;
       end;
+end;
+
+procedure TPermissaoPerfilController.RemoverPermissoes(
+  const aDataSet: TFDQuery);
+var
+  aQry : TFDQuery;
+begin
+  if aMsg.ShowConfirmation('Remover Permissões', 'Deseja remover todas as permissões do perfil ' + QuotedStr(aModel.Perfil.Descricao) + '?') then
+  try
+    aQry := TFDQuery.Create(nil);
+    with aDataSet do
+    begin
+      aQry.Connection  := aDataSet.Connection;
+      aQry.Transaction := aDataSet.Transaction;
+
+      DisableControls;
+      First;
+
+      while not Eof do
+      begin
+        Edit;
+        if FieldByName('parent').IsNull then
+          FieldByName('tp_permissao').AsInteger := -1
+        else
+          case ct_TipoRotina(FieldByName('tp_rotina').AsInteger) of
+            tr_Menu          : FieldByName('tp_permissao').AsInteger := Ord(tp_Visualizar);
+            tr_Formulario    ,
+            tr_Processo      ,
+            tr_Impressao     : FieldByName('tp_permissao').AsInteger := Ord(tp_SemAcesso);
+            tr_CampoCadastro : FieldByName('tp_permissao').AsInteger := Ord(tp_Alterar);
+          end;
+
+        Post;
+        Next;
+      end;
+
+      First;
+      while not Eof do
+      begin
+        if not FieldByName('parent').IsNull then
+        begin
+          aQry.SQL.BeginUpdate;
+          aQry.SQL.Clear;
+          aQry.SQL.Add('Update USR_PERFIL_PERMISSAO p Set');
+          aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
+          aQry.SQL.Add('where (p.id_acesso = :id_acesso)');
+          aQry.SQL.Add('  and (p.id_perfil = :id_perfil)');
+          aQry.SQL.EndUpdate;
+
+          aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
+          aQry.ParamByName('id_perfil').AsString  := GUIDToString(aModel.Perfil.ID);
+          aQry.ExecSQL;
+        end;
+
+        Next;
+      end;
+
+      aQry.Connection.CommitRetaining;
+    end;
+  finally
+    aQry.Free;
+    aDataSet.First;
+    aDataSet.EnableControls;
+  end;
 end;
 
 function TPermissaoPerfilController.Save(const aDataSet: TDataSet): Boolean;

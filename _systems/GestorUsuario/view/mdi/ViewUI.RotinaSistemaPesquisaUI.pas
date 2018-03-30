@@ -37,6 +37,7 @@ type
     procedure dbtPesquisaDBKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure dbgPesquisaEnter(Sender: TObject);
+    procedure acnPesquisarExecute(Sender: TObject);
   private
     { Private declarations }
     aController : TRotinaController;
@@ -67,6 +68,12 @@ uses
   DataModule.ControleUsuario;
 
 { TFrmRotinaSistemaPesquisaUI }
+
+procedure TFrmRotinaSistemaPesquisaUI.acnPesquisarExecute(Sender: TObject);
+begin
+  inherited;
+  dbtPesquisaDB.SetFocus;
+end;
 
 procedure TFrmRotinaSistemaPesquisaUI.Cancel;
 begin

@@ -382,7 +382,6 @@ object DtmControleUsuario: TDtmControleUsuario
     Top = 280
   end
   object fdQryPerfilUsuario: TFDQuery
-    Active = True
     Connection = DtmBase.fdConexao
     Transaction = DtmBase.trnConexao
     UpdateTransaction = DtmBase.trnConexao
@@ -393,6 +392,9 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , p.ds_perfil as description'
       '  , null as parent'
       '  , 0 as image'
+      '  , p.id_perfil'
+      '  , p.cd_perfil'
+      '  , p.ds_perfil'
       '  , p.sn_sistema'
       '  , p.sn_ativo'
       '  , 1 as sn_perfil'
@@ -409,6 +411,9 @@ object DtmControleUsuario: TDtmControleUsuario
         'ion'
       '  , u.id_perfil as parent'
       '  , 2 as image'
+      '  , u.id_perfil'
+      '  , p.cd_perfil'
+      '  , p.ds_perfil'
       '  , u.sn_sistema'
       '  , u.sn_ativo'
       '  , 0 as sn_perfil'
@@ -433,101 +438,63 @@ object DtmControleUsuario: TDtmControleUsuario
       end>
   end
   object fdQryPermissaoAcesso: TFDQuery
+    CachedUpdates = True
     Connection = DtmBase.fdConexao
     Transaction = DtmBase.trnConexao
     UpdateTransaction = DtmBase.trnConexao
     SQL.Strings = (
       'Select'
-      '    sr.id'
-      '  , sr.id_sistema'
-      '  , sr.id_rotina'
-      '  , sr.sn_ativo'
-      '  , s.cd_sistema'
+      '    r.id_rotina as id'
+      '  , r.nm_rotina as description'
+      '  , r.id_mestre as parent'
+      '  , Case when r.id_mestre is null'
+      '      then 021 -- Sistema'
+      '      else'
+      '        Case r.tp_rotina'
+      '          when 0 then 014 -- Menu'
+      '          when 3 then 213 -- Impressao'
+      '          when 4 then 190 -- Campos do cadastro'
+      '          else'
+      '            208 -- Formularios e processos'
+      '        end'
+      '    end as image'
+      ''
+      '  , s.id_sistema'
       '  , s.nm_sistema'
-      '  , r.cd_rotina'
       '  , r.nm_rotina'
-      '  , r.ds_rotina'
-      '  , r.ix_rotina'
-      '  , r.tp_rotina'
       '  , r.id_mestre'
-      '  , r.sn_restringir_campo'
-      
-        '  , (case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39',' +
-        ' '#39#39') then 1 else 0 end) as sn_cadastro'
-      
-        '  , case when r.cd_rotina <> replace(r.cd_rotina, '#39'CadastroUI'#39', ' +
-        #39#39')'
-      '      then r.sn_restringir_campo'
-      '      else -1'
-      '    end as sn_restringir_campo_edit'
-      '  , ('
-      '      ('
-      '          Select'
-      '            count(xx.id_rotina)'
-      '          from SYS_ROTINA xx'
-      
-        '            inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema =' +
-        ' sr.id_sistema and xy.id_rotina = xx.id_rotina)'
-      '          where xx.id_mestre = sr.id_rotina'
-      '            and xx.tp_rotina <> 4'
-      '      ) + ('
-      '          Select'
-      '            count(xx.id_rotina)'
-      '          from SYS_ROTINA xx'
-      '          where xx.id_mestre in ('
-      '              Select'
-      '                xx.id_rotina'
-      '              from SYS_ROTINA xx'
-      
-        '                inner join SYS_SISTEMA_ROTINA xy on (xy.id_siste' +
-        'ma = sr.id_sistema and xy.id_rotina = xx.id_rotina)'
-      '              where xx.id_mestre = sr.id_rotina'
-      '                and xx.tp_rotina <> 4'
-      '          ) and xx.tp_rotina <> 4'
-      '      )'
-      '    ) as qt_total_rotinas'
-      '  , ('
-      '      Select'
-      '        count(xx.id_rotina)'
-      '      from SYS_ROTINA xx'
-      
-        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
-        'id_sistema and xy.id_rotina = xx.id_rotina)'
-      '      where xx.id_mestre = sr.id_rotina'
-      '        and xx.tp_rotina <> 4'
-      '    ) as qt_rotinas'
-      '  , Case ('
-      '      Select'
-      '        count(xx.id_rotina)'
-      '      from SYS_ROTINA xx'
-      
-        '        inner join SYS_SISTEMA_ROTINA xy on (xy.id_sistema = sr.' +
-        'id_sistema and xy.id_rotina = xx.id_rotina)'
-      '      where xx.id_mestre = sr.id_rotina'
-      '        and xx.tp_rotina <> 4'
-      '    )'
-      '      when 0'
-      '        then 190 -- Cadastro'
-      '      when 1'
-      '        then 210 -- Pesquisa'
-      '        else 021 -- Sistema'
-      '    end as idx_image'
-      'from SYS_SISTEMA_ROTINA sr'
+      ''
+      '  , r.id_rotina'
+      '  , r.tp_rotina'
+      '  , r.ix_rotina'
+      ''
+      '  , p.id_acesso'
+      '  , p.id_perfil'
+      '  , Case when r.id_mestre is null'
+      '      then -1'
+      '      else p.tp_permissao'
+      '    end as tp_permissao'
+      'from USR_PERFIL_PERMISSAO p'
+      '  inner join SYS_SISTEMA_ROTINA sr on (sr.id = p.id_acesso)'
       '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
       '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
-      'where (r.tp_rotina <> 4)'
-      '  and (upper(r.nm_rotina) like upper(:nm_rotina))'
+      ''
+      
+        'where p.id_perfil = :perfil --'#39'{CDCCBE81-0FE3-4569-B4FE-9D2525CE' +
+        'D60E}'#39
+      ''
       'order by'
-      '    r.ix_rotina')
+      '    s.cd_sistema'
+      '  , r.ix_rotina')
     Left = 368
     Top = 88
     ParamData = <
       item
-        Name = 'NM_ROTINA'
+        Name = 'PERFIL'
         DataType = ftString
         ParamType = ptInput
-        Size = 150
-        Value = ''
+        Size = 38
+        Value = Null
       end>
   end
 end

@@ -54,6 +54,7 @@ type
     stl_ContentEven: TcxStyle;
     stl_Inactive: TcxStyle;
     svdExportar: TSaveDialog;
+    imgTipoPermissao: TcxImageList;
   private
     { Private declarations }
   public
