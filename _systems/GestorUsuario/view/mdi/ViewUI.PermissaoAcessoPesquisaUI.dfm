@@ -297,6 +297,13 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
       ShortCut = 16430
       OnExecute = acnRemoverPermissaoExecute
     end
+    object acnSalvarPermissao: TAction
+      Category = 'zOutras'
+      Caption = '&Salvar Permiss'#245'es'
+      Hint = 'Salvar Todas Permiss'#245'es'
+      ImageIndex = 141
+      OnExecute = acnSalvarPermissaoExecute
+    end
   end
   inherited brnEvento: TdxBarManager
     Categories.Strings = (
@@ -334,6 +341,10 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
           ItemName = 'BrBtnRemoverPermissao'
         end
         item
+          Visible = True
+          ItemName = 'BrBtnSalvarPermissao'
+        end
+        item
           BeginGroup = True
           Visible = True
           ItemName = 'BrBtnExportar'
@@ -345,6 +356,11 @@ inherited FrmPermissaoAcessoPesquisaUI: TFrmPermissaoAcessoPesquisaUI
     end
     object BrBtnRemoverPermissao: TdxBarButton
       Action = acnRemoverPermissao
+      Category = 2
+      PaintStyle = psCaptionGlyph
+    end
+    object BrBtnSalvarPermissao: TdxBarButton
+      Action = acnSalvarPermissao
       Category = 2
       PaintStyle = psCaptionGlyph
     end

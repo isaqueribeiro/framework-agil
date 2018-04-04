@@ -19,6 +19,7 @@ uses
   Model.Perfil in '..\..\model\Model.Perfil.pas',
   Model.Perfil.Permissao in '..\..\model\Model.Perfil.Permissao.pas',
   Model.Usuario in '..\..\model\Model.Usuario.pas',
+  Model.Usuario.Permissao in '..\..\model\Model.Usuario.Permissao.pas',
   Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
   Controller.Sistema in '..\..\controller\Controller.Sistema.pas',

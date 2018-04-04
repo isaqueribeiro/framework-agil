@@ -398,6 +398,9 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , p.sn_sistema'
       '  , p.sn_ativo'
       '  , 1 as sn_perfil'
+      '  , null as ds_login'
+      '  , null as ds_primeironome'
+      '  , null as ds_sobrenome'
       'from USR_PERFIL p'
       'where upper(p.ds_perfil) like :descricao'
       ''
@@ -417,6 +420,9 @@ object DtmControleUsuario: TDtmControleUsuario
       '  , u.sn_sistema'
       '  , u.sn_ativo'
       '  , 0 as sn_perfil'
+      '  , u.ds_login'
+      '  , u.ds_primeironome'
+      '  , u.ds_sobrenome'
       'from USR_USUARIO u'
       '  left join USR_PERFIL p on (p.id_perfil = u.id_perfil)'
       
@@ -470,6 +476,8 @@ object DtmControleUsuario: TDtmControleUsuario
       ''
       '  , p.id_acesso'
       '  , p.id_perfil'
+      '  , null as id_usuario'
+      '  --, p.tp_permissao'
       '  , Case when r.id_mestre is null'
       '      then -1'
       '      else p.tp_permissao'
@@ -479,13 +487,52 @@ object DtmControleUsuario: TDtmControleUsuario
       '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
       '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
       ''
-      
-        'where p.id_perfil = :perfil --'#39'{CDCCBE81-0FE3-4569-B4FE-9D2525CE' +
-        'D60E}'#39
+      'where p.id_perfil = :perfil'
+      ''
+      'union'
+      ''
+      'Select'
+      '    r.id_rotina as id'
+      '  , r.nm_rotina as description'
+      '  , r.id_mestre as parent'
+      '  , Case when r.id_mestre is null'
+      '      then 021 -- Sistema'
+      '      else'
+      '        Case r.tp_rotina'
+      '          when 0 then 014 -- Menu'
+      '          when 3 then 213 -- Impressao'
+      '          when 4 then 190 -- Campos do cadastro'
+      '          else'
+      '            208 -- Formularios e processos'
+      '        end'
+      '    end as image'
+      ''
+      '  , s.id_sistema'
+      '  , s.nm_sistema'
+      '  , r.nm_rotina'
+      '  , r.id_mestre'
+      ''
+      '  , r.id_rotina'
+      '  , r.tp_rotina'
+      '  , r.ix_rotina'
+      ''
+      '  , u.id_acesso'
+      '  , null as id_perfil'
+      '  , u.id_usuario'
+      '  , Case when r.id_mestre is null'
+      '      then -1'
+      '      else u.tp_permissao'
+      '    end as tp_permissao'
+      'from USR_USUARIO_PERMISSAO u'
+      '  inner join SYS_SISTEMA_ROTINA sr on (sr.id = u.id_acesso)'
+      '  inner join SYS_SISTEMA s on (s.id_sistema = sr.id_sistema)'
+      '  inner join SYS_ROTINA r on (r.id_rotina = sr.id_rotina)'
+      ''
+      'where u.id_usuario = :usuario '
       ''
       'order by'
-      '    s.cd_sistema'
-      '  , r.ix_rotina')
+      '     5 '
+      '  , 11')
     Left = 368
     Top = 88
     ParamData = <
@@ -495,6 +542,12 @@ object DtmControleUsuario: TDtmControleUsuario
         ParamType = ptInput
         Size = 38
         Value = Null
+      end
+      item
+        Name = 'USUARIO'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 38
       end>
   end
 end

@@ -44,12 +44,15 @@ type
     Bevel1: TBevel;
     acnRemoverPermissao: TAction;
     BrBtnRemoverPermissao: TdxBarButton;
+    acnSalvarPermissao: TAction;
+    BrBtnSalvarPermissao: TdxBarButton;
     procedure FormCreate(Sender: TObject);
     procedure acnPesquisarExecute(Sender: TObject);
     procedure dbtPerfilUsuarioDBClick(Sender: TObject);
     procedure dbtPerfilUsuarioDBKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure acnRemoverPermissaoExecute(Sender: TObject);
+    procedure acnSalvarPermissaoExecute(Sender: TObject);
   private
     { Private declarations }
     aControllerPerfil    : TPerfilController;
@@ -92,16 +95,63 @@ procedure TFrmPermissaoAcessoPesquisaUI.acnRemoverPermissaoExecute(
 begin
   if Assigned(aControllerPermissao) then
     with aControllerPermissao, dtsPesquisa.DataSet do
+    begin
+      CarregarPermissaoAcesso;
+
       if (FieldByName('sn_perfil').AsInteger = 1) then
       begin
-        CarregarPermissaoAcesso;
-        Model.Perfil.ID         := StringToGUID(FieldByName('id_perfil').AsString);
-        Model.Perfil.Codigo     := FieldByName('cd_perfil').AsInteger;
-        Model.Perfil.Descricao  := FieldByName('ds_perfil').AsString;
-        Model.Perfil.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
-        Model.Perfil.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
-        RemoverPermissoes(DtmControleUsuario.fdQryPermissaoAcesso);
+        ModelPerfil.Perfil.ID         := StringToGUID(FieldByName('id').AsString);
+        ModelPerfil.Perfil.Codigo     := FieldByName('cd_perfil').AsInteger;
+        ModelPerfil.Perfil.Descricao  := FieldByName('ds_perfil').AsString;
+        ModelPerfil.Perfil.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+        ModelPerfil.Perfil.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+      end
+      else
+      begin
+        ModelUsuario.Usuario.ID           := StringToGUID(FieldByName('id').AsString);
+        ModelUsuario.Usuario.Login        := FieldByName('ds_login').AsString;
+        ModelUsuario.Usuario.PrimeiroNome := FieldByName('ds_primeironome').AsString;
+        ModelUsuario.Usuario.Sobrenome    := FieldByName('ds_sobrenome').AsString;
+        ModelUsuario.Usuario.Ativo        := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+        ModelUsuario.Usuario.UsoSistema   := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+        ModelUsuario.Usuario.Perfil.ID        := StringToGUID(FieldByName('id_perfil').AsString);
+        ModelUsuario.Usuario.Perfil.Codigo    := FieldByName('cd_perfil').AsInteger;
+        ModelUsuario.Usuario.Perfil.Descricao := FieldByName('ds_perfil').AsString;
       end;
+
+      RemoverPermissoes((FieldByName('sn_perfil').AsInteger = 1), DtmControleUsuario.fdQryPermissaoAcesso);
+    end;
+end;
+
+procedure TFrmPermissaoAcessoPesquisaUI.acnSalvarPermissaoExecute(
+  Sender: TObject);
+begin
+  if Assigned(aControllerPermissao) then
+    with aControllerPermissao, dtsPesquisa.DataSet do
+    begin
+      if (FieldByName('sn_perfil').AsInteger = 1) then
+      begin
+        ModelPerfil.Perfil.ID         := StringToGUID(FieldByName('id').AsString);
+        ModelPerfil.Perfil.Codigo     := FieldByName('cd_perfil').AsInteger;
+        ModelPerfil.Perfil.Descricao  := FieldByName('ds_perfil').AsString;
+        ModelPerfil.Perfil.Ativo      := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+        ModelPerfil.Perfil.UsoSistema := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+      end
+      else
+      begin
+        ModelUsuario.Usuario.ID           := StringToGUID(FieldByName('id').AsString);
+        ModelUsuario.Usuario.Login        := FieldByName('ds_login').AsString;
+        ModelUsuario.Usuario.PrimeiroNome := FieldByName('ds_primeironome').AsString;
+        ModelUsuario.Usuario.Sobrenome    := FieldByName('ds_sobrenome').AsString;
+        ModelUsuario.Usuario.Ativo        := (FieldByName('sn_ativo').AsInteger = FLAG_SIM);
+        ModelUsuario.Usuario.UsoSistema   := (FieldByName('sn_sistema').AsInteger = FLAG_SIM);
+        ModelUsuario.Usuario.Perfil.ID        := StringToGUID(FieldByName('id_perfil').AsString);
+        ModelUsuario.Usuario.Perfil.Codigo    := FieldByName('cd_perfil').AsInteger;
+        ModelUsuario.Usuario.Perfil.Descricao := FieldByName('ds_perfil').AsString;
+      end;
+
+      SalvarPermissoes((FieldByName('sn_perfil').AsInteger = 1), DtmControleUsuario.fdQryPermissaoAcesso);
+    end;
 end;
 
 procedure TFrmPermissaoAcessoPesquisaUI.Cancel;
@@ -130,7 +180,7 @@ begin
       aRetorno := aControllerPermissao.ExecuteQuery(
           (dtsPesquisa.DataSet.FieldByName('sn_perfil').AsInteger = 1)
         , fdQryPermissaoAcesso
-        , GUIDToString(aControllerPerfil.Model.ID));
+        , dtsPesquisa.DataSet.FieldByName('id').AsString); //GUIDToString(aControllerPerfil.Model.ID));
 
       if aRetorno then
         dbtPermissaoDB.FullExpand;

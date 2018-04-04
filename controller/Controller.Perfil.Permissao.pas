@@ -8,6 +8,7 @@ Uses
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Perfil.Permissao,
+  Model.Usuario.Permissao,
   Controller.Mensagem,
 
   System.Classes, System.SysUtils, System.StrUtils,
@@ -21,9 +22,12 @@ Uses
     private
       class var aInstance : TPermissaoPerfilController;
       aMsg   : TMensagemController;
-      aModel : TPermissaoPerfil;
-      procedure SetModel(Value : TPermissaoPerfil);
-      function GetModel : TPermissaoPerfil;
+      aModelPerfil  : TPermissaoPerfil;
+      aModelUsuario : TPermissaoUsuario;
+      procedure SetModelPerfil(Value : TPermissaoPerfil);
+      procedure SetModelUsuario(Value : TPermissaoUsuario);
+      function GetModelPerfil  : TPermissaoPerfil;
+      function GetModelUsuario : TPermissaoUsuario;
     protected
 //      constructor Create;
       procedure CarregarDados(const aDataSet : TDataSet);
@@ -37,7 +41,8 @@ Uses
       procedure Load(const aDataSet: TDataSet);
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
-      procedure RemoverPermissoes(const aDataSet: TFDQuery);
+      procedure RemoverPermissoes(const aPerfil : Boolean; const aDataSet: TFDQuery);
+      procedure SalvarPermissoes(const aPerfil : Boolean; const aDataSet: TFDQuery); virtual; abstract;
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -47,7 +52,8 @@ Uses
       function New: TBaseObject; overload;
       function ExecuteQuery(const aPerfil : Boolean; const aDataSet: TDataSet; aPesquisa : String) : Boolean;
     published
-      property Model : TPermissaoPerfil read GetModel write SetModel;
+      property ModelPerfil  : TPermissaoPerfil read GetModelPerfil write SetModelPerfil;
+      property ModelUsuario : TPermissaoUsuario read GetModelUsuario write SetModelUsuario;
     end;
 
 implementation
@@ -67,8 +73,9 @@ end;
 constructor TPermissaoPerfilController.Create;
 begin
   inherited Create;
-  aMsg   := TMensagemController.GetInstance;
-  aModel := TPermissaoPerfil.Create;
+  aMsg := TMensagemController.GetInstance;
+  aModelPerfil  := TPermissaoPerfil.Create;
+  aModelUsuario := TPermissaoUsuario.Create;
 end;
 
 function TPermissaoPerfilController.Delete(const aDataSet: TDataSet): Boolean;
@@ -78,7 +85,8 @@ end;
 
 destructor TPermissaoPerfilController.Destroy;
 begin
-  aModel.Free;
+  aModelPerfil.Free;
+  aModelUsuario.Free;
   inherited Destroy;
 end;
 
@@ -114,8 +122,19 @@ begin
 
         if (Params.FindParam('perfil') <> nil) then
           ParamByName('perfil').Clear;
-        if (Params.FindParam('perfil') <> nil) then
-          ParamByName('perfil').AsString  := aPesquisa;
+        if (Params.FindParam('usuario') <> nil) then
+          ParamByName('usuario').Clear;
+
+        if aPerfil then
+        begin
+          if (Params.FindParam('perfil') <> nil) then
+            ParamByName('perfil').AsString  := aPesquisa;
+        end
+        else
+        begin
+          if (Params.FindParam('usuario') <> nil) then
+            ParamByName('usuario').AsString  := aPesquisa;
+        end;
 
         aDataSet.Open;
 
@@ -145,9 +164,14 @@ begin
   Result := aInstance;
 end;
 
-function TPermissaoPerfilController.GetModel: TPermissaoPerfil;
+function TPermissaoPerfilController.GetModelPerfil : TPermissaoPerfil;
 begin
-  Result := aModel;
+  Result := aModelPerfil;
+end;
+
+function TPermissaoPerfilController.GetModelUsuario: TPermissaoUsuario;
+begin
+  Result := aModelUsuario;
 end;
 
 procedure TPermissaoPerfilController.Load(const aDataSet: TDataSet);
@@ -157,11 +181,11 @@ end;
 
 function TPermissaoPerfilController.New: TBaseObject;
 begin
-  if Assigned(aModel) then
-    aModel.Free;
+  if Assigned(aModelPerfil) then
+    aModelPerfil.Free;
 
-  aModel := TPermissaoPerfil.Create;
-  Result := aModel;
+  aModelPerfil := TPermissaoPerfil.Create;
+  Result := aModelPerfil;
 end;
 
 procedure TPermissaoPerfilController.New(const aDataSet: TDataSet);
@@ -195,11 +219,11 @@ begin
 end;
 
 procedure TPermissaoPerfilController.RemoverPermissoes(
-  const aDataSet: TFDQuery);
+  const aPerfil : Boolean; const aDataSet: TFDQuery);
 var
   aQry : TFDQuery;
 begin
-  if aMsg.ShowConfirmation('Remover Permissões', 'Deseja remover todas as permissões do perfil ' + QuotedStr(aModel.Perfil.Descricao) + '?') then
+  if aMsg.ShowConfirmation('Remover Permissões', 'Deseja remover todas as permissões do perfil ' + QuotedStr(aModelPerfil.Perfil.Descricao) + '?') then
   try
     aQry := TFDQuery.Create(nil);
     with aDataSet do
@@ -233,17 +257,34 @@ begin
       begin
         if not FieldByName('parent').IsNull then
         begin
-          aQry.SQL.BeginUpdate;
-          aQry.SQL.Clear;
-          aQry.SQL.Add('Update USR_PERFIL_PERMISSAO p Set');
-          aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
-          aQry.SQL.Add('where (p.id_acesso = :id_acesso)');
-          aQry.SQL.Add('  and (p.id_perfil = :id_perfil)');
-          aQry.SQL.EndUpdate;
+          if aPerfil then
+          begin
+            aQry.SQL.BeginUpdate;
+            aQry.SQL.Clear;
+            aQry.SQL.Add('Update USR_PERFIL_PERMISSAO p Set');
+            aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
+            aQry.SQL.Add('where (p.id_acesso = :id_acesso)');
+            aQry.SQL.Add('  and (p.id_perfil = :id_perfil)');
+            aQry.SQL.EndUpdate;
 
-          aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
-          aQry.ParamByName('id_perfil').AsString  := GUIDToString(aModel.Perfil.ID);
-          aQry.ExecSQL;
+            aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
+            aQry.ParamByName('id_perfil').AsString  := GUIDToString(aModelPerfil.Perfil.ID);
+            aQry.ExecSQL;
+          end
+          else
+          begin
+            aQry.SQL.BeginUpdate;
+            aQry.SQL.Clear;
+            aQry.SQL.Add('Update USR_USUARIO_PERMISSAO p Set');
+            aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
+            aQry.SQL.Add('where (p.id_acesso  = :id_acesso)');
+            aQry.SQL.Add('  and (p.id_usuario = :id_usuario)');
+            aQry.SQL.EndUpdate;
+
+            aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
+            aQry.ParamByName('id_usuario').AsString := GUIDToString(aModelUsuario.Usuario.ID);
+            aQry.ExecSQL;
+          end;
         end;
 
         Next;
@@ -263,9 +304,14 @@ begin
   ;
 end;
 
-procedure TPermissaoPerfilController.SetModel(Value: TPermissaoPerfil);
+procedure TPermissaoPerfilController.SetModelPerfil(Value: TPermissaoPerfil);
 begin
-  aModel := Value;
+  aModelPerfil := Value;
+end;
+
+procedure TPermissaoPerfilController.SetModelUsuario(Value: TPermissaoUsuario);
+begin
+  aModelUsuario := Value;
 end;
 
 end.
