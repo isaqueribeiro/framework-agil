@@ -253,3 +253,137 @@ Token unknown - line 1, column 1.
 description.
 
 */
+
+
+/*------ SYSDBA 06/04/2018 11:31:50 --------*/
+
+SET TERM ^ ;
+
+create or alter procedure SP_REPLICAR_PERMISSAO (
+    ID_PERFIL DMN_GUID)
+as
+declare variable ID_USUARIO DMN_GUID;
+declare variable ID_ACESSO DMN_GUID;
+declare variable TP_PERMISSAO DMN_SMALLINT;
+begin
+  for
+    Select
+        p.id_acesso
+      , u.id_usuario
+      , p.tp_permissao
+    from USR_PERFIL_PERMISSAO p
+      inner join USR_USUARIO u on (u.id_perfil = p.id_perfil)
+    where p.id_perfil = :id_perfil
+    Into
+        id_acesso
+      , id_usuario
+      , tp_permissao
+  do
+  begin
+    if (not exists(
+      Select
+        up.tp_permissao
+      from USR_USUARIO_PERMISSAO up
+      where up.id_acesso  = :id_acesso
+        and up.id_usuario = :id_usuario
+    )) then
+    begin
+      Insert Into USR_USUARIO_PERMISSAO (
+          id_acesso
+        , id_usuario
+        , tp_permissao
+      ) values (
+          :id_acesso
+        , :id_usuario
+        , :tp_permissao
+      );
+    end
+    else
+    begin
+      Update USR_USUARIO_PERMISSAO up Set
+        up.tp_permissao   = :tp_permissao
+      where up.id_acesso  = :id_acesso
+        and up.id_usuario = :id_usuario;
+    end
+  end
+end^
+
+SET TERM ; ^
+
+GRANT EXECUTE ON PROCEDURE SP_REPLICAR_PERMISSAO TO "PUBLIC";
+
+
+
+/*------ SYSDBA 06/04/2018 11:33:23 --------*/
+
+SET TERM ^ ;
+
+CREATE OR ALTER procedure SP_REPLICAR_PERMISSAO (
+    ID_PERFIL DMN_GUID)
+as
+declare variable ID_USUARIO DMN_GUID;
+declare variable ID_ACESSO DMN_GUID;
+declare variable TP_PERMISSAO DMN_SMALLINT;
+begin
+  for
+    Select
+        p.id_acesso
+      , u.id_usuario
+      , p.tp_permissao
+    from USR_PERFIL_PERMISSAO p
+      inner join USR_USUARIO u on (u.id_perfil = p.id_perfil)
+    where p.id_perfil = :id_perfil
+    Into
+        id_acesso
+      , id_usuario
+      , tp_permissao
+  do
+  begin
+    if (not exists(
+      Select
+        up.tp_permissao
+      from USR_USUARIO_PERMISSAO up
+      where up.id_acesso  = :id_acesso
+        and up.id_usuario = :id_usuario
+    )) then
+    begin
+      Insert Into USR_USUARIO_PERMISSAO (
+          id_acesso
+        , id_usuario
+        , tp_permissao
+      ) values (
+          :id_acesso
+        , :id_usuario
+        , :tp_permissao
+      );
+    end
+    else
+    begin
+      Update USR_USUARIO_PERMISSAO up Set
+        up.tp_permissao   = :tp_permissao
+      where up.id_acesso  = :id_acesso
+        and up.id_usuario = :id_usuario;
+    end
+  end
+end^
+
+SET TERM ; ^
+
+COMMENT ON PROCEDURE SP_REPLICAR_PERMISSAO IS 'Procedimento Replicar Permissao no Usuario.
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   066/04/2018
+
+Stored procedure responsavel por replicar nas permissoes dos usuarios as permissoes
+definidas no perfil de acesso destes mesmos usuarios.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    06/04/2018 - IMR :
+        * Documentacao do objeto.';
+
