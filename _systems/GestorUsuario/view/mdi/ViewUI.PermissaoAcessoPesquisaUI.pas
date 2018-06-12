@@ -150,7 +150,9 @@ begin
         ModelUsuario.Usuario.Perfil.Descricao := FieldByName('ds_perfil').AsString;
       end;
 
-      SalvarPermissoes((FieldByName('sn_perfil').AsInteger = 1), DtmControleUsuario.fdQryPermissaoAcesso);
+      SalvarPermissoes((FieldByName('sn_perfil').AsInteger = 1),
+        DtmControleUsuario.fdQryPermissaoAcesso,
+        DtmControleUsuario.fdSpReplicarPermissao);
     end;
 end;
 

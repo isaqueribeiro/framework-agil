@@ -31,11 +31,11 @@ uses
   Winapi.Windows,
   System.SysUtils, System.StrUtils, System.Classes,
   Vcl.Forms, Vcl.ImgList, Vcl.Controls, Vcl.Dialogs,
-  cxClasses, cxLookAndFeels,
+  cxClasses, cxLookAndFeels, cxGraphics, dxScreenTip,
+  cxEdit, dxCustomHint, cxHint, cxStyles,
 
   dxSkinsCore, dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray,
-  dxSkinOffice2013White, dxSkinsForm, cxGraphics, dxScreenTip, cxEdit,
-  dxCustomHint, cxHint, cxStyles;
+  dxSkinOffice2013White, dxSkinsForm;
 
 type
   TDtmRecursos = class(TDataModule)
@@ -171,7 +171,7 @@ var
   idHash   : TIdHashMessageDigest5;
 begin
   aRetorno := False;
-  idHash := TIdHashMessageDigest5.Create;
+  idHash   := TIdHashMessageDigest5.Create;
   try
     sKeyChar := idHash.HashStringAsHex(Key);
 

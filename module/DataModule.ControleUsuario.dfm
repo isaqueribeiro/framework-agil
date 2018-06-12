@@ -550,4 +550,18 @@ object DtmControleUsuario: TDtmControleUsuario
         Size = 38
       end>
   end
+  object fdSpReplicarPermissao: TFDStoredProc
+    Connection = DtmBase.fdConexao
+    StoredProcName = 'SP_REPLICAR_PERMISSAO'
+    Left = 368
+    Top = 136
+    ParamData = <
+      item
+        Position = 1
+        Name = 'ID_PERFIL'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 38
+      end>
+  end
 end

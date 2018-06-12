@@ -42,7 +42,7 @@ Uses
       procedure Refresh(const aDataSet: TDataSet);
       procedure RefreshRecord(const aDataSet: TDataSet);
       procedure RemoverPermissoes(const aPerfil : Boolean; const aDataSet: TFDQuery);
-      procedure SalvarPermissoes(const aPerfil : Boolean; const aDataSet: TFDQuery); virtual; abstract;
+      procedure SalvarPermissoes(const aPerfil : Boolean; const aDataSet: TFDQuery; const aStoredProcedure : TFDStoredProc);
 
       function Edit(const aDataSet: TDataSet) : Boolean;
       function Delete(const aDataSet: TDataSet) : Boolean;
@@ -234,6 +234,7 @@ begin
       DisableControls;
       First;
 
+      // Remover os acessos
       while not Eof do
       begin
         Edit;
@@ -252,6 +253,7 @@ begin
         Next;
       end;
 
+      // Gravar os acessos removidos
       First;
       while not Eof do
       begin
@@ -288,6 +290,117 @@ begin
         end;
 
         Next;
+      end;
+
+      aQry.Connection.CommitRetaining;
+    end;
+  finally
+    aQry.Free;
+    aDataSet.First;
+    aDataSet.EnableControls;
+  end;
+end;
+
+procedure TPermissaoPerfilController.SalvarPermissoes(const aPerfil: Boolean;
+  const aDataSet: TFDQuery; const aStoredProcedure : TFDStoredProc);
+var
+  sMsg : String;
+  aQry : TFDQuery;
+begin
+  if aPerfil then
+    sMsg := 'Deseja salvar as permissões para o perfil ' + AnsiUpperCase(QuotedStr(aModelPerfil.Perfil.Descricao)) + '?'
+  else
+    sMsg := 'Deseja salvar as permissões para o usuário ' + AnsiUpperCase(QuotedStr(aModelUsuario.Usuario.Nome)) + '?';
+
+  if (aDataSet.State = dsEdit) then
+    aDataSet.Post;
+
+  if aMsg.ShowConfirmation('Salvar Permissões', sMsg) then
+  try
+    aQry := TFDQuery.Create(nil);
+    with aDataSet do
+    begin
+      aQry.Connection  := aDataSet.Connection;
+      aQry.Transaction := aDataSet.Transaction;
+
+      DisableControls;
+      First;
+
+      // Validar Tipo de permissão x Tipo da Rotina de acesso
+      while not Eof do
+      begin
+        Edit;
+        if FieldByName('parent').IsNull then
+          FieldByName('tp_permissao').AsInteger := -1
+        else
+          case ct_TipoRotina(FieldByName('tp_rotina').AsInteger) of
+            tr_Menu      ,
+            tr_Impressao :
+              if (FieldByName('tp_permissao').AsInteger > Ord(tp_Visualizar)) then
+                FieldByName('tp_permissao').AsInteger := Ord(tp_Visualizar);
+
+            tr_Formulario :
+              ;
+
+            tr_Processo :
+              if (FieldByName('tp_permissao').AsInteger <> Ord(tp_SemAcesso)) and (FieldByName('tp_permissao').AsInteger <> Ord(tp_Visualizar)) and (FieldByName('tp_permissao').AsInteger <> Ord(tp_ControleTotal)) then
+                FieldByName('tp_permissao').AsInteger := Ord(tp_ControleTotal);
+
+            tr_CampoCadastro :
+              if (FieldByName('tp_permissao').AsInteger <> Ord(tp_Visualizar)) and (FieldByName('tp_permissao').AsInteger <> Ord(tp_Alterar)) then
+                FieldByName('tp_permissao').AsInteger := Ord(tp_Alterar);
+          end;
+
+        Post;
+        Next;
+      end;
+
+      // Gravar permissões informadas
+      First;
+      while not Eof do
+      begin
+        if not FieldByName('parent').IsNull then
+        begin
+          if aPerfil then
+          begin
+            aQry.SQL.BeginUpdate;
+            aQry.SQL.Clear;
+            aQry.SQL.Add('Update USR_PERFIL_PERMISSAO p Set');
+            aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
+            aQry.SQL.Add('where (p.id_acesso = :id_acesso)');
+            aQry.SQL.Add('  and (p.id_perfil = :id_perfil)');
+            aQry.SQL.EndUpdate;
+
+            aQry.Close;
+            aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
+            aQry.ParamByName('id_perfil').AsString  := GUIDToString(aModelPerfil.Perfil.ID);
+            aQry.ExecSQL;
+          end
+          else
+          begin
+            aQry.SQL.BeginUpdate;
+            aQry.SQL.Clear;
+            aQry.SQL.Add('Update USR_USUARIO_PERMISSAO p Set');
+            aQry.SQL.Add('  p.tp_permissao = ' + FieldByName('tp_permissao').AsString);
+            aQry.SQL.Add('where (p.id_acesso  = :id_acesso)');
+            aQry.SQL.Add('  and (p.id_usuario = :id_usuario)');
+            aQry.SQL.EndUpdate;
+
+            aQry.ParamByName('id_acesso').AsString  := FieldByName('id_acesso').AsString;
+            aQry.ParamByName('id_usuario').AsString := GUIDToString(aModelUsuario.Usuario.ID);
+            aQry.ExecSQL;
+          end;
+        end;
+
+        Next;
+      end;
+
+      // Replicar permissões do perfil para os usuários
+      if aPerfil then
+      begin
+        aStoredProcedure.Close;
+        aStoredProcedure.ParamByName('id_perfil').AsString  := GUIDToString(aModelPerfil.Perfil.ID);
+        aStoredProcedure.ExecProc;
       end;
 
       aQry.Connection.CommitRetaining;
