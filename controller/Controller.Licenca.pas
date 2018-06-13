@@ -3,10 +3,17 @@ unit Controller.Licenca;
 interface
 
 Uses
+  TypeAgil.Constants,
+  TypeAgil.ComplexTypes,
   InterfaceAgil.Controller,
   ClasseAgil.BaseObject,
   Model.Licenca,
-  System.Classes, System.SysUtils, System.StrUtils,
+  Controller.Mensagem,
+
+  System.Classes, System.SysUtils, System.StrUtils, System.Math,
+
+  FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Stan.Param,
+  FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   Data.DB, Datasnap.DBClient;
 
   Type
@@ -44,6 +51,7 @@ constructor TLicencaController.Create;
 begin
   inherited Create;
   aModel := TLicenca.Create;
+  //aModel := TLicenca.Criar;
 end;
 
 function TLicencaController.Delete(const aDataSet: TDataSet): Boolean;

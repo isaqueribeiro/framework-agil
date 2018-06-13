@@ -387,3 +387,204 @@ Historico:
     06/04/2018 - IMR :
         * Documentacao do objeto.';
 
+
+
+
+/*------ SYSDBA 13/06/2018 15:03:57 --------*/
+
+CREATE DOMAIN DMN_CNPJ AS
+VARCHAR(14);COMMENT ON DOMAIN DMN_CNPJ IS 'CNPJ';
+
+CREATE DOMAIN DMN_CNPJ_FORMTADO AS
+VARCHAR(18);COMMENT ON DOMAIN DMN_CNPJ_FORMTADO IS 'CNPJ Formatado';
+
+CREATE DOMAIN DMN_CPF AS
+VARCHAR(11);COMMENT ON DOMAIN DMN_CPF IS 'CPF';
+
+CREATE DOMAIN DMN_CPF_FORMATADO AS
+VARCHAR(14);COMMENT ON DOMAIN DMN_CPF_FORMATADO IS 'CPF Formatado';
+
+CREATE DOMAIN DMN_CPF_CNPJ AS
+VARCHAR(14);COMMENT ON DOMAIN DMN_CPF_CNPJ IS 'CPF/CNPJ sem formatacao';
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:04:54 --------*/
+
+CREATE DOMAIN DMN_CPF_CNPJ_NN AS
+VARCHAR(14)
+NOT NULL;COMMENT ON DOMAIN DMN_CPF_CNPJ_NN IS 'CPF/CNPJ sem formatacao - Nao nulo';
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:11:22 --------*/
+
+CREATE TABLE SYS_LICENCA (
+    ID_LICENCA DMN_GUID_NN NOT NULL,
+    CD_LICENCA DMN_CPF_CNPJ_NN,
+    TX_LICENCA DMN_TEXT);
+
+ALTER TABLE SYS_LICENCA
+ADD CONSTRAINT PK_SYS_LICENCA
+PRIMARY KEY (ID_LICENCA);
+
+COMMENT ON COLUMN SYS_LICENCA.ID_LICENCA IS
+'ID';
+
+COMMENT ON COLUMN SYS_LICENCA.CD_LICENCA IS
+'Codigo - CPF/CNPJ do Cliente';
+
+COMMENT ON COLUMN SYS_LICENCA.TX_LICENCA IS
+'Licenca - Texto criptografado';
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:11:23 --------*/
+
+COMMENT ON TABLE SYS_LICENCA IS 'Tabela Licenca.
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   13/06/2018
+
+Tabela responsavel por armazenar os dados da licenca de uso do cliente para que
+este possa fazer uso dos sistemas do pacote Agil Softwares.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    13/06/2018 - IMR :
+        * Documentacao do objeto.';
+
+GRANT ALL ON SYS_LICENCA TO "PUBLIC";
+
+
+
+/*------ SYSDBA 13/06/2018 15:11:47 --------*/
+
+ALTER TABLE SYS_LICENCA
+ADD CONSTRAINT UNQ_SYS_LICENCA
+UNIQUE (CD_LICENCA);
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:15:45 --------*/
+
+SET TERM ^ ;
+
+CREATE trigger tg_licenca_codigo for sys_licenca
+active before insert or update position 0
+AS
+  declare variable codigo DMN_CPF_CNPJ;
+begin
+  codigo = trim(new.cd_licenca);
+  codigo = replace(replace(replace(:codigo, '.', ''), '-', ''), '/', '');
+  new.cd_licenca = :codigo;
+end^
+
+SET TERM ; ^
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:17:16 --------*/
+
+SET TERM ^ ;
+
+CREATE OR ALTER trigger tg_licenca_codigo for sys_licenca
+active before insert or update position 0
+AS
+  declare variable codigo DMN_CPF_CNPJ;
+begin
+  codigo = trim(new.cd_licenca);
+  codigo = replace(replace(replace(:codigo, '.', ''), '-', ''), '/', '');
+  new.cd_licenca = :codigo;
+end^
+
+SET TERM ; ^
+
+COMMENT ON TRIGGER TG_LICENCA_CODIGO IS 'Trigger Limpar Codigo Licenca.
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   13/06/2018
+
+Trigger responsavel por gerar limpar o codigo da licenca que corresponde ao CPF/CNPJ
+do cliente para haja apenas numero no campo.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    13/06/2018 - IMR :
+        * Documentacao do objeto.';
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:17:25 --------*/
+
+SET TERM ^ ;
+
+CREATE OR ALTER trigger tg_licenca_codigo for sys_licenca
+active before insert or update position 1
+AS
+  declare variable codigo DMN_CPF_CNPJ;
+begin
+  codigo = trim(new.cd_licenca);
+  codigo = replace(replace(replace(:codigo, '.', ''), '-', ''), '/', '');
+  new.cd_licenca = :codigo;
+end^
+
+SET TERM ; ^
+
+
+
+
+/*------ SYSDBA 13/06/2018 15:19:57 --------*/
+
+SET TERM ^ ;
+
+CREATE trigger id_licenca_id for sys_licenca
+active before insert position 0
+AS
+begin
+  if (coalesce(new.id_licenca, '') = '') then
+  begin
+    Select
+      g.hex_uuid_format
+    from GET_GUID_UUID_HEX g
+    Into
+      new.id_licenca;
+  end
+end^
+
+SET TERM ; ^
+
+COMMENT ON TRIGGER ID_LICENCA_ID IS 'Trigger Gerar ID Licenca.
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   13/06/2018
+
+Trigger responsavel por gerar um novo ID (Guid) para o registro da licenca de uso
+para o(s) sistema(s) quando este nao for informado.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    13/06/2018 - IMR :
+        * Documentacao do objeto.';
+

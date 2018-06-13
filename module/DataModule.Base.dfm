@@ -13,6 +13,7 @@ object DtmBase: TDtmBase
       'Password=masterkey'
       'Database=agil_system'
       'DriverID=FB')
+    Connected = True
     LoginPrompt = False
     Transaction = trnConexao
     UpdateTransaction = trnConexao
@@ -309,5 +310,52 @@ object DtmBase: TDtmBase
         ParamType = ptInput
         Size = 38
       end>
+  end
+  object fdQryLicenca: TFDQuery
+    Active = True
+    Connection = fdConexao
+    Transaction = trnConexao
+    UpdateObject = fdUpdLicenca
+    SQL.Strings = (
+      'Select'
+      '    l.id_licenca'
+      '  , l.cd_licenca'
+      '  , l.tx_licenca'
+      'from SYS_LICENCA l'
+      'where l.cd_licenca = :cd_licenca'
+      '')
+    Left = 400
+    Top = 256
+    ParamData = <
+      item
+        Name = 'CD_LICENCA'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 38
+        Value = Null
+      end>
+  end
+  object fdUpdLicenca: TFDUpdateSQL
+    Connection = fdConexao
+    InsertSQL.Strings = (
+      'INSERT INTO SYS_LICENCA'
+      '(ID_LICENCA, CD_LICENCA, TX_LICENCA)'
+      'VALUES (:NEW_ID_LICENCA, :NEW_CD_LICENCA, :NEW_TX_LICENCA)'
+      'RETURNING ID_LICENCA')
+    ModifySQL.Strings = (
+      'UPDATE SYS_LICENCA'
+      'SET ID_LICENCA = :NEW_ID_LICENCA, CD_LICENCA = :NEW_CD_LICENCA, '
+      '  TX_LICENCA = :NEW_TX_LICENCA'
+      'WHERE ID_LICENCA = :OLD_ID_LICENCA'
+      'RETURNING ID_LICENCA')
+    DeleteSQL.Strings = (
+      'DELETE FROM SYS_LICENCA'
+      'WHERE ID_LICENCA = :OLD_ID_LICENCA')
+    FetchRowSQL.Strings = (
+      'SELECT ID_LICENCA, CD_LICENCA, TX_LICENCA'
+      'FROM SYS_LICENCA'
+      'WHERE ID_LICENCA = :ID_LICENCA')
+    Left = 400
+    Top = 304
   end
 end

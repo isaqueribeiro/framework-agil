@@ -34,6 +34,8 @@ type
     fdQrySistemaRotina: TFDQuery;
     fdUpdSistemaRotina: TFDUpdateSQL;
     fdSetSistemaRotina: TFDStoredProc;
+    fdQryLicenca: TFDQuery;
+    fdUpdLicenca: TFDUpdateSQL;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }

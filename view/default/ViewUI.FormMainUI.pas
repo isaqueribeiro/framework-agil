@@ -180,11 +180,14 @@ begin
     IntToStr(gSistema.Conexao.Porta)         + '.' +
     AnsiLowerCase(gSistema.Conexao.Base);
 
+  LblCompany.Caption := gLicencaApp.Model.RazaoSocial;
+
   acnAlterarSenhaUsuario.Caption := Format('Alterar Senha (%s)', ['user_name@']);
 
   stbInforme.Panels.Items[0].Text := LblDate.Caption;
   stbInforme.Panels.Items[1].Text := LblTime.Caption;
   stbInforme.Panels.Items[2].Text := LblUser.Caption;
+  stbInforme.Panels.Items[3].Text := LblCompany.Caption;
 end;
 
 end.
