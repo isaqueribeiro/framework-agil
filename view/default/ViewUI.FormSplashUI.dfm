@@ -946,28 +946,28 @@ inherited FormSplashUI: TFormSplashUI
   end
   object lblCompanyName: TLabel
     Left = 150
-    Top = 240
-    Width = 123
-    Height = 21
+    Top = 223
+    Width = 98
+    Height = 17
     Anchors = [akLeft, akBottom]
     Caption = 'Company Name'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
+    Font.Height = -13
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
   end
   object lblLegalCopyright: TLabel
     Left = 150
-    Top = 265
-    Width = 92
-    Height = 17
+    Top = 246
+    Width = 81
+    Height = 13
     Anchors = [akLeft, akBottom]
     Caption = 'Legal Copyright'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
@@ -1016,13 +1016,13 @@ inherited FormSplashUI: TFormSplashUI
     Left = 150
     Top = 146
     Width = 395
-    Height = 88
+    Height = 71
     Anchors = [akLeft, akTop, akRight]
     AutoSize = False
     Caption = 'Licen'#231'a de uso para demonstra'#231#227'o'
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -11
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False

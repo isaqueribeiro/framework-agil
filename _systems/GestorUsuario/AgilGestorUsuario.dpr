@@ -48,22 +48,31 @@ uses
 
 {$R *.res}
 
+var
+  aSplash : TFormSplashGestorUsuarioUI;
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Ágil Gestor Usuários';
+
+  aSplash := TFormSplashGestorUsuarioUI.Create(Application);
+  aSplash.Show;
+
   Application.CreateForm(TDtmRecursos, DtmRecursos);
   Application.CreateForm(TDtmBase, DtmBase);
   Application.CreateForm(TDtmControleUsuario, DtmControleUsuario);
   if DtmBase.Conectado then
   begin
     Application.CreateForm(TFormMainGestorUsuarioUI, FormMainGestorUsuarioUI);
+    aSplash.Hide;
+    aSplash.Free;
     Application.Run;
   end
   else
   begin
     DtmBase.Free;
     DtmRecursos.Free;
+    aSplash.Free;
     Application.Terminate;
   end;
 end.

@@ -5,7 +5,7 @@ interface
 Uses
   ClasseAgil.BaseObject,
   TypeAgil.ComplexTypes,
-  System.Classes, System.SysUtils, System.StrUtils;
+  System.Classes, System.SysUtils, System.StrUtils, System.DateUtils;
 
 Type
   TLicenca = class(TBaseObject)
@@ -22,6 +22,7 @@ Type
       procedure SetRazaoSocial(Value : String);
       procedure SetNomeFantasia(Value : String);
       procedure SetNotificacaoSplash(Value : String);
+      procedure SetValorDefault;
 
       function GetChave : String;
       function GetTextoCrip : TStringList;
@@ -50,71 +51,51 @@ implementation
 constructor TLicenca.Create;
 begin
   inherited Create;
-
-  aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
-  aNomeFantasia := 'Empresa de Demonstração';
-  aCnpj         := '71.841.661/0001-98';      // CNJP virtual válido
-
-  aNotificacaoSplash := EmptyStr;
-
-  with aEndereco do
-  begin
-    Logradouro  := EmptyStr;
-    Numero      := EmptyStr;
-    Complemento := EmptyStr;
-    Bairro      := EmptyStr;
-    Cidade      := 'Ananindeua';
-    UF          := 'PA';
-    Cep         := '67.125-775';
-  end;
-
-  SetLength(aSistema, 1);
-
-  with aSistema[Low(aSistema)] do
-  begin
-    ProductKey  := EmptyStr;
-    ProductName := EmptyStr;
-  end;
-
-  aTexto := TStringList.Create;
+  SetValorDefault;
 end;
 
 constructor TLicenca.Criar;
 begin
   inherited Create;
-
-  aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
-  aNomeFantasia := 'Empresa de Demonstração';
-  aCnpj         := '71.841.661/0001-98';      // CNJP virtual válido
-
-  aNotificacaoSplash := EmptyStr;
-
-  with aEndereco do
-  begin
-    Logradouro  := EmptyStr;
-    Numero      := EmptyStr;
-    Complemento := EmptyStr;
-    Bairro      := EmptyStr;
-    Cidade      := 'Ananindeua';
-    UF          := 'PA';
-    Cep         := '67.125-775';
-  end;
-
-  SetLength(aSistema, 1);
-
-  with aSistema[Low(aSistema)] do
-  begin
-    ProductKey  := EmptyStr;
-    ProductName := EmptyStr;
-  end;
-
-  aTexto := TStringList.Create;
+  SetValorDefault;
 end;
 
 destructor TLicenca.Destroy;
 begin
   aTexto.Free;
   inherited;
+end;
+
+procedure TLicenca.SetValorDefault;
+begin
+  aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
+  aNomeFantasia := 'Empresa de Demonstração';
+  aCnpj         := '71.841.661/0001-98';      // CNJP virtual válido
+
+  aCompetenciaLimite := StrToInt(FormatDateTime('yyyymm', Date));
+  aDataBloqueio      := StrToDate(FormatFloat('00', DaysInMonth(Date)) + '/' + FormatDateTime('mm/yyyy', Date));
+  aNotificacaoSplash := EmptyStr;
+
+  with aEndereco do
+  begin
+    Logradouro  := EmptyStr;
+    Numero      := EmptyStr;
+    Complemento := EmptyStr;
+    Bairro      := EmptyStr;
+    Cidade      := 'Ananindeua';
+    UF          := 'PA';
+    Cep         := '67.125-775';
+  end;
+
+  SetLength(aSistema, 1);
+
+  with aSistema[Low(aSistema)] do
+  begin
+    ProductKey  := EmptyStr;
+    ProductName := EmptyStr;
+  end;
+
+  aTexto := TStringList.Create;
 end;
 
 function TLicenca.GetChave: String;

@@ -200,4 +200,7 @@ begin
   end;
 end;
 
+initialization
+  gLicencaApp.Model.NotificacaoSplash := 'Carregando base de dados...';
+
 end.

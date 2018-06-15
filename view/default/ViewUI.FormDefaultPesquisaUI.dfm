@@ -8,7 +8,6 @@ inherited FormDefaultPesquisaUI: TFormDefaultPesquisaUI
   OnActivate = FormActivate
   OnClose = FormClose
   OnResize = FormResize
-  ExplicitWidth = 697
   ExplicitHeight = 426
   PixelsPerInch = 96
   TextHeight = 13

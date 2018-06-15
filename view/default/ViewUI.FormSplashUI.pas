@@ -76,7 +76,6 @@ end;
 
 procedure TFormSplashUI.FormShow(Sender: TObject);
 begin
-  inherited;
   CarregarInformacao;
 end;
 

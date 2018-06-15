@@ -87,4 +87,7 @@ begin
   end;
 end;
 
+initialization
+  gLicencaApp.Model.NotificacaoSplash := 'Carregando controle de usuários...';
+
 end.

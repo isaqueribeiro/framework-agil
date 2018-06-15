@@ -207,5 +207,6 @@ initialization
   gLicencaApp := TLicencaController.GetInstance();
   gSistema    := TSistemaController.GetInstance();
   gFormulario := TFormularios.Create;
+  gLicencaApp.Model.NotificacaoSplash := 'Carregando recursos...';
 
 end.
