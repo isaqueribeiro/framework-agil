@@ -82,10 +82,13 @@ end;
 procedure TFormSplashUI.Update(Observable: IObservable);
 begin
   with aLicenca, Model do
-    lblRegistradoPara.Caption := 'Propriedade intelectual de ' + aVersao.Owner +
-      ', com licença de uso para ' + RazaoSocial + ', com CPF/CNPJ ' + Cnpj +
-      '. Atualizada em ' + aVersao.ReleaseDate + ', tendo como competência limite ' +
-      IntToStr(CompetenciaLimite) + ' (' + FormatDateTime('dd/mm/yyyy', DataBloqueio) + ').';
+    if Carregada then
+      lblRegistradoPara.Caption := 'Propriedade intelectual de ' + aVersao.Owner +
+        ', com licença de uso para ' + RazaoSocial + ', com CPF/CNPJ ' + Cnpj +
+        '. Atualizada em ' + aVersao.ReleaseDate + ', tendo como competência limite ' +
+        IntToStr(CompetenciaLimite) + ' (' + FormatDateTime('dd/mm/yyyy', DataBloqueio) + ').'
+    else
+      lblRegistradoPara.Caption := EmptyStr;
 
   lblRegistradoPara.Caption := Trim(lblRegistradoPara.Caption);
   lblCarregando.Caption     := Trim(aLicenca.Model.NotificacaoSplash);

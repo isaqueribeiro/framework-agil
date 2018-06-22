@@ -19,6 +19,7 @@ Type
       aSistema           : ct_Sistema;
       aNotificacaoSplash : String;
       aTexto : TStringList;
+      aCarregada : Boolean;
       procedure SetRazaoSocial(Value : String);
       procedure SetNomeFantasia(Value : String);
       procedure SetNotificacaoSplash(Value : String);
@@ -42,6 +43,7 @@ Type
       property Sistema           : ct_Sistema read aSistema write aSistema;
       property NotificacaoSplash : String read aNotificacaoSplash write SetNotificacaoSplash;
       property TextoCrip : TStringList read GetTextoCrip;
+      property Carregada : Boolean read aCarregada write aCarregada;
   end;
 
 implementation
@@ -71,6 +73,7 @@ begin
   aRazaoSocial  := 'EMPRESA DE DEMONSTRAÇÃO';
   aNomeFantasia := 'Empresa de Demonstração';
   aCnpj         := '71.841.661/0001-98';      // CNJP virtual válido
+  aCarregada    := False;
 
   aCompetenciaLimite := StrToInt(FormatDateTime('yyyymm', Date));
   aDataBloqueio      := StrToDate(FormatFloat('00', DaysInMonth(Date)) + '/' + FormatDateTime('mm/yyyy', Date));

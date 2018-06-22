@@ -825,11 +825,28 @@ inherited FormMainUI: TFormMainUI
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.ImageIndex = 2
-        Width = 296
+        Width = 298
       end
       item
         PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
         PanelStyle.ImageIndex = 9
+        PanelStyle.Font.Charset = DEFAULT_CHARSET
+        PanelStyle.Font.Color = clWindowText
+        PanelStyle.Font.Height = -11
+        PanelStyle.Font.Name = 'Tahoma'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.ParentFont = False
+        Width = 420
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.ImageIndex = 7
+        PanelStyle.Font.Charset = DEFAULT_CHARSET
+        PanelStyle.Font.Color = clWindowText
+        PanelStyle.Font.Height = -11
+        PanelStyle.Font.Name = 'Tahoma'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.ParentFont = False
       end>
     PaintStyle = stpsUseLookAndFeel
     LookAndFeel.SkinName = 'Office2013DarkGray'

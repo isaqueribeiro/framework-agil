@@ -104,7 +104,7 @@ end;
 
 procedure TLicencaController.Load(const aDataSet: TDataSet);
 begin
-  ;
+  aModel.Carregada := True;
   aModel.Notify;
 end;
 

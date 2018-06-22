@@ -104,6 +104,8 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     end
   end
   inherited rbvMenu: TdxRibbonBackstageView
+    Width = 719
+    Height = 358
     Buttons = <
       item
         BeginGroup = True
@@ -119,14 +121,15 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         Item = BrBtnFecharApp
         Position = mbpAfterTabs
       end>
+    ExplicitWidth = 719
+    ExplicitHeight = 358
     object rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
-      Active = True
       Caption = 'Configurar Empresa'
       DesignSize = (
-        367
-        328)
+        536
+        358)
       object lblConfigurarEmpresa: TcxLabel
         Left = 20
         Top = 19
@@ -144,17 +147,19 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         Properties.LineOptions.Alignment = cxllaBottom
         Properties.LineOptions.Visible = True
         Transparent = True
+        ExplicitWidth = 333
         Height = 26
-        Width = 333
+        Width = 502
       end
     end
     object rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
+      Active = True
       Caption = 'Configurar Certificado'
       DesignSize = (
-        367
-        328)
+        536
+        358)
       object lblConfigurarCertificado: TcxLabel
         Left = 20
         Top = 19
@@ -172,8 +177,9 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         Properties.LineOptions.Alignment = cxllaBottom
         Properties.LineOptions.Visible = True
         Transparent = True
+        ExplicitWidth = 333
         Height = 26
-        Width = 333
+        Width = 502
       end
     end
   end
