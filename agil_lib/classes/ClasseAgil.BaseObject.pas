@@ -83,7 +83,7 @@ end;
 
 destructor TBaseObject.Destroy;
 begin
-   FreeAndNil(aObservers);
+  FreeAndNil(aObservers);
   inherited;
 end;
 

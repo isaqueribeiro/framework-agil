@@ -126,6 +126,7 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarEmpresa: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
+      Active = True
       Caption = 'Configurar Empresa'
       DesignSize = (
         536
@@ -147,7 +148,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         Properties.LineOptions.Alignment = cxllaBottom
         Properties.LineOptions.Visible = True
         Transparent = True
-        ExplicitWidth = 333
         Height = 26
         Width = 502
       end
@@ -155,7 +155,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
     object rbvConfigurarCertificado: TdxRibbonBackstageViewTabSheet
       Left = 183
       Top = 0
-      Active = True
       Caption = 'Configurar Certificado'
       DesignSize = (
         536
@@ -177,7 +176,6 @@ inherited FormMainGestorUsuarioUI: TFormMainGestorUsuarioUI
         Properties.LineOptions.Alignment = cxllaBottom
         Properties.LineOptions.Visible = True
         Transparent = True
-        ExplicitWidth = 333
         Height = 26
         Width = 502
       end

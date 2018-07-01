@@ -13,7 +13,6 @@ object DtmBase: TDtmBase
       'Password=masterkey'
       'Database=agil_system'
       'DriverID=FB')
-    Connected = True
     LoginPrompt = False
     Transaction = trnConexao
     UpdateTransaction = trnConexao
@@ -312,7 +311,6 @@ object DtmBase: TDtmBase
       end>
   end
   object fdQryLicenca: TFDQuery
-    Active = True
     Connection = fdConexao
     Transaction = trnConexao
     UpdateObject = fdUpdLicenca

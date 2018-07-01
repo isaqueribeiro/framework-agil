@@ -158,6 +158,7 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\model\Model.Perfil.Permissao.pas"/>
         <DCCReference Include="..\..\model\Model.Usuario.pas"/>
         <DCCReference Include="..\..\model\Model.Usuario.Permissao.pas"/>
+        <DCCReference Include="..\..\model\Model.Endereco.pas"/>
         <DCCReference Include="..\..\controller\Controller.Mensagem.pas"/>
         <DCCReference Include="..\..\controller\Controller.VersaoAplicacao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Sistema.pas"/>
@@ -166,12 +167,17 @@ Todos os direitos reservados.;LegalTrademarks=;OriginalFilename=;ProductName=Agi
         <DCCReference Include="..\..\controller\Controller.Perfil.pas"/>
         <DCCReference Include="..\..\controller\Controller.Perfil.Permissao.pas"/>
         <DCCReference Include="..\..\controller\Controller.Usuario.pas"/>
+        <DCCReference Include="..\..\controller\Controller.Endereco.pas"/>
         <DCCReference Include="..\..\module\DataModule.Recursos.pas">
             <Form>DtmRecursos</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\module\DataModule.Base.pas">
             <Form>DtmBase</Form>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="..\..\module\DataModule.Endereco.pas">
+            <Form>DtmEndereco</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\..\module\DataModule.ControleUsuario.pas">

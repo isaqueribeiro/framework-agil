@@ -1512,3 +1512,398 @@ COMMENT ON COLUMN TBL_BAIRRO.SN_ATIVO IS
 CREATE INDEX IDX_TBL_BAIRRO_ATIVO
 ON TBL_BAIRRO (SN_ATIVO);
 
+
+
+
+/*------ SYSDBA 01/07/2018 10:01:37 --------*/
+
+ALTER TABLE SYS_CLIENTE DROP TP_CLIENTE;
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:02:03 --------*/
+
+ALTER TABLE SYS_CLIENTE
+    ADD TP_CADASTRO DMN_TIPO_2;
+
+COMMENT ON COLUMN SYS_CLIENTE.TP_CADASTRO IS
+'Tipo:
+0 - Pessoa Fisica
+1 - Pessoa Juridica
+2 - Orgao Publico';
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:04:37 --------*/
+
+CREATE TABLE SYS_TIPO_CLIENTE (
+    CD_TIPO DMN_SMALLINT_NN NOT NULL,
+    DS_TIPO DMN_VCHAR_50);
+
+ALTER TABLE SYS_TIPO_CLIENTE
+ADD CONSTRAINT PK_SYS_TIPO_CLIENTE
+PRIMARY KEY (CD_TIPO);
+
+COMMENT ON COLUMN SYS_TIPO_CLIENTE.CD_TIPO IS
+'Codigo';
+
+COMMENT ON COLUMN SYS_TIPO_CLIENTE.DS_TIPO IS
+'Descricao';
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:04:38 --------*/
+
+COMMENT ON TABLE SYS_TIPO_CLIENTE IS 'Tabela Tipo(s) de Cliente do(s) Sistema(s).
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   01/07/2018
+
+Tabela responsavel por armazenar as descricoes dos tipos de clientes de uso dos
+sistemas do pacote Agil.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    01/07/2018 - IMR :
+        * Documentacao do objeto.';
+
+GRANT ALL ON SYS_TIPO_CLIENTE TO "PUBLIC";
+
+
+
+/*------ SYSDBA 01/07/2018 10:09:09 --------*/
+
+ALTER TABLE SYS_TIPO_CLIENTE
+ADD CONSTRAINT UNQ_SYS_TIPO_CLIENTE
+UNIQUE (DS_TIPO);
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:15:17 --------*/
+
+ALTER TABLE SYS_CLIENTE
+    ADD TP_CLIENTE DMN_SMALLINT_NN;
+
+COMMENT ON COLUMN SYS_CLIENTE.TP_CLIENTE IS
+'Tipo do Cliente';
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:15:28 --------*/
+
+update RDB$RELATION_FIELDS set
+RDB$FIELD_SOURCE = 'DMN_SMALLINT'
+where (RDB$FIELD_NAME = 'TP_CLIENTE') and
+(RDB$RELATION_NAME = 'SYS_CLIENTE')
+;
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:15:41 --------*/
+
+update RDB$RELATION_FIELDS set
+RDB$FIELD_SOURCE = 'DMN_SMALLINT_NN'
+where (RDB$FIELD_NAME = 'TP_CLIENTE') and
+(RDB$RELATION_NAME = 'SYS_CLIENTE')
+;
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:16:05 --------*/
+
+ALTER TABLE SYS_CLIENTE
+ADD CONSTRAINT FK_SYS_CLIENTE_TIPO
+FOREIGN KEY (TP_CLIENTE)
+REFERENCES SYS_TIPO_CLIENTE(CD_TIPO);
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:39:43 --------*/
+
+CREATE TABLE TBL_CEP (
+    ID_CEP DMN_GUID_NN NOT NULL,
+    NR_CEP DMN_BIGINT,
+    CD_TIPO DMN_SMALLINT,
+    CD_BAIRRO DMN_BIGINT,
+    CD_CIDADE DMN_INTEGER,
+    CD_ESTADO DMN_SMALLINT,
+    NM_BAIRRO DMN_VCHAR_150,
+    NM_CIDADE DMN_VCHAR_150,
+    UF DMN_UF,
+    DS_ENDERECO DMN_VCHAR_250,
+    DS_LOGRADOURO DMN_VCHAR_250);
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT PK_TBL_CEP
+PRIMARY KEY (ID_CEP);
+
+COMMENT ON COLUMN TBL_CEP.ID_CEP IS
+'ID';
+
+COMMENT ON COLUMN TBL_CEP.NR_CEP IS
+'Numero';
+
+COMMENT ON COLUMN TBL_CEP.CD_TIPO IS
+'Tipo';
+
+COMMENT ON COLUMN TBL_CEP.CD_BAIRRO IS
+'Bairro';
+
+COMMENT ON COLUMN TBL_CEP.CD_CIDADE IS
+'Cidade';
+
+COMMENT ON COLUMN TBL_CEP.CD_ESTADO IS
+'Estado';
+
+COMMENT ON COLUMN TBL_CEP.NM_BAIRRO IS
+'Descritivo - Bairro';
+
+COMMENT ON COLUMN TBL_CEP.NM_CIDADE IS
+'Descritivo - Cidade';
+
+COMMENT ON COLUMN TBL_CEP.UF IS
+'UF';
+
+COMMENT ON COLUMN TBL_CEP.DS_ENDERECO IS
+'Endereco (Tipo + Logradouro)';
+
+COMMENT ON COLUMN TBL_CEP.DS_LOGRADOURO IS
+'Logradouro';
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:39:44 --------*/
+
+COMMENT ON TABLE TBL_CEP IS 'Tabela CEPs (Endereco).
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   01/07/2018
+
+Tabela responsavel por armazenar os numeros de CEPs que serao utilizados para montar
+os enderecos de clientes, fornecedores, pessoas (Entidades em geral).
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    01/07/2018 - IMR :
+        * Documentacao do objeto.';
+
+GRANT ALL ON TBL_CEP TO "PUBLIC";
+
+
+
+/*------ SYSDBA 01/07/2018 10:40:06 --------*/
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT UNQ_TBL_CEP_NUMERO
+UNIQUE (NR_CEP);
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column ID_CEP position 1;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column NR_CEP position 2;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column CD_TIPO position 3;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column CD_BAIRRO position 4;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column CD_CIDADE position 5;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column CD_ESTADO position 6;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column NM_BAIRRO position 7;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column NM_CIDADE position 8;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column UF position 9;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column DS_LOGRADOURO position 10;
+
+
+/*------ SYSDBA 01/07/2018 10:41:15 --------*/
+
+alter table TBL_CEP
+alter column DS_ENDERECO position 11;
+
+
+/*------ SYSDBA 01/07/2018 10:42:38 --------*/
+
+SET TERM ^ ;
+
+CREATE trigger tg_cep_id for tbl_cep
+active before insert position 0
+AS
+begin
+  if (coalesce(new.id_cep, '') = '') then
+  begin
+    Select
+      g.hex_uuid_format
+    from GET_GUID_UUID_HEX g
+    Into
+      new.id_cep;
+  end
+end^
+
+SET TERM ; ^
+
+COMMENT ON TRIGGER TG_CEP_ID IS 'Trigger Gerar ID CEP.
+
+    Autor   :   Isaque Marinho Ribeiro
+    Data    :   01/07/2018
+
+Trigger responsavel por gerar um novo ID (Guid) para cada novo registro de CEP
+quando este nao for informado.
+
+Historico:
+
+    Legendas:
+        + Novo objeto de banco (Campos, Triggers)
+        - Remocao de objeto de banco
+        * Modificacao no objeto de banco
+
+    01/07/2018 - IMR :
+        * Documentacao do objeto.';
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:46:58 --------*/
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT FK_TBL_CEP_TIPO
+FOREIGN KEY (CD_TIPO)
+REFERENCES TBL_TIPO_LOGRADOURO(CD_TIPO);
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT FK_TBL_CEP_CIDADE
+FOREIGN KEY (CD_CIDADE)
+REFERENCES TBL_CIDADE(CD_CIDADE);
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT FK_TBL_CEP_ESTADO
+FOREIGN KEY (CD_ESTADO)
+REFERENCES TBL_ESTADO(CD_ESTADO);
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:47:59 --------*/
+
+ALTER TABLE TBL_CEP
+    ADD ID_BAIRRO DMN_GUID;
+
+COMMENT ON COLUMN TBL_CEP.ID_BAIRRO IS
+'Bairro';
+
+alter table TBL_CEP
+alter ID_CEP position 1;
+
+alter table TBL_CEP
+alter NR_CEP position 2;
+
+alter table TBL_CEP
+alter CD_TIPO position 3;
+
+alter table TBL_CEP
+alter ID_BAIRRO position 4;
+
+alter table TBL_CEP
+alter CD_BAIRRO position 5;
+
+alter table TBL_CEP
+alter CD_CIDADE position 6;
+
+alter table TBL_CEP
+alter CD_ESTADO position 7;
+
+alter table TBL_CEP
+alter NM_BAIRRO position 8;
+
+alter table TBL_CEP
+alter NM_CIDADE position 9;
+
+alter table TBL_CEP
+alter UF position 10;
+
+alter table TBL_CEP
+alter DS_LOGRADOURO position 11;
+
+alter table TBL_CEP
+alter DS_ENDERECO position 12;
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:48:17 --------*/
+
+ALTER TABLE TBL_CEP
+ADD CONSTRAINT FK_TBL_CEP_BAIRRO
+FOREIGN KEY (ID_BAIRRO)
+REFERENCES TBL_BAIRRO(ID_BAIRRO);
+
+
+
+
+/*------ SYSDBA 01/07/2018 10:52:55 --------*/
+
+ALTER TABLE TBL_CEP DROP CD_BAIRRO;
+

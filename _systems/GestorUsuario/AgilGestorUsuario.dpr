@@ -20,6 +20,7 @@ uses
   Model.Perfil.Permissao in '..\..\model\Model.Perfil.Permissao.pas',
   Model.Usuario in '..\..\model\Model.Usuario.pas',
   Model.Usuario.Permissao in '..\..\model\Model.Usuario.Permissao.pas',
+  Model.Endereco in '..\..\model\Model.Endereco.pas',
   Controller.Mensagem in '..\..\controller\Controller.Mensagem.pas',
   Controller.VersaoAplicacao in '..\..\controller\Controller.VersaoAplicacao.pas',
   Controller.Sistema in '..\..\controller\Controller.Sistema.pas',
@@ -28,8 +29,10 @@ uses
   Controller.Perfil in '..\..\controller\Controller.Perfil.pas',
   Controller.Perfil.Permissao in '..\..\controller\Controller.Perfil.Permissao.pas',
   Controller.Usuario in '..\..\controller\Controller.Usuario.pas',
+  Controller.Endereco in '..\..\controller\Controller.Endereco.pas',
   DataModule.Recursos in '..\..\module\DataModule.Recursos.pas' {DtmRecursos: TDataModule},
   DataModule.Base in '..\..\module\DataModule.Base.pas' {DtmBase: TDataModule},
+  DataModule.Endereco in '..\..\module\DataModule.Endereco.pas' {DtmEndereco: TDataModule},
   DataModule.ControleUsuario in '..\..\module\DataModule.ControleUsuario.pas' {DtmControleUsuario: TDataModule},
   ViewUI.FormRequiredFields in '..\..\view\ViewUI.FormRequiredFields.pas' {FormRequiredFields},
   ViewUI.FormDefaultUI in '..\..\view\default\ViewUI.FormDefaultUI.pas' {FormDefaultUI},
@@ -60,6 +63,7 @@ begin
 
   Application.CreateForm(TDtmRecursos, DtmRecursos);
   Application.CreateForm(TDtmBase, DtmBase);
+  Application.CreateForm(TDtmEndereco, DtmEndereco);
   Application.CreateForm(TDtmControleUsuario, DtmControleUsuario);
   if DtmBase.Conectado then
   begin
@@ -71,6 +75,8 @@ begin
   else
   begin
     DtmBase.Free;
+    DtmEndereco.Free;
+    DtmControleUsuario.Free;
     DtmRecursos.Free;
     aSplash.Free;
     Application.Terminate;

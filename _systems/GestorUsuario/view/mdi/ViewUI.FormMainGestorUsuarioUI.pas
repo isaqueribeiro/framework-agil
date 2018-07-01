@@ -38,6 +38,7 @@ type
     nvbControleRotinaSistema: TdxNavBarItem;
     procedure acnTesteExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -62,6 +63,12 @@ procedure TFormMainGestorUsuarioUI.FormCreate(Sender: TObject);
 begin
   inherited;
   ;
+end;
+
+procedure TFormMainGestorUsuarioUI.FormShow(Sender: TObject);
+begin
+  inherited;
+  rbvMenu.ActiveTab := rbvConfigurarEmpresa;
 end;
 
 end.

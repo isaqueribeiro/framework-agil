@@ -49,6 +49,7 @@ type
     property Conectado : Boolean read GetConectado;
 
     function GetNewValueDB(aTabela, aCampo, aCondicao : String) : Integer;
+    function GetCurrNewValueDB(aTabela, aCampo, aCondicao : String) : Currency;
     function EmptyFields(const aDataSet : TDataSet) : TStringList;
   end;
 
@@ -175,6 +176,39 @@ begin
       EndUpdate;
       if OpenOrExecute then
         aRetorno := FieldByName('ID').AsInteger + 1;
+    end;
+  finally
+    if fdQryExecute.Active then
+      fdQryExecute.Close;
+
+    Result := aRetorno;
+  end;
+end;
+
+function TDtmBase.GetCurrNewValueDB(aTabela, aCampo, aCondicao: String): Currency;
+var
+  aRetorno : Currency;
+begin
+  aRetorno := 0;
+  try
+    with fdQryExecute, SQL do
+    begin
+      if fdQryExecute.Active then
+        fdQryExecute.Close;
+
+      BeginUpdate;
+      Clear;
+
+      Add('Select');
+      Add('  max(' + aCampo + ') as ID');
+      Add('from ' + aTabela);
+
+      if (Trim(aCondicao) <> EmptyStr) then
+        Add('where ' + aCondicao);
+
+      EndUpdate;
+      if OpenOrExecute then
+        aRetorno := FieldByName('ID').AsCurrency + 1;
     end;
   finally
     if fdQryExecute.Active then
